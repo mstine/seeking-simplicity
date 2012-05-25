@@ -4,7 +4,7 @@
   <title><![CDATA[Seeking Simplicity]]></title>
   <link href="http://mattstine.com/atom.xml" rel="self"/>
   <link href="http://mattstine.com/"/>
-  <updated>2012-05-24T19:13:18-05:00</updated>
+  <updated>2012-05-24T20:08:28-05:00</updated>
   <id>http://mattstine.com/</id>
   <author>
     <name><![CDATA[Matt Stine]]></name>
@@ -12,6 +12,33 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[The Relaunch]]></title>
+    <link href="http://mattstine.com/2012/05/24/the-relaunch/"/>
+    <updated>2012-05-24T19:45:00-05:00</updated>
+    <id>http://mattstine.com/2012/05/24/the-relaunch</id>
+    <content type="html"><![CDATA[<p>I have rebooted this blog many times over the last several years. If you&#8217;ve been a reader of my blog in the past, you will have noticed significant changes. If you&#8217;re new here, welcome!</p>
+
+<p>This reboot has been in the works for several months now, even though I&#8217;ve probably spent far less than 24 active hours working on it. Life as an &#8220;itinerant&#8221; consultant and conference speaker is extremely busy compared to what I was doing on May 16, 2012 (the date of my last blog posting). At that time I was in the middle of a transition from 3+ years as a front-line manager of a software development team into a lead software architect role. Since that time I&#8217;ve changed jobs (careers?) twice:</p>
+
+<ul>
+<li>June 2011 - February 2012: During this time I was titled as a &#8220;Technical Architect&#8221; at AutoZone&#8217;s corporate offices in Memphis, TN. My focus was the modernization of their retail store management system architecture and technical stack. While there I also did a fair amount of agile coaching.</li>
+<li>February 2012 - Present: In January, VMware came calling, wanting to know if I would join the vFabric Cloud Application Platform PSO as a Senior Consultant. After a few weeks of interviews and careful consideration, I made the jump. I&#8217;m now in the midst of helping a Fortune 50 company build a brand new &#8220;private cloud&#8221; hosting platform for their next generation of application development.</li>
+</ul>
+
+
+<p>During that time I also significantly increased my participation on the No Fluff Just Stuff tour. In other words, I&#8217;ve BEEN BUSY.</p>
+
+<p>At any rate, I have for quite awhile now wanted to get back into the practice of writing. However, I&#8217;ve wanted to do so outside the constraints of a hosted platform like Blogger or WordPress.com. Those systems place far too many constraints on how your blog works, and they also happen to be the only place that your data is housed. Sure, I could write my posts in Vim and then copy/paste them into the platform, but that&#8217;s annoying. I wanted to manage my writing using a plain text editor, mark it up using something lightweight like Markdown, check my writing into version control using Git, generate my site using a tool like Jekyll, and then push my site to the cloud. What was the easiest way to achieve all of this goodness? <a href="http://octopress.org">Octopress</a> seemed to fit the bill.</p>
+
+<p>So, what you now see is the result of my labor in migrating from WordPress.com to Octopress, hosted at Heroku. One day (perhaps) I&#8217;ll write up the process that I used. It was a bit convoluted and involved gigantic piles of yak hair, so I&#8217;d rather not consider that piece right now.</p>
+
+<p>What I will be focusing on quite a bit is the idea of simplicity. For more than a decade I have wandered through the barren wasteland that is accidental complexity in software. A few months ago I viewed Rich Hickey’s <a href="https://thestrangeloop.com/sessions/simple-made-easy">keynote session at StrangeLoop 2011</a> entitled <a href="http://www.infoq.com/presentations/Simple-Made-Easy">“Simple Made Easy”</a>. It is Rich’s definition of simplicity in software that has inspired the brand new title of this blog, wherein I will chronicle my continuing quest to seek out simplicity in software structure.</p>
+
+<p>Alas, it is time to return to billable work. I shall endeavor to post again in far less than a year. So, as we say in the south, &#8220;Ya&#8217;ll come back now, you hear?&#8221;</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Design Meeting Patterns/Antipatterns]]></title>
@@ -453,23 +480,6 @@
 <p>As you can see here, I&#8217;ve secured both the Blurb plugin and the Settings plugin in this manner by requiring that the logged in user be in the ROLE_ADMIN role. Now as Glen Smith would say, that&#8217;s a snack!</p>
 
 <p><em><strong>Update:</strong> <a href="http://burtbeckwith.com/blog/">Burt Beckwith</a> enlightened me to an approach that will get this done without the use of filters that will also direct you to the requested URL after login rather than the main page. Unfortunately I&#8217;ve never been able to track this down before. Just add the following to SecurityConfig.groovy:</em></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Pomodoro: The First Iteration]]></title>
-    <link href="http://mattstine.com/2009/11/04/pomodoro-the-first-iteration/"/>
-    <updated>2009-11-04T15:44:32-06:00</updated>
-    <id>http://mattstine.com/2009/11/04/pomodoro-the-first-iteration</id>
-    <content type="html"><![CDATA[<p>I spent about an hour last night reading through Francesco Cirillo&#8217;s e-book <em>The Pomodoro Technique</em>. Up until this point I knew the basics of the technique, but I really wanted to drill down and get the details. I won&#8217;t explain those here - visit <a href="http://www.pomodorotechnique.com/">http://www.pomodorotechnique.com/</a> to get the lowdown. What I want to talk about is my experience applying the technique this morning.</p>
-
-<p>I managed to complete two Pomodoros. Each of the Pomodoros was filled with internal interruptions of various kinds. One of the first things that I observed was something that I already knew from yesterday&#8217;s TADD post: I am definitely not used to focusing on one distinct task for any prolonged length of time. My mind was constantly bouncing around from idea to idea, almost as if my R-mode had a &#8220;memory leak.&#8221; My first Pomodoro was primarily a reading task - I used it for my daily Bible reading and meditation. This part of my day brings it&#8217;s focus challenges anyway, as I&#8217;m not doing anything tactile. I find its much easier to focus when I&#8217;m typing or writing something. The Pomodoro offered no relief from this, save a plan for dealing with the interruptions as they came up. First, note down that one happened with an apostrophe, and second, write the todo item or idea down on my inventory. This definitely helped to refocus my mind on the work at hand, but I still wish I could find a way to prevent those streamer thoughts from landing in the first place.</p>
-
-<p>The second thing that I observed was that my workspace is not at all setup to encourage focus. In recent months I&#8217;ve stopped using task-focused desktops in OS X, something that Neil Ford recommends in <em>The Productive Programmer</em>. I was reminded of this later in the day today reading <a href="http://memeagora.blogspot.com/2009/11/productivity-pron.html">his latest blog entry</a>. I think it would be a good idea to use my first Pomodoro of the day to setup task-based desktops for each of the tasks on my TODO list. I could fire up all of the programs necessary and drop them on to a space. Since a lot of my work is focused on web-based applications, I think I&#8217;ll probably use Fluid (<a href="http://fluidapp.com/">http://fluidapp.com/</a>) to create site specific browsers for the web applications that I need for each task. Another thing that I need to do is turn off the ringer on my phones and the new message notifications on Entourage. One tool that I did already have in my arsenal is Doodim, which blacks out everything except for the currently focused window on OS X. The only problem with Doodim (<a href="http://www.lachoseinteractive.net/en/products/doodim/">http://www.lachoseinteractive.net/en/products/doodim/</a>) is that it doesn&#8217;t work with external screens, so only my MacBook Pro&#8217;s screen gets the benefits. I counteracted this by making sure that the window I was actively using was on the external screen and maximized, but this won&#8217;t work for some tasks during which I might have multiple small windows to interact with.</p>
-
-<p>The final thing that I observed is that I still definitely live in an interruption-based work environment. My third attempt to complete a Pomodoro was repeated three times, and none of these times did I make it without having to stop and actively handle an external interruption. The difference? My office door was open. My first two Pomodoros were completed with the office door closed and my &#8220;Ssshhh&#8230;Genius at work!&#8221; sign on the door. This is going to be a tough one to handle. I don&#8217;t want to keep my office door closed all day, for more reasons than one. First, I don&#8217;t want to seem completely unapproachable. I&#8217;m a manager these days, and a huge part of my job is being available for people. For me, some interruptions will always be OK. But how can I sort those out prior to them happening? This is something I&#8217;ll be stewing on over the next couple of days. Second, my office turns into an absolute OVEN when the door is closed for too long. We have a really strange HVAC system that completely overreacts to small changes in the temperature. Unfortunately, it always seems to think I need to be slow cooked. ::SIGH::</p>
-
-<p>So, there you have it. I&#8217;ve learned a lot - I observed quite a view things about my work patterns and my environment, and will be working over the next few days to make changes to both to support better focus. If you have any comments or suggestions, please feel free to comment. Thanks!</p>
 ]]></content>
   </entry>
   

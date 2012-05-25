@@ -9,7 +9,7 @@
   <meta name="author" content="Matt Stine">
 
   
-  <meta name="description" content="The JavaOne 2009 Script Bowl was quite a delight to watch. The players were Jython (Frank Wierzbecki), Groovy (Guillaume LaForge), Clojure (Rich &hellip;">
+  <meta name="description" content="I happened to catch Guillaume LaForge&#8217;s tweet this morning about a &#8220;Groovy lunch&#8221; at JavaOne today. After our JUG-USA meeting with &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -64,6 +64,44 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/06/04/more-connecting-at-javaone-2009/">More Connecting at #JavaOne 2009</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-06-04T01:13:03-05:00" pubdate data-updated="true">Jun 4<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I happened to catch <a href="http://glaforge.free.fr/weblog/">Guillaume LaForge&#8217;s</a> tweet this morning about a &#8220;Groovy lunch&#8221; at JavaOne today. After our JUG-USA meeting with <a href="http://blogs.sun.com/jag/">James Gosling</a>(blog entry on this one to come), I made my way over to the &#8220;cafeteria&#8221; and found Guillaume, <a href="http://jameswilliams.be/blog/entry/index">James Williams (of the Griffon team)</a>, and <a href="http://weblogs.java.net/blog/johnsmart">John Smart</a> in exactly the location that Guillaume specified. We were shortly joined by Grails in Action (a.k.a. San Gria) co-author <a href="http://blogs.bytecode.com.au/glen/">Glen Smith</a>. Topics ranged from things we can do better with Groovy/Grails testing, the differences between the Groovy and other dynamic/scripting language communities, Groovy&#8217;s victory in the ScriptBowl, and none other than the differences in public transportation between the southeastern US and the Bay Area. I had a great time guys and will see you at the BOF.</p>
+
+<p>I also finally got the chance to meet <a href="http://dickwallsblog.blogspot.com/">Dick Wall</a> of the <a href="http://javaposse.com">Java Posse</a>. Dick is just as great in person as he has sounded for the past couple of years on the podcast. Unfortunately our chat was ever so brief, focused around the language features Dick would like to see in future versions of Scala. We were quickly ushered over to the Java.net &#8220;presentation area&#8221; to participate in <a href="http://weblogs.java.net/blog/joshy">Josh Marinacci&#8217;s</a> JavaFX Q&amp;A. Was also good meeting him and seeing the cool new UI controls in FX.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -535,55 +573,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2009/05/02/ive-forked-the-grails-paypal-plugin/">I&#8217;ve &#8220;Forked&#8221; the Grails PayPal Plugin&#8230;</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-05-02T00:59:46-05:00" pubdate data-updated="true">May 2<span>nd</span>, 2009</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>I&#8217;m currently completing the finishing touches on a new e-commerce site for my wife&#8217;s stationary business. We decided a long time ago to use <a href="http://www.paypal.com">PayPal</a> for all of the payment processing since we&#8217;ve had a great experience using it for our eBay selling. About a year ago Graeme Rocher polished off the last release of a <a href="http://grails.org/plugin/paypal">PayPal plugin</a> that is available in <a href="http://grails.org/plugin/home">the Grails Plugin repository</a>. It really is a very nice plugin, yet I had a couple of problems with it:</p>
-
-<ul>
-<li><p>It is only capable of handling payments for one item transactions via &#8220;Buy Now&#8221; buttons. I want to upload an entire shopping cart full of multiple items.</p></li>
-<li><p>It currently won&#8217;t handle shipping addresses. The site I&#8217;m building allows the user to maintain a list of shipping addresses, and I&#8217;d want to send the address information they choose along to PayPal.</p></li>
-<li><p>Minor issue: needed to upgrade the plugin to Grails 1.1.</p></li>
-</ul>
-
-
-<p>So, I decided this evening to fork the plugin. I want to leverage all of the great work that has been done thus far (especially with the IPN processing part - superb stuff), but I have to add in these two functions and do the version upgrade. Interestingly enough I couldn&#8217;t get the tests to run out of the box after the upgrade. No good developer likes to modify code without a stable running test suite, right? So what I ended up doing was creating a new Grails 1.1 plugin project and copying the original artifacts over. Once this was done all of the tests ran perfectly.</p>
-
-<p>So, at this point I&#8217;ve added function #1. You can now redirect to the &#8220;uploadCart&#8221; action. It assumes that you have already constructed a Payment object (now containing PaymentItems) and saved it, and then passed the transactionId along. I did this so that folks with multiple different ways of handling shopping carts could have some degree of flexibility - the onus is on you to map your cart to your Payment object correctly. The original functions implemented by Graeme are backward compatible, assuming only one PaymentItem in the Payment. I&#8217;ve run all of the original tests and also did some manual functional testing by running the plugin app against my own PayPal Sandbox account. So far so good. Look for more updates as this evolves. Once I get something I&#8217;m totally happy with I&#8217;ll see about getting it pushed back into the main plugin repo.</p>
-
-<p>Want to take a closer look? Visit <a href="http://github.com/mstine/grails-paypal-plugin/tree/master">http://github.com/mstine/grails-paypal-plugin/tree/master</a></p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/5/">&larr; Older</a>
@@ -609,6 +598,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/05/24/the-relaunch/">The Relaunch</a>
+      </li>
+    
+      <li class="post">
         <a href="/2011/05/16/design-meeting-patternsantipatterns/">Design Meeting Patterns/Antipatterns</a>
       </li>
     
@@ -622,10 +615,6 @@
     
       <li class="post">
         <a href="/2010/11/29/selenium-2-0-refcard/">Selenium 2.0 Refcard</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2010/11/10/agile-zone-roundup/">Agile Zone Roundup</a>
       </li>
     
   </ul>

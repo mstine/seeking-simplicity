@@ -9,7 +9,7 @@
   <meta name="author" content="Matt Stine">
 
   
-  <meta name="description" content="I posted earlier on my desire to become a better programmer. Well, I&#8217;ve since put together a plan of action for the next twelve months. I&#8217 &hellip;">
+  <meta name="description" content="From http://sourceforge.net/forum/forum.php?forum_id=719803: On July 27, 2007, STJUDE-SRM 1.0 was released. STJUDE-SRM is a laboratory management &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -64,6 +64,62 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2007/07/27/stjude-srm-10-released/">STJUDE-SRM 1.0 Released</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2007-07-27T13:59:00-05:00" pubdate data-updated="true">Jul 27<span>th</span>, 2007</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>From <a href="http://sourceforge.net/forum/forum.php?forum_id=719803">http://sourceforge.net/forum/forum.php?forum_id=719803</a>:</p>
+
+<blockquote><p>On July 27, 2007, STJUDE-SRM 1.0 was released.</p></blockquote>
+
+<p>STJUDE-SRM is a laboratory management system designed to support shared resource facility (or core lab) activities. It was designed and developed by the Hartwell Center for Bioinformatics and Biotechnology at St. Jude Children&#8217;s Research Hospital.</p>
+
+<p>Shared resources supported include DNA synthesis, Peptide synthesis, DNA sequencing, Functional Genomics (spotted microarray laboratory), and Affymetrix (commercial microarrays) laboratories. STJUDE-SRM was also designed so that it is sufficiently modular and scalable to support other laboratory activities as needed. It could conceivably support all facilities on a campus or at a research organization and provide a single portal for investigators to access these resources, retrieve data, receive invoices for services, and generate reports.</p>
+
+<p>Currently available is a build of STJUDE-SRM which is certified for JBoss 4.2.0.GA running on J2SE 5.0. Builds for JBoss 4.0.5.GA and BEA Weblogic Server 8.1 are forthcoming.</p>
+
+<p>STJUDE-SRM 1.0 can be downloaded here: <a href="http://sourceforge.net/project/showfiles.php?group_id=197795">http://sourceforge.net/project/showfiles.php?group_id=197795</a></p>
+
+<p>Please report all bugs you find in the STJUDE-SRM bug tracker: <a href="http://sourceforge.net/tracker/?group_id=197795&amp;atid=962898">http://sourceforge.net/tracker/?group_id=197795&amp;atid=962898</a></p>
+
+<p><a href="http://sourceforge.net/tracker/?group_id=197795&amp;atid=962898"></a></p>
+
+<p>This is a VERY satisfying announcement for me, as I have spent the better part of the last six years working on this project. I was so excited when I learned we would be releasing it to the open source community. Enjoy!</p>
+
+<p>For more information on STJUDE-SRM, please visit: <a href="http://stjude-srm.sourceforge.net">http://stjude-srm.sourceforge.net</a>.</p>
+
+<p><a href="http://sourceforge.net/tracker/?group_id=197795&amp;atid=962898"></a></p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -571,69 +627,6 @@ components and renderers for partial page updates</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2007/05/10/wednesday-was-ajax-day/">Wednesday Was AJAX Day</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2007-05-10T18:49:00-05:00" pubdate data-updated="true">May 10<span>th</span>, 2007</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Not officially, but nearly every session I attended had something to do with AJAX:</p>
-
-<ul>
-<li>Creating Amazing Web Interfaces with Ajax</li>
-<li>jMaki: Web 2.0 App Building Made Easy</li>
-<li>Fast, Beautiful, Easy: Pick Three - Building Web User Interfaces in the Java Programming Language with Google Web Toolkit</li>
-<li>Killer JavaScript Technology Frameworks for Java Platform Developers: An Exploration of Prototype, Script.aculo.us, and Rico</li>
-</ul>
-
-
-<p>I have to say that I was rather impressed by what I saw.</p>
-
-<p>The first talk was by Ben and Dion, the Ajaxian guys. It was an appropriate way to start, as they gave a quick history overview of Ajax. One nice point they made was that Ajax really isn&#8217;t about the acronym - it never was - it&#8217;s about building killer websites. Who cares what the actual technology behind it is. They discussed a couple of what they seemed to consider the better frameworks available - Dojo and ExtJS. They then explored some amazing up and coming features, including offline support and 2D client side graphics manipulation.</p>
-
-<p>I was rather impressed with jMaki - in short it is a wrapper around many of the popular JavaScript frameworks available (Dojo, Yahoo UI, Script.aculo.us, Spry, Google), and makes them accessible to Java, PHP, and Ruby. It has excellent tool support in NetBeans and Eclipse. It provides protection from changes in the API&#8217;s of all of these projects - you can mix and match frameworks and only be concerned about one API - jMaki&#8217;s. It does the work of linking all of the widgets together and communicating amongst them and with the server side.</p>
-
-<p>The GWT talk was easily my favorite of the day. I&#8217;m extremely impressed with what these guys have done. I hadn&#8217;t had much opportunity to look at GWT until now, and I really wish I had. I was initially skeptical about writing an entire application in Java and letting it generate HTML and JavaScript. I guess these guys knew that, because they&#8217;re development philosophy addresses my concerns quite nicely:</p>
-
-<p>To radically improve the web experience for<br/>
-users by enabling developers to use existing<br/>
-Java tools to build no-compromise AJAX for<br/>
-any modern browser</p>
-
-<p>From what I can see, they deliver on their mission. They&#8217;ve optimized their code for speed and for browser specificity (e.g. from what I understand, if your client is using Firefox, you get Firefox optimized JavaScript, same for IE, etc.). You can use all of your favorite IDE features to build the code, including the debugger. I really want to try to make use of this toolkit in the near future.</p>
-
-<p>The final talk was less informative for me, but only because I had experience with most of the technologies already. The killer part of this was how the speaker extended existing JSF components and added Script.aculo.us effects. It really made his version of Yahoo maps shine.</p>
-
-<p>Ajax isn&#8217;t going anywhere but up. I just left yet another Ajax/JSF session, which for me was the best session of the conference so far. In a later entry I&#8217;ll tell you why.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/10/">&larr; Older</a>
@@ -659,6 +652,10 @@ any modern browser</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/05/24/the-relaunch/">The Relaunch</a>
+      </li>
+    
+      <li class="post">
         <a href="/2011/05/16/design-meeting-patternsantipatterns/">Design Meeting Patterns/Antipatterns</a>
       </li>
     
@@ -672,10 +669,6 @@ any modern browser</p>
     
       <li class="post">
         <a href="/2010/11/29/selenium-2-0-refcard/">Selenium 2.0 Refcard</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2010/11/10/agile-zone-roundup/">Agile Zone Roundup</a>
       </li>
     
   </ul>
