@@ -1,0 +1,262 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Don't build software that's TOO smart! - Seeking Simplicity</title>
+  <meta name="author" content="Matt Stine">
+
+  
+  <meta name="description" content="I had an extremely successful meeting with one of our clients yesterday. We were discussing how we wanted to go about migrating her laboratory from &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://mattstine.com/2010/06/03/dont-build-software-thats-too-smart">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Seeking Simplicity" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Seeking Simplicity</a></h1>
+  
+    <h2>A blog about programming, software architecture and everything else...</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:mattstine.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Don't Build Software That's TOO Smart!</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-06-03T17:00:35-05:00" pubdate data-updated="true">Jun 3<span>rd</span>, 2010</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>I had an extremely successful meeting with one of our clients yesterday. We were discussing how we wanted to go about migrating her laboratory from its current system (one that we built several years ago) to our new lab management platform. At some point during the discussion I made the statement, &#8220;We tried to make the previous system too smart! We&#8217;re not repeating that mistake this time.&#8221; Of course, she was in complete agreement with that principle. I&#8217;ve had similar interactions with our other clients that are making migrations (rather than encountering our system for the first time on this new version), and although I&#8217;ve never explicitly stated the principle that way, similar sentiments have abounded.</p>
+
+<p>What is too smart software? In our case, it was a system that attempted to encapsulate every single rule of &#8220;business&#8221; process that occurred within a given laboratory. Many times statements were flung around like &#8220;will it ALWAYS happen this way,&#8221; &#8220;what should we do if this happens?&#8221; etc., etc., etc. We tried to cover every single possibility, and we did an excellent job of preventing users from ever breaking their own rules. What we didn&#8217;t realize (and we&#8217;re not unique - this problem is RAMPANT) is that the rules CHANGE. Rules come, rules go. Sometimes the rule remains, but there are a few exceptional cases that must be dealt with. Our system simply couldn&#8217;t deal with a world that worked this way - and thus, our system was completely unfit for the real world.</p>
+
+<p>We set out with a different mission this time. If there&#8217;s one overriding characteristic of SRM (Shared Resource Management) 2.0, it&#8217;s the explicit assumption that the world will change continually. We don&#8217;t attempt to tell you how you must use this system. We capture your data, we invoice for your services, we run your reports - but YOU, the user gets to decide how you&#8217;ll interact with it. If your workflow changes, we change with you. Now the devil is in the details. It&#8217;s taken roughly 20-30 man years worth of effort to build a system like this, and it hasn&#8217;t been easy. But in the end, we&#8217;re finding that those years were much better spent ENABLING our users rather than PREVENTING our users from getting things done.</p>
+
+<p>I&#8217;m not sure that I&#8217;ve gotten my point across in this brief diatribe, so I&#8217;ll attempt to sum it up here. If you&#8217;re developing a system, figure out the 2 or 3 things that will make your users&#8217; lives AWESOME, and do those 2 or 3 things extremely well. Don&#8217;t do the rest AT ALL. Don&#8217;t build a system that attempts to be smarter than the knowledge expert using it - it&#8217;s a means to your user&#8217;s end, not an end in itself.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Matt Stine</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-06-03T17:00:35-05:00" pubdate data-updated="true">Jun 3<span>rd</span>, 2010</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/agile/'>agile</a>, <a class='category' href='/blog/categories/development/'>development</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://mattstine.com/2010/06/03/dont-build-software-thats-too-smart/" data-via="mstine" data-counturl="http://mattstine.com/2010/06/03/dont-build-software-thats-too-smart/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2010/05/28/announcing-nosql-summer-memphis/" title="Previous Post: Announcing NOSQL Summer Memphis">&laquo; Announcing NOSQL Summer Memphis</a>
+      
+      
+        <a class="basic-alignment right" href="/2010/06/22/nfjs-fall-2010-what-do-you-want-to-learn/" title="Next Post: NFJS Fall 2010: What do you want to learn?">NFJS Fall 2010: What do you want to learn? &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+	<h1>Hello, World!</h1>
+	<p>
+		<img src="http://mattstine.files.wordpress.com/2011/05/indiamug.jpg" width="173" height="213">
+	</p>
+	<p>
+		<a href="http://www.linkedin.com/in/mattstine"><img alt="View Matt Stine&#039;s profile on LinkedIn" src="http://www.linkedin.com/img/webpromo/btn_myprofile_160x33.gif" border="0" width="160" height="33"></a>
+	</p>
+</section><section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2011/05/16/design-meeting-patternsantipatterns/">Design Meeting Patterns/Antipatterns</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/01/05/selenium-conference-2011/">Selenium Conference 2011</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/01/02/2010-in-review-the-automated-analysis/">2010 in review: the automated analysis...</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2010/11/29/selenium-2-0-refcard/">Selenium 2.0 Refcard</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2010/11/10/agile-zone-roundup/">Agile Zone Roundup</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating...</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("mstine", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/mstine" class="twitter-follow-button" data-show-count="false">Follow @mstine</a>
+  
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - Matt Stine -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'seekingsimplicity';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

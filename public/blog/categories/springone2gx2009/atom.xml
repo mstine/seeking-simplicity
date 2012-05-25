@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: springone2gx2009 | Seeking Simplicity]]></title>
+  <link href="http://mattstine.com/blog/categories/springone2gx2009/atom.xml" rel="self"/>
+  <link href="http://mattstine.com/"/>
+  <updated>2012-05-24T19:13:18-05:00</updated>
+  <id>http://mattstine.com/</id>
+  <author>
+    <name><![CDATA[Matt Stine]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Thoughts so far on #springone2gx]]></title>
+    <link href="http://mattstine.com/2009/10/21/thoughts-so-far-on-springone2gx/"/>
+    <updated>2009-10-21T22:00:01-05:00</updated>
+    <id>http://mattstine.com/2009/10/21/thoughts-so-far-on-springone2gx</id>
+    <content type="html"><![CDATA[<p>It's now Wednesday night, day 2.5 of SpringOne/2GX in New Orleans, LA. Normally I like to blog about each session that I attend when I make it to SpringOne, but as this has been my first year here as a speaker, I've spent practically all of my free time tweaking my presentation and demos. So, I wanted to summarize my reflections thus far before I forget them.</p>
+
+<p>First of all, my talk went off fantastically. I presented <a href="http://www.springone2gx.com/conference/new_orleans/2009/10/session?id=15651">Case Study: SRM 2.0 - A next generation shared resource management system built on SpringSource dm Server</a>, which summarized our experiences using OSGi and SpringSource dm Server as the foundation for the enterprise application that we're about to release into production. There was a small but very enthusiastic crowd, and I fielded quite a few questions both during the talk and immediately following. I was very encouraged to see nothing but green in the evaluation bucket at the back of the room, and <a href="http://twitter.com/sudr/status/5056103019">this tweet</a> was the icing on the cake.</p>
+
+<p>Second, I've been extremely impressed with the venue. After attending the last two years in Hollywood, Florida, I can't help but think that this move was one of the best that was made. The Roosevelt Hotel is very charming, and the banquet staff here is top notch. I've attended quite a few conferences, and the food here is definitely some of the best I've ever had. Not only that, but there is an entirely different energy level here in New Orleans - just hearing the live jazz piping into my hotel room every night from the French Quarter below is very nice.</p>
+
+<p>Third, the combination of SpringOne and 2GX, the Groovy and Grails conference, into one event has topped my expectations. Being able to bounce back and forth between two of my favorite technologies has been awesome. Getting the latest scoop on Spring 3.0 and diving into Griffon during the same morning was great. Not only that, but getting to interact with my tweeps from SpringSource and the G3 community during the same week has been a blast. My only regret is that I didn't have my talk more finalized before the event so that I could spend more time with the hallway conversations.</p>
+
+<p><strong>Quick reviews of the sessions that I've attended thus far:</strong></p>
+
+<ul>
+<li><p>What's New in Spring 3.0 (Arjen Poutsma) - This was a great overview of the new and notable in Spring 3.0. I was very excited to see just how simple and powerful the REST support that is now built directly into Spring MVC will be. The only letdown was that Arjen didn't dye his hair this year.</p></li>
+<li><p>Intro to Griffon: Grails for RIAs (Danno Ferrin) - This was my first opportunity to hear a full blown talk on Griffon. Danno did a fantastic job walking us through how to use Griffon to develop a simple weather dashboard widget. I absolutely can't wait to write my first Griffon app. Now that my session is done, I may start tonight!</p></li>
+<li><p>Grails Internals (Jeff Brown) - Jeff Brown is live coding at its best. I love his ZERO slides approach, and I learned quite a bit about the different metaprogramming aspects used to deliver Grails functionality. I'm more than inspired to contribute to plugins at a higher level now.</p></li>
+<li><p>MOPing up Groovy (Venkat Subramaniam) - Whether you're interested in the topic or not, one must attend AT LEAST one Venkat talk whenever he's in the same town as you. This talk was mostly focused around the metaprogramming topics that Venkat covered in <em>Programming Groovy</em>, but seasoned with Venkat's unique blend of off the cuff humor. From no one else will you hear, "We don't want to duplicate code...at least not in public."</p></li>
+<li><p>Grails for the Enterprise (Robert Fischer) - I must admit, I didn't really NEED to go to this talk. I was mainly interested in checking out Robert as a speaker and hearing his strategies for driving Grails adoption. I liked his approach, and I really enjoyed his live coding session at the back end of the talk. He has quite a bit of energy and created a very rich interaction with the crowd.</p></li>
+<li><p>Functional Groovy (Hamlet D'Arcy) - This was by far the best session of the conference for me thus far. Hamlet walked us through the 10 commandments of functional programming using Groovy as the syntax for exploration, sprinkled in a healthy amount of <em>The Little Schemer</em>, explained that using a non-functional language to learn functional programming was like learning OO in Cobol, and found a way to tie in <em>Zen and the Art of Motorcycle Maintenance</em>, Plato, Aristotle, elephants, and ducks.</p></li>
+<li><p>What's new in dm Server 2.0 (Ben Hale) - Ben walked us through the new and notable in dm Server 2.0. A great app server has gotten even better!</p></li>
+</ul>
+
+
+<p>So there you have it. I'm looking forward to a nice relaxing day tomorrow (now that I don't have demos and slides to tweak all day) and a quick flight home to rejoin my wife and kids. See you tomorrow Grant and the girls!</p>
+]]></content>
+  </entry>
+  
+</feed>

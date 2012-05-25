@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: jsf | Seeking Simplicity]]></title>
+  <link href="http://mattstine.com/blog/categories/jsf/atom.xml" rel="self"/>
+  <link href="http://mattstine.com/"/>
+  <updated>2012-05-24T19:13:18-05:00</updated>
+  <id>http://mattstine.com/</id>
+  <author>
+    <name><![CDATA[Matt Stine]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[How to implement form-level validation in JSF]]></title>
+    <link href="http://mattstine.com/2007/06/27/how-to-implement-form-level-validation-in-jsf/"/>
+    <updated>2007-06-27T12:54:00-05:00</updated>
+    <id>http://mattstine.com/2007/06/27/how-to-implement-form-level-validation-in-jsf</id>
+    <content type="html"><![CDATA[<p>Recently I was faced with the challenge of implementing form-level (or page-level) validation in a JSF-based application. What I mean by form-level validation is the need to evaluate a subset of a form's fields as a unit, rather than simply validating each field in isolation. An example of this type of validation can be found on a user registration form where one has to select a password in one text field, and then retype the same password in another text field for confirmation. Validating that these two text fields contain the same password is an example of form level validation.</p>
+
+<p>In my case, I had two date selector components on my form, one for a start date/time and one for an end date/time for an event that was being scheduled. The rule I needed to validate was that the end date/time was later than the start date/time.</p>
+
+<p>There are a few ways to implement validation like this, including but not limited to:</p>
+
+<ol>
+<li><p>Build a custom component that renders selectors for both the start and end date/time, then validate as a unit. This actually is field-level validation and doesn't truly address the form-level problem.</p></li>
+<li><p>Implement a validator method on a managed bean that will evaluate the data submitted for multiple components.</p></li>
+</ol>
+
+
+<p>I'll address the second method in this HOWTO.</p>
+
+<p>First, you'll need to bind at least <em>n-1</em> of the components that you want to validate to properties on your managed bean. The simplest way is to declare properties of type <strong>UIInput</strong>:</p>
+
+<blockquote><pre><code>&lt;br&gt;&lt;/br&gt;private UIInput startDateComponent;&lt;br&gt;&lt;/br&gt;&lt;br&gt;&lt;/br&gt;public UIInput getStartDateComponent() {&lt;br&gt;&lt;/br&gt;    return startDateComponent;&lt;br&gt;&lt;/br&gt;}&lt;br&gt;&lt;/br&gt;&lt;br&gt;&lt;/br&gt;public void setStartDateComponent(UIInput startDateComponent) {  &lt;br&gt;&lt;/br&gt;    this.startDateComponent = startDateComponent;&lt;br&gt;&lt;/br&gt;}&lt;br&gt;&lt;/br&gt;
+</code></pre></blockquote>
+
+<p>and do the actual binding in the JSP:</p>
+
+<blockquote><p><br></br>&lt;t:inputDate id="eventStart" value="#{orderForm.sampleInfo.requestedStartTime}"<br></br>    type="both"<br></br>    popupCalendar="true"<br></br>    ampm="true" binding="#{dateValidationForm.startDateComponent}"/><br></br></p></blockquote>
+
+<p>Next, you'll implement the validation method, which can have any name you like, but must share the same signature as this example:</p>
+
+<blockquote><p><br></br>public void validateEndDate(FacesContext context, UIComponent toValidate, Object value) {<br></br>    Date endDate = (Date) value;<br></br>    Date startDate = (Date) getStartDateComponent().getLocalValue();<br></br><br></br>    if (startDate == null) {<br></br>        context.addMessage(getStartDateComponent().getClientId(context),new FacesMessage("Please specify a valid date and time."));<br></br>        throw new ValidatorException(new FacesMessage());<br></br>    }<br></br><br></br>    long endTime = endDate.getTime();<br></br>    long startTime = startDate.getTime();<br></br><br></br>    if (startTime >= endTime) {<br></br>        addError("errors.batchOrder.invalidEndDate");<br></br>        throw new ValidatorException(new FacesMessage("Event end must be later than event start."));<br></br>    }<br></br>}<br></br></p></blockquote>
+
+<p>And finally, you'll bind the validation method to the last component in your subset of components that need to be validated together:</p>
+
+<blockquote><p><br></br>&lt;t:inputDate id="eventEnd" value="#{orderForm.sampleInfo.requestedEndTime}" type="both" popupCalendar="true" ampm="true" validator="#{dateValidationForm.validateEndDate}"/><br></br></blockquote></p>
+
+<p>To understand why I say <em>n-1</em> components, think of the way the validation phase occurs in JSF. Data is bound to the components in the order that they occur in the JSF component tree, which just so happens to be the order in which they appear in the JSP source. Looking at the <strong>validateEndDate</strong> method, you'll see that I only reference the <strong>startDateComponent</strong> from the binding, but I reference the <strong>endDate</strong> as the <strong>Object value</strong> reference that was passed into the method. This is why you only need to bind <em>n-1</em> components, because you get the <em>nth</em> component from the method signature.</p></blockquote>
+
+<p>If you want to be more uniform and bind all of the components, you could create an extra dummy hidden value component and bind the validator method to it. You could then bind all of the components to your managed bean and access them all from the bindings rather than accessing one from the method signature.</p>
+
+<p>The <strong>validateEndDate</strong> method itself is rather simple. First you access the data by getting the local value of each component (again, the <strong>endDate</strong> value is not accessed in this way - in fact, it hasn't been bound yet because it must be validated first, and that's what's happening in this method!). You then apply the business rule. You'll see that first I look to see if the <strong>startDate</strong> is null. I'm not sure why this is possible, but if the <strong>startDate</strong> was not submitting a good value on the FIRST submit, the local value was null. So, I catch that here. I add an error message to the <strong>startDateComponent</strong> and throw a <strong>ValidatorException</strong>. If the business rule is violated, throw a <strong>ValidatorException</strong>. (I'm also using the <strong>addError</strong> method provided by AppFuse to work w/ its message framework as well, but that is not necessary w/ all JSF apps).</p>
+
+<p>Now, for the final problem I encountered. In Weblogic server, which we're still using for the time being, if your session cannot be serialized then it deletes your entire session. Obviously this can cause major problems in any web app. To deal with this, ANY SESSION SCOPED MANAGED BEAN must be fully serializable, meaning it and any objects referenced in its state. Herein lies the problem for JSF. Instances of <strong>UIComponent</strong> (an ancestor of <strong>UIInput</strong>) are not serializable, so if we bind our components to <strong>UIInput</strong> fields on a session-scoped managed bean (the bean backing this form is an Order Form/Shopping Cart style bean), it will not be serializable and Weblogic will kick out your session.</p>
+
+<p>To deal with this problem, realize that there is no reason that you can only have one managed bean backing a form. In fact, you can reference as many managed beans as you need. Since validation is done for each request, there is no need to manage any state there across multiple requests like we need to do with a shopping cart. So, why not declare an additional managed bean that is REQUEST SCOPED, and then put the bindings and validation method there. That is exactly what I did. Here is the entire bean:</p>
+
+<blockquote><blockquote><p><br></br>public class DateValidationForm extends BasePage {<br></br><br></br>    private UIInput startDateComponent;<br></br><br></br>    public UIInput getStartDateComponent() {<br></br>        return startDateComponent;<br></br>    }<br></br> <br></br>    public void setStartDateComponent(UIInput startDateComponent) {<br></br>        this.startDateComponent = startDateComponent;<br></br>    }<br></br><br></br>    public void validateEndDate(FacesContext context, UIComponent toValidate, Object value) {<br></br>        Date endDate = (Date) value;<br></br>        Date startDate = (Date) getStartDateComponent().getLocalValue();<br></br><br></br>        if (startDate == null) {<br></br>            context.addMessage(getStartDateComponent().getClientId(context),new FacesMessage("Please specify a valid date and time."));<br></br>            throw new ValidatorException(new FacesMessage());<br></br>        }<br></br><br></br>        long endTime = endDate.getTime();<br></br>        long startTime = startDate.getTime();<br></br><br></br>        if (startTime >= endTime) {<br></br>            addError("errors.batchOrder.invalidEndDate");<br></br>            throw new ValidatorException(new FacesMessage("Event end must be later than event start."));<br></br>        }<br></br>    }<br></br>}<br></br></p></blockquote>
+
+<p>and the declaration in faces-config.xml:</p>
+
+<blockquote><p><br></br><managed-bean><br></br>    <managed-bean-name>dateValidationForm</managed-bean-name><br></br>    <managed-bean-class>org.stjude.hc.srmcti.webapp.action.ordering.</p>
+
+<pre><code>DateValidationForm&lt;/managed-bean-class&gt;&lt;br&gt;&lt;/br&gt;    &lt;managed-bean-scope&gt;request&lt;/managed-bean-scope&gt;&lt;br&gt;&lt;/br&gt;&lt;/managed-bean&gt;&lt;br&gt;&lt;/br&gt;
+</code></pre></blockquote>
+
+<p>The added bonus is that you can reuse this bean across all forms where you need this behavior. My application happens to have 2 additional forms where I would have repeated this logic, so I just reference this bean there.</p></blockquote>
+
+<p>Enjoy!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Thursday was slow...]]></title>
+    <link href="http://mattstine.com/2007/05/11/thursday-was-slow/"/>
+    <updated>2007-05-11T22:17:00-05:00</updated>
+    <id>http://mattstine.com/2007/05/11/thursday-was-slow</id>
+    <content type="html"><![CDATA[<p>for me, not for JavaOne. Of course I was a good little programmer and used the schedule builder to sign up for all of my sessions. I edited them a bit after the first two keynotes. Even then, I had one lone session scheduled for Thursday morning (that wasn't really directly applicable to my work, it just looked interesting), and then two sessions in the afternoon, the first starting at 4:10. I decided to skip out on the morning session and do a little shopping at Pier 39. The highlight was a "Bucket of Boat Trash" and clam chowder at the Bubba Gump Shrimp Company. And yes, we Ole Miss Rebels are represented as far out as the end of Pier 39:</p>
+
+<p><a href="http://picasaweb.google.com/matt.stine/SanFranciscoJavaOne2007/photo#5063511710562298018"><img src="http://lh4.google.com/image/matt.stine/RkU1ErgYqKI/AAAAAAAAAMA/6BJ0mkhqgn8/s288/DSCN1117.JPG" alt="" /></a></p>
+
+<p>The two sessions that I attended were:</p>
+
+<ul>
+<li>RubyTooling: State of the Art</li>
+<li>Using Ajax with POJC (Plain Old JavaServer Faces Components)</li>
+</ul>
+
+
+<p>I attended the first session simply to get a little more detail on all of the hype surrounding Ruby tooling support in NetBeans 6. What I got was even more than I bargained for. The project leaders actually walked us through not only the features that were available, but how they were implemented. I had never really thought about the problems with providing code completion and refactoring with a dynamically-typed language. It was really cool to see the thought process that went into their solutions. I'd love to hear a similar discussion from the JetBrains guys, as the Ruby support in IntelliJ IDEA is quite good as well.</p>
+
+<p>For me the second session was the best of the conference for me up until that point, and arguably it still is after attending Friday's sessions. Craig McClanahan, of Struts fame, was the main speaker and was joined by his colleagues Matthew Bohm and Jayashri Visvanathan. What made this session so good for me was that they presented a problem - "How can I add Ajax behaviors to my JavaServer™ Faces technology based application, without throwing away my investment in existing component libraries?" - and then provided three different solutions to that problem - low, medium, and high level.</p>
+
+<p>The low level consisted of simply using the HTML event pass-through attributes that are implemented by most standard JSF components (onClick, onBlur, etc.). One could use an existing JavaScript framework such as Dojo to send an XMLHttpRequest and then map that request to a Servlet or JSF handler using a technology such as Shale Remoting. The response could be sent back as JSON data which could then be transformed into the desired UI update.</p>
+
+<p>The medium level consisted of actually extending existing JSF components and adding the desired Ajax behavior. Due to time constraints they didn't cover this solution in detail, but they did provide a link to a detailed discussion in the Java BluePrints catalog: https://blueprints.dev.java.net/bpcatalog/ee5/ajax/extendingRenderFunctionality.html</p>
+
+<p>The high level solutions addressed the following needs (copied directly from the slides):</p>
+
+<p>● Partial page submit—gather up a particular set of<br/>
+input element values, and send them to a bit of server<br/>
+side business logic<br/>
+● Partial page refresh—the business logic needs to<br/>
+refresh the content of one or more subtrees of the<br/>
+client side DOM<br/>
+● Synchronization—the benefits of synchronizing the<br/>
+server side state<br/>
+● Don’t repeat yourself (DRY)—reuse existing<br/>
+components and renderers for partial page updates</p>
+
+<p>To address these issues, the speakers highlighted two add-on frameworks:</p>
+
+<p>● Ajax4JSF (http://labs.jboss.com/portal/jbossajax4jsf)<br/>
+● Dynamic Faces (https://jsf-extensions.dev.java.net/)</p>
+
+<p>I was quite impressed with both of these frameworks. One of my colleagues is currently implementing Ajax behavior in a Facelets-based application using Ajax4JSF and he is quite happy with it. Dynamic Faces looked really awesome, especially its tooling support in NetBeans (actually I'm quite impressed with the overall JSF support in NetBeans - I'll definitely be adding it to my tool belt). The highlight of the presentation was Matt's video of him building an entire currency trading application in 28 minutes - except it was "fast-played" to finish in 3 1/2 minutes and set to techno music. Matt wowed us with his dancing abilities while we watched true RAD. The crowd went wild!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Wednesday was AJAX Day]]></title>
+    <link href="http://mattstine.com/2007/05/10/wednesday-was-ajax-day/"/>
+    <updated>2007-05-10T18:49:00-05:00</updated>
+    <id>http://mattstine.com/2007/05/10/wednesday-was-ajax-day</id>
+    <content type="html"><![CDATA[<p>Not officially, but nearly every session I attended had something to do with AJAX:</p>
+
+<ul>
+<li>Creating Amazing Web Interfaces with Ajax</li>
+<li>jMaki: Web 2.0 App Building Made Easy</li>
+<li>Fast, Beautiful, Easy: Pick Three - Building Web User Interfaces in the Java Programming Language with Google Web Toolkit</li>
+<li>Killer JavaScript Technology Frameworks for Java Platform Developers: An Exploration of Prototype, Script.aculo.us, and Rico</li>
+</ul>
+
+
+<p>I have to say that I was rather impressed by what I saw.</p>
+
+<p>The first talk was by Ben and Dion, the Ajaxian guys. It was an appropriate way to start, as they gave a quick history overview of Ajax. One nice point they made was that Ajax really isn't about the acronym - it never was - it's about building killer websites. Who cares what the actual technology behind it is. They discussed a couple of what they seemed to consider the better frameworks available - Dojo and ExtJS. They then explored some amazing up and coming features, including offline support and 2D client side graphics manipulation.</p>
+
+<p>I was rather impressed with jMaki - in short it is a wrapper around many of the popular JavaScript frameworks available (Dojo, Yahoo UI, Script.aculo.us, Spry, Google), and makes them accessible to Java, PHP, and Ruby. It has excellent tool support in NetBeans and Eclipse. It provides protection from changes in the API's of all of these projects - you can mix and match frameworks and only be concerned about one API - jMaki's. It does the work of linking all of the widgets together and communicating amongst them and with the server side.</p>
+
+<p>The GWT talk was easily my favorite of the day. I'm extremely impressed with what these guys have done. I hadn't had much opportunity to look at GWT until now, and I really wish I had. I was initially skeptical about writing an entire application in Java and letting it generate HTML and JavaScript. I guess these guys knew that, because they're development philosophy addresses my concerns quite nicely:</p>
+
+<p>To radically improve the web experience for<br/>
+users by enabling developers to use existing<br/>
+Java tools to build no-compromise AJAX for<br/>
+any modern browser</p>
+
+<p>From what I can see, they deliver on their mission. They've optimized their code for speed and for browser specificity (e.g. from what I understand, if your client is using Firefox, you get Firefox optimized JavaScript, same for IE, etc.). You can use all of your favorite IDE features to build the code, including the debugger. I really want to try to make use of this toolkit in the near future.</p>
+
+<p>The final talk was less informative for me, but only because I had experience with most of the technologies already. The killer part of this was how the speaker extended existing JSF components and added Script.aculo.us effects. It really made his version of Yahoo maps shine.</p>
+
+<p>Ajax isn't going anywhere but up. I just left yet another Ajax/JSF session, which for me was the best session of the conference so far. In a later entry I'll tell you why.</p>
+]]></content>
+  </entry>
+  
+</feed>

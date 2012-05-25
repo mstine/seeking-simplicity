@@ -1,0 +1,267 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Set Conditional Breakpoints in IDEA - Seeking Simplicity</title>
+  <meta name="author" content="Matt Stine">
+
+  
+  <meta name="description" content="So yesterday I was attempting to debug an issue in a batch processing module within one of our applications. In short, an assertion was failing deep &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://mattstine.com/2008/02/05/set-conditional-breakpoints-in-idea">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Seeking Simplicity" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Seeking Simplicity</a></h1>
+  
+    <h2>A blog about programming, software architecture and everything else...</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:mattstine.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Set Conditional Breakpoints in IDEA</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-02-05T12:27:00-06:00" pubdate data-updated="true">Feb 5<span>th</span>, 2008</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>So yesterday I was attempting to debug an issue in a batch processing module within one of our applications. In short, an assertion was failing deep within Hibernate as it attempted to flush the session. Using a combination of various log statements, I had isolated the problem down to a particular record that the batch process was attempting to update. (BTW: I know you shouldn&#8217;t be using Hibernate for batch processing - however, we&#8217;re talking about batches of at most 1000 records here, not millions!) What I really wanted to do was set a breakpoint and examine the state of the objects at runtime; however, I dreaded the thought of clicking through the breakpoint time and time again until I got to the particular record that was causing the problem. &#8220;Surely,&#8221; I thought, &#8220;there must be a way to tell the debugger to only break under certain conditions.&#8221;</p>
+
+<p>So, here&#8217;s the code I wanted to examine:</p>
+
+<pre><code>&lt;br&gt;&lt;/br&gt;public Publication parsePublication(String inputLine)&lt;br&gt;&lt;/br&gt;   throws ParseException {&lt;br&gt;&lt;/br&gt;       Publication publication = new Publication();&lt;br&gt;&lt;/br&gt;&lt;br&gt;&lt;/br&gt;       String[] fields = inputLine.split("\t");&lt;br&gt;&lt;/br&gt;&lt;br&gt;&lt;/br&gt;       publication.setPublicationType(fields[0]);&lt;br&gt;&lt;/br&gt;       ...&lt;br&gt;&lt;/br&gt;       return publication;&lt;br&gt;&lt;/br&gt;}&lt;br&gt;&lt;/br&gt;
+</code></pre>
+
+<p>Essentially, I wanted to break after <code>inputLine.split("\t");</code> if and only if <code>fields[35]</code> existed and was equal to &#8220;PM:16732581.&#8221; After examining IDEA&#8217;s Breakpoint dialog, I noticed a section in the bottom right-hand corner that I&#8217;d never played with before:</p>
+
+<p><a href="http://2.bp.blogspot.com/_Vo63LRwAZbk/R6idFtXVh2I/AAAAAAAAAcw/DpuaZ5TQUCs/s1600-h/breakpoint_dialog.jpg"><img src="http://2.bp.blogspot.com/_Vo63LRwAZbk/R6idFtXVh2I/AAAAAAAAAcw/DpuaZ5TQUCs/s320/breakpoint_dialog.jpg" alt="" /></a></p>
+
+<p>As it turns out, this is exactly what I needed. If you click on the ellipsis next to the drop menu, you get a context-sensitive editor equipped with code completion:</p>
+
+<p><a href="http://3.bp.blogspot.com/_Vo63LRwAZbk/R6idb9XVh3I/AAAAAAAAAc4/MENimxICxyk/s1600-h/condition_dialog2.jpg"><img src="http://3.bp.blogspot.com/_Vo63LRwAZbk/R6idb9XVh3I/AAAAAAAAAc4/MENimxICxyk/s400/condition_dialog2.jpg" alt="" /></a></p>
+
+<p>Enter the desired conditions and voila! A conditional breakpoint. It worked like a charm the very first time, and I only had to inspect the breakpoint when the problematic record came up.</p>
+
+<p>Another nice feature of the conditional breakpoint is that if some sort of exception (such as a NullPointerException) occurs while attempting to evaluate the conditional expression, IDEA pops up a dialog informing you what happened and asking if you want to stop at the breakpoint or continue. Nice.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Matt Stine</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-02-05T12:27:00-06:00" pubdate data-updated="true">Feb 5<span>th</span>, 2008</time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://mattstine.com/2008/02/05/set-conditional-breakpoints-in-idea/" data-via="mstine" data-counturl="http://mattstine.com/2008/02/05/set-conditional-breakpoints-in-idea/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2008/02/05/grails-10-released/" title="Previous Post: Grails 1.0 Released!">&laquo; Grails 1.0 Released!</a>
+      
+      
+        <a class="basic-alignment right" href="/2008/02/08/on-our-way-to-the-gateway-software-symposium/" title="Next Post: On our way to the Gateway Software Symposium">On our way to the Gateway Software Symposium &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+	<h1>Hello, World!</h1>
+	<p>
+		<img src="http://mattstine.files.wordpress.com/2011/05/indiamug.jpg" width="173" height="213">
+	</p>
+	<p>
+		<a href="http://www.linkedin.com/in/mattstine"><img alt="View Matt Stine&#039;s profile on LinkedIn" src="http://www.linkedin.com/img/webpromo/btn_myprofile_160x33.gif" border="0" width="160" height="33"></a>
+	</p>
+</section><section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2011/05/16/design-meeting-patternsantipatterns/">Design Meeting Patterns/Antipatterns</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/01/05/selenium-conference-2011/">Selenium Conference 2011</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/01/02/2010-in-review-the-automated-analysis/">2010 in review: the automated analysis...</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2010/11/29/selenium-2-0-refcard/">Selenium 2.0 Refcard</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2010/11/10/agile-zone-roundup/">Agile Zone Roundup</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating...</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("mstine", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/mstine" class="twitter-follow-button" data-show-count="false">Follow @mstine</a>
+  
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - Matt Stine -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'seekingsimplicity';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

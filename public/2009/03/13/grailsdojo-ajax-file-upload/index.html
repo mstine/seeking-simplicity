@@ -1,0 +1,337 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Grails+Dojo Ajax File Upload - Seeking Simplicity</title>
+  <meta name="author" content="Matt Stine">
+
+  
+  <meta name="description" content="I&#8217;m currently working on a Grails application with a requirement for uploading product images, which are subsequently resized into thumbnails &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://mattstine.com/2009/03/13/grailsdojo-ajax-file-upload">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Seeking Simplicity" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Seeking Simplicity</a></h1>
+  
+    <h2>A blog about programming, software architecture and everything else...</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:mattstine.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Grails+Dojo Ajax File Upload</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-03-13T22:08:00-05:00" pubdate data-updated="true">Mar 13<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>I&#8217;m currently working on a <a href="http://grails.org/">Grails</a> application with a requirement for uploading product images, which are subsequently resized into thumbnails of various sizes for different shopping screens. Since it took a bit of doing to get this done, I thought I&#8217;d post my solution here in case anyone could benefit from it.</p>
+
+<p>First, to set the stage, I&#8217;ve upgraded the application all the way to the newly released <a href="http://www.springsource.org/node/1107">Grails 1.1</a>.</p>
+
+<p>To start off, I naively attempted to use the built-in Prototype library to do the upload with a simple <code>&lt;g:submitRemote/&gt;</code> tag. You might have guessed that this didn&#8217;t work at all. Continuing to learn the hard way (without reading the manual I might add), I submitted this as a bug to the Grails project. Graeme ever so politely informed me that this was known and expected behavior, as Prototype doesn&#8217;t support such a thing. However, it was Graeme that also tipped me off to try Dojo.</p>
+
+<p>So, continuing down this path, I proceeded to install the Grails Dojo plugin. Once this is done, a <code>&lt;g:javascript library="dojo"/&amp;gt</code> is supposedly all that is required to convert your Ajax calls from Prototype to Dojo. This turned out to not be the case for me, with Javascript errors popping up all over the place, not the least of which was that dojo.js seemed to be installed in an unexpected location via the plugin. The hacker in me simply copied this to the expected location and moved along. However, as I attempted to work with Dojo&#8217;s file upload support, I discovered that the version of Dojo shipped with the plugin seemed at first glance to be way behind. Frustrated by this, I went ahead and stripped the Dojo plugin out and installed <a href="http://download.dojotoolkit.org/release-1.2.3/dojo.js">the latest version available (at this writing 1.2.3)</a>, and set about to develop my solution.</p>
+
+<p>Here goes:</p>
+
+<p><strong>1. Add the necessary Dojo dependencies to your GSP:</strong></p>
+
+<pre><code>&lt;script type="text/javascript" src="${createLinkTo(dir: 'js/dojo', file: 'dojo.js')}"
+   djConfig="parseOnLoad:true, isDebug:true"&gt;&lt;/script&gt;
+&lt;g:javascript&gt;
+   dojo.require("dojo.io.iframe");
+&lt;/g:javascript&gt;
+</code></pre>
+
+<p><strong>2. Write a function using dojo.io.iframe to send the form:</strong></p>
+
+<pre><code>function submitForm() {
+   dojo.io.iframe.send({
+      form: 'uploadProductImageForm',
+      load: function (data) {
+         dojo.byId('productImage').innerHTML = data;
+      }
+   });
+}
+</code></pre>
+
+<p><strong>3. Create the file upload form:</strong></p>
+
+<pre><code>&lt;g:form name="uploadProductImageForm" method="post" action="uploadProductImage" enctype="multipart/form-data"&gt;
+   &lt;input type="hidden" name="id" value="${productInstance?.id}"/&gt;
+   &lt;input type="file" name="newProductImage"/&gt;
+   &lt;span class="button"&gt;&lt;input class="add" type="button" name="uploadImage" value="Upload Image" onclick="submitForm()"/&gt;&lt;/span&gt;
+&lt;/g:form&gt;
+</code></pre>
+
+<p><strong>4. Create the controller method:</strong></p>
+
+<pre><code>def uploadProductImage = {
+   def f = request.getFile('newProductImage')
+   if (!f.empty) {
+
+   def imagePath = grailsApplication.config.store.productImages.location
+
+   //Create unique name for this image set based on current timestamp
+   def name = "image" + new Date().getTime()
+
+   //Store the file
+   def file = new File("${imagePath}/${originalFilename}")
+   f.transferTo(file)
+
+   //Do some image processing (resizing, etc.)
+   ...
+
+   //Dojo requires returning the result nested in an HTML document containing a body and textarea tag. Do this with
+   //Groovy's built-in MarkupBuilder
+
+   def writer = new StringWriter()
+   def xml = new MarkupBuilder(writer)
+
+   xml.html {
+     body {
+       textarea {
+         img(src: resource(dir: grailsApplication.config.store.productImages.webPath, file: product.mediumImage.name), width: '250')
+       }
+     }
+   }
+
+   render writer.toString()
+   }
+   else {
+      flash.message = 'file cannot be empty'
+      redirect(action: show)
+   }
+}
+</code></pre>
+
+<p>And there you have it. Let me know what you think of this solution. It definitely works for me. You will notice that I didn&#8217;t include an upload progress bar - I&#8217;ll be doing this in a future iteration of the project. Cheers!</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Matt Stine</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-03-13T22:08:00-05:00" pubdate data-updated="true">Mar 13<span>th</span>, 2009</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/codeproject/'>CodeProject</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://mattstine.com/2009/03/13/grailsdojo-ajax-file-upload/" data-via="mstine" data-counturl="http://mattstine.com/2009/03/13/grailsdojo-ajax-file-upload/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2009/03/13/im-speaking-at-the-march-memphis-jug-meeting/" title="Previous Post: I'm speaking at the March Memphis JUG meeting">&laquo; I'm speaking at the March Memphis JUG meeting</a>
+      
+      
+        <a class="basic-alignment right" href="/2009/03/15/the-manifesto-for-software-craftsmanship/" title="Next Post: The Manifesto for Software Craftsmanship">The Manifesto for Software Craftsmanship &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+	<h1>Hello, World!</h1>
+	<p>
+		<img src="http://mattstine.files.wordpress.com/2011/05/indiamug.jpg" width="173" height="213">
+	</p>
+	<p>
+		<a href="http://www.linkedin.com/in/mattstine"><img alt="View Matt Stine&#039;s profile on LinkedIn" src="http://www.linkedin.com/img/webpromo/btn_myprofile_160x33.gif" border="0" width="160" height="33"></a>
+	</p>
+</section><section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2011/05/16/design-meeting-patternsantipatterns/">Design Meeting Patterns/Antipatterns</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/01/05/selenium-conference-2011/">Selenium Conference 2011</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/01/02/2010-in-review-the-automated-analysis/">2010 in review: the automated analysis...</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2010/11/29/selenium-2-0-refcard/">Selenium 2.0 Refcard</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2010/11/10/agile-zone-roundup/">Agile Zone Roundup</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating...</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("mstine", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/mstine" class="twitter-follow-button" data-show-count="false">Follow @mstine</a>
+  
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - Matt Stine -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'seekingsimplicity';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

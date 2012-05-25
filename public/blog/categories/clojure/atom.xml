@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: clojure | Seeking Simplicity]]></title>
+  <link href="http://mattstine.com/blog/categories/clojure/atom.xml" rel="self"/>
+  <link href="http://mattstine.com/"/>
+  <updated>2012-05-24T19:13:18-05:00</updated>
+  <id>http://mattstine.com/</id>
+  <author>
+    <name><![CDATA[Matt Stine]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Functional programming blog aggregator in the works...]]></title>
+    <link href="http://mattstine.com/2009/04/30/functional-programming-blog-aggregator-in-the-works/"/>
+    <updated>2009-04-30T13:31:58-05:00</updated>
+    <id>http://mattstine.com/2009/04/30/functional-programming-blog-aggregator-in-the-works</id>
+    <content type="html"><![CDATA[<p>So I'm in the midst of planning my next toy project, specifically with an aim to build something for the cloud, be it <a href="http://code.google.com/appengine">Google App Engine</a>, <a href="http://mor.ph">Mor.ph</a>, <a href="http://aws.amazon.com/ec2/">EC2</a>, etc. (that part is still up for grabs). What I'd like to do is an opt-in blog aggregation site focused around functional programming. It would be very similar to what <a href="http://blogs.bytecode.com.au/glen/">Glen Smith</a> has done with <a href="http://groovyblogs.org">groovyblogs.org</a>. Groovyblogs is currently my number one referral site and is generating about 20% of the traffic for this blog. I think it is a great way to find out what blogs are out there in a given space, and there doesn't seem to be an equivalent for the functional space. Since my LOTY interest is focused in the functional space, particularly around Scala and Clojure, and my TOTY interest is the cloud technologies out there, it seems like the perfect marriage.</p>
+
+<p>So here's my question. Would you be interested in using such a site? As a reader, blogger, or both? Please sound off. Thanks!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Hello, Clojure!]]></title>
+    <link href="http://mattstine.com/2009/04/24/hello-clojure/"/>
+    <updated>2009-04-24T17:12:23-05:00</updated>
+    <id>http://mattstine.com/2009/04/24/hello-clojure</id>
+    <content type="html"><![CDATA[<pre><code>; Hello World!
+(defn hello [name]
+  (println "Hello, " name))
+
+(hello "World!")
+</code></pre>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[LOTY...Part Deux]]></title>
+    <link href="http://mattstine.com/2009/04/06/lotypart-deux/"/>
+    <updated>2009-04-06T22:31:58-05:00</updated>
+    <id>http://mattstine.com/2009/04/06/lotypart-deux</id>
+    <content type="html"><![CDATA[<p><img src="http://mattstine.files.wordpress.com/2009/04/scala_vs_clojure.jpg" alt="scala_vs_clojure" /><a href="http://mattstine.files.wordpress.com/2009/04/scala_vs_clojure.jpg2009/04/02/loty-time-again-scala-or-clojure">A few days ago I pontificated</a> on my need to choose a new "Language of the Year." Right now I'm attempting to choose between <a href="http://www.scala-lang.org/">Scala</a> and <a href="http://clojure.org/">Clojure</a>. If nothing else, I've learned from this exercise that asking the community for feedback is a GOOD thing. Your comments have been very helpful.</p>
+
+<p>To summarize:</p>
+
+<ol>
+<li><p>As far as the polls go, Scala is in the lead by a margin of 4 to 2.</p></li>
+<li><p>Two of the Scala votes have been simple +1's, and two have provided a supporting argument.</p></li>
+<li><p>Both Clojure voters have provided a supporting argument.</p></li>
+<li><p>So, to make this a bit more of a fair fight, I'm only going to consider the "supported votes" at this point. This leads to the obvious result of a tie!</p></li>
+</ol>
+
+
+<p>So, what to do?</p>
+
+<p>The argument for using Scala is that it is a functional/OO hybrid, so it will be easier to slide into. Interestingly enough, the argument against using Scala is that it is a functional/OO hybrid, so it will be easier to slide back into OO/imperative habits! Clojure, being more of a purely functional language, will be harder to get into initially, but will force me to think functionally. Hmmm...</p>
+
+<p>So here's my idea. Let's do this the agile way. What I'd like to do is complete a timeboxed spike (in terms of actual time spent learning the language, not calendar time - I'm doing this in my spare time, and I've got my wife, four kids, and three other side projects competing for my attention!) of roughly two weeks in each language. The first week of the spike would be spent getting comfortable with the syntax, reading articles/documentation/blogs/etc., writing "Hello, World!" etc. The second week of the spike would be spent solving the same problem in each language, preferably a problem sitting in the functional sweet spot.</p>
+
+<p>How does this sound to everyone? And to follow up, does anyone have a suggested problem I might tackle? Cheers!</p>
+]]></content>
+  </entry>
+  
+</feed>

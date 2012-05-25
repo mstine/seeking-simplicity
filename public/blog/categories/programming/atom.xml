@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: programming | Seeking Simplicity]]></title>
+  <link href="http://mattstine.com/blog/categories/programming/atom.xml" rel="self"/>
+  <link href="http://mattstine.com/"/>
+  <updated>2012-05-24T19:13:18-05:00</updated>
+  <id>http://mattstine.com/</id>
+  <author>
+    <name><![CDATA[Matt Stine]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Dead Programmers Society]]></title>
+    <link href="http://mattstine.com/2010/02/16/dead-programmers-society/"/>
+    <updated>2010-02-16T22:42:40-06:00</updated>
+    <id>http://mattstine.com/2010/02/16/dead-programmers-society</id>
+    <content type="html"><![CDATA[<p>A local Pastor once gave the <a href="http://holding2truth.blogspot.com/2009/01/strange-sounding-advice.html">advice of introducing ourselves</a> <a href="http://holding2truth.blogspot.com/2009/02/strange-advice-introducing-our-kids-to.html">and our kids to dead people</a>. It is his belief that if his kids grow up idolizing the likes of Eric Liddell, Jim Elliot, and Hudson Taylor, they would be far better off than by looking up to many of our so-called "heroes" of today. I happen to agree with his advice, but that's not the subject of tonight's blog entry.</p>
+
+<p>I think that this advice is very applicable to us as software developers today. While our industry is still young enough that a great many of our "founding fathers" are still around, it is surprising to see how often their work and contributions go unnoticed by the vast majority of us. At the January Memphis/Mid-South Java User Group meeting, our program focused on books that all of us as developers should read. Four of us gave our takes on the topic. Joel Neely, one of a few people that I learn from every time I get near them, pulled yet another rabbit out of his hat by focusing on several books, all of which had been published before the majority of us were out of diapers! One book struck me in particular: <em>A Discipline of Programming</em> by Edsgar W. Dijkstra. In it EWD "presents a formal approach to developing (non-deterministic!) algorithms, using what we would now call a DSL for algorithm design. Incidentally, that book was published in 1976." (Thanks Joel for the excellent summary). I'd like to pull out just a couple of quotes from that book:</p>
+
+<p><em>A most important, but also a most elusive, aspect of any tool is its influence on the habits of those who train themselves in its use. If the tool is a programming language, this influence is - whether we like it or not - an influence on our thinking habits.</em></p>
+
+<p>Just out of curiosity, does this sound anything at all to you like the frequent admonitions to learn a "language of the year (LOTY)?" Of course that isn't the context of EWD's quote, but the underlying principle remains the same. Almost universally accompanying that admonition is a statement along the lines of "even if you never use it in your day job, it will affect THE WAY YOU THINK about programming during your day job."</p>
+
+<p><em>...a carefully chosen separation of concerns is essential for the design of in all respects, high quality programs...</em></p>
+
+<p>Does "loosely coupled, highly cohesive, modular architecture" come to mind?</p>
+
+<p><em>...the fact that programming languages could be used as a vehicle for instructing existing automatic computers, has for a long time been regarded as their most important property...we shall try to redress the balance, and we shall do so by regarding the fact that our algorithms could actually be carried out be a computer as a lucky accidental circumstance that need not occupy a central position in our considerations...I view a programming language primarily as a vehicle for the description of (potentially highly sophisticated) abstract mechanisms.</em></p>
+
+<p>I hear so much of what is bandied about today as "new" embodied in this quote. The calls to liberate programming from its "C" roots by banishing primitives, because hey, primitives are only their to keep "Java from being too slow!" The calls to favor "essence over ceremony" in language design by eliminating boilerplate code in favor of sensible defaults that clear away the noise from the algorithmic intent that we're trying to communicate. The constant reminders that it's more important for our code to be readable to humans, not to computers, because that's what compilers are for.</p>
+
+<p>What's the point? The point is that most, if not all, of the ideas that are "new" today are simply restatements of past ideas in a different context. A wise man, one much wiser than I, once said "...there is nothing new under the sun" (Ecclesiastes 1:9). Edsgar W. Dijkstra passed from this earth in 2002, but his ideas live on, and they are very much applicable to software developers today. There are may others like him: Donald Knuth, John McCarthy, Alan Turing, David Gries - some dead, some alive, but all giants upon whose shoulders we stand. We would do well to consider their words.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[LOTY Time Again: Scala or Clojure?!?!]]></title>
+    <link href="http://mattstine.com/2009/04/02/loty-time-again-scala-or-clojure/"/>
+    <updated>2009-04-02T15:21:21-05:00</updated>
+    <id>http://mattstine.com/2009/04/02/loty-time-again-scala-or-clojure</id>
+    <content type="html"><![CDATA[<p>In 2007 <a href="http://www.mattstine.com/2007/07/10/my-professional-development-goals-for-2007-2008/">I established several professional development goals</a> (<a href="http://www.mattstine.com/2008/01/02/mid-year-review-my-professional-development-goals-for-2007-2008/">and later reported my progress on these</a>), one of which was to learn Groovy and Grails. This goal stemmed from the continually referenced idea from <em>The Pragmatic Programmer</em> to "learn a new language every year." This idea has become so ubiquitous that it even has it's own four-letter acronym, LOTY (Language of the Year).</p>
+
+<p>Since establishing and reporting on these goals, I've had several things get in the way of fully realizing all of them. However, I can safely say that in the last two years I have mastered enough Groovy and Grails that they no longer fit in the LOTY category. At this point they're really not showing my anything that is causing any paradigm shifts for me. They're comfortable. When I learn a new feature, it just seems to make sense, and nothing surprises me anymore. Languages like these aren't good LOTY candidates because one of the purposes of learning a LOTY is to challenge and change your ideas about programming. Groovy doesn't do this for me anymore. It's time to move on (not to say that I'm dropping Groovy and Grails as a tool - I'm using them more now than ever - they're just not a learning tool for me anymore).</p>
+
+<p>So, at this point I want to delve into a language that attempts to tackle the concurrent/multicore programming challenge. I'd like to stay on the JVM because I appreciate the benefits that it brings as a platform, so for now Erlang is out. The two leading candidates in the JVM/concurrent/multicore arena seem to be <a href="http://www.scala-lang.org/">Scala</a> and <a href="http://clojure.org/">Clojure</a>. An added benefit of both of these languages is that they support the functional paradigm, something I haven't really played with since my computer science education days and a very interesting language named Haskell.</p>
+
+<p>Scala is a multiparadigm language, supporting both object-oriented and functional constructs. It is statically typed, yet offers very nice type inference. Clojure, on the other hand, is a functional Lisp derivative with almost no OO constructs that is dynamically typed. Both are designed to enable concurrent programming. Which one do I choose? I open the floor for comments.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Mid-Year Review: My Professional Development Goals for 2007-2008]]></title>
+    <link href="http://mattstine.com/2008/01/02/mid-year-review-my-professional-development-goals-for-2007-2008/"/>
+    <updated>2008-01-02T17:33:00-06:00</updated>
+    <id>http://mattstine.com/2008/01/02/mid-year-review-my-professional-development-goals-for-2007-2008</id>
+    <content type="html"><![CDATA[<p>Back in July I posted my professional development goals for the year (My performance review is annually in July, so it's a good time to set goals.), and it seemed like a good idea to take a look at my progress while doing the "New Year's Resolution" thing.</p>
+
+<ol>
+<li>Learn Groovy and Grails</li>
+</ol>
+
+
+<p> Andy and Dave suggest learning a new language every year, so this seemed like a good goal for me. I can't say that I've truly learned Groovy and Grails in depth, but I did learn them enough <a href="http://www.memphisjug.org/october25%2C2007">to do a presentation on them</a> (as well as Ruby, JRuby, and Rails) at our Java User Group meeting  in October, so I've effectively touched on two languages and two frameworks for those languages. I've since gotten interested in Scala as well. At any rate, I'd like to go deeper w/ Groovy and Grails as I have time, which is scarce!</p>
+
+<ol>
+<li>Release HallKeeper v1.0 as part of #1</li>
+</ol>
+
+
+<p>This project seems destined to fail. I haven't worked on it in any meaningful way since the summer. I've thought about it in the past week, and I'd actually like to try doing it in straight Java POJOs with Spring and Hibernate since I'm more well-versed in that area. At any rate, it really is my lack of spare time that keeps this one on the perpetual back burner.</p>
+
+<ol>
+<li>Read and LEARN the following books:</li>
+</ol>
+
+
+<pre><code>* The Definitive Guide to Grails - Rocher
+* The Pragmatic Programmer - Hunt, Thomas
+* Computer Algorithms: Introduction to Design &amp; Analysis - Baase, Van Gelder
+* Concepts of Programming Languages: Sebesta
+* Groovy in Action - Konig  
+</code></pre>
+
+<p>I've pretty much finished #1, got started on #2, and haven't really touched the last three. Again, the needs of the moment have necessitated I focus on other areas, particularly other books. Recent projects have pointed me to three additional books I'd really like to cover this year, so I may not get to my original list. Here are the titles:</p>
+
+<pre><code>* Working Effectively with Legacy Code - Feathers  
+
+* POJOs in Action - Richardson
+* Domain Driven Design - Evans  
+</code></pre>
+
+<ol>
+<li>Review two books for the JavaLobby/DZone book review team</li>
+</ol>
+
+
+<p>This is one I've hit the nail on. I just completed my second book review, which will be published some time in the next few weeks. My first review, <a href="http://matt-stine.blogspot.com/2007/10/ajax-construction-kit-building-plug-and.html">Ajax Construction Kit: Building Plug-and-Play Ajax Applications</a>, was published in October 2007. These have been rather time consuming and have kept me from other projects, so I don't plan to take any more reviews this year.</p>
+
+<ol>
+<li>Pass the Sun Certified Programmer for the Java 2 Platform, Standard Edition 5.0 Exam</li>
+</ol>
+
+
+<p>Haven't touched this one yet. Preparing for this will be one of my foci in the coming weeks.</p>
+
+<ol>
+<li>Write one Java/software development blog article per week</li>
+</ol>
+
+
+<p>I haven't done so hot on this one. OK, let's be really honest. I haven't come close. However, my recent flurry of entries on The Spring Experience 2007 have gotten me into a bit of a groove. I'm going to try to keep up the momentum and finish this year strong.</p>
+
+<ol>
+<li>Attend JavaOne 2008 or similar conference</li>
+</ol>
+
+
+<p>I've actually traveled twice since my original post. My first trip was to the <a href="http://nerlscd.biotech.cornell.edu/">Northeast Life Sciences Core Directors Meeting</a> last November at Cornell University in Ithaca, NY. The purpose of this trip was to present and generate interest around our open source shared resource management system for core facilities, <a href="http://stjude-srm.sourceforge.net/">STJUDE-SRM</a>. The trip was a great success. My second trip really fulfills this goal, as I attended <a href="http://www.thespringexperience.com/conference/hollywood/2007/12/index.html">The Spring Experience 2007</a> in Hollywood, FL. This proved to be one of the best technical conferences I've ever attended, and also one of the most fun!</p>
+
+<ol>
+<li>Start a Memphis/Mid-South Area Java User Group</li>
+</ol>
+
+
+<p>I don't think this goal could have gone any better than it has. In late July I started a <a href="http://groups.google.com/group/memphis-mid-south-jug">Google Group</a> and a small Google Page Creator website to attempt to drum up interest in a Java User Group for the Memphis, TN and surrounding Mid-South area. On July 23, 2007, along comes Diane Tabulog, a technical recruiter with local company <a href="http://www.vaco.com/Technology/tech_about.htm">Vaco Technology</a>, who convinces her company to throw its support behind our JUG. All of a sudden we have an offer for a meeting location, food budget, giveaways, etc. Later, Clayton Naeve, our CIO at St. Jude, agreed to let us use our awesome conference room at our division's new offices at 160 Shadyac Avenue to meet, as Vaco's facilities were a bit small. On August 15, <a href="http://weblogs.java.net/blog/caroljmcdonald">Carol McDonald</a>, a Java Technology Evangelist from Sun Microsystems, offered to speak at our JUG, and we signed her up for the first meeting. Little by little, all of the necessary pieces started to fall into place, including additional free giveaways from Sun, O'Reilly, Atlassian, and JetBrains. <a href="http://www.memphisjug.org/september20%2C2007">The first meeting</a> was a great success, and since then we've had two more successful meetings. Our next meeting is Thursday, January 17, 2008. Find out more at <a href="http://www.memphisjug.org">http://www.memphisjug.org</a>.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[My Professional Development Goals for 2007-2008]]></title>
+    <link href="http://mattstine.com/2007/07/10/my-professional-development-goals-for-2007-2008/"/>
+    <updated>2007-07-10T14:14:00-05:00</updated>
+    <id>http://mattstine.com/2007/07/10/my-professional-development-goals-for-2007-2008</id>
+    <content type="html"><![CDATA[<p>I posted earlier on my desire to <a href="http://matt-stine.blogspot.com/2007/07/help-me-become-better-programmer.html">become a better programmer</a>. Well, I've since put together a plan of action for the next twelve months. I've based some of these goals on suggestions from The Pragmatic Programmer by Andy Hunt and Dave Thomas.</p>
+
+<ol>
+<li>Learn Groovy and Grails</li>
+</ol>
+
+
+<p>Andy and Dave suggest learning a new language every year. I had already informally started learning Groovy and Grails after JavaOne 2007. Since I already have a head start on this one, Groovy will be my language for the next year (I'm learning Grails mainly because of my web development background - it will provide me more opportunity to apply my Groovy knowledge). This should be an easy way to get started on the goal of a new language each year since my Java knowledge should transfer easily.</p>
+
+<ol>
+<li>Release HallKeeper v1.0 as part of #1</li>
+</ol>
+
+
+<p>Several years ago I started an open source project called <a href="http://code.google.com/p/hallkeeper">HallKeeper</a>. HallKeeper is planned to be a web-based management system for university residence halls. Life got in the way of this project so it lay dormant for a few years. I've recently revived it as sort of a "lab" in which to learn Groovy and Grails, and hopefully have a little fun along the way.</p>
+
+<ol>
+<li>Read and LEARN the following books:</li>
+</ol>
+
+
+<pre><code>* The Definitive Guide to Grails - Rocher
+* The Pragmatic Programmer - Hunt, Thomas
+* Computer Algorithms: Introduction to Design &amp; Analysis - Baase, Van Gelder
+* Concepts of Programming Languages: Sebesta
+* Groovy in Action - Konig
+</code></pre>
+
+<p>When I say LEARN, I mean I don't just want to do a cursory read of these. I want to really engage the concepts presented in each and apply them to my day-to-day work. I already have a head start reading the first two books. The third and fourth books are actually textbooks from my undergraduate education. I could really use a refresher on these concepts, and I think I'm a much more serious student now as a professional than I was when I was actually a student.</p>
+
+<ol>
+<li>Review two books for the JavaLobby/DZone book review team</li>
+</ol>
+
+
+<p>I joined this team several months ago and was actually assigned to review two books - again, life got in the way (if you have any small children, you'll understand). Things have settled down a bit now and I've asked to rejoin. Hopefully I'll be able to crank out some reviews this time and learn something in the process.</p>
+
+<ol>
+<li>Pass the Sun Certified Programmer for the Java 2 Platform, Standard Edition 5.0 Exam</li>
+</ol>
+
+
+<p>I want to do this mainly to give myself an excuse to go back over the fundamentals of Java, as well as learn the new features that 5.0 brought to the table in detail (generics, annotations, etc.). I have still basically been living in a Java 1.4 world as I'd say roughly 85% of my daily work is on an application that is still bound to that JDK. So, passing this is mainly just a reason to study, and it is a nice edition to the resume as well.</p>
+
+<ol>
+<li>Write one Java/software development blog article per week</li>
+</ol>
+
+
+<p>This would be numero uno! I've always stressed about the frequency of my blog writing - I've felt compelled to write every single day, and I usually end up writing a one paragraph synopsis of some other guy's blog entry. Not exactly something that will attract many readers. I'll still post those on a more frequent basis as they keep the content flowing, but I also want to write at least one in-depth article per week to give people something to look forward to. One way I'll do this is to blog about the books I'm reading. The Pragmatic Programmer provides challenges and/or exercises at the end of each chapter - great seeds for entries.</p>
+
+<ol>
+<li>Attend JavaOne 2008 or similar conference</li>
+</ol>
+
+
+<p>This one depends on the boss - hopefully I'll get to travel again this year. I'd love to go back to JavaOne - I learned a lot, and big geek shows always motivate me to go back and introduce new technology to the group, as well as get more involved in the community. I always feel a surge in my professional development in the 2-3 month period following my attending a conference.</p>
+
+<ol>
+<li>Start a Memphis/Mid-South Area Java User Group</li>
+</ol>
+
+
+<p>We don't have a JUG in this area and I really think that we could benefit from one. My company has a large number of Java developers, and I know that several others in the area, including FedEx and Autozone do as well. This would be a great way to get some of the good speakers from the conferences I've attended to speak locally, and it may even serve to get us on the map with some of the smaller shows like NFJS. Sun and others really seem to take an interest in supporting JUGS, so I look forward to see what happens. I've started a <a href="http://groups.google.com/group/memphis-mid-south-jug">Google Group</a> for the newborn JUG, and I'll be blogging more in the future about it.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Help me become a better programmer!]]></title>
+    <link href="http://mattstine.com/2007/07/02/help-me-become-a-better-programmer/"/>
+    <updated>2007-07-02T15:12:00-05:00</updated>
+    <id>http://mattstine.com/2007/07/02/help-me-become-a-better-programmer</id>
+    <content type="html"><![CDATA[<p>I have decided to embark upon a quest to become a better programmer. I would really like to improve my understanding of the computer science that underlies my day-to-day tasks, particularly as it relates to programming language design as well as algorithm design and complexity analysis. I would also like to improve my analytical and problem solving skills. I've found that I'm really good at learning new technologies and quickly bringing them to bear on web application development problems, but take me out of that problem space and I get nervous rather quickly.</p>
+
+<p>Who has ideas about the best way to go about this? Please comment!</p>
+]]></content>
+  </entry>
+  
+</feed>

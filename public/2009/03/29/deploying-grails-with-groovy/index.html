@@ -1,0 +1,313 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Deploying Grails with Groovy - Seeking Simplicity</title>
+  <meta name="author" content="Matt Stine">
+
+  
+  <meta name="description" content="Interesting title, eh? Maybe this one will make it through Glen&#8217;s filter at GroovyBlogs.org. On to the meat. I&#8217;ve been steadily working &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://mattstine.com/2009/03/29/deploying-grails-with-groovy">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Seeking Simplicity" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Seeking Simplicity</a></h1>
+  
+    <h2>A blog about programming, software architecture and everything else...</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:mattstine.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Deploying Grails With Groovy</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-03-29T03:38:09-05:00" pubdate data-updated="true">Mar 29<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Interesting title, eh? Maybe this one will make it through Glen&#8217;s filter at <a href="http://groovyblogs.org">GroovyBlogs.org</a>.</p>
+
+<p>On to the meat. I&#8217;ve been steadily working on a couple of Grails applications, one being the website for the <a href="http://www.memphisjug.org">Memphis JUG</a>, and another being the e-commerce site for my wife&#8217;s soon to be launched designer stationery business. Just like your average Grails developer, I&#8217;ve been happily coding away at 127.0.0.1 using the good old development Jetty+MySQL stack. Well, in the last week or so it&#8217;s come time to actually deploy both of these applications into production. I started out last weekend with the Memphis JUG site. My first approach was to build the WAR file locally and then &#8220;scp&#8221; it up to the server.</p>
+
+<p>YMMV, but the upload speed on my DSL connection is horrible! After doing this three or four times in one night, waiting 15-20 minutes for the WAR to upload each time (Grails WAR&#8217;s are rather thick when carrying all of the dependencies along), I decided to myself, &#8220;There must be a better way to do this.&#8221;</p>
+
+<p>Fast forward a week and here I sit working on the first &#8220;pre-production&#8221; release of my wife&#8217;s store site. With quite a bit of time on my hands during these &#8220;dark and early&#8221; hours (a story for a later entry), I decided it was time for the experiment.</p>
+
+<p>Each of these projects is hosted at GitHub, so the process that I mapped out in my mind looked like this:</p>
+
+<ol>
+<li><p>Check out the latest code from GitHub</p></li>
+<li><p>Run &#8220;grails war&#8221;</p></li>
+<li><p>Stop the Tomcat service (my hosting provider sets up Tomcat to run as a service)</p></li>
+<li><p>Delete the remnants of the previous deployment from Tomcat&#8217;s deployment directory</p></li>
+<li><p>Copy the new WAR file to Tomcat&#8217;s deployment directory</p></li>
+<li><p>Start the Tomcat service</p></li>
+</ol>
+
+
+<p>By the way, I forgot to mention that before doing all of this I moved the production data source definition from being locally defined to being a JNDI lookup within Tomcat. This posed its own challenge, which I&#8217;ll blog about a bit later.</p>
+
+<p>Anyway, back to the deployment. I though this would be an excellent opportunity to take <a href="http://groovy.codehaus.org/Using+Ant+from+Groovy">Groovy&#8217;s Antbuilder</a> out for a spin. Here&#8217;s an example of what I put together:</p>
+
+<pre><code>#!/usr/bin/env groovy
+
+def ant = new AntBuilder()
+
+//Update the codebase from GitHub
+ant.exec(executable:'git', dir: "${PROJECT_DIR}") {
+        arg(value:'pull')
+}
+
+//Generate the WAR file using Ant
+ant.ant(dir:'"${PROJECT_DIR}"', target: 'war')
+
+//Stop Tomcat
+ant.exec(executable:'service') {
+        arg(line:'tomcat6 stop')
+}
+
+//Delete the old webapp contents from Tomcat's deploy directory
+ant.delete(includeemptydirs:'true', verbose:'true') {
+        fileset(dir:"${CONTEXT_ROOT_DIR}", includes:'**/*')
+}
+
+//Copy the new WAR file to Tomcat's deploy directory
+ant.copy(file:"${WAR_FILE}", tofile:"${CONTEXT_ROOT_DIR}/ROOT.war")
+
+//Start Tomcat
+ant.exec(executable:'service') {
+        arg(line:'tomcat6 start')
+}
+</code></pre>
+
+<p>As you can see, I have a few undefined Groovy constants in there. Let&#8217;s just say I didn&#8217;t want to expose ALL of the details of my server.</p>
+
+<p>At any rate, it&#8217;s pretty simple. One word of warning - if you&#8217;re using Ehcache, make sure to add it to your ivy.xml dependencies, or the Ant build won&#8217;t bring it in like running &#8220;grails war&#8221; will. I hope someone finds this simple script useful. Enjoy!</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Matt Stine</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-03-29T03:38:09-05:00" pubdate data-updated="true">Mar 29<span>th</span>, 2009</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/codeproject/'>CodeProject</a>, <a class='category' href='/blog/categories/deployment/'>deployment</a>, <a class='category' href='/blog/categories/grails/'>grails</a>, <a class='category' href='/blog/categories/groovy/'>groovy</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://mattstine.com/2009/03/29/deploying-grails-with-groovy/" data-via="mstine" data-counturl="http://mattstine.com/2009/03/29/deploying-grails-with-groovy/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2009/03/26/need-a-textile-engine-look-no-further-than-plextile/" title="Previous Post: Need a Textile engine? Look no further than Plextile!">&laquo; Need a Textile engine? Look no further than Plextile!</a>
+      
+      
+        <a class="basic-alignment right" href="/2009/04/01/awesome-april-fools-joke/" title="Next Post: Awesome April Fools Joke">Awesome April Fools Joke &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+	<h1>Hello, World!</h1>
+	<p>
+		<img src="http://mattstine.files.wordpress.com/2011/05/indiamug.jpg" width="173" height="213">
+	</p>
+	<p>
+		<a href="http://www.linkedin.com/in/mattstine"><img alt="View Matt Stine&#039;s profile on LinkedIn" src="http://www.linkedin.com/img/webpromo/btn_myprofile_160x33.gif" border="0" width="160" height="33"></a>
+	</p>
+</section><section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2011/05/16/design-meeting-patternsantipatterns/">Design Meeting Patterns/Antipatterns</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/01/05/selenium-conference-2011/">Selenium Conference 2011</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/01/02/2010-in-review-the-automated-analysis/">2010 in review: the automated analysis...</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2010/11/29/selenium-2-0-refcard/">Selenium 2.0 Refcard</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2010/11/10/agile-zone-roundup/">Agile Zone Roundup</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating...</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("mstine", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/mstine" class="twitter-follow-button" data-show-count="false">Follow @mstine</a>
+  
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - Matt Stine -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'seekingsimplicity';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

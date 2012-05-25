@@ -9,7 +9,7 @@
   <meta name="author" content="Matt Stine">
 
   
-  <meta name="description" content=" Blog Archives Recent Posts Latest Tweets Status updating&#8230; $.domReady(function(){ getTwitterFeed("mstine", 4, false); }); Follow @mstine ">
+  <meta name="description" content="For those of you that don&#8217;t know, I recently returned to the technical ranks as a Software Architect after a three-year stint in management. To &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -65,7 +65,544 @@
       <div class="blog-index">
   
   
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2011/05/16/design-meeting-patternsantipatterns/">Design Meeting Patterns/Antipatterns</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-05-16T16:57:50-05:00" pubdate data-updated="true">May 16<span>th</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>For those of you that don&#8217;t know, I recently returned to the technical ranks as a Software Architect after a three-year stint in management. To make a long story short, I now love my job again. Perhaps I&#8217;ll write the long story in a future blog entry. On to the topic at hand. Today I led the first significant design discussion that I have led in quite a long time. A few minutes afterward, I was already reflecting on what had occurred and how. The very first thing that I noticed was my drastically different approach to the task. I felt that my facilitation skills were more mature and effective than I remember from previous similar engagements. I&#8217;m not sure if the time I spent in management (where I facilitated quite a few meetings, though much more business-focused ones) helped, but something certainly has.</p>
+
+<p>I also noticed several things that I&#8217;ll call &#8220;pattern vs. antipattern&#8221; tugs of war. Quite often during the meeting I felt the group trying to move our discussion in one direction that I, for better or for worse, thought was ineffective. I would then redirect us on to what I felt was a better path. In true catalog form, here&#8217;s the list:</p>
+
+<ul>
+<li><p><strong>Understand the Problem vs. Jump to the Solution</strong> - only a couple of minutes into our discussion solutions were being flung about like drunken darts. This situation almost always leads to suboptimal or faulty solutions. As a facilitator, try to ensure that the problem has been clearly stated. If at all possible, write it down on a whiteboard. Make sure everyone agrees that the problem as stated is the problem the group is there to solve. Sure enough, after performing this exercise, we all had a very different and clear understanding of the problem than that with which we walked in the door.</p></li>
+<li><p><strong>Assume the Worst vs. Assume the Best</strong> - occasionally the exact details of a requirement are unclear, and not assuming something will totally derail the design discussion. You have a couple of choices. The first is to halt the discussion and get the details cleared up. This is clearly the best solution, as you&#8217;ll no longer have to assume anything. However, it can be the case that the person who can clear things up isn&#8217;t available. Or in some cases, the question you&#8217;ll be asking will require another meeting at another level of the organization. If you find yourself in that spot, and you can&#8217;t wait (we couldn&#8217;t!), then the best approach is to work from the worst possible case scenario. You&#8217;ll then be in the best position to handle whatever answer comes your way. However, our tendency is often to assume the best (&#8220;That will <em>never</em> happen!&#8221;). Fight that tendency. However, whatever you choose, follow up at your earliest opportunity.</p></li>
+<li><p><strong>Basing Decisions on the Current Situation vs. Basing Decisions on History</strong> - many times the group wanted to veer off into safer territory. In some cases, a possible solution departed significantly from the current design. While this is a valid concern (we do want consistency of design across the system where possible), it is certainly not a trump card. Occasionally the situation at hand will merit a significant departure from the current design. Another way history can rear its ugly head is the assertion that we&#8217;ve always solved similar problems like &#8216;x,&#8217; so we should do so with this problem as well. Again, note the word &#8220;similar.&#8221; All problems are somewhat different and have their own eccentricities. So, rather than working from history, I pushed us back to a clean slate with the statement &#8220;Let&#8217;s stop thinking about the past and start from scratch. We may very well come up with the same solution you guys are proposing, but I&#8217;d rather do so through our own objective analysis and not instinct.&#8221; Guess what. We came up with a different solution that we all felt better about.</p></li>
+<li><p><strong>Shooting for the &#8220;Best&#8221; Solution vs. the &#8220;Easiest&#8221; Solution</strong> - now sometimes we can&#8217;t afford the best solution. I grant that. However, I&#8217;m trying to fight the tendency to immediately jump to the &#8220;easiest thing that could possibly work.&#8221; Often this pops up in the first P vs. AP - if we don&#8217;t clearly understand the problem, sometimes an easy solution jumps out that doesn&#8217;t deal with the underlying details we&#8217;ve yet to uncover. Also, sometimes the best solution is quite simple and elegant. It doesn&#8217;t necessarily have to be harder and more complex than the easiest solution. In fact, sometimes the &#8220;easiest&#8221; solution leads to the most accidental complexity in the long-run. So, shoot for the best solution you can come up with and only then, optimize for cost.</p></li>
+<li><p><strong>Present Possible Solutions Objectively vs. My Solution is the Best!</strong> - one would hope that we all start here, but we don&#8217;t. We tend to like our own solutions to problems and want them to &#8220;win.&#8221; Our ego can get in the way of even hearing an alternate solution presented by another team member. I point you to <a href="http://www.code-magazine.com/Article.aspx?quickid=1105121">my colleague Ted Neward&#8217;s post for more on &#8220;egoless programming.&#8221;</a> So, as a facilitator, you&#8217;ve got to make sure that all solutions are presented objectively. I often had to say things like &#8220;OK, let&#8217;s assume before we ever get started that this is a good solution to the problem and not hack away at it until its fully presented, and we all understand it.&#8221; In the end, this insistence led us to choose a solution that none of us (myself included) originally thought we&#8217;d pick.</p></li>
+<li><p><strong>Validating from Code vs. Validating from Memory</strong> - more often than not, questions about the existing design/code/behavior will come up. Rather than scratching your head and trying to remember what you wrote six months ago, pull up the code and find out. I can&#8217;t tell you the number of meetings I&#8217;ve attended where baseless assertions were made about existing code, only to require another meeting the next day to revisit the whole discussion once those assertions were proven wrong. Again, as a facilitator, I directed us to solve every problem for which all of the facts were available. We inserted placeholders in our solution where questions remained. Guess what we&#8217;re doing now? Well, I&#8217;m blogging about the meeting, but the rest of us are validating from code. Tomorrow will fill in the blanks!</p></li>
+</ul>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2011/01/05/selenium-conference-2011/">Selenium Conference 2011</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-01-05T12:18:23-06:00" pubdate data-updated="true">Jan 5<span>th</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I completed an interest survey for a potential Selenium-focused conference several weeks ago, and I&#8217;m excited to let you know that the &#8220;powers that be&#8221; have decided that the conference is going to happen! I have already submitted my &#8220;Executable Specifications: Automating Your Requirements Document with Geb and Spock&#8221; talk as a potential session. Whether it makes the conference program or not, I plan on attending the event. Here are the details:</p>
+
+<p><img src="http://mattstine.files.wordpress.com/2011/01/selenium-conf-2011.png" alt="Selenium Conference 2011" /></p>
+
+<blockquote><p>Join members of the growing Selenium community for 3 jam-packed days of talks, workshops, lightning talks, and hack sessions. Hear speakers from around the world talk about the present and future of automated testing, share ideas with fellow Selenium developers, including Core Committers, and take part in shaping the future success of the Selenium project.</p></blockquote>
+
+<p><strong>When:</strong> April 4-6, 2011
+<strong>Where:</strong> Marines’ Memorial Club &amp; Hotel, 609 Sutter St, San Francisco, CA 94102 USA
+<strong>Register now to be a speaker or sponsor. More details: <a href="http://www.seleniumconf.com/">http://www.seleniumconf.com/</a></strong></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2011/01/02/2010-in-review-the-automated-analysis/">2010 in Review: The Automated Analysis&#8230;</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-01-02T20:28:25-06:00" pubdate data-updated="true">Jan 2<span>nd</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>The stats helper monkeys at WordPress.com mulled over how this blog did in 2010, and here&#8217;s a high level summary of its overall blog health:</p>
+
+<p><img src="http://s0.wp.com/i/annual-recap/meter-healthy3.gif" alt="Healthy blog!" /></p>
+
+<p>The <em>Blog-Health-o-Meter™</em> reads Fresher than ever.</p>
+
+<h2>Crunchy numbers</h2>
+
+<pre><code>            ![Featured image](http://s0.wp.com/i/annual-recap/abstract-stats-1.png)
+</code></pre>
+
+<p><em>A helper monkey made this abstract painting, inspired by your stats.</em></p>
+
+<p>A Boeing 747-400 passenger jet can hold 416 passengers.  This blog was viewed about <strong>6,600</strong> times in 2010.  That&#8217;s about 16 full 747s.</p>
+
+<p>In 2010, there were <strong>15</strong> new posts, growing the total archive of this blog to 115 posts. There were <strong>24</strong> pictures uploaded, taking up a total of 979kb. That&#8217;s about 2 pictures per month.</p>
+
+<p>The busiest day of the year was June 4th with <strong>139</strong> views. The most popular post that day was <a href="http://mattstine.com/2010/06/03/dont-build-software-thats-too-smart/">Don&#8217;t build software that&#8217;s TOO smart!</a>.</p>
+
+<h2>Where did they come from?</h2>
+
+<p>The top referring sites in 2010 were <strong>agile.dzone.com</strong>, <strong>java.dzone.com</strong>, <strong>twitter.com</strong>, <strong>Google Reader</strong>, and <strong>javablogs.com</strong>.</p>
+
+<p>Some visitors came searching, mostly for <strong>matt stine</strong>, <strong>groovy http post</strong>, <strong>groovy post</strong>, <strong>groovy url post</strong>, and <strong>groovy url encode</strong>.</p>
+
+<h2>Attractions in 2010</h2>
+
+<p>These are the posts and pages that got the most views in 2010.</p>
+
+<p>1</p>
+
+<pre><code>                [Don't build software that's TOO smart!](http://mattstine.com/2010/06/03/dont-build-software-thats-too-smart/) June 2010  
+</code></pre>
+
+<p>1 comment</p>
+
+<p>2</p>
+
+<pre><code>                [Groovy: Post to a URL](http://mattstine.com/2009/04/25/groovy-post-to-a-url/) April 2009  
+</code></pre>
+
+<p>4 comments</p>
+
+<p>3</p>
+
+<pre><code>                [Resume](http://mattstine.com/resume/) March 2009                                           
+</code></pre>
+
+<p>4</p>
+
+<pre><code>                [Deploying Grails with Groovy](http://mattstine.com/2009/03/29/deploying-grails-with-groovy/) March 2009                                            
+</code></pre>
+
+<p>5</p>
+
+<pre><code>                [LOTY Time Again: Scala or Clojure?!?!](http://mattstine.com/2009/04/02/loty-time-again-scala-or-clojure/) April 2009  
+</code></pre>
+
+<p>17 comments</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2010/11/29/selenium-2-0-refcard/">Selenium 2.0 Refcard</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-11-29T15:44:18-06:00" pubdate data-updated="true">Nov 29<span>th</span>, 2010</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="http://refcardz.dzone.com/refcardz/getting-started-selenium-20?oid=hom31797"><img src="http://mattstine.files.wordpress.com/2010/11/31797.png" alt="" /></a>Today DZone released my first Refcard: &#8221;<a href="http://refcardz.dzone.com/refcardz/getting-started-selenium-20?oid=hom31797">Selenium 2.0: Using the WebDriver API to Create Robust User Acceptance Tests</a>.&#8221; I have been interested in writing a Refcard for a long time but have never pulled the trigger. For whatever reason, I decided to jump on the bandwagon last month. Writing this card was quite a challenge, as it&#8217;s difficult to boil down a big topic into only six pages while keeping it useful. Thus far the feedback from the community has been largely positive.</p>
+
+<p>If you&#8217;re looking for your next automated testing tool for browser-based user acceptance tests, download the card and let me know what you think!</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2010/11/10/agile-zone-roundup/">Agile Zone Roundup</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-11-10T08:53:15-06:00" pubdate data-updated="true">Nov 10<span>th</span>, 2010</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I&#8217;ve been really quiet on this blog lately. There have been multiple reasons for that. I&#8217;ve been extremely busy preparing for conferences this Fall including SpringOne/2GX and The Rich Web Experience. I&#8217;ve also stayed busy writing for DZone. I have my first DZone Refcard coming out soon, which is focused on Web Driver/Selenium 2. I&#8217;ve also been writing my regular articles for Agile Zone. Here&#8217;s a roundup:</p>
+
+<ul>
+<li><p><a href="http://agile.dzone.com/articles/modular-agile-loosely-coupled">Modular Agile: Loosely coupled, highly cohesive ceremonies</a></p></li>
+<li><p><a href="http://agile.dzone.com/articles/think-youre-doing-kanban-think">   Think You&#8217;re &#8220;Doing Kanban?&#8221; Think Again.</a></p></li>
+<li><p><a href="http://agile.dzone.com/articles/gaelyks-and-golden-hammers">On Gaelyks and Golden Hammers</a></p></li>
+<li><p><a href="http://agile.dzone.com/articles/automation-people-because">Automation for the People (because Everybody Doing It Manually Hurts)  </a></p></li>
+<li><p><a href="http://agile.dzone.com/articles/build-scripts-we-dont-need-no">Build Scripts? We Don&#8217;t Need No Stinkin&#8217; Build Scripts!</a></p></li>
+<li><p><a href="http://agile.dzone.com/polls/automated-browser-testing">Automated Browser Testing: What&#8217;s in Your Toolkit?</a></p></li>
+<li><p><a href="http://agile.dzone.com/articles/selenese-or-not-test-seems-be">To Selenese or not to Test? That Seems to be the Question.</a></p></li>
+<li><p><a href="http://agile.dzone.com/articles/apple-jvm-extra-feature">Is the Apple JVM an &#8220;Extra Feature?&#8221;</a></p></li>
+</ul>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2010/11/10/the-seven-wastes-of-software-development/">The Seven Wastes of Software Development</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-11-10T08:44:29-06:00" pubdate data-updated="true">Nov 10<span>th</span>, 2010</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>In late September I completed an eight-part article series for Agile Zone entitled &#8220;The Seven Wastes of Software Development.&#8221; This series discussed Mary and Tom Poppendieck&#8217;s mapping of Shigeo Shingo&#8217;s &#8220;Seven Wastes of Lean Manufacturing&#8221; into the software development world. This has been a very popular series, having been viewed a total of 57,887 times at this writing. Here&#8217;s a set of links to the series:</p>
+
+<ul>
+<li><strong><a href="http://agile.dzone.com/articles/seven-wastes-software">The Seven Wastes of Software Development - Introduction</a></strong></li>
+<li><strong><a href="http://agile.dzone.com/articles/waste-1-partially-done-work">Waste #1 - Partially Done Work</a></strong></li>
+<li><strong><a href="http://agile.dzone.com/articles/waste-2-extra-features">Waste #2 - Extra Features</a></strong></li>
+<li><strong><a href="http://agile.dzone.com/articles/waste-3-relearning">Waste #3 - Relearning</a></strong></li>
+<li><strong><a href="http://agile.dzone.com/articles/waste-4-handoffs">Waste #4 - Handoffs</a></strong></li>
+<li><a href="http://agile.dzone.com/articles/waste-5-delays"><strong>Waste #5 - Delays </strong></a></li>
+<li><a href="http://agile.dzone.com/articles/waste-6-task-switching"><strong>Waste #6 - Task Switching </strong></a></li>
+<li><a href="http://agile.dzone.com/articles/waste-7-defects"><strong>Waste #7 - Defects</strong></a></li>
+</ul>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2010/09/05/the-agile-guerilla-series/">The Agile Guerilla Series</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-09-05T20:28:43-05:00" pubdate data-updated="true">Sep 5<span>th</span>, 2010</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I recently completed a series of articles for Agile Zone entitled &#8220;The Agile Guerilla.&#8221; Those of you that have seen me on the No Fluff Just Stuff tour this year may recognize a talk by the same name. They are one and the same concept: my attempt to reach the masses with strategies for introducing change, specifically moving to agility, into organizations from the grassroots level.</p>
+
+<p>Here&#8217;s a list of the complete set of articles for your convenience!</p>
+
+<ul>
+<li><a href="http://agile.dzone.com/articles/agile-guerilla">The Agile Guerilla</a></li>
+<li><a href="http://agile.dzone.com/articles/show-dont-tell-persuade-dont">Show (Don&#8217;t Tell), Persuade (Don&#8217;t Preach)</a></li>
+<li><a href="http://agile.dzone.com/articles/going-guerilla-where-start">Going Guerilla: Where to Start</a></li>
+<li><a href="http://agile.dzone.com/articles/guerillas-workflow">The Guerilla&#8217;s Workflow</a></li>
+<li><a href="http://agile.dzone.com/articles/guerilla-tdd">Guerilla TDD </a></li>
+<li><p><a href="http://agile.dzone.com/articles/guerilla-continuous">Guerilla Continous Integration</a></p></li>
+<li><p><a href="http://agile.dzone.com/articles/so-what-are-you-waiting-go">So What Are You Waiting For? GO BANANAS!</a></p></li>
+</ul>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2010/08/02/more-agile-zone-articles/">More Agile Zone Articles!</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-08-02T08:44:04-05:00" pubdate data-updated="true">Aug 2<span>nd</span>, 2010</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Just to prove that I am writing, just not here, I thought I&#8217;d post another collection of links to my latest Agile Zone articles:</p>
+
+<ul>
+<li><p><a href="http://java.dzone.com/articles/yes-you-kanban">Yes You Kanban!</a></p></li>
+<li><p><a href="http://java.dzone.com/articles/guerillas-workflow">The Guerilla&#8217;s Workflow</a></p></li>
+<li><p><a href="http://java.dzone.com/articles/feedback-key">Feedback is the Key!</a></p></li>
+<li><p><a href="http://java.dzone.com/articles/going-guerilla-where-start">Going Guerilla: Where to Start</a></p></li>
+</ul>
+
+
+<p>In the near future you can look forward to a few more episodes of &#8220;The Agile Guerilla&#8221; series, as well as a brand new series I&#8217;ll be starting entitled &#8220;The Seven Wastes of Software Development.&#8221;</p>
+
+<p>Got any topics you want to hear more about? Post up in the comments and I&#8217;ll see about covering them at Agile Zone in the coming weeks!</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2010/07/20/im-in-the-zone-agile-zone/">I&#8217;m in the zone&#8230;Agile Zone.</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-07-20T22:38:09-05:00" pubdate data-updated="true">Jul 20<span>th</span>, 2010</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>My apologies to my colleagues down the street at <a href="http://www.autozone.com">AutoZone</a>, but I just had to do that. :-)</p>
+
+<p>I recently accepted the role of Agile Zone Leader at <a href="http://agile.dzone.com">DZone.com</a>. For the past few weeks I&#8217;ve been publishing a couple of articles a week on various agile development topics. I&#8217;m very happy to get the extra exposure and I hope that folks are getting some value out of my posts. On the downside, I have virtually zero time to write anything here, but on the upside I&#8217;m definitely writing more regularly. Nothing like positive pressure to deliver!</p>
+
+<p>Here are some links to my recent articles:</p>
+
+<ul>
+<li><p><a href="http://agile.dzone.com/articles/you-are-your-softwares-immune">You Are Your Software&#8217;s Immune System!</a></p></li>
+<li><p><a href="http://agile.dzone.com/articles/interview-w-alan-shalloway">Interview: Alan Shalloway on Lean Agile Software Development, Part One</a></p></li>
+<li><p><a href="http://agile.dzone.com/articles/interview-w-alan-shalloway">Interview: Alan Shalloway on Lean Agile Software Development, Part Two</a></p></li>
+<li><p><a href="http://agile.dzone.com/articles/show-dont-tell-persuade-dont">Show (Don&#8217;t Tell), Persuade (Don&#8217;t Preach)</a></p></li>
+<li><p><a href="http://agile.dzone.com/articles/scrummaster-said-i-had">But the ScrumMaster said I had to!</a></p></li>
+<li><p><a href="http://agile.dzone.com/articles/agile-guerilla">The Agile Guerilla</a></p></li>
+<li><p><a href="http://agile.dzone.com/articles/use-stories-deliver">Use Stories to Deliver Business Value</a></p></li>
+</ul>
+
+
+<p>Enjoy!</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2010/07/06/two-new-nfjs-talks-for-this-fall/">Two New NFJS Talks for This Fall!</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-07-06T21:40:00-05:00" pubdate data-updated="true">Jul 6<span>th</span>, 2010</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I&#8217;m excited to announce that I am working up two brand new talks for this Fall to go along side my regular fare. Both of these talks are already scheduled for shows in Boston, MA and Seattle, WA.</p>
+
+<p>The first talk is entitled &#8220;The Seven Wastes of Software Development.&#8221; We&#8217;ll begin by examining one of the key tenets of Lean Software Development, that of eliminating waste. We&#8217;ll then walk through the seven wastes identified by Mary and Tom Poppendieck in their books:</p>
+
+<ul>
+<li><p>Partially Done Work</p></li>
+<li><p>Extra Processes</p></li>
+<li><p>Extra Features</p></li>
+<li><p>Task Switching</p></li>
+<li><p>Waiting</p></li>
+<li><p>Motion</p></li>
+<li><p>Defects</p></li>
+</ul>
+
+
+<p>We&#8217;ll examine each of these wastes and look at some of their common manifestations, both in our coding practices and in our development methodologies. We&#8217;ll also examine strategies for eliminating each of these wastes from our development efforts.</p>
+
+<p>The second talk is entitled &#8220;Yes You Kanban!&#8221; Kanban is sweeping through the agile software development space. Is it hype? Or is it a useful tool to add to our belt? In this session, we&#8217;ll walk through the following topics and I&#8217;ll let you be the judge:</p>
+
+<ul>
+<li><p>What is Kanban?</p></li>
+<li><p>What is Kanban NOT?</p></li>
+<li><p>Comparison to SCRUM</p></li>
+<li><p>Roots of Kanban</p></li>
+<li><p>David Anderson&#8217;s five essential elements/principles of Kanban (Visualize workflow, Limit work-in-progress, Measure &amp; manage flow, Make process policies explicit, Use models to recognize improvement opportunities)</p></li>
+<li><p>Examples of Kanban systems</p></li>
+</ul>
+
+
+<p>I hope to see some of you in these talks this Fall and I look forward to our discussions!</p>
+</div>
+  
+  
+
+
+    </article>
+  
   <div class="pagination">
+    
+      <a class="prev" href="/blog/page/2/">&larr; Older</a>
     
     <a href="/blog/archives">Blog Archives</a>
     
@@ -74,8 +611,36 @@
 <aside class="sidebar">
   
     <section>
+	<h1>Hello, World!</h1>
+	<p>
+		<img src="http://mattstine.files.wordpress.com/2011/05/indiamug.jpg" width="173" height="213">
+	</p>
+	<p>
+		<a href="http://www.linkedin.com/in/mattstine"><img alt="View Matt Stine&#039;s profile on LinkedIn" src="http://www.linkedin.com/img/webpromo/btn_myprofile_160x33.gif" border="0" width="160" height="33"></a>
+	</p>
+</section><section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2011/05/16/design-meeting-patternsantipatterns/">Design Meeting Patterns/Antipatterns</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/01/05/selenium-conference-2011/">Selenium Conference 2011</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/01/02/2010-in-review-the-automated-analysis/">2010 in review: the automated analysis&#8230;</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2010/11/29/selenium-2-0-refcard/">Selenium 2.0 Refcard</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2010/11/10/agile-zone-roundup/">Agile Zone Roundup</a>
+      </li>
     
   </ul>
 </section>
@@ -113,6 +678,19 @@
 
 </footer>
   
+
+<script type="text/javascript">
+      var disqus_shortname = 'seekingsimplicity';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
 
 
 

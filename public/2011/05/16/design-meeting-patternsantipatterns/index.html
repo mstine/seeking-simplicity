@@ -1,0 +1,266 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Design Meeting Patterns/Antipatterns - Seeking Simplicity</title>
+  <meta name="author" content="Matt Stine">
+
+  
+  <meta name="description" content="For those of you that don&#8217;t know, I recently returned to the technical ranks as a Software Architect after a three-year stint in management. To &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://mattstine.com/2011/05/16/design-meeting-patternsantipatterns">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Seeking Simplicity" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Seeking Simplicity</a></h1>
+  
+    <h2>A blog about programming, software architecture and everything else...</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:mattstine.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Design Meeting Patterns/Antipatterns</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-05-16T16:57:50-05:00" pubdate data-updated="true">May 16<span>th</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>For those of you that don&#8217;t know, I recently returned to the technical ranks as a Software Architect after a three-year stint in management. To make a long story short, I now love my job again. Perhaps I&#8217;ll write the long story in a future blog entry. On to the topic at hand. Today I led the first significant design discussion that I have led in quite a long time. A few minutes afterward, I was already reflecting on what had occurred and how. The very first thing that I noticed was my drastically different approach to the task. I felt that my facilitation skills were more mature and effective than I remember from previous similar engagements. I&#8217;m not sure if the time I spent in management (where I facilitated quite a few meetings, though much more business-focused ones) helped, but something certainly has.</p>
+
+<p>I also noticed several things that I&#8217;ll call &#8220;pattern vs. antipattern&#8221; tugs of war. Quite often during the meeting I felt the group trying to move our discussion in one direction that I, for better or for worse, thought was ineffective. I would then redirect us on to what I felt was a better path. In true catalog form, here&#8217;s the list:</p>
+
+<ul>
+<li><p><strong>Understand the Problem vs. Jump to the Solution</strong> - only a couple of minutes into our discussion solutions were being flung about like drunken darts. This situation almost always leads to suboptimal or faulty solutions. As a facilitator, try to ensure that the problem has been clearly stated. If at all possible, write it down on a whiteboard. Make sure everyone agrees that the problem as stated is the problem the group is there to solve. Sure enough, after performing this exercise, we all had a very different and clear understanding of the problem than that with which we walked in the door.</p></li>
+<li><p><strong>Assume the Worst vs. Assume the Best</strong> - occasionally the exact details of a requirement are unclear, and not assuming something will totally derail the design discussion. You have a couple of choices. The first is to halt the discussion and get the details cleared up. This is clearly the best solution, as you&#8217;ll no longer have to assume anything. However, it can be the case that the person who can clear things up isn&#8217;t available. Or in some cases, the question you&#8217;ll be asking will require another meeting at another level of the organization. If you find yourself in that spot, and you can&#8217;t wait (we couldn&#8217;t!), then the best approach is to work from the worst possible case scenario. You&#8217;ll then be in the best position to handle whatever answer comes your way. However, our tendency is often to assume the best (&#8220;That will <em>never</em> happen!&#8221;). Fight that tendency. However, whatever you choose, follow up at your earliest opportunity.</p></li>
+<li><p><strong>Basing Decisions on the Current Situation vs. Basing Decisions on History</strong> - many times the group wanted to veer off into safer territory. In some cases, a possible solution departed significantly from the current design. While this is a valid concern (we do want consistency of design across the system where possible), it is certainly not a trump card. Occasionally the situation at hand will merit a significant departure from the current design. Another way history can rear its ugly head is the assertion that we&#8217;ve always solved similar problems like &#8216;x,&#8217; so we should do so with this problem as well. Again, note the word &#8220;similar.&#8221; All problems are somewhat different and have their own eccentricities. So, rather than working from history, I pushed us back to a clean slate with the statement &#8220;Let&#8217;s stop thinking about the past and start from scratch. We may very well come up with the same solution you guys are proposing, but I&#8217;d rather do so through our own objective analysis and not instinct.&#8221; Guess what. We came up with a different solution that we all felt better about.</p></li>
+<li><p><strong>Shooting for the &#8220;Best&#8221; Solution vs. the &#8220;Easiest&#8221; Solution</strong> - now sometimes we can&#8217;t afford the best solution. I grant that. However, I&#8217;m trying to fight the tendency to immediately jump to the &#8220;easiest thing that could possibly work.&#8221; Often this pops up in the first P vs. AP - if we don&#8217;t clearly understand the problem, sometimes an easy solution jumps out that doesn&#8217;t deal with the underlying details we&#8217;ve yet to uncover. Also, sometimes the best solution is quite simple and elegant. It doesn&#8217;t necessarily have to be harder and more complex than the easiest solution. In fact, sometimes the &#8220;easiest&#8221; solution leads to the most accidental complexity in the long-run. So, shoot for the best solution you can come up with and only then, optimize for cost.</p></li>
+<li><p><strong>Present Possible Solutions Objectively vs. My Solution is the Best!</strong> - one would hope that we all start here, but we don&#8217;t. We tend to like our own solutions to problems and want them to &#8220;win.&#8221; Our ego can get in the way of even hearing an alternate solution presented by another team member. I point you to <a href="http://www.code-magazine.com/Article.aspx?quickid=1105121">my colleague Ted Neward&#8217;s post for more on &#8220;egoless programming.&#8221;</a> So, as a facilitator, you&#8217;ve got to make sure that all solutions are presented objectively. I often had to say things like &#8220;OK, let&#8217;s assume before we ever get started that this is a good solution to the problem and not hack away at it until its fully presented, and we all understand it.&#8221; In the end, this insistence led us to choose a solution that none of us (myself included) originally thought we&#8217;d pick.</p></li>
+<li><p><strong>Validating from Code vs. Validating from Memory</strong> - more often than not, questions about the existing design/code/behavior will come up. Rather than scratching your head and trying to remember what you wrote six months ago, pull up the code and find out. I can&#8217;t tell you the number of meetings I&#8217;ve attended where baseless assertions were made about existing code, only to require another meeting the next day to revisit the whole discussion once those assertions were proven wrong. Again, as a facilitator, I directed us to solve every problem for which all of the facts were available. We inserted placeholders in our solution where questions remained. Guess what we&#8217;re doing now? Well, I&#8217;m blogging about the meeting, but the rest of us are validating from code. Tomorrow will fill in the blanks!</p></li>
+</ul>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Matt Stine</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-05-16T16:57:50-05:00" pubdate data-updated="true">May 16<span>th</span>, 2011</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/design/'>design</a>, <a class='category' href='/blog/categories/development/'>development</a>, <a class='category' href='/blog/categories/facilitation/'>facilitation</a>, <a class='category' href='/blog/categories/meetings/'>meetings</a>, <a class='category' href='/blog/categories/work/'>work</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://mattstine.com/2011/05/16/design-meeting-patternsantipatterns/" data-via="mstine" data-counturl="http://mattstine.com/2011/05/16/design-meeting-patternsantipatterns/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2011/01/05/selenium-conference-2011/" title="Previous Post: Selenium Conference 2011">&laquo; Selenium Conference 2011</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+	<h1>Hello, World!</h1>
+	<p>
+		<img src="http://mattstine.files.wordpress.com/2011/05/indiamug.jpg" width="173" height="213">
+	</p>
+	<p>
+		<a href="http://www.linkedin.com/in/mattstine"><img alt="View Matt Stine&#039;s profile on LinkedIn" src="http://www.linkedin.com/img/webpromo/btn_myprofile_160x33.gif" border="0" width="160" height="33"></a>
+	</p>
+</section><section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2011/05/16/design-meeting-patternsantipatterns/">Design Meeting Patterns/Antipatterns</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/01/05/selenium-conference-2011/">Selenium Conference 2011</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/01/02/2010-in-review-the-automated-analysis/">2010 in review: the automated analysis...</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2010/11/29/selenium-2-0-refcard/">Selenium 2.0 Refcard</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2010/11/10/agile-zone-roundup/">Agile Zone Roundup</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating...</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("mstine", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/mstine" class="twitter-follow-button" data-show-count="false">Follow @mstine</a>
+  
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - Matt Stine -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'seekingsimplicity';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

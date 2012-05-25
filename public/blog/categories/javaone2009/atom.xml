@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: javaone2009 | Seeking Simplicity]]></title>
+  <link href="http://mattstine.com/blog/categories/javaone2009/atom.xml" rel="self"/>
+  <link href="http://mattstine.com/"/>
+  <updated>2012-05-24T19:13:18-05:00</updated>
+  <id>http://mattstine.com/</id>
+  <author>
+    <name><![CDATA[Matt Stine]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[JUG Leadership Lessons Learned on SlideShare]]></title>
+    <link href="http://mattstine.com/2010/04/02/jug-leadership-lessons-learned-on-slideshare/"/>
+    <updated>2010-04-02T14:48:39-05:00</updated>
+    <id>http://mattstine.com/2010/04/02/jug-leadership-lessons-learned-on-slideshare</id>
+    <content type="html"><![CDATA[<p>I've been playing a bit with <a href="http://www.slideshare.net">SlideShare</a> today and I took the opportunity to upload the slides from my <a href="http://weblogs.java.net/blog/2009/07/02/how-start-and-grow-jug-community-corner-2009-podcast">Java.net Community Corner interview with Kevin Farnham at JavaOne 2009</a>. SlideShare has a nice feature that allows you to sync up the audio from an MP3 file with your slides, and since both were available, I thought I'd give it a try. The interface is extremely easy to use and I'm very happy with the outcome.</p>
+
+<p>This talk covers the various things I've learned about leading a Java User Group over the past few years. I would say that these are definitely applicable to leading any type of user group, so even if you aren't a Java person, you might find some meat here. Enjoy!</p>
+
+<p>[slideshare id=3622125&amp;doc=jugleadershiplessonslearned-100402140624-phpapp02]</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[#JavaOne Brain Dump Resources from Memphis JUG Meeting]]></title>
+    <link href="http://mattstine.com/2009/06/19/javaone-brain-dump-resources-from-memphis-jug-meeting/"/>
+    <updated>2009-06-19T12:25:33-05:00</updated>
+    <id>http://mattstine.com/2009/06/19/javaone-brain-dump-resources-from-memphis-jug-meeting</id>
+    <content type="html"><![CDATA[<p>I promised that I would post the links I mentioned in my talk last night at the Memphis JUG...here they are:</p>
+
+<p>General Session Replays: <a href="http://java.sun.com/javaone/2009/general_sessions.jsp">http://java.sun.com/javaone/2009/general_sessions.jsp</a></p>
+
+<p>BlogTalkRadio: <a href="http://www.blogtalkradio.com/JavaOne">http://www.blogtalkradio.com/JavaOne</a></p>
+
+<p>JavaOne Minute: <a href="http://channelsun.sun.com/video/channel-you/javaone+minute/23867338001">http://channelsun.sun.com/video/channel-you/javaone+minute/23867338001
+</a>
+Technical Sessions 2008-2009: <a href="http://developers.sun.com/learning/javaoneonline/">http://developers.sun.com/learning/javaoneonline/</a> (Must be SDN Member - FREE!)</p>
+
+<p>The Da Vinci Machine Project: <a href="http://openjdk.java.net/projects/mlvm/">http://openjdk.java.net/projects/mlvm/
+</a>
+Groovy: <a href="http://groovy.codehaus.org">http://groovy.codehaus.org</a></p>
+
+<p>Java.net Community Corner: <a href="http://wiki.java.net/bin/view/Javaone/CommunityCorner">http://wiki.java.net/bin/view/Javaone/CommunityCorner
+</a>
+JUGS Community: <a href="http://community.java.net/jugs/">http://community.java.net/jugs/</a></p>
+
+<p>Scala: <a href="http://scala-lang.org">http://scala-lang.org</a></p>
+
+<p>SpringSource: <a href="http://www.springsource.com">http://www.springsource.com</a></p>
+
+<p>JUG-USA: <a href="https://jug-usa.dev.java.net/">https://jug-usa.dev.java.net/</a></p>
+
+<p>OpenSolaris: <a href="http://opensolaris.org">http://opensolaris.org</a></p>
+
+<p>Neal Ford: <a href="http://nealford.com">http://nealford.com</a> (Can download his slides here)</p>
+
+<p>Findbugs: <a href="http://findbugs.sourceforge.net">http://findbugs.sourceforge.net</a></p>
+
+<p>Grails: <a href="http://grails.org">http://grails.org</a></p>
+
+<p>Grails Podcast: <a href="http://www.grailspodcast.com">http://www.grailspodcast.com</a></p>
+
+<p>JavaFX: <a href="http://javafx.com">http://javafx.com</a></p>
+
+<p>Griffon: <a href="http://griffon.codehaus.org">http://griffon.codehaus.org</a></p>
+
+<p>Java Store: <a href="http://store.java.com">http://store.java.com</a></p>
+
+<p>Jython: <a href="http://jython.org">http://jython.org</a></p>
+
+<p>Clojure: <a href="http://clojure.org">http://clojure.org</a></p>
+
+<p>JRuby: <a href="http://jruby.codehaus.org">http://jruby.codehaus.org</a></p>
+
+<p>Sun Cloud: <a href="http://cloud.sun.com">http://cloud.sun.com</a></p>
+
+<p>Project Kenai: <a href="http://kenai.com">http://kenai.com</a></p>
+
+<p>Zembly: <a href="http://zembly.com">http://zembly.com</a></p>
+
+<p>NetBeans: <a href="http://netbeans.org">http://netbeans.org</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[JUG-USA Meeting with James Gosling at #JavaOne]]></title>
+    <link href="http://mattstine.com/2009/06/05/jug-usa-meeting-with-james-gosling-at-javaone/"/>
+    <updated>2009-06-05T02:00:59-05:00</updated>
+    <id>http://mattstine.com/2009/06/05/jug-usa-meeting-with-james-gosling-at-javaone</id>
+    <content type="html"><![CDATA[<p><img src="http://mattstine.files.wordpress.com/2009/06/dscn0912.jpg?w=220" alt="James Gosling" /> On Wednesday morning, JUG-USA was fortunate enough to get about 45 minutes with the "Father of Java" himself, James Gosling. Each year at JavaOne, Sun distributes registration discount codes to interested JUG's. The JUG with the most registrations using their code gets this meeting. JUG-USA's founding allowed us to use a bit of strength in numbers to wrestle this crown from the bigger European JUG's for the first time that I know of.</p>
+
+<p>The session was setup as an informal Q&amp;A. I took furious notes on several of the questions that were most interesting to me, and I'll do my best to collate them into something intelligible here. <em><strong>Note that where I use quotes it's mostly to set off his answers...please don't take them as direct, but as paraphrases.</strong></em></p>
+
+<p>The first couple of questions surrounded web buzz. James sees Web 2.0 as "hype for folks who want to sell their books." When asked about the semantic web, he says his feelings are mostly positive, but maybe its an answer searching for a question. He feels that some parts of it will never perform.</p>
+
+<p>When asked about Scala, I was pleased to hear him say, "I like Scala a lot. They're doing some pretty nice stuff." He talked about how functional languages lend themselves to proving properties of programs, which can then lead to automatic decomposition onto multiprocessor systems. He wishes that the Scala guys would focus more on this aspect. He also said that he fears that Scala is almost going down the Perl route of making things "too concise" and that it's still awfully hard for many programmers to "get" the functional stuff.</p>
+
+<p>The next question was a rather predictable one - "James, now that you have the benefit of 14 years of experience with the Java language, is there anything you would have done differently?" Funny thing was the first thing out of his mouth was that the current AWT event model would have been one of the first things to go. Generics and closures were things he quickly mentioned that he wanted to have done, but he also said that there was quite a bit of arguing within the Java team about polishing for years vs. shipping the language. James said he felt like there was a certain window of opportunity out there that they needed to ship the language within to be successful (and it looks like they hit it). Continuing on down the list, James mentioned Eiffel-style precondtions and postconditions and type inferencing. He explained that the entire type system was designed to make C programmers comfortable, and at the time that was clearly the right decision. He state that at this point, the C/C++ comfort factor counts for nothing, and remarked that the casting syntax in Java is just "dumb." A follow-up question surrounded whether or not primitives should be a part of the language. James called this a hard problem, asserting that a "uniform type model can lead to bumpy behavior or bad performance." He said that the Scala specification gets around this with a dual object hierarchy (I need to look this up to see what he means.). He continued to talk about the definition of equality vs. identity, explaining that primitives can't have identity; in fact, they may never exist except as a figment of the compilers imagination, optimized away (my notes are fuzzy on this...when I get the recording I'll clean this up).</p>
+
+<p>The next question surrounded a statement that one attendee of the recent Google I/O conference heard, that threads are "deprecated" as a concurrency model. James immediately retorted that concurrency has very many ideas around it, and that it has been an active Ph.D. thesis generator for 30+ years. He mentioned competing models such as Actors in Scala and Erlang, and Communicating Sequential Processes (CSP) process algebra from Occam. He asserted that with CSP most people typically don't "think that way very well. People with Math degrees think it's cool, but everybody else is kind of like...huh?" He stated that no data sharing between threads makes a lot of problems go away, but that often times casting problems that way can be intractable. A big quotable: "All of the different threading paradigms feel to me like whack-a-mole." He closed the concurrency question by mentioning Guy Steele's work on Fortress, where they are doing automatic decomposition from functional constructs into multiple threads of execution, making all of this issue transparent to the programmer.</p>
+
+<p>Since this is getting pretty long, I'll mention that James says he knows that Larry Ellison, Oracle CEO (and Sun "suitor") has downloaded JavaFX and personally written apps with it, saying it is "pretty darn tasty!" (Again, don't take this as quoted...it's definitely paraphrased).</p>
+
+<p>Other quotables: "Android - it's hard to know what to think about it. It seems like a corner hobby project, chaos looking for a place to happen."</p>
+
+<p>"The exception system was DESIGNED to be a complete PITA."</p>
+
+<p>All-in-all, a great time was had by all. Thanks James for your time, it was definitely fascinating hearing your thoughts on so may different areas of the Java landscape.</p>
+
+<p><img src="http://mattstine.files.wordpress.com/2009/06/jug-usa-gosling-grouppic-900.jpg" alt="JUG-USA with James Gosling" /></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[More connecting at #JavaOne 2009]]></title>
+    <link href="http://mattstine.com/2009/06/04/more-connecting-at-javaone-2009/"/>
+    <updated>2009-06-04T01:13:03-05:00</updated>
+    <id>http://mattstine.com/2009/06/04/more-connecting-at-javaone-2009</id>
+    <content type="html"><![CDATA[<p>I happened to catch <a href="http://glaforge.free.fr/weblog/">Guillaume LaForge's</a> tweet this morning about a "Groovy lunch" at JavaOne today. After our JUG-USA meeting with <a href="http://blogs.sun.com/jag/">James Gosling</a>(blog entry on this one to come), I made my way over to the "cafeteria" and found Guillaume, <a href="http://jameswilliams.be/blog/entry/index">James Williams (of the Griffon team)</a>, and <a href="http://weblogs.java.net/blog/johnsmart">John Smart</a> in exactly the location that Guillaume specified. We were shortly joined by Grails in Action (a.k.a. San Gria) co-author <a href="http://blogs.bytecode.com.au/glen/">Glen Smith</a>. Topics ranged from things we can do better with Groovy/Grails testing, the differences between the Groovy and other dynamic/scripting language communities, Groovy's victory in the ScriptBowl, and none other than the differences in public transportation between the southeastern US and the Bay Area. I had a great time guys and will see you at the BOF.</p>
+
+<p>I also finally got the chance to meet <a href="http://dickwallsblog.blogspot.com/">Dick Wall</a> of the <a href="http://javaposse.com">Java Posse</a>. Dick is just as great in person as he has sounded for the past couple of years on the podcast. Unfortunately our chat was ever so brief, focused around the language features Dick would like to see in future versions of Scala. We were quickly ushered over to the Java.net "presentation area" to participate in <a href="http://weblogs.java.net/blog/joshy">Josh Marinacci's</a> JavaFX Q&amp;A. Was also good meeting him and seeing the cool new UI controls in FX.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[#JavaOne 2009 Script Bowl]]></title>
+    <link href="http://mattstine.com/2009/06/03/javaone-2009-script-bowl/"/>
+    <updated>2009-06-03T13:16:26-05:00</updated>
+    <id>http://mattstine.com/2009/06/03/javaone-2009-script-bowl</id>
+    <content type="html"><![CDATA[<p>The JavaOne 2009 Script Bowl was quite a delight to watch. The players were Jython (Frank Wierzbecki), Groovy (Guillaume LaForge), Clojure (Rich Hickey), Scala (Dick Wall), and JRuby (Thomas Enebo). The event was divided into two rounds:</p>
+
+<ol>
+<li><p>Demonstrating Language Features</p></li>
+<li><p>Demonstrating Community Contributions</p></li>
+</ol>
+
+
+<p>Each of the players focused on different angles during the language feature round. The Jython focus was squarely on the readability of the language. Frank's key quote was Python looks an awful lot like "executable pseudocode." The Groovy focus was a subset of Guillaume's "What's new in Groovy 1.6" talk, and highlighted the new compile-time metaprogramming/AST transformations. Rich Hickey directly attacked concurrency using Clojure, demonstrating a multi-threaded "Life" demo that highlighted the power of software transactional memory.</p>
+
+<p>I really enjoyed Dick's angle for Scala - demonstrating that most of the Java small language changes contained in Project Coin are already present in the Scala language and very useable! Thomas Enebo went straight for the WOW factor by showing how easily a Ruby DSL can be wrapped around existing Java libraries with JRuby to create a very compelling 3D game.</p>
+
+<p>Next came the community round. This was actually the most impressive part of the whole session. Frank kicked off the Jython community focus by highlighting an <a href="http://openendedgroup.com/field/wiki/OverviewBanners2">interactive "art IDE" called Field</a> that drives <a href="http://processing.org/">the Processing language</a>. The chose Jython as the scripting language for the environment. Very neat.</p>
+
+<p>The Groovy demo was something to behold. Guillaume started off by demonstrating SwingPad, an exploratory IDE for building Swing applications with Groovy. But the real treat was a very impressive Twitter+NASA Worldwind mashup built very concisely using Griffon. I really need to give Griffon a try.</p>
+
+<p>Rich Hickey demonstrated the power of Clojure to build a data-driven, functional, template based website. It took an existing HTML template (with 0 code) and transformed it using "css-like" selectors provided by a <a href="http://github.com/cgrand/enlive/tree/master">enlive</a>. Seemed a lot like what you can do with XSLT, but much cleaner.</p>
+
+<p>Dick demonstrated scouchdb, a Scala library for interacting with CouchDB.</p>
+
+<p>Thomas' focus was on just how big the Ruby community is, from developers, to conferences, to books, to IDE's, to libraries.</p>
+
+<p>At the end of the session, the winner was decided by crowd noise, with Groovy winning the day and Scala coming in second. My take home from this session is that really all of these languages bring something very interesting and powerful to the table, and I hope all of them continue to succeed. Great job everyone!</p>
+]]></content>
+  </entry>
+  
+</feed>

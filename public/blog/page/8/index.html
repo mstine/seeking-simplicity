@@ -1,0 +1,636 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Seeking Simplicity</title>
+  <meta name="author" content="Matt Stine">
+
+  
+  <meta name="description" content="This was my second talk of TSE 2007. I have to admit I chose it by process of elimination - none of the second session talks particularly jumped out &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://mattstine.com/blog/page/8">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Seeking Simplicity" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Seeking Simplicity</a></h1>
+  
+    <h2>A blog about programming, software architecture and everything else...</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:mattstine.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2007/12/14/whats-new-in-spring-25-juergen-hoeller/">What&#8217;s New in Spring 2.5? : Juergen Hoeller</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2007-12-14T15:20:00-06:00" pubdate data-updated="true">Dec 14<span>th</span>, 2007</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>This was my second talk of TSE 2007. I have to admit I chose it by process of elimination - none of the second session talks particularly jumped out and grabbed me like Chris Richardson&#8217;s talk.</p>
+
+<p>Juergen is the project lead for the Spring Framework, so he was the obvious choice to give this talk. Juergen split it up into three sections:</p>
+
+<ol>
+<li>Platforms</li>
+<li>Annotation Configuration</li>
+<li>AspectJ Support
+To break down part one as quickly as possible, Spring supports virtually EVERYTHING. You get JDK 1.4 all the way to Java 6, including all of the new API&#8217;s in Java 6. It fully supports Java EE 5 while remaining backward compatible all the way to J2EE 1.3.  You can now deploy a Spring ApplicationContext as a RAR file, and you also get full JCA 1.5 support (if you want to know what that means, don&#8217;t ask me :-)). Quite notable was the fact that they have worked with IBM to support WebSphere&#8217;s proprietary transaction manager. Also interesting was Spring&#8217;s continuing strong support for OSGi as an alternative enterprise runtime.</li>
+</ol>
+
+
+<p>The annotation configuration part of the talk was quite fascinating. I&#8217;m something of an annotations junkie - I have to be careful about that. At any rate, it was so good that I was interested enough to attend Juergen and Mark Fisher&#8217;s later talk that was completely dedicated to the subject. I&#8217;ll leave the details for my entry on that talk.</p>
+
+<p>The final portion, on AspectJ support, was equally fascinating. The first new feature was the ability to advise specific beans by name rather than by type using AspectJ. This was made even sweeter by the fact that you can use pattern matching in your  definition.  Very exciting was the ability to do AspectJ load-time weaving, meaning you can use the power of AspectJ at runtime without involving the AspectJ compiler. Unfortunately, this isn&#8217;t available across all appservers. I didn&#8217;t get a chance to ask and comfirm, but it seems that JBoss (our primary appserver) does not support this. GlassFish, Weblogic, OC4J, and Tomcat were all mentioned as being able to handle it.</p>
+
+<p>The most interesting part of this talk for me was the ability to annotate a class as @Configurable, and then do dependency injection on it even thought it isn&#8217;t managed by Spring. You could do this in Spring 2.0, but you had to use the AspectJ compiler. Now, with load-time weaving, you can do this at runtime! I really could have used this recently when I wanted to inject a single dependency into a class that was really overkill to manage as a Spring bean. Since I&#8217;m using Spring 2.5 in this project, I can go back and try this feature. Exciting!</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2007/12/13/pair-programming-with-the-official-rod-johnson-bobblehead/">Pair Programming With the Official Rod Johnson Bobblehead</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2007-12-13T21:20:00-06:00" pubdate data-updated="true">Dec 13<span>th</span>, 2007</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="http://3.bp.blogspot.com/_Vo63LRwAZbk/R2HoivNFFDI/AAAAAAAAAWg/Kp-khRPCwxU/s1600-h/rod_johnson_pairprog.jpg"><img src="http://3.bp.blogspot.com/_Vo63LRwAZbk/R2HoivNFFDI/AAAAAAAAAWg/Kp-khRPCwxU/s400/rod_johnson_pairprog.jpg" alt="" /></a></p>
+
+<p>As you can see, Rod really likes my Spring MVC configuration. :-)</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2007/12/13/improving-application-design-with-a-rich-domain-model-chris-richardson/">Improving Application Design With a Rich Domain Model: Chris Richardson</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2007-12-13T17:32:00-06:00" pubdate data-updated="true">Dec 13<span>th</span>, 2007</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>This was my very first session of the conference. I&#8217;ve really been looking forward to it. I became pretty excited about object-oriented programming when I first really learned it in my computer simulation course at Ole Miss. In that course we built discrete event simulation programs using collaborating Java threads. Each thread implemented an object from the domain model representing a particular simulation problem. Once I got into the &#8220;working world,&#8221; I found that the architecture described by Rod Johnson as the &#8220;J2EE stove pipe&#8221; had made my OO skills essentially unusable in the projects on which I was required to work on a day-to-day basis. My recent experiences developing in a more POJO-based style, particularly with JPA/Hibernate, have allowed me to get closer to my preferred OO-style, but the business logic still lived in the service-tier. My domain model was still essentially &#8220;anemic&#8221; to borrow from Martin Fowler.</p>
+
+<p>When I read the description for this session I was elated! Finally I could see that someone was building real enterprise applications using object-oriented techniques! I&#8217;ve never quite been able to articulate what I felt was wrong with the way we&#8217;re building applications in my group. I was fortunate enough to have breakfast with Chris Richardson prior to the session, and he said that addressing my inability to articulate those problems was one of the goals of his talk. Awesome! On to the session&#8230;</p>
+
+<p>Chris began with a tour through his object-based programming experience, beginning in LISP, followed by C++ and then Java. Around 1999 he got into EJB programming, and described his experience as &#8220;Applications were still built from objects, but those objects were very different&#8230;&#8221; Basically the EJB paradigm caused us to abandon object-oriented programming in favor of procedural programming. Why? Well, for all of the pros surrounding EJB, it made writing object-oriented code difficult, and in some cases, impossible. The EJB/procedural style works very well for simple business logic, but it doesn&#8217;t scale well as business logic becomes more complex. The result is a few monolithic transactional classes containing hundreds to thousands of lines of code embedded in very long methods. Hence, the legacy of EJB (and I quote):</p>
+
+<ul>
+<li><p>Java is an object-oriented language, AND&#8230;</p></li>
+<li><p>Object-oriented design is a better way to tackle complexity, YET&#8230;</p></li>
+<li><p>Many complex enterprise Java applications are written in a procedural style</p></li>
+</ul>
+
+
+<p>Chris then moved on to discuss the rich domain model pattern, which is really nothing new at all. It&#8217;s just good OO design. Most of your classes (or entities) correspond to real world concepts, and the business logic is spread amongst them. Classes are true objects: they contain state and behavior. The goal is to push as much business logic as possible down into the domain objects, which is exactly where it belongs. What do you get? Better maintainability, better testability, better reusability, and a better shared understanding of your domain. Not only that, but your code is quantifiably simpler! Who doesn&#8217;t want that? The main drawback to this is that you have to have good OO design skills to make it happen - which is exactly what the EJB programming model has made scarce.</p>
+
+<p>Chris followed this up by discussing the building blocks of domain models, concepts he derived from Eric Evans&#8217; book Domain Driven Design. In a nutshell, they are Entities, Value Objects, Aggregates, Services, Factories, and Repositories - the reader can get the book to find out what these are. Interesting notes for me include the fact that Repositories are nearly equivalent to DAO&#8217;s, especially the way I typically implement them. The concept of a Service is far different from what I&#8217;m used to. I &#8220;grew up&#8221; writing services according to the EJB Session Bean/Facade model, where essentially all of your business logic resides in service methods. Chris defined a service as a class implementing only logic that cannot be put in a single entity. They are actually quite thin!</p>
+
+<p>Next came the discussion of frameworks and their role. In short, frameworks act as an enabler to rich domain models when used properly. Your domain model should be implemented purely as Plain Old Java Objects (POJO&#8217;s) in that they don&#8217;t implement any infrastructure interfaces or call infrastructure API&#8217;s. The jury is still out on annotations - Chris argues that they still violate the POJO concept, I&#8217;m not so sure. You then wire your model together using dependency injection, handle crosscutting concerns (transaction management, security, logging, etc.) with Aspect-Oriented Programming (AOP), and use object/relational mapping (ORM) for persistence. What you often run into as obstacles are that many of these frameworks, particularly web and ORM frameworks, force you to introduce &#8220;smells&#8221; into your code for the framework to use them. Examples include requirements for public default constructors and JavaBean-style setters.</p>
+
+<p>Chris closed with an awesome discussion of common code smells and the refactorings used to eliminate them. I was most interested in Feature Envy, which is where you have methods that are far too interested in data belonging to other classes. This is very common in session facades, and the healing factor is to push that logic down into the appropriate domain classes. Another interesting smell was Primitive Obsession, where code uses built-in types (such as String and Integer) instead of application classes to represent state. The refactoring in this case is to introduce Value Objects, which are immutable, validated objects representing domain concepts (e.g. a shipping address).</p>
+
+<p>Chris closed with the charge to begin refactoring our procedural designs into a rich domain model on MONDAY! Oh, how I can&#8217;t wait to begin. Good job Chris!</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2007/12/13/enterprise-java-and-the-changing-of-the-guard/">Enterprise Java and the Changing of the Guard</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2007-12-13T14:02:00-06:00" pubdate data-updated="true">Dec 13<span>th</span>, 2007</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Greetings from <a href="http://www.thespringexperience.com">The Spring Experience 2007</a> in Hollywood, FL. So far this has been a great conference - I&#8217;m currently waiting for my third session of the day to start. As much as I enjoy all of the hype and eye candy at JavaOne, I really get a lot more out of these smaller conferences as you&#8217;re not running around stressed out trying to weave through thousands of geeks as you move from session to session (or more accurately, from session to queue!).</p>
+
+<p>I wanted to post a few insights that I gained from Rod Johnson&#8217;s keynote last night (the title of this entry). The basis for Rod&#8217;s presentation was a Gartner report entitled &#8221;<a href="http://www.gartner.com/DisplayDocument?ref=g_search&amp;id=525420&amp;subref=simplesearch">Trends in Platform Middleware: Disruption Is in Sight</a>.&#8221; To summarize, there are many converging forces in the enterprise Java space that are causing or will probably cause a great deal of disruption in the way we develop enterprise Java applications. These forces include our collective experience with application servers, the rediscovery of object-oriented or POJO-based programming, open source innovation, non-Java challengers (.NET, RoR), the rise of SOA, and Rich Internet Applications. Rod sees a big movement from the &#8220;old guard,&#8221; which he described as the &#8220;J2EE Stovepipe Architecture&#8221; which was based primarily around the idea of distributed objects, to a world in which many of the highest volume Java applications don&#8217;t even use a Java EE application server. An interesting point was the stagnation in job requirements for the big name application servers coupled with the BZ Research statistic that 64% of Java application developers are using Tomcat for production deployment. Yet another force for disruption is the emergence of OSGi, which allows developers to modularize applications and provides facilities for versioned components, fine-grained redeployment, and library conflict resolution - all features that Java EE currently does not and perhaps cannot address. Open source provides yet more disruption, as developers have become participants in rather than spectators of the development of Java enterprise solutions. Innovation is now primarily coming from the open source world. All of this culminated in the rather telegraphed conclusion that Rod (and also the Gartner report apparently) believes that Spring is uniquely positioned to provide the best value for ongoing Enterprise Java development in the face of the current trends. Of course, what would you expect him to say? :-) <a href="http://www.gartner.com/DisplayDocument?ref=g_search&amp;id=525420&amp;subref=simplesearch"><br/>
+</a><br/>
+I do tend to agree with him. The pace at which Spring is innovating and addressing the Java enterprise pain points far outpaces the pace of the JCP. It just takes too long to design specs by committee. One of the more wise things that Spring does is to learn from and in most cases accommodate the changing landscape of Java EE and integrate the best features directly into the framework. I for one am glad to be developing applications with Spring, as it makes it very easy to do the things I want to do and write quality code that isn&#8217;t directly dependent on an infrastructure framework. Generally, it stays out of my way.</p>
+
+<p>More to come on the sessions I&#8217;ve attended thus far.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2007/11/08/13949712720901forosx/">13949712720901ForOSX</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2007-11-08T09:22:00-06:00" pubdate data-updated="true">Nov 8<span>th</span>, 2007</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Here&#8217;s my vote for Java 6 on Mac OS X Leopard!</p>
+
+<p>13949712720901ForOSX</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2007/10/12/ajax-construction-kit-building-plug-and-play-ajax-applications/">Ajax Construction Kit: Building Plug-and-Play Ajax Applications</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2007-10-12T17:03:00-05:00" pubdate data-updated="true">Oct 12<span>th</span>, 2007</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="http://www.javalobby.org/articles/ajax-construction-kit/">My first book review</a> for <a href="http://www.javalobby.org">Javalobby</a> was published today!</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2007/09/05/please-support-me-in-the-2007-walk-to-cure-diabetes/">Please Support Me in the 2007 Walk to Cure Diabetes</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2007-09-05T11:00:00-05:00" pubdate data-updated="true">Sep 5<span>th</span>, 2007</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>This year, I&#8217;ll be taking part in JDRF&#8217;s Walk to Cure Diabetes, along with one-half million other walkers across the country, as we try to reach our goal of raising $90 million.</p>
+
+<p>Type 1, or juvenile, diabetes, is a devastating disease that affects millions of people - a large and growing percentage of them children. One of them is my oldest daughter, Abby, who is three years old.</p>
+
+<p>Since Abby&#8217;s diagnosis, she&#8217;s had her fingers pricked over 800 times already. She&#8217;s received more than 200 shots in her arms, legs, and tummy. Over the course of her life, she&#8217;ll continue to receive daily insulin injections and finger pricks. She must take insulin to stay alive. We must constantly monitor her glucose levels to ward off complications such as blindness, kidney failure, and stroke. Abby must maintain strict control of her diet every day (even on birthdays and holidays), check her blood sugar at least 6 times a day, and take insulin at least twice a day.</p>
+
+<p>There is some good news, though. For the first time, scientists are predicting that we CAN expect to see a cure well within our lifetime! This is exactly what we&#8217;re wishing for, so we&#8217;ve formed a team called &#8220;Wishing With Abby,&#8221; and we&#8217;d love to have your help.</p>
+
+<p>Please visit my Walk Web page if you would like to donate online or see how close I am to<br/>
+reaching my personal goal:</p>
+
+<p><a href="http://walk.jdrf.org/walker.cfm?id=86761462">http://walk.jdrf.org/walker.cfm?id=86761462</a></p>
+
+<p>Follow this link to make a donation:</p>
+
+<p><a href="http://walk.jdrf.org/support.cfm?id=86761462">http://walk.jdrf.org/support.cfm?id=86761462</a></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2007/08/29/welcome-to-matts-mac-paradise/">Welcome to Matt&#8217;s Mac Paradise</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2007-08-29T16:11:00-05:00" pubdate data-updated="true">Aug 29<span>th</span>, 2007</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="http://2.bp.blogspot.com/_Vo63LRwAZbk/RtXhAhQ4WVI/AAAAAAAAAQM/bMm-2pre3v8/s1600-h/DSCN0713.JPG"><img src="http://2.bp.blogspot.com/_Vo63LRwAZbk/RtXhAhQ4WVI/AAAAAAAAAQM/bMm-2pre3v8/s400/DSCN0713.JPG" alt="" /></a></p>
+
+<p>I&#8217;ve been wanting to post a picture of my new work setup for awhile, but I wanted to wait until I finished getting setup over at 160 Shadyac Avenue. Just for fun, I thought I&#8217;d go VMWare Fusion crazy and boot up every virtual machine I&#8217;ve got - you&#8217;re actually looking at 7 OS&#8217;s booted concurrently between two machines. To the left I&#8217;ve got my 15&#8221; MacBook Pro (2.2 GHz Intel Core 2 Duo processor, 4 GB 667 MHz DDR2 SDRAM) running Mac OS 10.4, Windows XP, and Ubuntu. To the right I&#8217;ve got my Mac Pro tower (2 x 2 GHz Dual-Core Intel Xeon processors, 5 GB 66 MHz DDR2 FB-DIMM RAM) driving the dual 19&#8221; Dell LCD&#8217;s, running Mac OS 10.4, Windows XP, Ubuntu, and Solaris Express. Whew - that was a mouthful. Thanks to Matt Raible for <a href="http://raibledesigns.com/rd/entry/re_one_30_monitor_or">blogging</a> about the Griffin Technologies iCurve laptop stand - I picked up its successor, the Elevator, for my MacBook Pro. I&#8217;ve got pictures from my past desktops over the years - I need to dig them up and show the procession of developer technology here. It&#8217;s been quite a ride from my first system as a junior developer six plus years ago.</p>
+
+<p><a href="http://picasa.google.com/blogger/"><img src="http://photos1.blogger.com/pbp.gif" alt="Posted by Picasa" /></a></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2007/08/17/havent-had-much-time-to-blog-lately/">Haven&#8217;t Had Much Time to Blog Lately&#8230;.</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2007-08-17T15:54:00-05:00" pubdate data-updated="true">Aug 17<span>th</span>, 2007</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="http://2.bp.blogspot.com/_Vo63LRwAZbk/RsYLERQ4WSI/AAAAAAAAAP0/Z6Sap8em5GY/s1600-h/DSCN0706.JPG"><img src="http://2.bp.blogspot.com/_Vo63LRwAZbk/RsYLERQ4WSI/AAAAAAAAAP0/Z6Sap8em5GY/s400/DSCN0706.JPG" alt="" /></a></p>
+
+<p>&#8230;.because we&#8217;ve been packing to move on top of all of our regular projects. St. Jude has nicely renovated a new building for us, so we developers are moving. This is where I&#8217;m headed on Monday:</p>
+
+<p><a href="http://1.bp.blogspot.com/_Vo63LRwAZbk/RsYMGBQ4WUI/AAAAAAAAAQE/jDsZtab8xBA/s1600-h/DSC_4433.JPG"><img src="http://1.bp.blogspot.com/_Vo63LRwAZbk/RsYMGBQ4WUI/AAAAAAAAAQE/jDsZtab8xBA/s400/DSC_4433.JPG" alt="" /></a>I&#8217;m both loving it and a little sad - I&#8217;ve been sitting in my desk for nearly my entire career as a software developer. I just know I&#8217;m going to park in the garage and come downstairs one morning to find my office gone. :-)</p>
+
+<p><a href="http://picasa.google.com/blogger/"><br/>
+</a></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2007/07/27/stjude-srm-10-released/">STJUDE-SRM 1.0 Released</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2007-07-27T13:59:00-05:00" pubdate data-updated="true">Jul 27<span>th</span>, 2007</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>From <a href="http://sourceforge.net/forum/forum.php?forum_id=719803">http://sourceforge.net/forum/forum.php?forum_id=719803</a>:</p>
+
+<blockquote><p>On July 27, 2007, STJUDE-SRM 1.0 was released.</p></blockquote>
+
+<p>STJUDE-SRM is a laboratory management system designed to support shared resource facility (or core lab) activities. It was designed and developed by the Hartwell Center for Bioinformatics and Biotechnology at St. Jude Children&#8217;s Research Hospital.</p>
+
+<p>Shared resources supported include DNA synthesis, Peptide synthesis, DNA sequencing, Functional Genomics (spotted microarray laboratory), and Affymetrix (commercial microarrays) laboratories. STJUDE-SRM was also designed so that it is sufficiently modular and scalable to support other laboratory activities as needed. It could conceivably support all facilities on a campus or at a research organization and provide a single portal for investigators to access these resources, retrieve data, receive invoices for services, and generate reports.</p>
+
+<p>Currently available is a build of STJUDE-SRM which is certified for JBoss 4.2.0.GA running on J2SE 5.0. Builds for JBoss 4.0.5.GA and BEA Weblogic Server 8.1 are forthcoming.</p>
+
+<p>STJUDE-SRM 1.0 can be downloaded here: <a href="http://sourceforge.net/project/showfiles.php?group_id=197795">http://sourceforge.net/project/showfiles.php?group_id=197795</a></p>
+
+<p>Please report all bugs you find in the STJUDE-SRM bug tracker: <a href="http://sourceforge.net/tracker/?group_id=197795&amp;atid=962898">http://sourceforge.net/tracker/?group_id=197795&amp;atid=962898</a></p>
+
+<p><a href="http://sourceforge.net/tracker/?group_id=197795&amp;atid=962898"></a></p>
+
+<p>This is a VERY satisfying announcement for me, as I have spent the better part of the last six years working on this project. I was so excited when I learned we would be releasing it to the open source community. Enjoy!</p>
+
+<p>For more information on STJUDE-SRM, please visit: <a href="http://stjude-srm.sourceforge.net">http://stjude-srm.sourceforge.net</a>.</p>
+
+<p><a href="http://sourceforge.net/tracker/?group_id=197795&amp;atid=962898"></a></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  <div class="pagination">
+    
+      <a class="prev" href="/blog/page/9/">&larr; Older</a>
+    
+    <a href="/blog/archives">Blog Archives</a>
+    
+    <a class="next" href="/blog/page/7/">Newer &rarr;</a>
+    
+  </div>
+</div>
+<aside class="sidebar">
+  
+    <section>
+	<h1>Hello, World!</h1>
+	<p>
+		<img src="http://mattstine.files.wordpress.com/2011/05/indiamug.jpg" width="173" height="213">
+	</p>
+	<p>
+		<a href="http://www.linkedin.com/in/mattstine"><img alt="View Matt Stine&#039;s profile on LinkedIn" src="http://www.linkedin.com/img/webpromo/btn_myprofile_160x33.gif" border="0" width="160" height="33"></a>
+	</p>
+</section><section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2011/05/16/design-meeting-patternsantipatterns/">Design Meeting Patterns/Antipatterns</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/01/05/selenium-conference-2011/">Selenium Conference 2011</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/01/02/2010-in-review-the-automated-analysis/">2010 in review: the automated analysis&#8230;</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2010/11/29/selenium-2-0-refcard/">Selenium 2.0 Refcard</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2010/11/10/agile-zone-roundup/">Agile Zone Roundup</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating&#8230;</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("mstine", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/mstine" class="twitter-follow-button" data-show-count="false">Follow @mstine</a>
+  
+</section>
+
+
+
+
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - Matt Stine -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'seekingsimplicity';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

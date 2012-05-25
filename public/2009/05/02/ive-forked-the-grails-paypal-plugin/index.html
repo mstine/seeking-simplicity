@@ -1,0 +1,269 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>I've "forked" the Grails PayPal Plugin... - Seeking Simplicity</title>
+  <meta name="author" content="Matt Stine">
+
+  
+  <meta name="description" content="I&#8217;m currently completing the finishing touches on a new e-commerce site for my wife&#8217;s stationary business. We decided a long time ago to &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://mattstine.com/2009/05/02/ive-forked-the-grails-paypal-plugin">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Seeking Simplicity" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Seeking Simplicity</a></h1>
+  
+    <h2>A blog about programming, software architecture and everything else...</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:mattstine.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">I've "Forked" the Grails PayPal Plugin...</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-05-02T00:59:46-05:00" pubdate data-updated="true">May 2<span>nd</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>I&#8217;m currently completing the finishing touches on a new e-commerce site for my wife&#8217;s stationary business. We decided a long time ago to use <a href="http://www.paypal.com">PayPal</a> for all of the payment processing since we&#8217;ve had a great experience using it for our eBay selling. About a year ago Graeme Rocher polished off the last release of a <a href="http://grails.org/plugin/paypal">PayPal plugin</a> that is available in <a href="http://grails.org/plugin/home">the Grails Plugin repository</a>. It really is a very nice plugin, yet I had a couple of problems with it:</p>
+
+<ul>
+<li><p>It is only capable of handling payments for one item transactions via &#8220;Buy Now&#8221; buttons. I want to upload an entire shopping cart full of multiple items.</p></li>
+<li><p>It currently won&#8217;t handle shipping addresses. The site I&#8217;m building allows the user to maintain a list of shipping addresses, and I&#8217;d want to send the address information they choose along to PayPal.</p></li>
+<li><p>Minor issue: needed to upgrade the plugin to Grails 1.1.</p></li>
+</ul>
+
+
+<p>So, I decided this evening to fork the plugin. I want to leverage all of the great work that has been done thus far (especially with the IPN processing part - superb stuff), but I have to add in these two functions and do the version upgrade. Interestingly enough I couldn&#8217;t get the tests to run out of the box after the upgrade. No good developer likes to modify code without a stable running test suite, right? So what I ended up doing was creating a new Grails 1.1 plugin project and copying the original artifacts over. Once this was done all of the tests ran perfectly.</p>
+
+<p>So, at this point I&#8217;ve added function #1. You can now redirect to the &#8220;uploadCart&#8221; action. It assumes that you have already constructed a Payment object (now containing PaymentItems) and saved it, and then passed the transactionId along. I did this so that folks with multiple different ways of handling shopping carts could have some degree of flexibility - the onus is on you to map your cart to your Payment object correctly. The original functions implemented by Graeme are backward compatible, assuming only one PaymentItem in the Payment. I&#8217;ve run all of the original tests and also did some manual functional testing by running the plugin app against my own PayPal Sandbox account. So far so good. Look for more updates as this evolves. Once I get something I&#8217;m totally happy with I&#8217;ll see about getting it pushed back into the main plugin repo.</p>
+
+<p>Want to take a closer look? Visit <a href="http://github.com/mstine/grails-paypal-plugin/tree/master">http://github.com/mstine/grails-paypal-plugin/tree/master</a></p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Matt Stine</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-05-02T00:59:46-05:00" pubdate data-updated="true">May 2<span>nd</span>, 2009</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/codeproject/'>CodeProject</a>, <a class='category' href='/blog/categories/grails/'>grails</a>, <a class='category' href='/blog/categories/groovy/'>groovy</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://mattstine.com/2009/05/02/ive-forked-the-grails-paypal-plugin/" data-via="mstine" data-counturl="http://mattstine.com/2009/05/02/ive-forked-the-grails-paypal-plugin/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2009/04/30/functional-programming-blog-aggregator-in-the-works/" title="Previous Post: Functional programming blog aggregator in the works...">&laquo; Functional programming blog aggregator in the works...</a>
+      
+      
+        <a class="basic-alignment right" href="/2009/05/11/career-20-toastmasters/" title="Next Post: Career 2.0: Toastmasters">Career 2.0: Toastmasters &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+	<h1>Hello, World!</h1>
+	<p>
+		<img src="http://mattstine.files.wordpress.com/2011/05/indiamug.jpg" width="173" height="213">
+	</p>
+	<p>
+		<a href="http://www.linkedin.com/in/mattstine"><img alt="View Matt Stine&#039;s profile on LinkedIn" src="http://www.linkedin.com/img/webpromo/btn_myprofile_160x33.gif" border="0" width="160" height="33"></a>
+	</p>
+</section><section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2011/05/16/design-meeting-patternsantipatterns/">Design Meeting Patterns/Antipatterns</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/01/05/selenium-conference-2011/">Selenium Conference 2011</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/01/02/2010-in-review-the-automated-analysis/">2010 in review: the automated analysis...</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2010/11/29/selenium-2-0-refcard/">Selenium 2.0 Refcard</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2010/11/10/agile-zone-roundup/">Agile Zone Roundup</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating...</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("mstine", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/mstine" class="twitter-follow-button" data-show-count="false">Follow @mstine</a>
+  
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - Matt Stine -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'seekingsimplicity';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

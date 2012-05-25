@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: jug | Seeking Simplicity]]></title>
+  <link href="http://mattstine.com/blog/categories/jug/atom.xml" rel="self"/>
+  <link href="http://mattstine.com/"/>
+  <updated>2012-05-24T19:13:18-05:00</updated>
+  <id>http://mattstine.com/</id>
+  <author>
+    <name><![CDATA[Matt Stine]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Announcing NOSQL Summer Memphis]]></title>
+    <link href="http://mattstine.com/2010/05/28/announcing-nosql-summer-memphis/"/>
+    <updated>2010-05-28T09:21:43-05:00</updated>
+    <id>http://mattstine.com/2010/05/28/announcing-nosql-summer-memphis</id>
+    <content type="html"><![CDATA[<p>I recently stumbled across the <a href="http://nosqlsummer.org/">NOSQL Summer</a> website via my friend Alex Miller's <a href="http://tech.puredanger.com/2010/05/25/nosql-summer-st-louis/">blog</a>. The idea is to setup a summer reading club focused around databases and distributed systems. Groups will gather "worldwide" to discuss various papers and the hopefully submit the substance of their discussions back to the NOSQL Summer website in the form of annotated papers.</p>
+
+<p>This sounded like a great idea to me, so I decided that we'd co-locate a NOSQL Summer discussion with our monthly Memphis JUG meetings. You can find the details of our NOSQL meetings at <a href="http://nosqlsummer.org/city/memphis">http://nosqlsummer.org/city/memphis</a>. We'll start at 5:30 and run until 6:15-6:30. If you're interested in these discussions, come on out to Southwest TN Community College on June 24th (even if you're not a Java type!).</p>
+
+<p>Our first paper will be <a href="http://nosqlsummer.org/paper/end-of-architectural-era">The End of an Architectural Era (It's Time for a Complete Rewrite)</a>. Please read it before the meeting and come prepared to mindshare.</p>
+
+<p>If there's enough interest in these discussions, we could start having a lunch time discussion at a centrally located restaurant halfway between each JUG meeting. We can discuss this at our first meeting in June. I hope to see you there!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[I'm speaking at the March Memphis JUG meeting]]></title>
+    <link href="http://mattstine.com/2009/03/13/im-speaking-at-the-march-memphis-jug-meeting/"/>
+    <updated>2009-03-13T12:24:00-05:00</updated>
+    <id>http://mattstine.com/2009/03/13/im-speaking-at-the-march-memphis-jug-meeting</id>
+    <content type="html"><![CDATA[<p>I learned a great deal about JMS from Mark Richards at last weekend's NFJS Gateway Software Symposium, and I thought I'd share it with the Memphis Java community. Take a look at <a href="http://www.memphisjug.org">http://www.memphisjug.org</a> for details!</p>
+]]></content>
+  </entry>
+  
+</feed>

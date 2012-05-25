@@ -1,0 +1,785 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Seeking Simplicity</title>
+  <meta name="author" content="Matt Stine">
+
+  
+  <meta name="description" content="Interesting title, eh? Maybe this one will make it through Glen&#8217;s filter at GroovyBlogs.org. On to the meat. I&#8217;ve been steadily working &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://mattstine.com/blog/page/6">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Seeking Simplicity" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Seeking Simplicity</a></h1>
+  
+    <h2>A blog about programming, software architecture and everything else...</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:mattstine.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/03/29/deploying-grails-with-groovy/">Deploying Grails With Groovy</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-03-29T03:38:09-05:00" pubdate data-updated="true">Mar 29<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Interesting title, eh? Maybe this one will make it through Glen&#8217;s filter at <a href="http://groovyblogs.org">GroovyBlogs.org</a>.</p>
+
+<p>On to the meat. I&#8217;ve been steadily working on a couple of Grails applications, one being the website for the <a href="http://www.memphisjug.org">Memphis JUG</a>, and another being the e-commerce site for my wife&#8217;s soon to be launched designer stationery business. Just like your average Grails developer, I&#8217;ve been happily coding away at 127.0.0.1 using the good old development Jetty+MySQL stack. Well, in the last week or so it&#8217;s come time to actually deploy both of these applications into production. I started out last weekend with the Memphis JUG site. My first approach was to build the WAR file locally and then &#8220;scp&#8221; it up to the server.</p>
+
+<p>YMMV, but the upload speed on my DSL connection is horrible! After doing this three or four times in one night, waiting 15-20 minutes for the WAR to upload each time (Grails WAR&#8217;s are rather thick when carrying all of the dependencies along), I decided to myself, &#8220;There must be a better way to do this.&#8221;</p>
+
+<p>Fast forward a week and here I sit working on the first &#8220;pre-production&#8221; release of my wife&#8217;s store site. With quite a bit of time on my hands during these &#8220;dark and early&#8221; hours (a story for a later entry), I decided it was time for the experiment.</p>
+
+<p>Each of these projects is hosted at GitHub, so the process that I mapped out in my mind looked like this:</p>
+
+<ol>
+<li><p>Check out the latest code from GitHub</p></li>
+<li><p>Run &#8220;grails war&#8221;</p></li>
+<li><p>Stop the Tomcat service (my hosting provider sets up Tomcat to run as a service)</p></li>
+<li><p>Delete the remnants of the previous deployment from Tomcat&#8217;s deployment directory</p></li>
+<li><p>Copy the new WAR file to Tomcat&#8217;s deployment directory</p></li>
+<li><p>Start the Tomcat service</p></li>
+</ol>
+
+
+<p>By the way, I forgot to mention that before doing all of this I moved the production data source definition from being locally defined to being a JNDI lookup within Tomcat. This posed its own challenge, which I&#8217;ll blog about a bit later.</p>
+
+<p>Anyway, back to the deployment. I though this would be an excellent opportunity to take <a href="http://groovy.codehaus.org/Using+Ant+from+Groovy">Groovy&#8217;s Antbuilder</a> out for a spin. Here&#8217;s an example of what I put together:</p>
+
+<pre><code>#!/usr/bin/env groovy
+
+def ant = new AntBuilder()
+
+//Update the codebase from GitHub
+ant.exec(executable:'git', dir: "${PROJECT_DIR}") {
+        arg(value:'pull')
+}
+
+//Generate the WAR file using Ant
+ant.ant(dir:'"${PROJECT_DIR}"', target: 'war')
+
+//Stop Tomcat
+ant.exec(executable:'service') {
+        arg(line:'tomcat6 stop')
+}
+
+//Delete the old webapp contents from Tomcat's deploy directory
+ant.delete(includeemptydirs:'true', verbose:'true') {
+        fileset(dir:"${CONTEXT_ROOT_DIR}", includes:'**/*')
+}
+
+//Copy the new WAR file to Tomcat's deploy directory
+ant.copy(file:"${WAR_FILE}", tofile:"${CONTEXT_ROOT_DIR}/ROOT.war")
+
+//Start Tomcat
+ant.exec(executable:'service') {
+        arg(line:'tomcat6 start')
+}
+</code></pre>
+
+<p>As you can see, I have a few undefined Groovy constants in there. Let&#8217;s just say I didn&#8217;t want to expose ALL of the details of my server.</p>
+
+<p>At any rate, it&#8217;s pretty simple. One word of warning - if you&#8217;re using Ehcache, make sure to add it to your ivy.xml dependencies, or the Ant build won&#8217;t bring it in like running &#8220;grails war&#8221; will. I hope someone finds this simple script useful. Enjoy!</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/03/26/need-a-textile-engine-look-no-further-than-plextile/">Need a Textile Engine? Look No Further Than Plextile!</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-03-26T16:23:46-05:00" pubdate data-updated="true">Mar 26<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>In finishing up the first release of JUG Nexus, the open source engine (<a href="http://github.com/mstine/jug-nexus/tree/master">http://github.com/mstine/jug-nexus/tree/master</a>) behind the new Memphis JUG website, I needed to put a good <a href="http://www.textism.com/tools/textile/">Textile</a> engine in place. I really don&#8217;t care for writing actual HTML in a content management system, and JUG Nexus being a lightweight CMS, I wanted a lightweight markup syntax for entering the details of upcoming JUG meetings. Textile is exactly that, and is also used for entering content into the very useful <a href="http://jugevents.org">JUGEvents</a> system produced by <a href="http://www.jugpadova.it/">JUG Padova</a> for the Java User Group community at large. I tried out several different engines, and none of them seemed to be very robust when it came to edge cases in the markup. For example, if I want to produce a hyperlink to a website, the textile format is the following:</p>
+
+<p><code>
+"Linked Text":http://www.site.com
+</code></p>
+
+<p>This syntax will result in the following HTML:</p>
+
+<pre><code>&lt;a href="http://www.site.com"&gt;Linked Text&lt;/a&gt;
+</code></pre>
+
+<p>Unfortunately, if you have a bang (!) in your &#8220;Linked Text,&#8221; most of the Textile engines that I used would not recognize it as an HTML link. Plextile does!</p>
+
+<p>The only drawback, however minimal, to using Plextile is that it does not come with a pre-packaged JAR file. You have to take the compiled code and JAR it yourself. Now, for free, I&#8217;ll include how I integrated Plextile with Grails. Grails has a very nice codec feature that provides a facility to register encoders and decoders of textual data as methods on any object. Grails searches for classes following the convention <code>XCodec</code> and dynamically registers <code>encodeAsX</code> and <code>decodeX</code> methods on <code>java.lang.Object</code> so that any data can be encoded and decoded. Enter the <code>TextileCodec</code>:</p>
+
+<pre><code>import com.plink.plextile.TextParser
+
+class TextileCodec {
+
+   static encode = {str -&gt;
+      new TextParser().parseTextile(str, true)
+   }
+
+}
+</code></pre>
+
+<p>Believe it or not, that&#8217;s it! Here&#8217;s the GSP template for rendering a JUG meeting:</p>
+
+<pre><code>&lt;div class="post"&gt;
+  &lt;h2&gt;${event.title}&lt;br/&gt;&lt;br/&gt;&lt;g:formatDate format="EEEE, MMMM dd, yyyy" date="${event.startTime}"/&gt;&lt;br/&gt;&lt;g:formatDate format="h:mm" date="${event.startTime}"/&gt;-&lt;g:formatDate format="h:mm a" date="${event.endTime}"/&gt;&lt;br/&gt;&lt;g:if test="${!event.archived}"&gt;&lt;a href="http://jugevents.org/jugevents/event/${event.jugEventsId}"&gt;Click HERE to register!&lt;/a&gt;&lt;/g:if&gt;&lt;/h2&gt;
+  &lt;div class="entry"&gt;
+    &lt;h2 class="title"&gt;Speaker/Topic:&lt;/h2&gt;
+    &lt;p&gt;${event.description.encodeAsTextile()}&lt;/p&gt;
+    &lt;h2 class="title"&gt;Location/Directions:&lt;/h2&gt;
+    &lt;p&gt;${event.location}&lt;/p&gt;
+    &lt;p&gt;${event.directions.encodeAsTextile()}&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+
+<p>Enjoy!</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/03/15/the-manifesto-for-software-craftsmanship/">The Manifesto for Software Craftsmanship</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-03-15T22:45:00-05:00" pubdate data-updated="true">Mar 15<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="http://5386.openphoto.net"><img src="http://openphoto.net/cgi-bin/image?image_id=5386" alt="" /></a>So as I&#8217;m sitting here thumbing through my <a href="http://www.infoq.com">InfoQ</a> feed on <a href="http://www.google.com/reader">Google Reader</a>, I come across the following posting: <a href="http://www.infoq.com/news/2009/03/software_craftsmanship">Software Craftsmanship Manifesto: A Call to Arms</a>. It seems that a group of &#8220;programming patriots&#8221; has struck again (see the <a href="http://agilemanifesto.org">Manifesto for Agile Software Development</a> - circa 2001), complete with a &#8220;founding document&#8221; look and feel. Clicking through <a href="http://manifesto.softwarecraftsmanship.org/">the source link</a>, one finds the following:</p>
+
+<blockquote><p>As aspiring Software Craftsmen we are raising the bar of professional software development by practicing it and helping others learn the craft. Through this work we have come to value:</p>
+
+<ul>
+<li><p>Not only working software, but also well-crafted software</p></li>
+<li><p>Not only responding to change, but also steadily adding value</p></li>
+<li><p>Not only individuals and interactions, but also a community of professionals</p></li>
+<li><p>Not only customer collaboration,but also productive partnerships</p></li>
+</ul>
+
+
+<p>That is, in pursuit of the items on the left we have found the items on the right to be indispensable.</p></blockquote>
+
+<p>© 2009, the undersigned. this statement may be freely copied in any form, but only in its entirety through this notice.</p>
+
+<p>You can&#8217;t even imagine my excitement in reading this. This statement of values is something that I have been trying to get across without having the needed words for quite some time.</p>
+
+<p>The motivation, says the InfoQ article, is right on target:</p>
+
+<blockquote><p>The members of the manifesto group answered two key questions: “How will it help solve the problems of crap code?” and “What will motivate &#8220;The developer just churning out code&#8221; to become a craftsman?” - the distinction is between the developer who is just getting it done vs the one getting it done right.</p></blockquote>
+
+<p>I have felt for a long time that the elements of craftsmanship are something sorely missing from our field. We, as programmers, are often so consumed with getting the job done that we do often neglect getting it done right. In our haste to move on to the next exciting project and/or technology, we neglect the tenets of simple design, test-driven development, merciless refactoring, clean code, etc. We&#8217;re often quite satisfied with the &#8220;hacky solution here&#8221; and the &#8220;quick and dirty solution there.&#8221;</p>
+
+<p>Quite frankly, I&#8217;ve had enough of that. I&#8217;m not satisfied when the contractor building my house cuts corners. I&#8217;m quite irritable when my mechanic does a less than thorough job with my car. Why should I expect my clients to settle for software built like that?</p>
+
+<p>So, to make this a practical rant, I thought I&#8217;d share a couple of the things that we&#8217;re doing in our team to move us in the right direction:</p>
+
+<ol>
+<li><p>First of all, we started a weekly &#8220;brown bag lunch/workshop,&#8221; inspired by Andy Hunt and Venkat Subramaniam&#8217;s discussion in <a href="http://pragprog.com/titles/pad/practices-of-an-agile-developer">Practices of an Agile Developer</a>.</p></li>
+<li><p>Second, we selected books to read as a team that will point us in the right direction. Our first two titles were <a href="http://pragprog.com/titles/tpp/the-pragmatic-programmer">The Pragmatic Programmer: From Journeyman to Master</a> (see, there&#8217;s craftsmanship right away!) and <a href="http://www.pearsonhighered.com/educator/academic/product/1,3110,0132350882,00.html">Clean Code: A Handbook of Agile Software Craftsmanship</a> (sense a pattern yet?).</p></li>
+<li><p>Third, we make a point of our weekly discussions to look at ways we can integrate the principles and practices that we&#8217;re learning into our daily work. An example: We&#8217;re working to integrate peer code review into our development process. The principles, patterns, and practices that we&#8217;re picking up from Clean Code will be informing us as we review code and look for possible improvements.</p></li>
+</ol>
+
+
+<p>So, with that said, tonight I became a signatory of the manifesto. <a href="http://manifesto.softwarecraftsmanship.org/sign/new">Why don&#8217;t you join me and fight the fight against crappy code!</a></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/03/13/grailsdojo-ajax-file-upload/">Grails+Dojo Ajax File Upload</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-03-13T22:08:00-05:00" pubdate data-updated="true">Mar 13<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I&#8217;m currently working on a <a href="http://grails.org/">Grails</a> application with a requirement for uploading product images, which are subsequently resized into thumbnails of various sizes for different shopping screens. Since it took a bit of doing to get this done, I thought I&#8217;d post my solution here in case anyone could benefit from it.</p>
+
+<p>First, to set the stage, I&#8217;ve upgraded the application all the way to the newly released <a href="http://www.springsource.org/node/1107">Grails 1.1</a>.</p>
+
+<p>To start off, I naively attempted to use the built-in Prototype library to do the upload with a simple <code>&lt;g:submitRemote/&gt;</code> tag. You might have guessed that this didn&#8217;t work at all. Continuing to learn the hard way (without reading the manual I might add), I submitted this as a bug to the Grails project. Graeme ever so politely informed me that this was known and expected behavior, as Prototype doesn&#8217;t support such a thing. However, it was Graeme that also tipped me off to try Dojo.</p>
+
+<p>So, continuing down this path, I proceeded to install the Grails Dojo plugin. Once this is done, a <code>&lt;g:javascript library="dojo"/&amp;gt</code> is supposedly all that is required to convert your Ajax calls from Prototype to Dojo. This turned out to not be the case for me, with Javascript errors popping up all over the place, not the least of which was that dojo.js seemed to be installed in an unexpected location via the plugin. The hacker in me simply copied this to the expected location and moved along. However, as I attempted to work with Dojo&#8217;s file upload support, I discovered that the version of Dojo shipped with the plugin seemed at first glance to be way behind. Frustrated by this, I went ahead and stripped the Dojo plugin out and installed <a href="http://download.dojotoolkit.org/release-1.2.3/dojo.js">the latest version available (at this writing 1.2.3)</a>, and set about to develop my solution.</p>
+
+<p>Here goes:</p>
+
+<p><strong>1. Add the necessary Dojo dependencies to your GSP:</strong></p>
+
+<pre><code>&lt;script type="text/javascript" src="${createLinkTo(dir: 'js/dojo', file: 'dojo.js')}"
+   djConfig="parseOnLoad:true, isDebug:true"&gt;&lt;/script&gt;
+&lt;g:javascript&gt;
+   dojo.require("dojo.io.iframe");
+&lt;/g:javascript&gt;
+</code></pre>
+
+<p><strong>2. Write a function using dojo.io.iframe to send the form:</strong></p>
+
+<pre><code>function submitForm() {
+   dojo.io.iframe.send({
+      form: 'uploadProductImageForm',
+      load: function (data) {
+         dojo.byId('productImage').innerHTML = data;
+      }
+   });
+}
+</code></pre>
+
+<p><strong>3. Create the file upload form:</strong></p>
+
+<pre><code>&lt;g:form name="uploadProductImageForm" method="post" action="uploadProductImage" enctype="multipart/form-data"&gt;
+   &lt;input type="hidden" name="id" value="${productInstance?.id}"/&gt;
+   &lt;input type="file" name="newProductImage"/&gt;
+   &lt;span class="button"&gt;&lt;input class="add" type="button" name="uploadImage" value="Upload Image" onclick="submitForm()"/&gt;&lt;/span&gt;
+&lt;/g:form&gt;
+</code></pre>
+
+<p><strong>4. Create the controller method:</strong></p>
+
+<pre><code>def uploadProductImage = {
+   def f = request.getFile('newProductImage')
+   if (!f.empty) {
+
+   def imagePath = grailsApplication.config.store.productImages.location
+
+   //Create unique name for this image set based on current timestamp
+   def name = "image" + new Date().getTime()
+
+   //Store the file
+   def file = new File("${imagePath}/${originalFilename}")
+   f.transferTo(file)
+
+   //Do some image processing (resizing, etc.)
+   ...
+
+   //Dojo requires returning the result nested in an HTML document containing a body and textarea tag. Do this with
+   //Groovy's built-in MarkupBuilder
+
+   def writer = new StringWriter()
+   def xml = new MarkupBuilder(writer)
+
+   xml.html {
+     body {
+       textarea {
+         img(src: resource(dir: grailsApplication.config.store.productImages.webPath, file: product.mediumImage.name), width: '250')
+       }
+     }
+   }
+
+   render writer.toString()
+   }
+   else {
+      flash.message = 'file cannot be empty'
+      redirect(action: show)
+   }
+}
+</code></pre>
+
+<p>And there you have it. Let me know what you think of this solution. It definitely works for me. You will notice that I didn&#8217;t include an upload progress bar - I&#8217;ll be doing this in a future iteration of the project. Cheers!</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/03/13/im-speaking-at-the-march-memphis-jug-meeting/">I&#8217;m Speaking at the March Memphis JUG Meeting</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-03-13T12:24:00-05:00" pubdate data-updated="true">Mar 13<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I learned a great deal about JMS from Mark Richards at last weekend&#8217;s NFJS Gateway Software Symposium, and I thought I&#8217;d share it with the Memphis Java community. Take a look at <a href="http://www.memphisjug.org">http://www.memphisjug.org</a> for details!</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/03/13/my-ipod-is-on-rice/">My iPod Is on Rice</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-03-13T11:55:00-05:00" pubdate data-updated="true">Mar 13<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Let me set the stage for you. I&#8217;m driving home happily listening to Ted Neward discuss the merits of Scala on the Javaworld podcast. As I pull into the driveway I see my wife waving frantically in the window. As geek brain struggles to process this, home brain kicks into gear. She needs me in the house now! I jump out of the car and slam the door shut, leaving all of the belongings I typically carry in the house.</p>
+
+<p>I enter the house to find that a wasp has some how gotten in and is terrorizing the family. What ensues is roughly 15 minutes of wasp hunting. Wasp dead - end of story. Or so I thought.</p>
+
+<p>As I&#8217;m driving my iPod (attached to the iTrip FM transmitter/charger) typically sits in my lap (for some reason I get the least FM interference that way). What I didn&#8217;t notice in my hasty departure from the vehicle is that my iPod nano flew out of the vehicle and was hanging by the iTrip cable. Unaware of this, I slammed the door on the cable and walked away.</p>
+
+<p>This in and of itself wasn&#8217;t a huge problem. Leaving it that way for approximately 24 hours - most of which included rather steady rainfall - was.</p>
+
+<p>So, a quick Google search finds that the consensus approach seems to be sticking the iPod in a cup of dry rice to soak up the moisture. So there you have it - my iPod is on rice. I hope it works. Stay tuned.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/03/12/its-been-a-long-time/">It&#8217;s Been a Long Time&#8230;</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-03-12T21:32:00-05:00" pubdate data-updated="true">Mar 12<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>&#8230;since I actively spent any time blogging. What you don&#8217;t know is that it has been a long time since I&#8217;ve done any writing whatsoever. The last two posts on this blog revolved around the birth of my first son, Grant Dawson, on May 16, 2009. This was one of several events that took place almost a year ago that sent me directly into a whirlwind of activity that found me barely keeping my head above water.</p>
+
+<p>It was also about this time that I found myself newly promoted into front-line management. The team that I entered first in 2000 as a Bioinformatics Intern during my last summer as an undergraduate, and then as a Software Engineer/Web Developer I following graduation in 2001, was now mine to lead. After doing this job now for nearly a year, I can safely say that my career as a developer has both prepared me for this role and left me completely bankrupt when faced with the responsibilities that are now mine. More on this to come.</p>
+
+<p>Another event that transpired in May was the sale of our first home. It had been on the market since March, and we &#8220;paused&#8221; the showings as Grant&#8217;s arrival became imminent. It was near the end of May that we received both our first and our last post-Grant showing phone call. I remarked to Wendy - &#8220;these folks are going to buy the house.&#8221; And buy it they did. Unfortunately for us, we had no idea whatsoever where we were going to move. What ensued was a chaotic whirlwind of house hunting which ended with us making an offer on a house that wasn&#8217;t even on the market. And that&#8217;s the house I&#8217;m sitting in while I write this first entry of 2009. Ask me to tell you the story sometime - it&#8217;s a good one.</p>
+
+<p>So, why I&#8217;m I here? Why not just leave the blogging task. After all, isn&#8217;t blogging passe at this point?</p>
+
+<p>I credit my return to the blogosphere to an incredible book by Jared Richardson and Matthew Bass - <a href="http://www.lulu.com/content/5925115">Career 2.0: Take Control of Your Life</a>. The basic premise of this book is to &#8220;Actively manage your career.&#8221; One of the ways by which the authors share how to do this is writing - sharing what you know with the community at-large. Of course what they shared was no surprise to me. I already knew all too well the career benefits associated with blogging. What I needed was a proverbial &#8220;kick in the pants.&#8221; And that&#8217;s what Career 2.0 did for me. If you&#8217;re in the software industry - take that back, I don&#8217;t care what industry you&#8217;re in (these principles are transcendent) - do yourself a favor and read this book. It will change something about your life, guaranteed.</p>
+
+<p>So, with that, let&#8217;s start the conversation again. I&#8217;m looking forward to where it might lead. Cheers!</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2008/08/14/little-man/">Little Man</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-08-14T22:54:00-05:00" pubdate data-updated="true">Aug 14<span>th</span>, 2008</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="http://4.bp.blogspot.com/_Vo63LRwAZbk/SKT-AuXbffI/AAAAAAAAAfQ/559p4D5Sv5E/s1600-h/P8110208.JPG"><img src="http://4.bp.blogspot.com/_Vo63LRwAZbk/SKT-AuXbffI/AAAAAAAAAfQ/559p4D5Sv5E/s400/P8110208.JPG" alt="" /></a><br/>
+Here&#8217;s little man Grant himself smiling for the camera!</p>
+
+<p><a href="http://picasa.google.com/blogger/"><img src="http://photos1.blogger.com/pbp.gif" alt="Posted by Picasa" /></a></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2008/05/18/introducing-grant-dawson-stine/">Introducing Grant Dawson Stine</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-05-18T14:11:00-05:00" pubdate data-updated="true">May 18<span>th</span>, 2008</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>So I haven&#8217;t blogged in quite awhile. I&#8217;ve been rather busy - here&#8217;s one VERY important reason why. Grant was born Friday, May 16, 2008, weighing in at 9 pounds 4 ounces and 22 inches long. Mom and baby are doing wonderfully, but as you can see, Dad is in a bit of shock!</p>
+
+<p><a href="http://4.bp.blogspot.com/_Vo63LRwAZbk/SDCAMcjQJGI/AAAAAAAAAfA/5LZWAyRyOfs/s1600-h/P5160099.jpg"><img src="http://4.bp.blogspot.com/_Vo63LRwAZbk/SDCAMcjQJGI/AAAAAAAAAfA/5LZWAyRyOfs/s400/P5160099.jpg" alt="" /></a></p>
+
+<p><a href="http://1.bp.blogspot.com/_Vo63LRwAZbk/SDCAMsjQJHI/AAAAAAAAAfI/5frhZqimCJM/s1600-h/P5160126.jpg"><img src="http://1.bp.blogspot.com/_Vo63LRwAZbk/SDCAMsjQJHI/AAAAAAAAAfI/5frhZqimCJM/s400/P5160126.jpg" alt="" /></a></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2008/02/08/on-our-way-to-the-gateway-software-symposium/">On Our Way to the Gateway Software Symposium</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-02-08T15:49:00-06:00" pubdate data-updated="true">Feb 8<span>th</span>, 2008</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>We&#8217;re taking most of our team to the St. Louis, Missouri, edition of the <a href="http://www.nofluffjuststuff.com">No Fluff Just Stuff</a> 2008 tour. This will be my first actual NFJS event. I attended the <a href="http://www.thespringexperience.com">Spring Experience</a> in 2007, which was put on by the NFJS guys, so I expect this event in St. Louis to be great. Since we&#8217;re based in Memphis, St. Louis is only about a 4 1/2 hour drive. We&#8217;re all going to pile in a van and road trip. It should be a great time.</p>
+
+<p>I&#8217;m going to have a hard time choosing sessions: Neal Ford, Scott Davis, David Geary, Jeff Brown, and Bryan Sletten all have sessions that I&#8217;d like to attend, several of which are in conflict. I hope they do post-conference video delivery of these sessions just like they&#8217;re doing for the Spring Experience.</p>
+
+<p>If anyone&#8217;s going to be there, let&#8217;s do dinner one night and you can meet some of the St. Jude team.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  <div class="pagination">
+    
+      <a class="prev" href="/blog/page/7/">&larr; Older</a>
+    
+    <a href="/blog/archives">Blog Archives</a>
+    
+    <a class="next" href="/blog/page/5/">Newer &rarr;</a>
+    
+  </div>
+</div>
+<aside class="sidebar">
+  
+    <section>
+	<h1>Hello, World!</h1>
+	<p>
+		<img src="http://mattstine.files.wordpress.com/2011/05/indiamug.jpg" width="173" height="213">
+	</p>
+	<p>
+		<a href="http://www.linkedin.com/in/mattstine"><img alt="View Matt Stine&#039;s profile on LinkedIn" src="http://www.linkedin.com/img/webpromo/btn_myprofile_160x33.gif" border="0" width="160" height="33"></a>
+	</p>
+</section><section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2011/05/16/design-meeting-patternsantipatterns/">Design Meeting Patterns/Antipatterns</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/01/05/selenium-conference-2011/">Selenium Conference 2011</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/01/02/2010-in-review-the-automated-analysis/">2010 in review: the automated analysis&#8230;</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2010/11/29/selenium-2-0-refcard/">Selenium 2.0 Refcard</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2010/11/10/agile-zone-roundup/">Agile Zone Roundup</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating&#8230;</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("mstine", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/mstine" class="twitter-follow-button" data-show-count="false">Follow @mstine</a>
+  
+</section>
+
+
+
+
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - Matt Stine -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'seekingsimplicity';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,273 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Web Application Data Access Patterns: Keith Donald - Seeking Simplicity</title>
+  <meta name="author" content="Matt Stine">
+
+  
+  <meta name="description" content="Well, after a short hiatus of getting back to &#8220;real&#8221; work, I&#8217;m going to attempt to squeeze in another Spring Experience 2007 entry &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://mattstine.com/2007/12/21/web-application-data-access-patterns-keith-donald">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Seeking Simplicity" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Seeking Simplicity</a></h1>
+  
+    <h2>A blog about programming, software architecture and everything else...</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:mattstine.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Web Application Data Access Patterns: Keith Donald</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2007-12-21T15:48:00-06:00" pubdate data-updated="true">Dec 21<span>st</span>, 2007</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Well, after a short hiatus of getting back to &#8220;real&#8221; work, I&#8217;m going to attempt to squeeze in another Spring Experience 2007 entry. This particular session was my first of Friday morning. I&#8217;ve always enjoyed Keith Donald as a speaker, having first heard him at <a href="http://www.theserverside.com/tt/articles/content/JIApresentations/Donald.pdf">TheServerSide.com&#8217;s Java In Action conference in 2005</a>, and again during his <a href="http://mattatjavaone2007.blogspot.com/2007/05/java-university-developing-enterprise.html">Java University session at JavaOne 2007</a>.</p>
+
+<p>Keith began with a discussion of why we need patterns. In his opinion, patterns simply provide a way of thinking about a particular approach to a problem. One could liken them to blueprints. They typically have a name, a description of the problem being solved, a description of the solution approach, and finally a selection of implementation guidelines and considerations. Pretty nice summation.</p>
+
+<p>The particular patterns that Keith planned to discuss surrounded the different data access patterns typically found in web applications.</p>
+
+<p>Keith began by discussing the &#8220;Unit of Work&#8221; pattern, which he defined as a unit of interaction with a shared resource that executes independently of other units. These interactions exhibit <a href="http://en.wikipedia.org/wiki/ACID">ACID properties</a>, and a database transaction provides a typical  example. In the context of an ORM such as Hibernate, a Unit of Work tracks changes to the object graph during a transaction and then synchronizes those changes with the database when the transaction is complete. Keith followed this discussion with an implementation example from his &#8220;Reward Network&#8221; sample application.</p>
+
+<p>Keith followed this discussion with two of what I&#8217;ll call &#8220;subpatterns&#8221; of the Unit of Work pattern: Pessimistic and Optimistic Locking. With pessimistic locking, you prevent other units from accessing your data during a given unit of work, and then release the &#8220;lock&#8221; as soon as possible. This locking is performed to prevent a <a href="http://en.wikipedia.org/wiki/Race_condition">race condition</a>, resulting in an inconsistent state in your model. Keith briefly illustrated implementation of pessimistic locking with Hibernate.</p>
+
+<p>It&#8217;s always interesting when someone asks a slightly off-topic question which ends up in a take home gem of information. At this point, someone asked if the implementations that Keith was showing showcased Spring&#8217;s Hibernate support. To this Keith surprised me by answering (and I paraphrase), &#8220;Hibernate&#8217;s native API&#8217;s are much more mature and powerful now, so we recommend you use those rather than Spring&#8217;s Hibernate API wrapper. Why add another dependency?&#8221; He then proceeded to recommend Rossen Stoyanchev&#8217;s Saturday morning session on &#8220;Working with Hibernate in a Spring 2.5 Environment&#8221; (blog entry to come later!). One of the better quotes of the conference came during this aside as well:</p>
+
+<blockquote><p><em>Whenever you can eliminate a dependency, you should.</em><br/>
+- Keith Donald</p></blockquote>
+
+<p>Well, back to the presentation. Keith then moved into a discussion of Optimistic Locking. Here, within a business transaction that executes across a series of system transactions, you use optimistic locking to prevent corruption of shared data. An examples is where several users can edit account information concurrently, but the frequency of concurrent access is fairly low. Data integrity is still at risk, so you use optimistic locking to handle those infrequent cases. Keith them demonstrated the use of <a href="http://www.hibernate.org/hib_docs/reference/en/html/transactions.html#transactions-optimistic">Hibernate versioning to implement optimistic locking</a>.</p>
+
+<p>Keith next moved into a discussion of the controversial &#8220;Open Session in View&#8221; pattern. This is a specialized technical pattern where by the Hibernate session is kept open for the duration of a given web request. It is generally used as a &#8220;quick fix&#8221; to prevent lazy loading exceptions in the view tier. This is generally considered a bad thing, as you end up with a great deal of &#8220;N+1 Select&#8221; situations while rendering the view, resulting in way too much SQL executed against the database. Typically, the need to use this pattern reveals a flaw in the design of your model or queries. For example, since you generally know how far in the object graph you&#8217;ll need to go for a specific view, you should load those relationships eagerly for that use case. You may also consider whether or not a given object association is appropriate to begin with.</p>
+
+<p>The final major pattern that Keith discussed was the &#8220;Conversational Persistence Context&#8221; pattern that is present in the upcoming Spring Web Flow 2.0 release. It is essentially a more flexible variation of the Open Session in View pattern, where by you can have an open session spanning multiple requests during a long-running user interaction context, or &#8220;conversation.&#8221; To be perfectly honest, I still don&#8217;t quite &#8220;get&#8221; this pattern beyond that, probably because I don&#8217;t know much about Web Flow or it&#8217;s cousins (e.g. Seam, Web Beans JSR-299).</p>
+
+<p>Keith closed with a very brief description of Master Detail, where you show an overview of objects in a collection and then allow drilling down into object details, and Paging, where you allow users to easily browse through a list of items of interest. I raised a point of contention with Keith at this point. His example implementation showed delegation of the paging concern to the DAO layer, rather than implementing that concern in the View layer. When I asked him where he thought it belonged, he thought it was obvious that it belonged in the DAO layer. I then let on that we had this debate in our team and decided the the concern belonged in the View layer. Why should I run the same query multiple times just to page through the data? Why not load the entire data set and then let the View tier decide how to page through it? Keith gracefully acknowledged my point.</p>
+
+<p>All in all, this was a great session, if for no other reason than it reminded me of some best practices in this area and let me in on the little secret about using native Hibernate API&#8217;s rather than Spring&#8217;s Hibernate template. Nice job, Keith.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Matt Stine</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2007-12-21T15:48:00-06:00" pubdate data-updated="true">Dec 21<span>st</span>, 2007</time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://mattstine.com/2007/12/21/web-application-data-access-patterns-keith-donald/" data-via="mstine" data-counturl="http://mattstine.com/2007/12/21/web-application-data-access-patterns-keith-donald/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2007/12/15/goodbye-spring-experience-2007/" title="Previous Post: Goodbye Spring Experience 2007!">&laquo; Goodbye Spring Experience 2007!</a>
+      
+      
+        <a class="basic-alignment right" href="/2008/01/02/mid-year-review-my-professional-development-goals-for-2007-2008/" title="Next Post: Mid-Year Review: My Professional Development Goals for 2007-2008">Mid-Year Review: My Professional Development Goals for 2007-2008 &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+	<h1>Hello, World!</h1>
+	<p>
+		<img src="http://mattstine.files.wordpress.com/2011/05/indiamug.jpg" width="173" height="213">
+	</p>
+	<p>
+		<a href="http://www.linkedin.com/in/mattstine"><img alt="View Matt Stine&#039;s profile on LinkedIn" src="http://www.linkedin.com/img/webpromo/btn_myprofile_160x33.gif" border="0" width="160" height="33"></a>
+	</p>
+</section><section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2011/05/16/design-meeting-patternsantipatterns/">Design Meeting Patterns/Antipatterns</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/01/05/selenium-conference-2011/">Selenium Conference 2011</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/01/02/2010-in-review-the-automated-analysis/">2010 in review: the automated analysis...</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2010/11/29/selenium-2-0-refcard/">Selenium 2.0 Refcard</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2010/11/10/agile-zone-roundup/">Agile Zone Roundup</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating...</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("mstine", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/mstine" class="twitter-follow-button" data-show-count="false">Follow @mstine</a>
+  
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - Matt Stine -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'seekingsimplicity';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

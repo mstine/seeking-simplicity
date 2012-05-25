@@ -1,0 +1,14 @@
+---
+date: '2007-11-08 09:22:00'
+layout: post
+slug: 13949712720901forosx
+status: publish
+title: 13949712720901ForOSX
+wordpress_id: '46'
+categories:
+- java
+---
+
+Here's my vote for Java 6 on Mac OS X Leopard!  
+  
+13949712720901ForOSX

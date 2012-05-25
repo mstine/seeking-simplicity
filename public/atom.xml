@@ -4,7 +4,7 @@
   <title><![CDATA[Seeking Simplicity]]></title>
   <link href="http://mattstine.com/atom.xml" rel="self"/>
   <link href="http://mattstine.com/"/>
-  <updated>2012-03-21T21:50:26-05:00</updated>
+  <updated>2012-05-24T19:13:18-05:00</updated>
   <id>http://mattstine.com/</id>
   <author>
     <name><![CDATA[Matt Stine]]></name>
@@ -12,5 +12,465 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Design Meeting Patterns/Antipatterns]]></title>
+    <link href="http://mattstine.com/2011/05/16/design-meeting-patternsantipatterns/"/>
+    <updated>2011-05-16T16:57:50-05:00</updated>
+    <id>http://mattstine.com/2011/05/16/design-meeting-patternsantipatterns</id>
+    <content type="html"><![CDATA[<p>For those of you that don&#8217;t know, I recently returned to the technical ranks as a Software Architect after a three-year stint in management. To make a long story short, I now love my job again. Perhaps I&#8217;ll write the long story in a future blog entry. On to the topic at hand. Today I led the first significant design discussion that I have led in quite a long time. A few minutes afterward, I was already reflecting on what had occurred and how. The very first thing that I noticed was my drastically different approach to the task. I felt that my facilitation skills were more mature and effective than I remember from previous similar engagements. I&#8217;m not sure if the time I spent in management (where I facilitated quite a few meetings, though much more business-focused ones) helped, but something certainly has.</p>
+
+<p>I also noticed several things that I&#8217;ll call &#8220;pattern vs. antipattern&#8221; tugs of war. Quite often during the meeting I felt the group trying to move our discussion in one direction that I, for better or for worse, thought was ineffective. I would then redirect us on to what I felt was a better path. In true catalog form, here&#8217;s the list:</p>
+
+<ul>
+<li><p><strong>Understand the Problem vs. Jump to the Solution</strong> - only a couple of minutes into our discussion solutions were being flung about like drunken darts. This situation almost always leads to suboptimal or faulty solutions. As a facilitator, try to ensure that the problem has been clearly stated. If at all possible, write it down on a whiteboard. Make sure everyone agrees that the problem as stated is the problem the group is there to solve. Sure enough, after performing this exercise, we all had a very different and clear understanding of the problem than that with which we walked in the door.</p></li>
+<li><p><strong>Assume the Worst vs. Assume the Best</strong> - occasionally the exact details of a requirement are unclear, and not assuming something will totally derail the design discussion. You have a couple of choices. The first is to halt the discussion and get the details cleared up. This is clearly the best solution, as you&#8217;ll no longer have to assume anything. However, it can be the case that the person who can clear things up isn&#8217;t available. Or in some cases, the question you&#8217;ll be asking will require another meeting at another level of the organization. If you find yourself in that spot, and you can&#8217;t wait (we couldn&#8217;t!), then the best approach is to work from the worst possible case scenario. You&#8217;ll then be in the best position to handle whatever answer comes your way. However, our tendency is often to assume the best (&#8220;That will <em>never</em> happen!&#8221;). Fight that tendency. However, whatever you choose, follow up at your earliest opportunity.</p></li>
+<li><p><strong>Basing Decisions on the Current Situation vs. Basing Decisions on History</strong> - many times the group wanted to veer off into safer territory. In some cases, a possible solution departed significantly from the current design. While this is a valid concern (we do want consistency of design across the system where possible), it is certainly not a trump card. Occasionally the situation at hand will merit a significant departure from the current design. Another way history can rear its ugly head is the assertion that we&#8217;ve always solved similar problems like &#8216;x,&#8217; so we should do so with this problem as well. Again, note the word &#8220;similar.&#8221; All problems are somewhat different and have their own eccentricities. So, rather than working from history, I pushed us back to a clean slate with the statement &#8220;Let&#8217;s stop thinking about the past and start from scratch. We may very well come up with the same solution you guys are proposing, but I&#8217;d rather do so through our own objective analysis and not instinct.&#8221; Guess what. We came up with a different solution that we all felt better about.</p></li>
+<li><p><strong>Shooting for the &#8220;Best&#8221; Solution vs. the &#8220;Easiest&#8221; Solution</strong> - now sometimes we can&#8217;t afford the best solution. I grant that. However, I&#8217;m trying to fight the tendency to immediately jump to the &#8220;easiest thing that could possibly work.&#8221; Often this pops up in the first P vs. AP - if we don&#8217;t clearly understand the problem, sometimes an easy solution jumps out that doesn&#8217;t deal with the underlying details we&#8217;ve yet to uncover. Also, sometimes the best solution is quite simple and elegant. It doesn&#8217;t necessarily have to be harder and more complex than the easiest solution. In fact, sometimes the &#8220;easiest&#8221; solution leads to the most accidental complexity in the long-run. So, shoot for the best solution you can come up with and only then, optimize for cost.</p></li>
+<li><p><strong>Present Possible Solutions Objectively vs. My Solution is the Best!</strong> - one would hope that we all start here, but we don&#8217;t. We tend to like our own solutions to problems and want them to &#8220;win.&#8221; Our ego can get in the way of even hearing an alternate solution presented by another team member. I point you to <a href="http://www.code-magazine.com/Article.aspx?quickid=1105121">my colleague Ted Neward&#8217;s post for more on &#8220;egoless programming.&#8221;</a> So, as a facilitator, you&#8217;ve got to make sure that all solutions are presented objectively. I often had to say things like &#8220;OK, let&#8217;s assume before we ever get started that this is a good solution to the problem and not hack away at it until its fully presented, and we all understand it.&#8221; In the end, this insistence led us to choose a solution that none of us (myself included) originally thought we&#8217;d pick.</p></li>
+<li><p><strong>Validating from Code vs. Validating from Memory</strong> - more often than not, questions about the existing design/code/behavior will come up. Rather than scratching your head and trying to remember what you wrote six months ago, pull up the code and find out. I can&#8217;t tell you the number of meetings I&#8217;ve attended where baseless assertions were made about existing code, only to require another meeting the next day to revisit the whole discussion once those assertions were proven wrong. Again, as a facilitator, I directed us to solve every problem for which all of the facts were available. We inserted placeholders in our solution where questions remained. Guess what we&#8217;re doing now? Well, I&#8217;m blogging about the meeting, but the rest of us are validating from code. Tomorrow will fill in the blanks!</p></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Selenium Conference 2011]]></title>
+    <link href="http://mattstine.com/2011/01/05/selenium-conference-2011/"/>
+    <updated>2011-01-05T12:18:23-06:00</updated>
+    <id>http://mattstine.com/2011/01/05/selenium-conference-2011</id>
+    <content type="html"><![CDATA[<p>I completed an interest survey for a potential Selenium-focused conference several weeks ago, and I&#8217;m excited to let you know that the &#8220;powers that be&#8221; have decided that the conference is going to happen! I have already submitted my &#8220;Executable Specifications: Automating Your Requirements Document with Geb and Spock&#8221; talk as a potential session. Whether it makes the conference program or not, I plan on attending the event. Here are the details:</p>
+
+<p><img src="http://mattstine.files.wordpress.com/2011/01/selenium-conf-2011.png" alt="Selenium Conference 2011" /></p>
+
+<blockquote><p>Join members of the growing Selenium community for 3 jam-packed days of talks, workshops, lightning talks, and hack sessions. Hear speakers from around the world talk about the present and future of automated testing, share ideas with fellow Selenium developers, including Core Committers, and take part in shaping the future success of the Selenium project.</p></blockquote>
+
+<p><strong>When:</strong> April 4-6, 2011
+<strong>Where:</strong> Marines’ Memorial Club &amp; Hotel, 609 Sutter St, San Francisco, CA 94102 USA
+<strong>Register now to be a speaker or sponsor. More details: <a href="http://www.seleniumconf.com/">http://www.seleniumconf.com/</a></strong></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[2010 in review: the automated analysis...]]></title>
+    <link href="http://mattstine.com/2011/01/02/2010-in-review-the-automated-analysis/"/>
+    <updated>2011-01-02T20:28:25-06:00</updated>
+    <id>http://mattstine.com/2011/01/02/2010-in-review-the-automated-analysis</id>
+    <content type="html"><![CDATA[<p>The stats helper monkeys at WordPress.com mulled over how this blog did in 2010, and here&#8217;s a high level summary of its overall blog health:</p>
+
+<p><img src="http://s0.wp.com/i/annual-recap/meter-healthy3.gif" alt="Healthy blog!" /></p>
+
+<p>The <em>Blog-Health-o-Meter™</em> reads Fresher than ever.</p>
+
+<h2>Crunchy numbers</h2>
+
+<pre><code>            ![Featured image](http://s0.wp.com/i/annual-recap/abstract-stats-1.png)
+</code></pre>
+
+<p><em>A helper monkey made this abstract painting, inspired by your stats.</em></p>
+
+<p>A Boeing 747-400 passenger jet can hold 416 passengers.  This blog was viewed about <strong>6,600</strong> times in 2010.  That&#8217;s about 16 full 747s.</p>
+
+<p>In 2010, there were <strong>15</strong> new posts, growing the total archive of this blog to 115 posts. There were <strong>24</strong> pictures uploaded, taking up a total of 979kb. That&#8217;s about 2 pictures per month.</p>
+
+<p>The busiest day of the year was June 4th with <strong>139</strong> views. The most popular post that day was <a href="http://mattstine.com/2010/06/03/dont-build-software-thats-too-smart/">Don&#8217;t build software that&#8217;s TOO smart!</a>.</p>
+
+<h2>Where did they come from?</h2>
+
+<p>The top referring sites in 2010 were <strong>agile.dzone.com</strong>, <strong>java.dzone.com</strong>, <strong>twitter.com</strong>, <strong>Google Reader</strong>, and <strong>javablogs.com</strong>.</p>
+
+<p>Some visitors came searching, mostly for <strong>matt stine</strong>, <strong>groovy http post</strong>, <strong>groovy post</strong>, <strong>groovy url post</strong>, and <strong>groovy url encode</strong>.</p>
+
+<h2>Attractions in 2010</h2>
+
+<p>These are the posts and pages that got the most views in 2010.</p>
+
+<p>1</p>
+
+<pre><code>                [Don't build software that's TOO smart!](http://mattstine.com/2010/06/03/dont-build-software-thats-too-smart/) June 2010  
+</code></pre>
+
+<p>1 comment</p>
+
+<p>2</p>
+
+<pre><code>                [Groovy: Post to a URL](http://mattstine.com/2009/04/25/groovy-post-to-a-url/) April 2009  
+</code></pre>
+
+<p>4 comments</p>
+
+<p>3</p>
+
+<pre><code>                [Resume](http://mattstine.com/resume/) March 2009                                           
+</code></pre>
+
+<p>4</p>
+
+<pre><code>                [Deploying Grails with Groovy](http://mattstine.com/2009/03/29/deploying-grails-with-groovy/) March 2009                                            
+</code></pre>
+
+<p>5</p>
+
+<pre><code>                [LOTY Time Again: Scala or Clojure?!?!](http://mattstine.com/2009/04/02/loty-time-again-scala-or-clojure/) April 2009  
+</code></pre>
+
+<p>17 comments</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Selenium 2.0 Refcard]]></title>
+    <link href="http://mattstine.com/2010/11/29/selenium-2-0-refcard/"/>
+    <updated>2010-11-29T15:44:18-06:00</updated>
+    <id>http://mattstine.com/2010/11/29/selenium-2-0-refcard</id>
+    <content type="html"><![CDATA[<p><a href="http://refcardz.dzone.com/refcardz/getting-started-selenium-20?oid=hom31797"><img src="http://mattstine.files.wordpress.com/2010/11/31797.png" alt="" /></a>Today DZone released my first Refcard: &#8221;<a href="http://refcardz.dzone.com/refcardz/getting-started-selenium-20?oid=hom31797">Selenium 2.0: Using the WebDriver API to Create Robust User Acceptance Tests</a>.&#8221; I have been interested in writing a Refcard for a long time but have never pulled the trigger. For whatever reason, I decided to jump on the bandwagon last month. Writing this card was quite a challenge, as it&#8217;s difficult to boil down a big topic into only six pages while keeping it useful. Thus far the feedback from the community has been largely positive.</p>
+
+<p>If you&#8217;re looking for your next automated testing tool for browser-based user acceptance tests, download the card and let me know what you think!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Agile Zone Roundup]]></title>
+    <link href="http://mattstine.com/2010/11/10/agile-zone-roundup/"/>
+    <updated>2010-11-10T08:53:15-06:00</updated>
+    <id>http://mattstine.com/2010/11/10/agile-zone-roundup</id>
+    <content type="html"><![CDATA[<p>I&#8217;ve been really quiet on this blog lately. There have been multiple reasons for that. I&#8217;ve been extremely busy preparing for conferences this Fall including SpringOne/2GX and The Rich Web Experience. I&#8217;ve also stayed busy writing for DZone. I have my first DZone Refcard coming out soon, which is focused on Web Driver/Selenium 2. I&#8217;ve also been writing my regular articles for Agile Zone. Here&#8217;s a roundup:</p>
+
+<ul>
+<li><p><a href="http://agile.dzone.com/articles/modular-agile-loosely-coupled">Modular Agile: Loosely coupled, highly cohesive ceremonies</a></p></li>
+<li><p><a href="http://agile.dzone.com/articles/think-youre-doing-kanban-think">   Think You&#8217;re &#8220;Doing Kanban?&#8221; Think Again.</a></p></li>
+<li><p><a href="http://agile.dzone.com/articles/gaelyks-and-golden-hammers">On Gaelyks and Golden Hammers</a></p></li>
+<li><p><a href="http://agile.dzone.com/articles/automation-people-because">Automation for the People (because Everybody Doing It Manually Hurts)  </a></p></li>
+<li><p><a href="http://agile.dzone.com/articles/build-scripts-we-dont-need-no">Build Scripts? We Don&#8217;t Need No Stinkin&#8217; Build Scripts!</a></p></li>
+<li><p><a href="http://agile.dzone.com/polls/automated-browser-testing">Automated Browser Testing: What&#8217;s in Your Toolkit?</a></p></li>
+<li><p><a href="http://agile.dzone.com/articles/selenese-or-not-test-seems-be">To Selenese or not to Test? That Seems to be the Question.</a></p></li>
+<li><p><a href="http://agile.dzone.com/articles/apple-jvm-extra-feature">Is the Apple JVM an &#8220;Extra Feature?&#8221;</a></p></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[The Seven Wastes of Software Development]]></title>
+    <link href="http://mattstine.com/2010/11/10/the-seven-wastes-of-software-development/"/>
+    <updated>2010-11-10T08:44:29-06:00</updated>
+    <id>http://mattstine.com/2010/11/10/the-seven-wastes-of-software-development</id>
+    <content type="html"><![CDATA[<p>In late September I completed an eight-part article series for Agile Zone entitled &#8220;The Seven Wastes of Software Development.&#8221; This series discussed Mary and Tom Poppendieck&#8217;s mapping of Shigeo Shingo&#8217;s &#8220;Seven Wastes of Lean Manufacturing&#8221; into the software development world. This has been a very popular series, having been viewed a total of 57,887 times at this writing. Here&#8217;s a set of links to the series:</p>
+
+<ul>
+<li><strong><a href="http://agile.dzone.com/articles/seven-wastes-software">The Seven Wastes of Software Development - Introduction</a></strong></li>
+<li><strong><a href="http://agile.dzone.com/articles/waste-1-partially-done-work">Waste #1 - Partially Done Work</a></strong></li>
+<li><strong><a href="http://agile.dzone.com/articles/waste-2-extra-features">Waste #2 - Extra Features</a></strong></li>
+<li><strong><a href="http://agile.dzone.com/articles/waste-3-relearning">Waste #3 - Relearning</a></strong></li>
+<li><strong><a href="http://agile.dzone.com/articles/waste-4-handoffs">Waste #4 - Handoffs</a></strong></li>
+<li><a href="http://agile.dzone.com/articles/waste-5-delays"><strong>Waste #5 - Delays </strong></a></li>
+<li><a href="http://agile.dzone.com/articles/waste-6-task-switching"><strong>Waste #6 - Task Switching </strong></a></li>
+<li><a href="http://agile.dzone.com/articles/waste-7-defects"><strong>Waste #7 - Defects</strong></a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[The Agile Guerilla Series]]></title>
+    <link href="http://mattstine.com/2010/09/05/the-agile-guerilla-series/"/>
+    <updated>2010-09-05T20:28:43-05:00</updated>
+    <id>http://mattstine.com/2010/09/05/the-agile-guerilla-series</id>
+    <content type="html"><![CDATA[<p>I recently completed a series of articles for Agile Zone entitled &#8220;The Agile Guerilla.&#8221; Those of you that have seen me on the No Fluff Just Stuff tour this year may recognize a talk by the same name. They are one and the same concept: my attempt to reach the masses with strategies for introducing change, specifically moving to agility, into organizations from the grassroots level.</p>
+
+<p>Here&#8217;s a list of the complete set of articles for your convenience!</p>
+
+<ul>
+<li><a href="http://agile.dzone.com/articles/agile-guerilla">The Agile Guerilla</a></li>
+<li><a href="http://agile.dzone.com/articles/show-dont-tell-persuade-dont">Show (Don&#8217;t Tell), Persuade (Don&#8217;t Preach)</a></li>
+<li><a href="http://agile.dzone.com/articles/going-guerilla-where-start">Going Guerilla: Where to Start</a></li>
+<li><a href="http://agile.dzone.com/articles/guerillas-workflow">The Guerilla&#8217;s Workflow</a></li>
+<li><a href="http://agile.dzone.com/articles/guerilla-tdd">Guerilla TDD </a></li>
+<li><p><a href="http://agile.dzone.com/articles/guerilla-continuous">Guerilla Continous Integration</a></p></li>
+<li><p><a href="http://agile.dzone.com/articles/so-what-are-you-waiting-go">So What Are You Waiting For? GO BANANAS!</a></p></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[More Agile Zone Articles!]]></title>
+    <link href="http://mattstine.com/2010/08/02/more-agile-zone-articles/"/>
+    <updated>2010-08-02T08:44:04-05:00</updated>
+    <id>http://mattstine.com/2010/08/02/more-agile-zone-articles</id>
+    <content type="html"><![CDATA[<p>Just to prove that I am writing, just not here, I thought I&#8217;d post another collection of links to my latest Agile Zone articles:</p>
+
+<ul>
+<li><p><a href="http://java.dzone.com/articles/yes-you-kanban">Yes You Kanban!</a></p></li>
+<li><p><a href="http://java.dzone.com/articles/guerillas-workflow">The Guerilla&#8217;s Workflow</a></p></li>
+<li><p><a href="http://java.dzone.com/articles/feedback-key">Feedback is the Key!</a></p></li>
+<li><p><a href="http://java.dzone.com/articles/going-guerilla-where-start">Going Guerilla: Where to Start</a></p></li>
+</ul>
+
+
+<p>In the near future you can look forward to a few more episodes of &#8220;The Agile Guerilla&#8221; series, as well as a brand new series I&#8217;ll be starting entitled &#8220;The Seven Wastes of Software Development.&#8221;</p>
+
+<p>Got any topics you want to hear more about? Post up in the comments and I&#8217;ll see about covering them at Agile Zone in the coming weeks!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[I'm in the zone...Agile Zone.]]></title>
+    <link href="http://mattstine.com/2010/07/20/im-in-the-zone-agile-zone/"/>
+    <updated>2010-07-20T22:38:09-05:00</updated>
+    <id>http://mattstine.com/2010/07/20/im-in-the-zone-agile-zone</id>
+    <content type="html"><![CDATA[<p>My apologies to my colleagues down the street at <a href="http://www.autozone.com">AutoZone</a>, but I just had to do that. :-)</p>
+
+<p>I recently accepted the role of Agile Zone Leader at <a href="http://agile.dzone.com">DZone.com</a>. For the past few weeks I&#8217;ve been publishing a couple of articles a week on various agile development topics. I&#8217;m very happy to get the extra exposure and I hope that folks are getting some value out of my posts. On the downside, I have virtually zero time to write anything here, but on the upside I&#8217;m definitely writing more regularly. Nothing like positive pressure to deliver!</p>
+
+<p>Here are some links to my recent articles:</p>
+
+<ul>
+<li><p><a href="http://agile.dzone.com/articles/you-are-your-softwares-immune">You Are Your Software&#8217;s Immune System!</a></p></li>
+<li><p><a href="http://agile.dzone.com/articles/interview-w-alan-shalloway">Interview: Alan Shalloway on Lean Agile Software Development, Part One</a></p></li>
+<li><p><a href="http://agile.dzone.com/articles/interview-w-alan-shalloway">Interview: Alan Shalloway on Lean Agile Software Development, Part Two</a></p></li>
+<li><p><a href="http://agile.dzone.com/articles/show-dont-tell-persuade-dont">Show (Don&#8217;t Tell), Persuade (Don&#8217;t Preach)</a></p></li>
+<li><p><a href="http://agile.dzone.com/articles/scrummaster-said-i-had">But the ScrumMaster said I had to!</a></p></li>
+<li><p><a href="http://agile.dzone.com/articles/agile-guerilla">The Agile Guerilla</a></p></li>
+<li><p><a href="http://agile.dzone.com/articles/use-stories-deliver">Use Stories to Deliver Business Value</a></p></li>
+</ul>
+
+
+<p>Enjoy!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Two new NFJS talks for this fall!]]></title>
+    <link href="http://mattstine.com/2010/07/06/two-new-nfjs-talks-for-this-fall/"/>
+    <updated>2010-07-06T21:40:00-05:00</updated>
+    <id>http://mattstine.com/2010/07/06/two-new-nfjs-talks-for-this-fall</id>
+    <content type="html"><![CDATA[<p>I&#8217;m excited to announce that I am working up two brand new talks for this Fall to go along side my regular fare. Both of these talks are already scheduled for shows in Boston, MA and Seattle, WA.</p>
+
+<p>The first talk is entitled &#8220;The Seven Wastes of Software Development.&#8221; We&#8217;ll begin by examining one of the key tenets of Lean Software Development, that of eliminating waste. We&#8217;ll then walk through the seven wastes identified by Mary and Tom Poppendieck in their books:</p>
+
+<ul>
+<li><p>Partially Done Work</p></li>
+<li><p>Extra Processes</p></li>
+<li><p>Extra Features</p></li>
+<li><p>Task Switching</p></li>
+<li><p>Waiting</p></li>
+<li><p>Motion</p></li>
+<li><p>Defects</p></li>
+</ul>
+
+
+<p>We&#8217;ll examine each of these wastes and look at some of their common manifestations, both in our coding practices and in our development methodologies. We&#8217;ll also examine strategies for eliminating each of these wastes from our development efforts.</p>
+
+<p>The second talk is entitled &#8220;Yes You Kanban!&#8221; Kanban is sweeping through the agile software development space. Is it hype? Or is it a useful tool to add to our belt? In this session, we&#8217;ll walk through the following topics and I&#8217;ll let you be the judge:</p>
+
+<ul>
+<li><p>What is Kanban?</p></li>
+<li><p>What is Kanban NOT?</p></li>
+<li><p>Comparison to SCRUM</p></li>
+<li><p>Roots of Kanban</p></li>
+<li><p>David Anderson&#8217;s five essential elements/principles of Kanban (Visualize workflow, Limit work-in-progress, Measure &amp; manage flow, Make process policies explicit, Use models to recognize improvement opportunities)</p></li>
+<li><p>Examples of Kanban systems</p></li>
+</ul>
+
+
+<p>I hope to see some of you in these talks this Fall and I look forward to our discussions!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[NFJS Fall 2010: What do you want to learn?]]></title>
+    <link href="http://mattstine.com/2010/06/22/nfjs-fall-2010-what-do-you-want-to-learn/"/>
+    <updated>2010-06-22T10:06:16-05:00</updated>
+    <id>http://mattstine.com/2010/06/22/nfjs-fall-2010-what-do-you-want-to-learn</id>
+    <content type="html"><![CDATA[<p>Hi everyone! I&#8217;m currently in the process of developing new talks for my Fall 2010 NFJS tour dates. While I don&#8217;t know yet where I&#8217;ll be speaking, I can tell you that I&#8217;ve registered availability for the following shows:</p>
+
+<ul>
+<li><p>Boston, MA</p></li>
+<li><p>Seattle, WA</p></li>
+<li><p>Atlanta, GA</p></li>
+<li><p>Minneapolis, MN</p></li>
+<li><p>Chicago, IL</p></li>
+<li><p>Denver, CO</p></li>
+</ul>
+
+
+<p>So, if you&#8217;re in one of those cities and you&#8217;re thinking about attending NFJS when it comes your way (see <a href="http://www.nofluffjuststuff.com">here</a> for the schedule), I&#8217;d like to know what you want to hear about assuming I come your way.</p>
+
+<p>To narrow down the potentials a bit, here are my personal areas of focus:</p>
+
+<ul>
+<li><p>Agility/Lean/Kanban</p></li>
+<li><p>Native Mobile and Web Mobile Software Development (iPhone/iPad/Android)</p></li>
+<li><p>Web Development in General (HTML5/CSS3/JavaScript)</p></li>
+<li><p>Modularity and OSGi</p></li>
+</ul>
+
+
+<p>If there are any topics from these four areas that you&#8217;d like to hear more about, please speak up in the comments section. And even if you&#8217;re not in one of these cities, most of any talks I develop for the Fall will likely show up on the 2011 tour as well, so please speak up anyway!</p>
+
+<p>Thanks in advance for your feedback!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Don't build software that's TOO smart!]]></title>
+    <link href="http://mattstine.com/2010/06/03/dont-build-software-thats-too-smart/"/>
+    <updated>2010-06-03T17:00:35-05:00</updated>
+    <id>http://mattstine.com/2010/06/03/dont-build-software-thats-too-smart</id>
+    <content type="html"><![CDATA[<p>I had an extremely successful meeting with one of our clients yesterday. We were discussing how we wanted to go about migrating her laboratory from its current system (one that we built several years ago) to our new lab management platform. At some point during the discussion I made the statement, &#8220;We tried to make the previous system too smart! We&#8217;re not repeating that mistake this time.&#8221; Of course, she was in complete agreement with that principle. I&#8217;ve had similar interactions with our other clients that are making migrations (rather than encountering our system for the first time on this new version), and although I&#8217;ve never explicitly stated the principle that way, similar sentiments have abounded.</p>
+
+<p>What is too smart software? In our case, it was a system that attempted to encapsulate every single rule of &#8220;business&#8221; process that occurred within a given laboratory. Many times statements were flung around like &#8220;will it ALWAYS happen this way,&#8221; &#8220;what should we do if this happens?&#8221; etc., etc., etc. We tried to cover every single possibility, and we did an excellent job of preventing users from ever breaking their own rules. What we didn&#8217;t realize (and we&#8217;re not unique - this problem is RAMPANT) is that the rules CHANGE. Rules come, rules go. Sometimes the rule remains, but there are a few exceptional cases that must be dealt with. Our system simply couldn&#8217;t deal with a world that worked this way - and thus, our system was completely unfit for the real world.</p>
+
+<p>We set out with a different mission this time. If there&#8217;s one overriding characteristic of SRM (Shared Resource Management) 2.0, it&#8217;s the explicit assumption that the world will change continually. We don&#8217;t attempt to tell you how you must use this system. We capture your data, we invoice for your services, we run your reports - but YOU, the user gets to decide how you&#8217;ll interact with it. If your workflow changes, we change with you. Now the devil is in the details. It&#8217;s taken roughly 20-30 man years worth of effort to build a system like this, and it hasn&#8217;t been easy. But in the end, we&#8217;re finding that those years were much better spent ENABLING our users rather than PREVENTING our users from getting things done.</p>
+
+<p>I&#8217;m not sure that I&#8217;ve gotten my point across in this brief diatribe, so I&#8217;ll attempt to sum it up here. If you&#8217;re developing a system, figure out the 2 or 3 things that will make your users&#8217; lives AWESOME, and do those 2 or 3 things extremely well. Don&#8217;t do the rest AT ALL. Don&#8217;t build a system that attempts to be smarter than the knowledge expert using it - it&#8217;s a means to your user&#8217;s end, not an end in itself.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Announcing NOSQL Summer Memphis]]></title>
+    <link href="http://mattstine.com/2010/05/28/announcing-nosql-summer-memphis/"/>
+    <updated>2010-05-28T09:21:43-05:00</updated>
+    <id>http://mattstine.com/2010/05/28/announcing-nosql-summer-memphis</id>
+    <content type="html"><![CDATA[<p>I recently stumbled across the <a href="http://nosqlsummer.org/">NOSQL Summer</a> website via my friend Alex Miller&#8217;s <a href="http://tech.puredanger.com/2010/05/25/nosql-summer-st-louis/">blog</a>. The idea is to setup a summer reading club focused around databases and distributed systems. Groups will gather &#8220;worldwide&#8221; to discuss various papers and the hopefully submit the substance of their discussions back to the NOSQL Summer website in the form of annotated papers.</p>
+
+<p>This sounded like a great idea to me, so I decided that we&#8217;d co-locate a NOSQL Summer discussion with our monthly Memphis JUG meetings. You can find the details of our NOSQL meetings at <a href="http://nosqlsummer.org/city/memphis">http://nosqlsummer.org/city/memphis</a>. We&#8217;ll start at 5:30 and run until 6:15-6:30. If you&#8217;re interested in these discussions, come on out to Southwest TN Community College on June 24th (even if you&#8217;re not a Java type!).</p>
+
+<p>Our first paper will be <a href="http://nosqlsummer.org/paper/end-of-architectural-era">The End of an Architectural Era (It&#8217;s Time for a Complete Rewrite)</a>. Please read it before the meeting and come prepared to mindshare.</p>
+
+<p>If there&#8217;s enough interest in these discussions, we could start having a lunch time discussion at a centrally located restaurant halfway between each JUG meeting. We can discuss this at our first meeting in June. I hope to see you there!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[First thoughts on "Seven Languages in Seven Weeks..."]]></title>
+    <link href="http://mattstine.com/2010/05/06/first-thoughts-on-seven-languages-in-seven-weeks/"/>
+    <updated>2010-05-06T13:35:28-05:00</updated>
+    <id>http://mattstine.com/2010/05/06/first-thoughts-on-seven-languages-in-seven-weeks</id>
+    <content type="html"><![CDATA[<p>I recently started reading the beta copy of Bruce Tate&#8217;s <a href="http://pragprog.com/titles/btlang/seven-languages-in-seven-weeks"><em>Seven Languages in Seven Weeks</em></a> from the Pragmatic Bookshelf. While I&#8217;m certainly NOT on pace to actually complete the book in seven weeks, I have been steadily plodding along. Reading this book takes me back to my days as an undergraduate computer science student at the University of Mississippi. As with most CS programs, we were all required to take a &#8220;Survey of Programming Languages&#8221; course toward the end of the curriculum. Tate&#8217;s book is very similiar to walking through this course, except:</p>
+
+<ol>
+<li><p>Tate&#8217;s text and suggested exercises are intensely practical, targeted at actually getting something useful done in the language.</p></li>
+<li><p>The language selection is entirely relevant to today&#8217;s practitioner. Chances are good that you&#8217;ll use a language from this set in your day job sometime in the next decade. Ignoring that, chances are good that you&#8217;ll use some language that is a &#8220;close cousin&#8221; of a language from this set.</p></li>
+<li><p>Your thinking about programming in general will be challenged by each chapter. This is not a leisurely read. You cannot &#8220;coast&#8221; through this course.</p></li>
+</ol>
+
+
+<p>At present I&#8217;m slowly working through the chapter devoted to Io. Io is a prototype-based language, close-cousins with Lua (of recent iPhone game development controversy) and JavaScript (can&#8217;t think of a practical use for this guy&#8230;umm&#8230;oh wait!). I&#8217;ve very much enjoyed Bruce&#8217;s treatment of the language, with his descriptions of the feature being as &#8220;visual&#8221; as words can effectively be - who else could liken languages to popular movie characters and get away with it? Before working through Io, Bruce and I tackled Ruby together. Ruby is an old and unfortunately neglected friend of mine. We&#8217;ve had our fun together doing a couple of small Rails applications, JUG talks and a (so far) unsuccessful trek into the world of OSGi, but unfortunately we haven&#8217;t hit the big time in my day job. Working through this chapter really served to reignite my enthusiasm for the language, especially as it relates to the rich ecosystem of testing tools available in the Ruby and Rails communities.</p>
+
+<p>In short, only two chapters in I&#8217;d thoroughly recommend that you purchase this book. Like <a href="http://oreilly.com/catalog/9780596100940"><em>Beyond Java</em></a> before it, Bruce has again challenged us to step outside of our comfort zone. If nothing else, you&#8217;ve got seven kickstarts into learning your &#8220;Language of the Year.&#8221;</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[OSGi on Rails?]]></title>
+    <link href="http://mattstine.com/2010/04/29/osgi-on-rails/"/>
+    <updated>2010-04-29T12:33:40-05:00</updated>
+    <id>http://mattstine.com/2010/04/29/osgi-on-rails</id>
+    <content type="html"><![CDATA[<p>I&#8217;ve seen quite a few blogs/articles/etc. lately related to the adoption (or lack thereof) of OSGi in the mainstream web application/enterprise application space. A nice summation of these is encapsulated in this excerpt from a comment by Peter Kriens on DZone (you&#8217;ll find it in the comments section for <a href="http://java.dzone.com/articles/osgi-perspectives">http://java.dzone.com/articles/osgi-perspectives</a>:</p>
+
+<blockquote><p>Yes, one of the next frontiers is to make OSGi easier to use for the web app developers. The solid foundation is there, so stop whining and help us create the tools, books, and tutorials that will make OSGi palatable in those markets.</p></blockquote>
+
+<p>There&#8217;s nothing like a call to action to get me stirred up. It&#8217;s no secret that I think OSGi is an excellent tool for tackling the complexity of enterprise applications (see my talks on the NFJS tour this year: <a href="http://www.nofluffjuststuff.com/conference/speaker/matt_stine">http://www.nofluffjuststuff.com/conference/speaker/matt_stine</a>). However, I will readily admit that the learning curve for tackling any non-trivial application in OSGi is rather steep. My bar for non-trivial is quite low - try learning OSGi while simultaneously attempting to get a mainstream framework like Hibernate working properly.</p>
+
+<p>I think that what we need is a tool that will enable a developer new to OSGi to get an OSGi-enabled web application up and running fairly readily. In fact, I think it would be good to absolutely minimize the amount of OSGi know-how required to get a basic web application into production, while at the same time leaving all of OSGi available just under the covers so that it can be easily accessed when I know what I need and how to use it. So here&#8217;s my proposal:</p>
+
+<p>1) Follow in the footsteps of AppFuse, Grails, Rails, Roo, etc. and put together a web application toolkit that will allow one to instantly spin-up a deployable OSGI-enabled web application.
+2) Since we&#8217;re talking about catering to mainstream here, Java the language ought to be the primary language used for development. With that said, we should not put up any barriers to using other languages available on the JVM.
+3) Bootstrap a DB-agnostic persistence layer leveraging JPA and make it easily accessible across the application bundles.
+4) Bootstrap a dependency injection framework for OSGi services based on the Blueprint standard.
+5) Bootstrap a security layer and provide a basic user/role security module with provided login, logout, etc. facilities.
+6) Pick a set of modern Java web application frameworks (e.g. Spring MVC, Struts 2, etc.) and make them easily pluggable.
+7) Wrap a nice build system around all of this that leverages a modern build tool (e.g. Gradle or Maven 3), the best of the PAX Tools features (especially Pax Construct, Exam, and Runner), and good facilities for automated testing.</p>
+
+<p>So, who&#8217;s with me? I&#8217;m open to any suggestions/comments/rants, etc.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[JUG Leadership Lessons Learned on SlideShare]]></title>
+    <link href="http://mattstine.com/2010/04/02/jug-leadership-lessons-learned-on-slideshare/"/>
+    <updated>2010-04-02T14:48:39-05:00</updated>
+    <id>http://mattstine.com/2010/04/02/jug-leadership-lessons-learned-on-slideshare</id>
+    <content type="html"><![CDATA[<p>I&#8217;ve been playing a bit with <a href="http://www.slideshare.net">SlideShare</a> today and I took the opportunity to upload the slides from my <a href="http://weblogs.java.net/blog/2009/07/02/how-start-and-grow-jug-community-corner-2009-podcast">Java.net Community Corner interview with Kevin Farnham at JavaOne 2009</a>. SlideShare has a nice feature that allows you to sync up the audio from an MP3 file with your slides, and since both were available, I thought I&#8217;d give it a try. The interface is extremely easy to use and I&#8217;m very happy with the outcome.</p>
+
+<p>This talk covers the various things I&#8217;ve learned about leading a Java User Group over the past few years. I would say that these are definitely applicable to leading any type of user group, so even if you aren&#8217;t a Java person, you might find some meat here. Enjoy!</p>
+
+<p>[slideshare id=3622125&amp;doc=jugleadershiplessonslearned-100402140624-phpapp02]</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Dead Programmers Society]]></title>
+    <link href="http://mattstine.com/2010/02/16/dead-programmers-society/"/>
+    <updated>2010-02-16T22:42:40-06:00</updated>
+    <id>http://mattstine.com/2010/02/16/dead-programmers-society</id>
+    <content type="html"><![CDATA[<p>A local Pastor once gave the <a href="http://holding2truth.blogspot.com/2009/01/strange-sounding-advice.html">advice of introducing ourselves</a> <a href="http://holding2truth.blogspot.com/2009/02/strange-advice-introducing-our-kids-to.html">and our kids to dead people</a>. It is his belief that if his kids grow up idolizing the likes of Eric Liddell, Jim Elliot, and Hudson Taylor, they would be far better off than by looking up to many of our so-called &#8220;heroes&#8221; of today. I happen to agree with his advice, but that&#8217;s not the subject of tonight&#8217;s blog entry.</p>
+
+<p>I think that this advice is very applicable to us as software developers today. While our industry is still young enough that a great many of our &#8220;founding fathers&#8221; are still around, it is surprising to see how often their work and contributions go unnoticed by the vast majority of us. At the January Memphis/Mid-South Java User Group meeting, our program focused on books that all of us as developers should read. Four of us gave our takes on the topic. Joel Neely, one of a few people that I learn from every time I get near them, pulled yet another rabbit out of his hat by focusing on several books, all of which had been published before the majority of us were out of diapers! One book struck me in particular: <em>A Discipline of Programming</em> by Edsgar W. Dijkstra. In it EWD &#8220;presents a formal approach to developing (non-deterministic!) algorithms, using what we would now call a DSL for algorithm design. Incidentally, that book was published in 1976.&#8221; (Thanks Joel for the excellent summary). I&#8217;d like to pull out just a couple of quotes from that book:</p>
+
+<p><em>A most important, but also a most elusive, aspect of any tool is its influence on the habits of those who train themselves in its use. If the tool is a programming language, this influence is - whether we like it or not - an influence on our thinking habits.</em></p>
+
+<p>Just out of curiosity, does this sound anything at all to you like the frequent admonitions to learn a &#8220;language of the year (LOTY)?&#8221; Of course that isn&#8217;t the context of EWD&#8217;s quote, but the underlying principle remains the same. Almost universally accompanying that admonition is a statement along the lines of &#8220;even if you never use it in your day job, it will affect THE WAY YOU THINK about programming during your day job.&#8221;</p>
+
+<p><em>&#8230;a carefully chosen separation of concerns is essential for the design of in all respects, high quality programs&#8230;</em></p>
+
+<p>Does &#8220;loosely coupled, highly cohesive, modular architecture&#8221; come to mind?</p>
+
+<p><em>&#8230;the fact that programming languages could be used as a vehicle for instructing existing automatic computers, has for a long time been regarded as their most important property&#8230;we shall try to redress the balance, and we shall do so by regarding the fact that our algorithms could actually be carried out be a computer as a lucky accidental circumstance that need not occupy a central position in our considerations&#8230;I view a programming language primarily as a vehicle for the description of (potentially highly sophisticated) abstract mechanisms.</em></p>
+
+<p>I hear so much of what is bandied about today as &#8220;new&#8221; embodied in this quote. The calls to liberate programming from its &#8220;C&#8221; roots by banishing primitives, because hey, primitives are only their to keep &#8220;Java from being too slow!&#8221; The calls to favor &#8220;essence over ceremony&#8221; in language design by eliminating boilerplate code in favor of sensible defaults that clear away the noise from the algorithmic intent that we&#8217;re trying to communicate. The constant reminders that it&#8217;s more important for our code to be readable to humans, not to computers, because that&#8217;s what compilers are for.</p>
+
+<p>What&#8217;s the point? The point is that most, if not all, of the ideas that are &#8220;new&#8221; today are simply restatements of past ideas in a different context. A wise man, one much wiser than I, once said &#8220;&#8230;there is nothing new under the sun&#8221; (Ecclesiastes 1:9). Edsgar W. Dijkstra passed from this earth in 2002, but his ideas live on, and they are very much applicable to software developers today. There are may others like him: Donald Knuth, John McCarthy, Alan Turing, David Gries - some dead, some alive, but all giants upon whose shoulders we stand. We would do well to consider their words.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[LOTY/TOTY for 2010]]></title>
+    <link href="http://mattstine.com/2010/01/06/lotytoty-for-2010/"/>
+    <updated>2010-01-06T14:25:09-06:00</updated>
+    <id>http://mattstine.com/2010/01/06/lotytoty-for-2010</id>
+    <content type="html"><![CDATA[<p>If anyone&#8217;s interested, here&#8217;s a clue as to what I&#8217;m working on in 2010:</p>
+
+<p><img src="http://mattstine.files.wordpress.com/2010/05/helloiphone.jpg" alt="" /></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Securing Grails Plugin Artifacts with Filters]]></title>
+    <link href="http://mattstine.com/2009/11/10/securing-grails-plugin-artifacts-with-filters/"/>
+    <updated>2009-11-10T13:50:11-06:00</updated>
+    <id>http://mattstine.com/2009/11/10/securing-grails-plugin-artifacts-with-filters</id>
+    <content type="html"><![CDATA[<p>So you&#8217;ve just installed the handy dandy Spring Security plugin (http://grails.org/plugin/acegi), which makes it incredibly easy to secure entire Grails controllers and/or controller actions with annotations, such as the following:</p>
+
+<p>This is enabled by turning on controller annotations in your SecurityConfig.groovy file:</p>
+
+<p>So all is now good in our project. We can secure either controllers or actions with annotations, enabling us to declaratively setup security side-by-side with the code that we&#8217;re securing in a very straightforward manner. You can continue developing your Grails applications with glee, fully assured that security is no longer an issue. But wait, one day you decide to install one of the many useful Grails plugins that add controller artifacts to your application. Lo and behold, you have no way to secure those controllers! Of course, you could descend into $USER_HOME/.grails/$GRAILS_VERSION/projects/projectName/plugins/pluginX and hack the source code for your individual instance of the plugin. This ought to work, but you&#8217;re now rather constrained in that every time you update the plugin you&#8217;ll need to remember to go make this manual change. That doesn&#8217;t sound very agile at all, does it? OK, so how about forking the plugin? This is a little bit better, but now you have the burden of merging changes from the global plugin repository to yours every time a new release happens. This is better, but still a bit cumbersome. How about becoming a committer and adding it to the global source? Of course not. Not everyone will want to secure their plugins the same way you do, and you&#8217;ve just introduced a rather unnecessary dependency on the Spring Security plugin. I say all this in an attempt to paint a grim picture. In reality, we&#8217;re actually in very good shape. Grails Filters to the rescue!</p>
+
+<p>All that you need to do is create a Grails filter that will match requests to the plugin artifact in question and then delegate to Spring Security for authorization. If they are authorized, you simply return true. If not, you can direct them to your login screen. It&#8217;s this simple:</p>
+
+<p>As you can see here, I&#8217;ve secured both the Blurb plugin and the Settings plugin in this manner by requiring that the logged in user be in the ROLE_ADMIN role. Now as Glen Smith would say, that&#8217;s a snack!</p>
+
+<p><em><strong>Update:</strong> <a href="http://burtbeckwith.com/blog/">Burt Beckwith</a> enlightened me to an approach that will get this done without the use of filters that will also direct you to the requested URL after login rather than the main page. Unfortunately I&#8217;ve never been able to track this down before. Just add the following to SecurityConfig.groovy:</em></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Pomodoro: The First Iteration]]></title>
+    <link href="http://mattstine.com/2009/11/04/pomodoro-the-first-iteration/"/>
+    <updated>2009-11-04T15:44:32-06:00</updated>
+    <id>http://mattstine.com/2009/11/04/pomodoro-the-first-iteration</id>
+    <content type="html"><![CDATA[<p>I spent about an hour last night reading through Francesco Cirillo&#8217;s e-book <em>The Pomodoro Technique</em>. Up until this point I knew the basics of the technique, but I really wanted to drill down and get the details. I won&#8217;t explain those here - visit <a href="http://www.pomodorotechnique.com/">http://www.pomodorotechnique.com/</a> to get the lowdown. What I want to talk about is my experience applying the technique this morning.</p>
+
+<p>I managed to complete two Pomodoros. Each of the Pomodoros was filled with internal interruptions of various kinds. One of the first things that I observed was something that I already knew from yesterday&#8217;s TADD post: I am definitely not used to focusing on one distinct task for any prolonged length of time. My mind was constantly bouncing around from idea to idea, almost as if my R-mode had a &#8220;memory leak.&#8221; My first Pomodoro was primarily a reading task - I used it for my daily Bible reading and meditation. This part of my day brings it&#8217;s focus challenges anyway, as I&#8217;m not doing anything tactile. I find its much easier to focus when I&#8217;m typing or writing something. The Pomodoro offered no relief from this, save a plan for dealing with the interruptions as they came up. First, note down that one happened with an apostrophe, and second, write the todo item or idea down on my inventory. This definitely helped to refocus my mind on the work at hand, but I still wish I could find a way to prevent those streamer thoughts from landing in the first place.</p>
+
+<p>The second thing that I observed was that my workspace is not at all setup to encourage focus. In recent months I&#8217;ve stopped using task-focused desktops in OS X, something that Neil Ford recommends in <em>The Productive Programmer</em>. I was reminded of this later in the day today reading <a href="http://memeagora.blogspot.com/2009/11/productivity-pron.html">his latest blog entry</a>. I think it would be a good idea to use my first Pomodoro of the day to setup task-based desktops for each of the tasks on my TODO list. I could fire up all of the programs necessary and drop them on to a space. Since a lot of my work is focused on web-based applications, I think I&#8217;ll probably use Fluid (<a href="http://fluidapp.com/">http://fluidapp.com/</a>) to create site specific browsers for the web applications that I need for each task. Another thing that I need to do is turn off the ringer on my phones and the new message notifications on Entourage. One tool that I did already have in my arsenal is Doodim, which blacks out everything except for the currently focused window on OS X. The only problem with Doodim (<a href="http://www.lachoseinteractive.net/en/products/doodim/">http://www.lachoseinteractive.net/en/products/doodim/</a>) is that it doesn&#8217;t work with external screens, so only my MacBook Pro&#8217;s screen gets the benefits. I counteracted this by making sure that the window I was actively using was on the external screen and maximized, but this won&#8217;t work for some tasks during which I might have multiple small windows to interact with.</p>
+
+<p>The final thing that I observed is that I still definitely live in an interruption-based work environment. My third attempt to complete a Pomodoro was repeated three times, and none of these times did I make it without having to stop and actively handle an external interruption. The difference? My office door was open. My first two Pomodoros were completed with the office door closed and my &#8220;Ssshhh&#8230;Genius at work!&#8221; sign on the door. This is going to be a tough one to handle. I don&#8217;t want to keep my office door closed all day, for more reasons than one. First, I don&#8217;t want to seem completely unapproachable. I&#8217;m a manager these days, and a huge part of my job is being available for people. For me, some interruptions will always be OK. But how can I sort those out prior to them happening? This is something I&#8217;ll be stewing on over the next couple of days. Second, my office turns into an absolute OVEN when the door is closed for too long. We have a really strange HVAC system that completely overreacts to small changes in the temperature. Unfortunately, it always seems to think I need to be slow cooked. ::SIGH::</p>
+
+<p>So, there you have it. I&#8217;ve learned a lot - I observed quite a view things about my work patterns and my environment, and will be working over the next few days to make changes to both to support better focus. If you have any comments or suggestions, please feel free to comment. Thanks!</p>
+]]></content>
+  </entry>
   
 </feed>

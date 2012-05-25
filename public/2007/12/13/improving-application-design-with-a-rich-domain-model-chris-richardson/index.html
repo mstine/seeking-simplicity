@@ -1,0 +1,277 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Improving Application Design with a Rich Domain Model: Chris Richardson - Seeking Simplicity</title>
+  <meta name="author" content="Matt Stine">
+
+  
+  <meta name="description" content="This was my very first session of the conference. I&#8217;ve really been looking forward to it. I became pretty excited about object-oriented &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://mattstine.com/2007/12/13/improving-application-design-with-a-rich-domain-model-chris-richardson">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Seeking Simplicity" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Seeking Simplicity</a></h1>
+  
+    <h2>A blog about programming, software architecture and everything else...</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:mattstine.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Improving Application Design With a Rich Domain Model: Chris Richardson</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2007-12-13T17:32:00-06:00" pubdate data-updated="true">Dec 13<span>th</span>, 2007</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>This was my very first session of the conference. I&#8217;ve really been looking forward to it. I became pretty excited about object-oriented programming when I first really learned it in my computer simulation course at Ole Miss. In that course we built discrete event simulation programs using collaborating Java threads. Each thread implemented an object from the domain model representing a particular simulation problem. Once I got into the &#8220;working world,&#8221; I found that the architecture described by Rod Johnson as the &#8220;J2EE stove pipe&#8221; had made my OO skills essentially unusable in the projects on which I was required to work on a day-to-day basis. My recent experiences developing in a more POJO-based style, particularly with JPA/Hibernate, have allowed me to get closer to my preferred OO-style, but the business logic still lived in the service-tier. My domain model was still essentially &#8220;anemic&#8221; to borrow from Martin Fowler.</p>
+
+<p>When I read the description for this session I was elated! Finally I could see that someone was building real enterprise applications using object-oriented techniques! I&#8217;ve never quite been able to articulate what I felt was wrong with the way we&#8217;re building applications in my group. I was fortunate enough to have breakfast with Chris Richardson prior to the session, and he said that addressing my inability to articulate those problems was one of the goals of his talk. Awesome! On to the session&#8230;</p>
+
+<p>Chris began with a tour through his object-based programming experience, beginning in LISP, followed by C++ and then Java. Around 1999 he got into EJB programming, and described his experience as &#8220;Applications were still built from objects, but those objects were very different&#8230;&#8221; Basically the EJB paradigm caused us to abandon object-oriented programming in favor of procedural programming. Why? Well, for all of the pros surrounding EJB, it made writing object-oriented code difficult, and in some cases, impossible. The EJB/procedural style works very well for simple business logic, but it doesn&#8217;t scale well as business logic becomes more complex. The result is a few monolithic transactional classes containing hundreds to thousands of lines of code embedded in very long methods. Hence, the legacy of EJB (and I quote):</p>
+
+<ul>
+<li><p>Java is an object-oriented language, AND&#8230;</p></li>
+<li><p>Object-oriented design is a better way to tackle complexity, YET&#8230;</p></li>
+<li><p>Many complex enterprise Java applications are written in a procedural style</p></li>
+</ul>
+
+
+<p>Chris then moved on to discuss the rich domain model pattern, which is really nothing new at all. It&#8217;s just good OO design. Most of your classes (or entities) correspond to real world concepts, and the business logic is spread amongst them. Classes are true objects: they contain state and behavior. The goal is to push as much business logic as possible down into the domain objects, which is exactly where it belongs. What do you get? Better maintainability, better testability, better reusability, and a better shared understanding of your domain. Not only that, but your code is quantifiably simpler! Who doesn&#8217;t want that? The main drawback to this is that you have to have good OO design skills to make it happen - which is exactly what the EJB programming model has made scarce.</p>
+
+<p>Chris followed this up by discussing the building blocks of domain models, concepts he derived from Eric Evans&#8217; book Domain Driven Design. In a nutshell, they are Entities, Value Objects, Aggregates, Services, Factories, and Repositories - the reader can get the book to find out what these are. Interesting notes for me include the fact that Repositories are nearly equivalent to DAO&#8217;s, especially the way I typically implement them. The concept of a Service is far different from what I&#8217;m used to. I &#8220;grew up&#8221; writing services according to the EJB Session Bean/Facade model, where essentially all of your business logic resides in service methods. Chris defined a service as a class implementing only logic that cannot be put in a single entity. They are actually quite thin!</p>
+
+<p>Next came the discussion of frameworks and their role. In short, frameworks act as an enabler to rich domain models when used properly. Your domain model should be implemented purely as Plain Old Java Objects (POJO&#8217;s) in that they don&#8217;t implement any infrastructure interfaces or call infrastructure API&#8217;s. The jury is still out on annotations - Chris argues that they still violate the POJO concept, I&#8217;m not so sure. You then wire your model together using dependency injection, handle crosscutting concerns (transaction management, security, logging, etc.) with Aspect-Oriented Programming (AOP), and use object/relational mapping (ORM) for persistence. What you often run into as obstacles are that many of these frameworks, particularly web and ORM frameworks, force you to introduce &#8220;smells&#8221; into your code for the framework to use them. Examples include requirements for public default constructors and JavaBean-style setters.</p>
+
+<p>Chris closed with an awesome discussion of common code smells and the refactorings used to eliminate them. I was most interested in Feature Envy, which is where you have methods that are far too interested in data belonging to other classes. This is very common in session facades, and the healing factor is to push that logic down into the appropriate domain classes. Another interesting smell was Primitive Obsession, where code uses built-in types (such as String and Integer) instead of application classes to represent state. The refactoring in this case is to introduce Value Objects, which are immutable, validated objects representing domain concepts (e.g. a shipping address).</p>
+
+<p>Chris closed with the charge to begin refactoring our procedural designs into a rich domain model on MONDAY! Oh, how I can&#8217;t wait to begin. Good job Chris!</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Matt Stine</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2007-12-13T17:32:00-06:00" pubdate data-updated="true">Dec 13<span>th</span>, 2007</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/java/'>java</a>, <a class='category' href='/blog/categories/thespringexperience2007/'>thespringexperience2007</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://mattstine.com/2007/12/13/improving-application-design-with-a-rich-domain-model-chris-richardson/" data-via="mstine" data-counturl="http://mattstine.com/2007/12/13/improving-application-design-with-a-rich-domain-model-chris-richardson/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2007/12/13/enterprise-java-and-the-changing-of-the-guard/" title="Previous Post: Enterprise Java and the Changing of the Guard">&laquo; Enterprise Java and the Changing of the Guard</a>
+      
+      
+        <a class="basic-alignment right" href="/2007/12/13/pair-programming-with-the-official-rod-johnson-bobblehead/" title="Next Post: Pair Programming with the Official Rod Johnson Bobblehead">Pair Programming with the Official Rod Johnson Bobblehead &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+	<h1>Hello, World!</h1>
+	<p>
+		<img src="http://mattstine.files.wordpress.com/2011/05/indiamug.jpg" width="173" height="213">
+	</p>
+	<p>
+		<a href="http://www.linkedin.com/in/mattstine"><img alt="View Matt Stine&#039;s profile on LinkedIn" src="http://www.linkedin.com/img/webpromo/btn_myprofile_160x33.gif" border="0" width="160" height="33"></a>
+	</p>
+</section><section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2011/05/16/design-meeting-patternsantipatterns/">Design Meeting Patterns/Antipatterns</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/01/05/selenium-conference-2011/">Selenium Conference 2011</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/01/02/2010-in-review-the-automated-analysis/">2010 in review: the automated analysis...</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2010/11/29/selenium-2-0-refcard/">Selenium 2.0 Refcard</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2010/11/10/agile-zone-roundup/">Agile Zone Roundup</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating...</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("mstine", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/mstine" class="twitter-follow-button" data-show-count="false">Follow @mstine</a>
+  
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - Matt Stine -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'seekingsimplicity';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

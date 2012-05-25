@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: textile | Seeking Simplicity]]></title>
+  <link href="http://mattstine.com/blog/categories/textile/atom.xml" rel="self"/>
+  <link href="http://mattstine.com/"/>
+  <updated>2012-05-24T19:13:18-05:00</updated>
+  <id>http://mattstine.com/</id>
+  <author>
+    <name><![CDATA[Matt Stine]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Need a Textile engine? Look no further than Plextile!]]></title>
+    <link href="http://mattstine.com/2009/03/26/need-a-textile-engine-look-no-further-than-plextile/"/>
+    <updated>2009-03-26T16:23:46-05:00</updated>
+    <id>http://mattstine.com/2009/03/26/need-a-textile-engine-look-no-further-than-plextile</id>
+    <content type="html"><![CDATA[<p>In finishing up the first release of JUG Nexus, the open source engine (<a href="http://github.com/mstine/jug-nexus/tree/master">http://github.com/mstine/jug-nexus/tree/master</a>) behind the new Memphis JUG website, I needed to put a good <a href="http://www.textism.com/tools/textile/">Textile</a> engine in place. I really don't care for writing actual HTML in a content management system, and JUG Nexus being a lightweight CMS, I wanted a lightweight markup syntax for entering the details of upcoming JUG meetings. Textile is exactly that, and is also used for entering content into the very useful <a href="http://jugevents.org">JUGEvents</a> system produced by <a href="http://www.jugpadova.it/">JUG Padova</a> for the Java User Group community at large. I tried out several different engines, and none of them seemed to be very robust when it came to edge cases in the markup. For example, if I want to produce a hyperlink to a website, the textile format is the following:</p>
+
+<p><code>
+"Linked Text":http://www.site.com
+</code></p>
+
+<p>This syntax will result in the following HTML:</p>
+
+<pre><code>&lt;a href="http://www.site.com"&gt;Linked Text&lt;/a&gt;
+</code></pre>
+
+<p>Unfortunately, if you have a bang (!) in your "Linked Text," most of the Textile engines that I used would not recognize it as an HTML link. Plextile does!</p>
+
+<p>The only drawback, however minimal, to using Plextile is that it does not come with a pre-packaged JAR file. You have to take the compiled code and JAR it yourself. Now, for free, I'll include how I integrated Plextile with Grails. Grails has a very nice codec feature that provides a facility to register encoders and decoders of textual data as methods on any object. Grails searches for classes following the convention <code>XCodec</code> and dynamically registers <code>encodeAsX</code> and <code>decodeX</code> methods on <code>java.lang.Object</code> so that any data can be encoded and decoded. Enter the <code>TextileCodec</code>:</p>
+
+<pre><code>import com.plink.plextile.TextParser
+
+class TextileCodec {
+
+   static encode = {str -&gt;
+      new TextParser().parseTextile(str, true)
+   }
+
+}
+</code></pre>
+
+<p>Believe it or not, that's it! Here's the GSP template for rendering a JUG meeting:</p>
+
+<pre><code>&lt;div class="post"&gt;
+  &lt;h2&gt;${event.title}&lt;br/&gt;&lt;br/&gt;&lt;g:formatDate format="EEEE, MMMM dd, yyyy" date="${event.startTime}"/&gt;&lt;br/&gt;&lt;g:formatDate format="h:mm" date="${event.startTime}"/&gt;-&lt;g:formatDate format="h:mm a" date="${event.endTime}"/&gt;&lt;br/&gt;&lt;g:if test="${!event.archived}"&gt;&lt;a href="http://jugevents.org/jugevents/event/${event.jugEventsId}"&gt;Click HERE to register!&lt;/a&gt;&lt;/g:if&gt;&lt;/h2&gt;
+  &lt;div class="entry"&gt;
+    &lt;h2 class="title"&gt;Speaker/Topic:&lt;/h2&gt;
+    &lt;p&gt;${event.description.encodeAsTextile()}&lt;/p&gt;
+    &lt;h2 class="title"&gt;Location/Directions:&lt;/h2&gt;
+    &lt;p&gt;${event.location}&lt;/p&gt;
+    &lt;p&gt;${event.directions.encodeAsTextile()}&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+
+<p>Enjoy!</p>
+]]></content>
+  </entry>
+  
+</feed>

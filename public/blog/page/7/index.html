@@ -1,0 +1,734 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Seeking Simplicity</title>
+  <meta name="author" content="Matt Stine">
+
+  
+  <meta name="description" content="So yesterday I was attempting to debug an issue in a batch processing module within one of our applications. In short, an assertion was failing deep &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://mattstine.com/blog/page/7">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Seeking Simplicity" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Seeking Simplicity</a></h1>
+  
+    <h2>A blog about programming, software architecture and everything else...</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:mattstine.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2008/02/05/set-conditional-breakpoints-in-idea/">Set Conditional Breakpoints in IDEA</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-02-05T12:27:00-06:00" pubdate data-updated="true">Feb 5<span>th</span>, 2008</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>So yesterday I was attempting to debug an issue in a batch processing module within one of our applications. In short, an assertion was failing deep within Hibernate as it attempted to flush the session. Using a combination of various log statements, I had isolated the problem down to a particular record that the batch process was attempting to update. (BTW: I know you shouldn&#8217;t be using Hibernate for batch processing - however, we&#8217;re talking about batches of at most 1000 records here, not millions!) What I really wanted to do was set a breakpoint and examine the state of the objects at runtime; however, I dreaded the thought of clicking through the breakpoint time and time again until I got to the particular record that was causing the problem. &#8220;Surely,&#8221; I thought, &#8220;there must be a way to tell the debugger to only break under certain conditions.&#8221;</p>
+
+<p>So, here&#8217;s the code I wanted to examine:</p>
+
+<pre><code>&lt;br&gt;&lt;/br&gt;public Publication parsePublication(String inputLine)&lt;br&gt;&lt;/br&gt;   throws ParseException {&lt;br&gt;&lt;/br&gt;       Publication publication = new Publication();&lt;br&gt;&lt;/br&gt;&lt;br&gt;&lt;/br&gt;       String[] fields = inputLine.split("\t");&lt;br&gt;&lt;/br&gt;&lt;br&gt;&lt;/br&gt;       publication.setPublicationType(fields[0]);&lt;br&gt;&lt;/br&gt;       ...&lt;br&gt;&lt;/br&gt;       return publication;&lt;br&gt;&lt;/br&gt;}&lt;br&gt;&lt;/br&gt;
+</code></pre>
+
+<p>Essentially, I wanted to break after <code>inputLine.split("\t");</code> if and only if <code>fields[35]</code> existed and was equal to &#8220;PM:16732581.&#8221; After examining IDEA&#8217;s Breakpoint dialog, I noticed a section in the bottom right-hand corner that I&#8217;d never played with before:</p>
+
+<p><a href="http://2.bp.blogspot.com/_Vo63LRwAZbk/R6idFtXVh2I/AAAAAAAAAcw/DpuaZ5TQUCs/s1600-h/breakpoint_dialog.jpg"><img src="http://2.bp.blogspot.com/_Vo63LRwAZbk/R6idFtXVh2I/AAAAAAAAAcw/DpuaZ5TQUCs/s320/breakpoint_dialog.jpg" alt="" /></a></p>
+
+<p>As it turns out, this is exactly what I needed. If you click on the ellipsis next to the drop menu, you get a context-sensitive editor equipped with code completion:</p>
+
+<p><a href="http://3.bp.blogspot.com/_Vo63LRwAZbk/R6idb9XVh3I/AAAAAAAAAc4/MENimxICxyk/s1600-h/condition_dialog2.jpg"><img src="http://3.bp.blogspot.com/_Vo63LRwAZbk/R6idb9XVh3I/AAAAAAAAAc4/MENimxICxyk/s400/condition_dialog2.jpg" alt="" /></a></p>
+
+<p>Enter the desired conditions and voila! A conditional breakpoint. It worked like a charm the very first time, and I only had to inspect the breakpoint when the problematic record came up.</p>
+
+<p>Another nice feature of the conditional breakpoint is that if some sort of exception (such as a NullPointerException) occurs while attempting to evaluate the conditional expression, IDEA pops up a dialog informing you what happened and asking if you want to stop at the breakpoint or continue. Nice.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2008/02/05/grails-10-released/">Grails 1.0 Released!</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-02-05T10:48:00-06:00" pubdate data-updated="true">Feb 5<span>th</span>, 2008</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="http://grails.org/Home">Grails</a>, by far my favorite of the JVM dynamic language frameworks, was released this morning, with a snazzy, new, &#8220;Web 2.0 style&#8221; website to boot. Congratulations Graeme and company on all of your hard work!</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2008/02/04/a-javascript-code-prettifier/">A Javascript Code &#8220;Prettifier&#8221;</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-02-04T17:43:00-06:00" pubdate data-updated="true">Feb 4<span>th</span>, 2008</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I came across a <a href="http://code.google.com/p/google-code-prettify/">link</a> today that would allow you to post &#8220;pretty&#8221; code in any HTML page. I&#8217;ve had plenty of problems (as have others) posting well-formatted source code to my Blogger-based blog. I&#8217;ve wanted to correct this problem for some time, and this project appears to be a decent solution. Here&#8217;s an example:</p>
+
+<pre><code>function chooseWinner() {&lt;br&gt;&lt;/br&gt;   $('p3').removeClassName('winner');&lt;br&gt;&lt;/br&gt;   participantBo.chooseWinnerForEvent(eventId, function(data) {&lt;br&gt;&lt;/br&gt;      people = $A(data);&lt;br&gt;&lt;/br&gt;      updateDivs();&lt;br&gt;&lt;/br&gt;      intervalId = setInterval(doShift, 500);&lt;br&gt;&lt;/br&gt;   });&lt;br&gt;&lt;/br&gt;}
+</code></pre>
+
+<p>Now that isn&#8217;t too bad is it? There seems to be a bit of a delay as the Javascript is loaded, but I think that&#8217;s more a symptom of my connection than it is a problem with the script.</p>
+
+<p>Here&#8217;s how you can take advantage of this solution (quoted from <a href="http://google-code-prettify.googlecode.com/svn/trunk/README.html">http://google-code-prettify.googlecode.com/svn/trunk/README.html</a>):</p>
+
+<ol>
+<li><p><a href="http://google-code-prettify.googlecode.com/files/prettify-small.zip">Download</a> a distribution</p></li>
+<li><p>Include the script and stylesheets in your document<br/>
+  (you will need to make sure the css and js file are on your server, and<br/>
+   adjust the paths in the script and link tag)</p></li>
+</ol>
+
+
+<pre><code>&lt;link href="prettify.css" type="text/css" rel="stylesheet" /&gt;&lt;br&gt;&lt;/br&gt;&lt;script type="text/javascript" src="prettify.js"&gt;&lt;/script&gt;
+</code></pre>
+
+<ol>
+<li><p>Add <code>onload="prettyPrint()"</code> to your<br/>
+document&#8217;s body tag.</p></li>
+<li><p>Modify the stylesheet to get the coloring you prefer</p></li>
+<li><p>Put code snippets in<br/>
+<pre class="prettyprint">...</pre><br/>
+or <code class="prettyprint">...</code><br/>
+and it will automatically be pretty printed.</p></li>
+</ol>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2008/02/04/the-spring-experience-2007-videos-on-the-way/">The Spring Experience 2007 - Videos on the Way!</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-02-04T15:28:00-06:00" pubdate data-updated="true">Feb 4<span>th</span>, 2008</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I got an awesome email today&#8230;</p>
+
+<blockquote><p>We are happy to announce that the video/audio streaming from TSE 2007 will be available online the week of February 11th for you.  You will have the opportunity to see/hear the TSE 2007 presentations you were not able to make at TSE 2007 due to all of the great sessions available per time period.  We have captured the entire session length including any demos/live coding.  Please look for the email from us next Monday, February 11th with the details about viewing the session content online.</p></blockquote>
+
+<p>I&#8217;m extremely excited about this. For two reasons:</p>
+
+<ol>
+<li>I didn&#8217;t get to finish my reviews of the sessions that I attended. Now that it has been several weeks since the conference, I don&#8217;t feel like my memory of them is good enough to do a fair review. Now I can do a refresh and write!</li>
+<li>There were several sessions that I wanted to attend that I couldn&#8217;t - now I get to attend&#8230;and write!
+Look forward to some more reviews from The Spring Experience 2007 in the coming weeks!</li>
+</ol>
+
+
+<blockquote></blockquote>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2008/01/25/practical-jruby-on-rails-web-20-projects/">Practical JRuby on Rails Web 2.0 Projects</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-01-25T14:29:00-06:00" pubdate data-updated="true">Jan 25<span>th</span>, 2008</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Are Java&#8217;s days numbered as a web development technology? With buzzwords like Ruby, Rails, and Web 2.0 zipping around the web development community, one may begin to wonder. Could Java&#8217;s lifespan be extended by finding synergy between Java and Ruby? On the scene comes JRuby, the definitive implementation of Ruby for the JVM. In his new book from Apress, Ola Bini guides the reader through the development of four Web 2.0 projects using JRuby on Rails. I think that Bini does a masterful job of always using the right tool for the right job. <a href="http://java.dzone.com/reviews/practical-jruby-rails-web-20-p">Read my review for complete details.</a></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2008/01/02/mid-year-review-my-professional-development-goals-for-2007-2008/">Mid-Year Review: My Professional Development Goals for 2007-2008</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-01-02T17:33:00-06:00" pubdate data-updated="true">Jan 2<span>nd</span>, 2008</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Back in July I posted my professional development goals for the year (My performance review is annually in July, so it&#8217;s a good time to set goals.), and it seemed like a good idea to take a look at my progress while doing the &#8220;New Year&#8217;s Resolution&#8221; thing.</p>
+
+<ol>
+<li>Learn Groovy and Grails</li>
+</ol>
+
+
+<p> Andy and Dave suggest learning a new language every year, so this seemed like a good goal for me. I can&#8217;t say that I&#8217;ve truly learned Groovy and Grails in depth, but I did learn them enough <a href="http://www.memphisjug.org/october25%2C2007">to do a presentation on them</a> (as well as Ruby, JRuby, and Rails) at our Java User Group meeting  in October, so I&#8217;ve effectively touched on two languages and two frameworks for those languages. I&#8217;ve since gotten interested in Scala as well. At any rate, I&#8217;d like to go deeper w/ Groovy and Grails as I have time, which is scarce!</p>
+
+<ol>
+<li>Release HallKeeper v1.0 as part of #1</li>
+</ol>
+
+
+<p>This project seems destined to fail. I haven&#8217;t worked on it in any meaningful way since the summer. I&#8217;ve thought about it in the past week, and I&#8217;d actually like to try doing it in straight Java POJOs with Spring and Hibernate since I&#8217;m more well-versed in that area. At any rate, it really is my lack of spare time that keeps this one on the perpetual back burner.</p>
+
+<ol>
+<li>Read and LEARN the following books:</li>
+</ol>
+
+
+<pre><code>* The Definitive Guide to Grails - Rocher
+* The Pragmatic Programmer - Hunt, Thomas
+* Computer Algorithms: Introduction to Design &amp; Analysis - Baase, Van Gelder
+* Concepts of Programming Languages: Sebesta
+* Groovy in Action - Konig  
+</code></pre>
+
+<p>I&#8217;ve pretty much finished #1, got started on #2, and haven&#8217;t really touched the last three. Again, the needs of the moment have necessitated I focus on other areas, particularly other books. Recent projects have pointed me to three additional books I&#8217;d really like to cover this year, so I may not get to my original list. Here are the titles:</p>
+
+<pre><code>* Working Effectively with Legacy Code - Feathers  
+
+* POJOs in Action - Richardson
+* Domain Driven Design - Evans  
+</code></pre>
+
+<ol>
+<li>Review two books for the JavaLobby/DZone book review team</li>
+</ol>
+
+
+<p>This is one I&#8217;ve hit the nail on. I just completed my second book review, which will be published some time in the next few weeks. My first review, <a href="http://matt-stine.blogspot.com/2007/10/ajax-construction-kit-building-plug-and.html">Ajax Construction Kit: Building Plug-and-Play Ajax Applications</a>, was published in October 2007. These have been rather time consuming and have kept me from other projects, so I don&#8217;t plan to take any more reviews this year.</p>
+
+<ol>
+<li>Pass the Sun Certified Programmer for the Java 2 Platform, Standard Edition 5.0 Exam</li>
+</ol>
+
+
+<p>Haven&#8217;t touched this one yet. Preparing for this will be one of my foci in the coming weeks.</p>
+
+<ol>
+<li>Write one Java/software development blog article per week</li>
+</ol>
+
+
+<p>I haven&#8217;t done so hot on this one. OK, let&#8217;s be really honest. I haven&#8217;t come close. However, my recent flurry of entries on The Spring Experience 2007 have gotten me into a bit of a groove. I&#8217;m going to try to keep up the momentum and finish this year strong.</p>
+
+<ol>
+<li>Attend JavaOne 2008 or similar conference</li>
+</ol>
+
+
+<p>I&#8217;ve actually traveled twice since my original post. My first trip was to the <a href="http://nerlscd.biotech.cornell.edu/">Northeast Life Sciences Core Directors Meeting</a> last November at Cornell University in Ithaca, NY. The purpose of this trip was to present and generate interest around our open source shared resource management system for core facilities, <a href="http://stjude-srm.sourceforge.net/">STJUDE-SRM</a>. The trip was a great success. My second trip really fulfills this goal, as I attended <a href="http://www.thespringexperience.com/conference/hollywood/2007/12/index.html">The Spring Experience 2007</a> in Hollywood, FL. This proved to be one of the best technical conferences I&#8217;ve ever attended, and also one of the most fun!</p>
+
+<ol>
+<li>Start a Memphis/Mid-South Area Java User Group</li>
+</ol>
+
+
+<p>I don&#8217;t think this goal could have gone any better than it has. In late July I started a <a href="http://groups.google.com/group/memphis-mid-south-jug">Google Group</a> and a small Google Page Creator website to attempt to drum up interest in a Java User Group for the Memphis, TN and surrounding Mid-South area. On July 23, 2007, along comes Diane Tabulog, a technical recruiter with local company <a href="http://www.vaco.com/Technology/tech_about.htm">Vaco Technology</a>, who convinces her company to throw its support behind our JUG. All of a sudden we have an offer for a meeting location, food budget, giveaways, etc. Later, Clayton Naeve, our CIO at St. Jude, agreed to let us use our awesome conference room at our division&#8217;s new offices at 160 Shadyac Avenue to meet, as Vaco&#8217;s facilities were a bit small. On August 15, <a href="http://weblogs.java.net/blog/caroljmcdonald">Carol McDonald</a>, a Java Technology Evangelist from Sun Microsystems, offered to speak at our JUG, and we signed her up for the first meeting. Little by little, all of the necessary pieces started to fall into place, including additional free giveaways from Sun, O&#8217;Reilly, Atlassian, and JetBrains. <a href="http://www.memphisjug.org/september20%2C2007">The first meeting</a> was a great success, and since then we&#8217;ve had two more successful meetings. Our next meeting is Thursday, January 17, 2008. Find out more at <a href="http://www.memphisjug.org">http://www.memphisjug.org</a>.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2007/12/21/web-application-data-access-patterns-keith-donald/">Web Application Data Access Patterns: Keith Donald</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2007-12-21T15:48:00-06:00" pubdate data-updated="true">Dec 21<span>st</span>, 2007</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Well, after a short hiatus of getting back to &#8220;real&#8221; work, I&#8217;m going to attempt to squeeze in another Spring Experience 2007 entry. This particular session was my first of Friday morning. I&#8217;ve always enjoyed Keith Donald as a speaker, having first heard him at <a href="http://www.theserverside.com/tt/articles/content/JIApresentations/Donald.pdf">TheServerSide.com&#8217;s Java In Action conference in 2005</a>, and again during his <a href="http://mattatjavaone2007.blogspot.com/2007/05/java-university-developing-enterprise.html">Java University session at JavaOne 2007</a>.</p>
+
+<p>Keith began with a discussion of why we need patterns. In his opinion, patterns simply provide a way of thinking about a particular approach to a problem. One could liken them to blueprints. They typically have a name, a description of the problem being solved, a description of the solution approach, and finally a selection of implementation guidelines and considerations. Pretty nice summation.</p>
+
+<p>The particular patterns that Keith planned to discuss surrounded the different data access patterns typically found in web applications.</p>
+
+<p>Keith began by discussing the &#8220;Unit of Work&#8221; pattern, which he defined as a unit of interaction with a shared resource that executes independently of other units. These interactions exhibit <a href="http://en.wikipedia.org/wiki/ACID">ACID properties</a>, and a database transaction provides a typical  example. In the context of an ORM such as Hibernate, a Unit of Work tracks changes to the object graph during a transaction and then synchronizes those changes with the database when the transaction is complete. Keith followed this discussion with an implementation example from his &#8220;Reward Network&#8221; sample application.</p>
+
+<p>Keith followed this discussion with two of what I&#8217;ll call &#8220;subpatterns&#8221; of the Unit of Work pattern: Pessimistic and Optimistic Locking. With pessimistic locking, you prevent other units from accessing your data during a given unit of work, and then release the &#8220;lock&#8221; as soon as possible. This locking is performed to prevent a <a href="http://en.wikipedia.org/wiki/Race_condition">race condition</a>, resulting in an inconsistent state in your model. Keith briefly illustrated implementation of pessimistic locking with Hibernate.</p>
+
+<p>It&#8217;s always interesting when someone asks a slightly off-topic question which ends up in a take home gem of information. At this point, someone asked if the implementations that Keith was showing showcased Spring&#8217;s Hibernate support. To this Keith surprised me by answering (and I paraphrase), &#8220;Hibernate&#8217;s native API&#8217;s are much more mature and powerful now, so we recommend you use those rather than Spring&#8217;s Hibernate API wrapper. Why add another dependency?&#8221; He then proceeded to recommend Rossen Stoyanchev&#8217;s Saturday morning session on &#8220;Working with Hibernate in a Spring 2.5 Environment&#8221; (blog entry to come later!). One of the better quotes of the conference came during this aside as well:</p>
+
+<blockquote><p><em>Whenever you can eliminate a dependency, you should.</em><br/>
+- Keith Donald</p></blockquote>
+
+<p>Well, back to the presentation. Keith then moved into a discussion of Optimistic Locking. Here, within a business transaction that executes across a series of system transactions, you use optimistic locking to prevent corruption of shared data. An examples is where several users can edit account information concurrently, but the frequency of concurrent access is fairly low. Data integrity is still at risk, so you use optimistic locking to handle those infrequent cases. Keith them demonstrated the use of <a href="http://www.hibernate.org/hib_docs/reference/en/html/transactions.html#transactions-optimistic">Hibernate versioning to implement optimistic locking</a>.</p>
+
+<p>Keith next moved into a discussion of the controversial &#8220;Open Session in View&#8221; pattern. This is a specialized technical pattern where by the Hibernate session is kept open for the duration of a given web request. It is generally used as a &#8220;quick fix&#8221; to prevent lazy loading exceptions in the view tier. This is generally considered a bad thing, as you end up with a great deal of &#8220;N+1 Select&#8221; situations while rendering the view, resulting in way too much SQL executed against the database. Typically, the need to use this pattern reveals a flaw in the design of your model or queries. For example, since you generally know how far in the object graph you&#8217;ll need to go for a specific view, you should load those relationships eagerly for that use case. You may also consider whether or not a given object association is appropriate to begin with.</p>
+
+<p>The final major pattern that Keith discussed was the &#8220;Conversational Persistence Context&#8221; pattern that is present in the upcoming Spring Web Flow 2.0 release. It is essentially a more flexible variation of the Open Session in View pattern, where by you can have an open session spanning multiple requests during a long-running user interaction context, or &#8220;conversation.&#8221; To be perfectly honest, I still don&#8217;t quite &#8220;get&#8221; this pattern beyond that, probably because I don&#8217;t know much about Web Flow or it&#8217;s cousins (e.g. Seam, Web Beans JSR-299).</p>
+
+<p>Keith closed with a very brief description of Master Detail, where you show an overview of objects in a collection and then allow drilling down into object details, and Paging, where you allow users to easily browse through a list of items of interest. I raised a point of contention with Keith at this point. His example implementation showed delegation of the paging concern to the DAO layer, rather than implementing that concern in the View layer. When I asked him where he thought it belonged, he thought it was obvious that it belonged in the DAO layer. I then let on that we had this debate in our team and decided the the concern belonged in the View layer. Why should I run the same query multiple times just to page through the data? Why not load the entire data set and then let the View tier decide how to page through it? Keith gracefully acknowledged my point.</p>
+
+<p>All in all, this was a great session, if for no other reason than it reminded me of some best practices in this area and let me in on the little secret about using native Hibernate API&#8217;s rather than Spring&#8217;s Hibernate template. Nice job, Keith.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2007/12/15/goodbye-spring-experience-2007/">Goodbye Spring Experience 2007!</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2007-12-15T22:09:00-06:00" pubdate data-updated="true">Dec 15<span>th</span>, 2007</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="http://picasaweb.google.com/matt.stine/TheSpringExperience2007/photo#5144397897054158610"><img src="http://lh3.google.com/matt.stine/R2SSoZUt_xI/AAAAAAAAAYQ/Ijb1Py3pDN4/s288/DSCN0746.JPG" alt="" /></a>Well it had to end eventually. As you can see, I&#8217;m hopelessly behind on my blog entries, having only made it through my first day of sessions. I&#8217;ve still got several more I intend to cover (I probably won&#8217;t do the last two as I started blanking out - I think my brain was pretty much melted by this afternoon). Look for those entries in the coming days. Many thanks go out to <a href="http://www.nofluffjuststuff.com/">No Fluff Just Stuff </a>and <a href="http://www.springsource.com/">SpringSource</a> for putting on an awesome conference!</p>
+
+<p>There were several things I really liked about this conference that I believe set it apart from most of the conferences that I have attended.</p>
+
+<ol>
+<li>The technical content was top-notch - Spring topics from the developers themselves. There were also quite a few architecture/design sessions that were also superb.</li>
+<li>The session length, at 90 minutes, provided ample time to cover each topic pretty well in-depth. The session scope cooperated with this, as most of the speakers didn&#8217;t try to do too broad of subjects for the time allotted.</li>
+<li>It was a smaller conference, at a little over 500 developers. This meant you weren&#8217;t trying to weave through crowds to get in queues for packed out sessions like at JavaOne. Much less stressful.</li>
+<li>The atmosphere was just plain fun. Everyone was laid back. I mean, how many conferences give you a bobblehead doll on the first night! I now issue a call out to Sun that we must have a James Gosling bobblehead doll issued to every attendee at JavaOne 2008!</li>
+<li>The food was top notch - every meal was provided, buffet-style (no boxes!!!). I ate way too much.</li>
+<li><p>The location was great. You can&#8217;t beat a front-on view of the Atlantic Ocean from the conference center balcony during session breaks.</p></li>
+<li><p>SWAG! Let&#8217;s see what all I collected: a computer bag, a binder with all of the slides, two t-shirts, a hat, sunglasses, a beach towel, a Frisbee, a NFJS Anthology, a bobblehead doll, a Spring Source toolkit (two screwdrivers and a measuring tape - you&#8217;d have to see it)&#8230;what&#8217;s more, Jay Zimmerman distributed the left-over swag after the conference closed. I picked up two more computer bags full of swag and two conference binders to give away at the January and February Memphis JUG meetings!
+Once again, thanks for a great conference. It was easily the best all-around that I&#8217;ve attended.</p></li>
+</ol>
+
+
+<p><a href="http://picasaweb.google.com/matt.stine/TheSpringExperience2007/photo#5144397905644093234"><img src="http://lh5.google.com/matt.stine/R2SSo5Ut_zI/AAAAAAAAAYg/BUmwMhV_HoQ/s288/DSCN0752.JPG" alt="" /></a></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2007/12/15/the-state-of-the-art-in-dependency-injection-rod-johnson/">The State of the Art in Dependency Injection: Rod Johnson</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2007-12-15T10:06:00-06:00" pubdate data-updated="true">Dec 15<span>th</span>, 2007</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>This was a truly fascinating talk. If you ever wanted to learn the entire history and landscape of dependency injection (DI), this was your opportunity. I really didn&#8217;t realize how deep of a topic DI really is.</p>
+
+<p>According to Rod, DI had its beginnings in 2002, in the Interface 21 Framework that was born from his seminal work, <a href="http://www.amazon.com/Expert-One-One-Design-Development/dp/1861007841">Expert One-on-One J2EE Design and Development</a>. In the beginning, DI was done solely through setter injection (SI), with external metadata (usually in XML). 2003 gave us Spring 0.9, which had the same DI model, but added FactoryBeans for indirection and proxy-based AOP (enabling among other things, declarative transaction management). With Spring, DI was always just one enabler of a complete enterprise solution. Contrast that with <a href="http://www.picocontainer.org/">PicoContainer</a>, also arriving on the scene in 2003, which was an ultra-lightweight DI-only container. PicoContainer brought us several innovations, including constructor injection, automatic resolution by type, and an attempt to dispense with external configuration.</p>
+
+<p>Rod then discussed the Pros and Cons of Constructor Injection (CI). On the Pro side, we see that CI is great for immutable objects, can be used with existing code, enforces that the necessary dependencies are provided at object construction, and allows developers to dispense with methods like afterPropertiesSet(). On the Con side, there are no default arguments in Java, which forces us to ALWAYS provide all of the necessary dependencies, constructor overriding can be somewhat messy, and constructor argument names are not usually available through reflection, which forces us to depend on argument order for dependency resolution.</p>
+
+<p>Spring 1.0, which arrived in late 2003, incorporated some of PicoContainer&#8217;s innovation: CI, &#8220;Autowiring&#8221; by type and by name, as well as the ability to mix CI and SI. Here Rod reflected on Spring&#8217;s pragmatic philosophy, whereby they are more than willing to incorporate the good ideas that others had first.</p>
+
+<p>Spring 1.1 brought us method injection, a unique Spring feature, which solved the problem of long-lived managed objects which depend on short-lived objects. It also brought us Factory Methods. You now had the ability to create objects through invoking static factory methods or instance methods on other beans.</p>
+
+<p>With the finalization of the <a href="http://java.sun.com/products/ejb/docs.html">EJB 3.0 standard</a> in May 2006, several new ideas became available in the world of DI: annotation-based DI, annotations for callback methods (e.g. @PostConstruct), scanning for annotations without any external configuration needed for a deployment unit, and field injection (FI). These EJB standard brought with it a new philosophy - that annotations are a superior model and that externalization should be a second-class citizen. The Pros of this standard? One big one - no configuration is necessary for simple cases. The Cons? Rod listed several: resources could only be injected from JNDI, no CI, limited control over object lifecycle, unsuitability for fine-grained object graphs, effectively usable ONLY with annotations, as the XML configuration option is so verbose, and it isn&#8217;t just DI - it brings along with it enforcement of many obsolete EJB concepts (such as bean instance pooling).</p>
+
+<p>Spring 2.0 arrived in late 2005 with its own share of innovations: integration with <a href="http://www.eclipse.org/aspectj/">AspectJ</a>, the ability to inject anything with an AspectJ aspect via @Configurable, namespaces to provide an XML-based DSL for external configuration, the @Required annotation, and pluggable scopes to manage the object lifecycle. About that same time, JBoss Seam introduced many strange ideas (that I didn&#8217;t quite grasp from Rod&#8217;s explanation): bijection, outjection, and subversion of control.</p>
+
+<p>Some additional players on the field include Spring Java Config, which is a DSL for configuration in Java, <a href="http://code.google.com/p/google-guice/">Google Guice 1.0</a>, and the <a href="http://jcp.org/en/jsr/detail?id=299">JSR-299 Web Beans spec</a>, which Rod described as &#8220;blogware&#8221; in that there is currently no available implementation.</p>
+
+<p>Finally we got to Spring 2.5, released last month. Rod didn&#8217;t have his slides printed or available on the web (argh!), so about this time my hand was really hurting from taking furious notes, and I simply gave up. Fortunately, most of what Rod covered was redundant from some of the other sessions, so I&#8217;ll have or will blog about it later. About the only thing I really don&#8217;t have good notes on is Spring Java Config, which he discussed pretty extensively. If you want to learn more about it, check out <a href="http://www.springframework.org/javaconfig">http://www.springframework.org/javaconfig</a>.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2007/12/14/ajax-integration-guide-for-2008-jeremy-grelle/">Ajax Integration Guide for 2008: Jeremy Grelle</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2007-12-14T15:40:00-06:00" pubdate data-updated="true">Dec 14<span>th</span>, 2007</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>This talk looked really exciting going in. Jeremy is a member of the Spring Web Products team and the lead of Spring Faces, as well as a member of the JSF 2.0 Expert Group. He describes himself as the resident Ajax freak at SpringSource. Jeremy began by discussing the current Ajax landscape, highlighting what he believes are the important features a successful framework must deliver, and then identifying the frameworks he considers to be the cream of the crop. No surprises here on the list: Prototype/Scriptaculous, jQuery, YUI, Ext, and Dojo. He then gave a brief high-level overview of each framework - I really didn&#8217;t learn anything new here, as I&#8217;ve been following these frameworks for quite awhile. He mentioned the commonality that all of these frameworks are about more than asynchronous client-server communication - they&#8217;re about improving your client-side code and user experience. See Dion&#8217;s May 2007 comment that Ajax &#8220;was never about the acronym - it&#8217;s about building killer websites.&#8221; What is good about all of these frameworks is that you can use all of them in an unobtrusive manner and progressively enhance your UI. This gives you the ability to only Ajaxify what you need and also get graceful degradation.</p>
+
+<p>In the second portion of his talk, Jeremy talked about connecting to Spring. I was really hoping that the &#8220;goods&#8221; would be delivered here. He started by mentioning DWR, which I think is a really nice framework. It merited 2 slides and no demo (even though there was a slide mentioning a demo). I don&#8217;t think Jeremy really cares for it or GWT, as he sort of lumped them together and didn&#8217;t mention them again. I do appreciate his point that neither really allows you to harvest any existing controlling infrastructure that we may have built using Spring MVC or another framework.</p>
+
+<p>Jeremy then moved into what he considers the better way to do it, which is the progressive enhancement I mentioned above. He took the existing Spring Booking MVC + Web Flow example application and ajaxified portions of it. He did this using an interesting combination of Apache Tiles, some Javascript &#8220;pseudo-AOP&#8221; he lifted from the SpringFaces project, and a bit of Dojo. It seemed to work really well, but it wasn&#8217;t immediately clear how this type of technology was going to be made available to us as developers. He said something along the lines of &#8220;you don&#8217;t have to be using JSF to use this Javascript, so we probably need to change the name to something else.&#8221; I hope they figure out soon so I can get my hands on it. :-)</p>
+
+<p>He closed by briefly discussing REST&#8217;s place in the future of Spring Web. The ideal scenario, according to Jeremy, is that we will be able to request different representations of the same resource. For example, we could request HTML for full page display or partial DOM updates, and JSON for intelligent widgets like the Dojo table.</p>
+
+<p>It looks like a lot of exciting things will happen in 2008. I hope I don&#8217;t have to wait too long.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  <div class="pagination">
+    
+      <a class="prev" href="/blog/page/8/">&larr; Older</a>
+    
+    <a href="/blog/archives">Blog Archives</a>
+    
+    <a class="next" href="/blog/page/6/">Newer &rarr;</a>
+    
+  </div>
+</div>
+<aside class="sidebar">
+  
+    <section>
+	<h1>Hello, World!</h1>
+	<p>
+		<img src="http://mattstine.files.wordpress.com/2011/05/indiamug.jpg" width="173" height="213">
+	</p>
+	<p>
+		<a href="http://www.linkedin.com/in/mattstine"><img alt="View Matt Stine&#039;s profile on LinkedIn" src="http://www.linkedin.com/img/webpromo/btn_myprofile_160x33.gif" border="0" width="160" height="33"></a>
+	</p>
+</section><section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2011/05/16/design-meeting-patternsantipatterns/">Design Meeting Patterns/Antipatterns</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/01/05/selenium-conference-2011/">Selenium Conference 2011</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/01/02/2010-in-review-the-automated-analysis/">2010 in review: the automated analysis&#8230;</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2010/11/29/selenium-2-0-refcard/">Selenium 2.0 Refcard</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2010/11/10/agile-zone-roundup/">Agile Zone Roundup</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating&#8230;</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("mstine", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/mstine" class="twitter-follow-button" data-show-count="false">Follow @mstine</a>
+  
+</section>
+
+
+
+
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - Matt Stine -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'seekingsimplicity';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

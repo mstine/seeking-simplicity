@@ -1,0 +1,12 @@
+---
+date: '2007-04-30 14:38:00'
+layout: post
+slug: welcome
+status: publish
+title: Welcome!
+wordpress_id: '25'
+categories:
+- general
+---
+
+I plan to start posting here on Saturday, May 5, 2007. Look for photos, videos, and session synopses, as well as miscellaneous banter about JavaOne 2007 in San Francisco, CA!

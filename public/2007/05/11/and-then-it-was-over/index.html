@@ -1,0 +1,278 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>And then it was over... - Seeking Simplicity</title>
+  <meta name="author" content="Matt Stine">
+
+  
+  <meta name="description" content="I really enjoyed &#8220;The Toy Show&#8221; this morning. James Gosling went through a flurry of different demos from around the &#8220;cool&#8221; &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://mattstine.com/2007/05/11/and-then-it-was-over">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Seeking Simplicity" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Seeking Simplicity</a></h1>
+  
+    <h2>A blog about programming, software architecture and everything else...</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:mattstine.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">And Then It Was Over...</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2007-05-11T22:57:00-05:00" pubdate data-updated="true">May 11<span>th</span>, 2007</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p><a href="http://picasaweb.google.com/matt.stine/SanFranciscoJavaOne2007/photo#5063512122879158706"><img src="http://lh4.google.com/image/matt.stine/RkU1crgYqbI/AAAAAAAAAOI/fn4ypOF5zkQ/s288/DSCN1138.JPG" alt="" /></a></p>
+
+<p>I really enjoyed &#8220;The Toy Show&#8221; this morning. James Gosling went through a flurry of different demos from around the &#8220;cool&#8221; Java world. I was especially impressed with Project Wonderland (http://lg3d-wonderland.dev.java.net/), a virtual workplace environment, and with the real-time robotics demos. Unfortunately I was so sucked in that I didn&#8217;t get any good photos.</p>
+
+<p>If anything you could call this my day on the back end. I attended four sessions, two of which were focused on that.</p>
+
+<ul>
+<li>Comparing the Developer Experience of Java EE 5.0, Ruby on Rails, and Grails: Lessons Learned from Developing One Application</li>
+<li>Implementing Java EE Applications Using Enterprise JavaBeans (EJB) 3 Technology: Real-World Tips, Tricks, and New Design Patterns</li>
+<li>The Top 10 Ways to Botch Enterprise Java Technology-Based Application Scalability and Reliability</li>
+<li>Exploting JRuby: Building Domain-Specific Languages for the Java Virtual Machine</li>
+</ul>
+
+
+<p>I scheduled the first session because I thought it was be a good way to tie together all that I had learned about Grails and Rails and then compare it to my existing Java EE knowledge. As it turns out, the speaker believed that given tool support, the development experience wasn&#8217;t all that different between the three. He then gave some performance comparisons, but I wasn&#8217;t all that sure the analysis was very sound. Java EE came out way on top. I hadn&#8217;t heard that it outperformed the others by quite as much as he showed. He made a rather dubious statement when he said that Grails and Rails weren&#8217;t protected by standards. Groovy is a JSR and Grails just sits on top of it. If that isn&#8217;t standard protection, then what is?</p>
+
+<p>The EJB tips, tricks, and patterns session was quite nice. I learned a few nuances of the platform. The patterns part was the best. They first went through some of the design patterns from the EJB 2.x days and identified which ones were obsolete and which ones were still useful. They then provided several new design patterns. Unfortunately the slides for this talk were not yet available and I just don&#8217;t feel like combing through my handwritten notes. Definitely check this one out online when it is posted.</p>
+
+<p>Cameron Purdy&#8217;s &#8220;Top 10&#8221; talk was both humorous and thought-provoking. I&#8217;ll never do justice to it. Check it out when the video comes available.</p>
+
+<p>The final session of the conference for me addressed a burning question I had in my mind since Monday - what in the world is a DSL? I heard it thrown around in the Grails and Ruby talks at Java University, but nobody ever defined the acronym. Domain Specific Language - that what it is! I mainly attended this talk because I thought there might be applications for DSL&#8217;s in our work at St. Jude. A DSL is a custom language designed for a specific purpose. Ruby&#8217;s Rake language for instrumenting application builds is an example. Rob Harrop gave an impressive demo of how he built two DSL&#8217;s, one providing a simpler API for JMX, and another for corporate action entitlement calculations. While I can&#8217;t think of a direct application for DSL&#8217;s yet, I&#8217;m not tossing out the possibility.</p>
+
+<p>JavaOne was a great conference for me. If I didn&#8217;t hate to leave my family for this long, I&#8217;d love to attend every year. It&#8217;s definitely drinking from a fire hydrant.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Matt Stine</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2007-05-11T22:57:00-05:00" pubdate data-updated="true">May 11<span>th</span>, 2007</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/dsl/'>DSL</a>, <a class='category' href='/blog/categories/ejb3/'>EJB3</a>, <a class='category' href='/blog/categories/grails/'>grails</a>, <a class='category' href='/blog/categories/groovy/'>groovy</a>, <a class='category' href='/blog/categories/rails/'>rails</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://mattstine.com/2007/05/11/and-then-it-was-over/" data-via="mstine" data-counturl="http://mattstine.com/2007/05/11/and-then-it-was-over/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2007/05/11/thursday-was-slow/" title="Previous Post: Thursday was slow...">&laquo; Thursday was slow...</a>
+      
+      
+        <a class="basic-alignment right" href="/2007/06/19/migrated/" title="Next Post: Migrated">Migrated &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+	<h1>Hello, World!</h1>
+	<p>
+		<img src="http://mattstine.files.wordpress.com/2011/05/indiamug.jpg" width="173" height="213">
+	</p>
+	<p>
+		<a href="http://www.linkedin.com/in/mattstine"><img alt="View Matt Stine&#039;s profile on LinkedIn" src="http://www.linkedin.com/img/webpromo/btn_myprofile_160x33.gif" border="0" width="160" height="33"></a>
+	</p>
+</section><section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2011/05/16/design-meeting-patternsantipatterns/">Design Meeting Patterns/Antipatterns</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/01/05/selenium-conference-2011/">Selenium Conference 2011</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/01/02/2010-in-review-the-automated-analysis/">2010 in review: the automated analysis...</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2010/11/29/selenium-2-0-refcard/">Selenium 2.0 Refcard</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2010/11/10/agile-zone-roundup/">Agile Zone Roundup</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating...</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("mstine", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/mstine" class="twitter-follow-button" data-show-count="false">Follow @mstine</a>
+  
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - Matt Stine -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'seekingsimplicity';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

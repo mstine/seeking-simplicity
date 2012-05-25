@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Career 2.0 | Seeking Simplicity]]></title>
+  <link href="http://mattstine.com/blog/categories/career-2-0/atom.xml" rel="self"/>
+  <link href="http://mattstine.com/"/>
+  <updated>2012-05-24T19:13:18-05:00</updated>
+  <id>http://mattstine.com/</id>
+  <author>
+    <name><![CDATA[Matt Stine]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Career 2.0: Toastmasters]]></title>
+    <link href="http://mattstine.com/2009/05/11/career-20-toastmasters/"/>
+    <updated>2009-05-11T15:59:31-05:00</updated>
+    <id>http://mattstine.com/2009/05/11/career-20-toastmasters</id>
+    <content type="html"><![CDATA[<p>I'm currently making my second trip through <a href="http://agileartisans.com/main">Jared Richardson's</a> excellent book <a href="http://www.lulu.com/content/5925115">Career 2.0: Take Control of Your Life</a>. In the "Public Speaking" chapter, one of the recommended avenues for public speaking practice is <a href="http://www.toastmasters.org">Toastmasters</a>. I first heard of Toastmasters...you guessed it, on my first trip through the book. Shortly after returning home from <a href="http://www.nofluffjuststuff.com/conference/st_louis/2009/03/index.html">NFJS St. Louis</a>, I decided to see if I could find a local club. Lo and behold, a Toastmasters club already meets on the St. Jude Children's Research Hospital campus! I had no excuse but to check it out at this point.</p>
+
+<p>For the uninitiated, Toastmasters is an organization focused on helping individuals hone their communication and leadership skills in a safe environment. This is accomplished primarily through three different avenues:</p>
+
+<ul>
+<li><p>Serving in one of the meeting leadership roles, such as Toastmaster (the meeting facilitator);</p></li>
+<li><p>Giving a prepared speech/talk from the list of speech projects in the Toastmasters "coursework";</p></li>
+<li><p>Speaking extemporaneously on one of several "table topics," which are speaking prompts provided during the meeting.</p></li>
+</ul>
+
+
+<p>Participation in any of these avenues is immediately followed up with feedback from one or more people playing various "evaluator" roles. I couldn't help but see the parallels to agile software development!</p>
+
+<p>I've now attended three meetings, and at the last meeting I decided to join up. The St. Jude club is an extremely friendly group, and several of its members are very accomplished public speakers. You can definitely tell that the Toastmasters experience has helped them enhance their communications skills. I'm looking forward to polishing my own.</p>
+]]></content>
+  </entry>
+  
+</feed>

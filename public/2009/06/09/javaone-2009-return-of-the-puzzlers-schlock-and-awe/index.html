@@ -1,0 +1,339 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>#JavaOne 2009 Return of the Puzzlers: Schlock and Awe - Seeking Simplicity</title>
+  <meta name="author" content="Matt Stine">
+
+  
+  <meta name="description" content="For several years now, Neal Gafter (Microsoft) and Joshua Block (Google), have made a habit of presenting various incarnations of this technical &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://mattstine.com/2009/06/09/javaone-2009-return-of-the-puzzlers-schlock-and-awe">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Seeking Simplicity" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Seeking Simplicity</a></h1>
+  
+    <h2>A blog about programming, software architecture and everything else...</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:mattstine.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">#JavaOne 2009 Return of the Puzzlers: Schlock and Awe</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-06-09T20:19:30-05:00" pubdate data-updated="true">Jun 9<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>For several years now, Neal Gafter (Microsoft) and Joshua Block (Google), have made a habit of presenting various incarnations of this technical session, focused on what they call &#8220;Java Puzzlers.&#8221; Java Puzzlers are nothing more than short Java programs with curious behavior. It is a somewhat interactive session, with each puzzler&#8217;s code listing followed by a four possible choices (A,B,C,D) to answer the question: &#8220;What does it print?&#8221; Neal and Joshua &#8220;require&#8221; that every attendee vote for their answer. After the vote, they reveal the correct answer and how to fix the problem. At the end of each problem presentation is the most important part, which is the Java programming principle that is illuminated by the puzzler. These are important tools to carry with you as you go forth a develop your Java code.</p>
+
+<p>The following is a listing of the problem titles that were presented:</p>
+
+<ol>
+<li><p>Life&#8217;s Persistent Questions</p></li>
+<li><p>Instruments of Torture</p></li>
+<li><p>Iterator Titillator</p></li>
+<li><p>Searching for the One</p></li>
+<li><p>Cogito Ergo Sum</p></li>
+<li><p>Thread Friendly</p></li>
+<li><p>When Words Collide</p></li>
+</ol>
+
+
+<p>I&#8217;m going to spend my time focused on the last puzzler, as it was the one for which I was ABSOLUTELY CERTAIN that I knew the correct answer. Here&#8217;s the code listing:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">PrintWords</span> <span class="o">{</span>
+</span><span class='line'>  <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span>
+</span><span class='line'>      <span class="n">Words</span><span class="o">.</span><span class="na">FIRST</span> <span class="o">+</span> <span class="s">&quot; &quot;</span> <span class="o">+</span> <span class="n">Words</span><span class="o">.</span><span class="na">SECOND</span> <span class="o">+</span> <span class="s">&quot; &quot;</span> <span class="o">+</span> <span class="n">Words</span><span class="o">.</span><span class="na">THIRD</span><span class="o">);</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Words</span> <span class="o">{</span> <span class="c1">// Compile PrintWords against this version</span>
+</span><span class='line'>  <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">FIRST</span>  <span class="o">=</span> <span class="s">&quot;the&quot;</span><span class="o">;</span>
+</span><span class='line'>  <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">SECOND</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+</span><span class='line'>  <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">THIRD</span>  <span class="o">=</span> <span class="s">&quot;set&quot;</span><span class="o">;</span>
+</span><span class='line'><span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Words</span> <span class="o">{</span> <span class="c1">// Run against this version</span>
+</span><span class='line'>  <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">FIRST</span>  <span class="o">=</span> <span class="s">&quot;physics&quot;</span><span class="o">;</span>
+</span><span class='line'>  <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">SECOND</span> <span class="o">=</span> <span class="s">&quot;chemistry&quot;</span><span class="o">;</span>
+</span><span class='line'>  <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">THIRD</span>  <span class="o">=</span> <span class="s">&quot;biology&quot;</span><span class="o">;</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>So here&#8217;s the problem. We have two versions of class &#8220;Words.&#8221; We compile class &#8220;PrintWords&#8221; against the first version and we then run the class against the second version. What does it print out? I used my trusty &#8220;seasoned Java programmer&#8221; knowledge to assert that the program would print &#8220;the null set.&#8221; Why? Well, any seasoned Java programmer realizes that static final variables (or &#8220;constant variables&#8221; - what a curious concept) are inlined by the compiler. So it&#8217;s quite obvious that &#8220;the&#8221; would be inlined wherever FIRST appears, null would be inlined wherever SECOND appears, and &#8220;set&#8221; would be inlined wherever THIRD appears.</p>
+
+<p>Imagine my frustration when Josh and Neil announced that the program would in fact print &#8220;the chemistry set.&#8221; As it turns out, null cannot be inlined! It is not a constant variable. So when we run our Java program, the JVM smartly picks up the non-null value of SECOND that is is able to find in the new version of Words.</p>
+
+<p>Simply because this one got me, I wanted to highlight it for my readers. The &#8220;moral&#8221; of this story is that only primitives and strings can be constant, and that null is not a constant. One should use a constant field ONLY if its value will NEVER change. For final fields whose value may change, they suggest the use of an ident() method:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="c1">// Returns its argument</span>
+</span><span class='line'><span class="kd">private</span> <span class="kd">static</span> <span class="n">String</span> <span class="nf">ident</span><span class="o">(</span><span class="n">String</span> <span class="n">s</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>  <span class="k">return</span> <span class="n">s</span><span class="o">;</span>
+</span><span class='line'><span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// None of these fields are constant variables</span>
+</span><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Words</span> <span class="o">{</span>
+</span><span class='line'>  <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">FIRST</span>  <span class="o">=</span> <span class="n">ident</span><span class="o">(</span><span class="s">&quot;the&quot;</span><span class="o">);</span>
+</span><span class='line'>  <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">SECOND</span> <span class="o">=</span> <span class="n">ident</span><span class="o">(</span><span class="kc">null</span><span class="o">);</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
+
+<p>The compile will not inline the call to ident.</p>
+
+<p>Want more? Pick up a copy of Neal and Josh&#8217;s book, <em>Java Puzzlers: Traps, Pitfalls, and Corner Cases!</em></p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Matt Stine</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-06-09T20:19:30-05:00" pubdate data-updated="true">Jun 9<span>th</span>, 2009</time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://mattstine.com/2009/06/09/javaone-2009-return-of-the-puzzlers-schlock-and-awe/" data-via="mstine" data-counturl="http://mattstine.com/2009/06/09/javaone-2009-return-of-the-puzzlers-schlock-and-awe/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2009/06/05/jug-usa-meeting-with-james-gosling-at-javaone/" title="Previous Post: JUG-USA Meeting with James Gosling at #JavaOne">&laquo; JUG-USA Meeting with James Gosling at #JavaOne</a>
+      
+      
+        <a class="basic-alignment right" href="/2009/06/17/book-review-career-20-take-control-of-your-life/" title="Next Post: Book Review: Career 2.0 - Take Control of Your Life">Book Review: Career 2.0 - Take Control of Your Life &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+	<h1>Hello, World!</h1>
+	<p>
+		<img src="http://mattstine.files.wordpress.com/2011/05/indiamug.jpg" width="173" height="213">
+	</p>
+	<p>
+		<a href="http://www.linkedin.com/in/mattstine"><img alt="View Matt Stine&#039;s profile on LinkedIn" src="http://www.linkedin.com/img/webpromo/btn_myprofile_160x33.gif" border="0" width="160" height="33"></a>
+	</p>
+</section><section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2011/05/16/design-meeting-patternsantipatterns/">Design Meeting Patterns/Antipatterns</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/01/05/selenium-conference-2011/">Selenium Conference 2011</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/01/02/2010-in-review-the-automated-analysis/">2010 in review: the automated analysis...</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2010/11/29/selenium-2-0-refcard/">Selenium 2.0 Refcard</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2010/11/10/agile-zone-roundup/">Agile Zone Roundup</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating...</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("mstine", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/mstine" class="twitter-follow-button" data-show-count="false">Follow @mstine</a>
+  
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - Matt Stine -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'seekingsimplicity';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

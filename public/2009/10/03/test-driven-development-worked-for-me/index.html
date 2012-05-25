@@ -1,0 +1,282 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Test Driven Development Worked for Me! - Seeking Simplicity</title>
+  <meta name="author" content="Matt Stine">
+
+  
+  <meta name="description" content="Our team got to spend a few days with Jared Richardson this week, talking tech leadership, agile, and automated testing. At some point during the &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://mattstine.com/2009/10/03/test-driven-development-worked-for-me">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Seeking Simplicity" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Seeking Simplicity</a></h1>
+  
+    <h2>A blog about programming, software architecture and everything else...</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:mattstine.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Test Driven Development Worked for Me!</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-10-03T17:02:36-05:00" pubdate data-updated="true">Oct 3<span>rd</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Our team got to spend a few days with Jared Richardson this week, talking tech leadership, agile, and automated testing. At some point during the opening day&#8217;s discussion, I related the story of how I initially got into Test Driven Development (TDD) and how it seriously ramped up my productivity and decreased my defect count.</p>
+
+<p>In early 2003, we were slowly dragging through development of the first version of our Shared Resource Management system. At the time our development model looked a little something like this:</p>
+
+<p>1) Code until you run into an unimplemented dependency;
+2) Repeat until one of the dependencies is checked in;
+3) Big Bang Integration!
+4) Debug, debug, debug&#8230;
+5) Repeat until something pseudo-demoable is ready.</p>
+
+<p>As you might imagine, this wasn&#8217;t a very productive way to work, but unfortunately it was all most of us knew. At the time I thought we really needed to improve on our testing so that we could eliminate a lot of the defects that at the time I didn&#8217;t realize were being caused by our development model. I asked my boss if I could start a QA effort and not too much later found the XP/Agile Universe conference that was held in August 2003. It was my hope that we could learn about how to properly test/QA our software there as there seemed to be a lot of talks about this &#8220;TDD&#8221; thing. I got approval to attend, and while down there I was immersed in this new culture of Extreme Programming (XP) and Agile.</p>
+
+<p>At one point I ventured into a room that was setup like what many of us would call a SCRUM/Team room today, where a group of folks were all coding away on a system and making its &#8220;Fit&#8221; tests pass. I quickly paired up with a gentleman and we went to work. At some point Brian Marick came over and asked what we were working on. I fumbled through a description of the requirement and he then asked, &#8220;Well, where&#8217;s your test?&#8221; I said that we didn&#8217;t have one, and he then said something that at the time was very profound to me, &#8220;Well, you can&#8217;t write any code until you have a failing test!&#8221;</p>
+
+<p>I spent most of my time waiting in the airport to return to Memphis reading Uncle Bob&#8217;s &#8220;Agile Software Development: Principles, Patterns, and Practices.&#8221; Needless to say, I was fired up.</p>
+
+<p>When I returned to work in the following weeks, I essentially tried two different tactics in parallel to share what I learned with my team.</p>
+
+<p>First, I practiced what Jared calls &#8220;2x4 Development,&#8221; or, beating your team in the shins with a 2x4 until they start doing TDD, pair programming, continuous integration, etc. I even delivered my own version of the agile manifesto to the entire department, and the most profound comments I got out of that were &#8220;I can&#8217;t ever imagine us paying two developers to sit at the same computer and work on the same code,&#8221; and &#8220;Well, who&#8217;s going to test the test code?!?!&#8221;</p>
+
+<p>Needless to say, this didn&#8217;t work very well. My second tactic was much more guerrilla in nature. I told the guy that I was working with that I didn&#8217;t care what he did with the rest of his time, as long as he checked in his interfaces before he started to code. Now I had something to mock! I then proceeded to TDD all of my code. I advertised my productivity in terms of test cases passing with a little counter on my whiteboard. Development was fun again, as I could get instant feedback on how my code was working and I knew that it was interacting properly with its dependencies. Sure enough, when those big bang integrations happened, my code rarely seemed to be the source of the defects, and I quickly found myself getting pulled into other parts of the code to help develop since I had already gotten my typical assignment finished!</p>
+
+<p>We delivered the section of the system that I developed using TDD much faster than any part that I had worked on up to that point (no hard numbers, but I have a pretty good memory of that time), and in addition, I wrote the CLEANEST code I had ever written up to that point.</p>
+
+<p>So, while Jared wouldn&#8217;t recommend you try TDD if the rest of your team isn&#8217;t on board - you&#8217;re never going to get someone who doesn&#8217;t care about tests to fix one that they broke - this guerrilla tactic worked well for me and got me some recognition as a guy who could write good clean code fast! If I could go back to that point, I think I would have tried <a href="http://www.jaredrichardson.net/blog/2005/11/03/">Defect Driven Testing</a> first or in addition to my GTDD.</p>
+
+<p>So, how are you getting your team test infected?</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Matt Stine</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-10-03T17:02:36-05:00" pubdate data-updated="true">Oct 3<span>rd</span>, 2009</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/agile/'>agile</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://mattstine.com/2009/10/03/test-driven-development-worked-for-me/" data-via="mstine" data-counturl="http://mattstine.com/2009/10/03/test-driven-development-worked-for-me/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2009/06/25/isabella-featured-on-totally-tots/" title="Previous Post: Isabella featured on Totally Tots">&laquo; Isabella featured on Totally Tots</a>
+      
+      
+        <a class="basic-alignment right" href="/2009/10/09/making-java-groovier-with-lambdaj/" title="Next Post: Making Java "Groovier" with LambdaJ">Making Java "Groovier" with LambdaJ &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+	<h1>Hello, World!</h1>
+	<p>
+		<img src="http://mattstine.files.wordpress.com/2011/05/indiamug.jpg" width="173" height="213">
+	</p>
+	<p>
+		<a href="http://www.linkedin.com/in/mattstine"><img alt="View Matt Stine&#039;s profile on LinkedIn" src="http://www.linkedin.com/img/webpromo/btn_myprofile_160x33.gif" border="0" width="160" height="33"></a>
+	</p>
+</section><section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2011/05/16/design-meeting-patternsantipatterns/">Design Meeting Patterns/Antipatterns</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/01/05/selenium-conference-2011/">Selenium Conference 2011</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/01/02/2010-in-review-the-automated-analysis/">2010 in review: the automated analysis...</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2010/11/29/selenium-2-0-refcard/">Selenium 2.0 Refcard</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2010/11/10/agile-zone-roundup/">Agile Zone Roundup</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating...</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("mstine", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/mstine" class="twitter-follow-button" data-show-count="false">Follow @mstine</a>
+  
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - Matt Stine -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'seekingsimplicity';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

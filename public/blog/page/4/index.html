@@ -1,0 +1,702 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Seeking Simplicity</title>
+  <meta name="author" content="Matt Stine">
+
+  
+  <meta name="description" content="The JavaOne 2009 Script Bowl was quite a delight to watch. The players were Jython (Frank Wierzbecki), Groovy (Guillaume LaForge), Clojure (Rich &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://mattstine.com/blog/page/4">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Seeking Simplicity" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Seeking Simplicity</a></h1>
+  
+    <h2>A blog about programming, software architecture and everything else...</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:mattstine.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/06/03/javaone-2009-script-bowl/">#JavaOne 2009 Script Bowl</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-06-03T13:16:26-05:00" pubdate data-updated="true">Jun 3<span>rd</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>The JavaOne 2009 Script Bowl was quite a delight to watch. The players were Jython (Frank Wierzbecki), Groovy (Guillaume LaForge), Clojure (Rich Hickey), Scala (Dick Wall), and JRuby (Thomas Enebo). The event was divided into two rounds:</p>
+
+<ol>
+<li><p>Demonstrating Language Features</p></li>
+<li><p>Demonstrating Community Contributions</p></li>
+</ol>
+
+
+<p>Each of the players focused on different angles during the language feature round. The Jython focus was squarely on the readability of the language. Frank&#8217;s key quote was Python looks an awful lot like &#8220;executable pseudocode.&#8221; The Groovy focus was a subset of Guillaume&#8217;s &#8220;What&#8217;s new in Groovy 1.6&#8221; talk, and highlighted the new compile-time metaprogramming/AST transformations. Rich Hickey directly attacked concurrency using Clojure, demonstrating a multi-threaded &#8220;Life&#8221; demo that highlighted the power of software transactional memory.</p>
+
+<p>I really enjoyed Dick&#8217;s angle for Scala - demonstrating that most of the Java small language changes contained in Project Coin are already present in the Scala language and very useable! Thomas Enebo went straight for the WOW factor by showing how easily a Ruby DSL can be wrapped around existing Java libraries with JRuby to create a very compelling 3D game.</p>
+
+<p>Next came the community round. This was actually the most impressive part of the whole session. Frank kicked off the Jython community focus by highlighting an <a href="http://openendedgroup.com/field/wiki/OverviewBanners2">interactive &#8220;art IDE&#8221; called Field</a> that drives <a href="http://processing.org/">the Processing language</a>. The chose Jython as the scripting language for the environment. Very neat.</p>
+
+<p>The Groovy demo was something to behold. Guillaume started off by demonstrating SwingPad, an exploratory IDE for building Swing applications with Groovy. But the real treat was a very impressive Twitter+NASA Worldwind mashup built very concisely using Griffon. I really need to give Griffon a try.</p>
+
+<p>Rich Hickey demonstrated the power of Clojure to build a data-driven, functional, template based website. It took an existing HTML template (with 0 code) and transformed it using &#8220;css-like&#8221; selectors provided by a <a href="http://github.com/cgrand/enlive/tree/master">enlive</a>. Seemed a lot like what you can do with XSLT, but much cleaner.</p>
+
+<p>Dick demonstrated scouchdb, a Scala library for interacting with CouchDB.</p>
+
+<p>Thomas&#8217; focus was on just how big the Ruby community is, from developers, to conferences, to books, to IDE&#8217;s, to libraries.</p>
+
+<p>At the end of the session, the winner was decided by crowd noise, with Groovy winning the day and Scala coming in second. My take home from this session is that really all of these languages bring something very interesting and powerful to the table, and I hope all of them continue to succeed. Great job everyone!</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/06/03/jug-leadership-lessons-learned-javaone-javanet-community-corner-podcast/">JUG Leadership: Lessons Learned - #JavaOne Java.net Community Corner Podcast</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-06-03T02:21:06-05:00" pubdate data-updated="true">Jun 3<span>rd</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Here&#8217;s the link to my slides from my podcast Wednesday morning from the Java.net Community Corner: <a href="http://www.mattstine.com/wp-content/JUGLeadershipLessonsLearned.pdf">Download PDF</a>.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/06/02/reactions-from-javaone-2009-opening-keynote/">Reactions From #JavaOne 2009 Opening Keynote</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-06-02T16:22:21-05:00" pubdate data-updated="true">Jun 2<span>nd</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="http://picasaweb.google.com/sunahouston2/JavaOne2009#5344645971163695266"><img src="http://mattstine.files.wordpress.com/2009/06/j1-2009-keynote-ellison-mcnealy-stage880.jpg?w=223" alt="Photo by Aaron Houston" /></a>The morning session opened with a HUGE elephant under the rug - &#8220;Where is Oracle?&#8221; There&#8217;s no booth in the Pavilion - super strange.</p>
+
+<p>Things kicked off very slowly. Jonathan Schwartz, Sun CEO, for all of his ponytail excellence, wasn&#8217;t exactly inspiring a great deal of excitement in the crowd. In fact, the loudest applause from the audience was initially for the tech support guy who fixed the projection for one of the demos.</p>
+
+<p>Thankfully things eventually got moving. Verizon and Sun announced a very exciting partnership whereby Verizon will expose their network elements to Java developers. Things like presence, location, friends and family lists, mobile-to-mobile lists - all of these will now be accessible to the developer. These specs will come out on July 27. This announcement is very exciting as it means that Verizon phones will now be a very powerful platform for Java mobile development.</p>
+
+<p>The JavaFX demos were really cool. They demoed one of the new LG XCanvas series of TV&#8217;s, which actually run JavaFX on the TV itself. Processors and video codecs actually live within the TV, and the TV is connected to the network. Live, on-demand, interactive content is now available directly on the set, and it&#8217;s very smooth. It seems that JavaFX continues to be the center of innovation within Sun. This continued with a demo of the new JavaFX visual authoring tool. This was very impressive. JavaFX apps are now possible with absolutely no coding, which makes them extremely accessible to content designers. Visual assets can be dragged and dropped onto the stage, animation can be built by recording drag motions, no compile-build-deploy cycle. Another great features was visual wiring of component properties to UI controls. Very smooth. And apps can be deployed directly to the Java App Store via the tool.</p>
+
+<p>Funny, this was the big oops of the keynote. Nandini Ramani leaked the &#8220;liveness&#8221; of the app store before the official announcement. Nandini - &#8220;And you can deploy directly to the App Store.&#8221; Jonathan - &#8220;We haven&#8217;t launched the App Store yet.&#8221; OOPS.</p>
+
+<p>But the App Store was immediately announced next. http://store.java.com is now in private beta, and I quickly registered and got an invite. I was playing with the App Store in the following session and downloaded two applications. Extremely like the iPhone App Store for Java. You can now distribute your Java applications directly to billions of consumers with Java-enabled devices. At this point it only supports free applications, as they have left it up to the community to provide feedback on how money should be collected. Nice move. Very impressive. This could be a game changer for the Java platform if it&#8217;s used correctly.</p>
+
+<p>FINALLY the elephant came out, but it took Scott McNealy coming on stage to get it done. It was very interesting how Jonathan Schwartz unceremoniously left the stage. Scott thanked him twice for his stewardship of the company - it was a very obvious yet implicit changing of the guard. Funny that they should decide to introduce Larry Ellison, CEO Oracle, via a great amount of cheesy images (Java flying on the sail to Larry&#8217;s yacht, etc.) At the end, while no promises were made, Larry said that we should look to the past to see what the future will hold and expect more of the same. &#8220;I don&#8217;t expect any significant changes.&#8221; I hope that holds true. The audience very properly gave Scott a standing ovation as he left the stage, a nice gesture to a guy that has continually kept Sun on the cutting edge of technology.</p>
+
+<p>All in all, it was a bittersweet keynote, but I&#8217;m cautiously optimistic about the future of the platform. Our landscape is continually changing, and the future is uncertain. If everyone&#8217;s being transparent, however, good things are still to come.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/06/02/java-technology-on-google-app-engine-communityone-2009-lightning-talk/">Java™ Technology on Google App Engine: #CommunityOne 2009 Lightning Talk</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-06-02T15:56:01-05:00" pubdate data-updated="true">Jun 2<span>nd</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>My second lightning talk at Community One West 2009 revolved around the still relatively recent announcement <a href="http://code.google.com/appengine/docs/java/overview.html">that Java is now supported on Google&#8217;s App Engine</a>.</p>
+
+<p>What exactly is <a href="http://code.google.com/appengine">Google App Engine</a>? It&#8217;s none other than a way that you can run your Java technology-based applications on Google&#8217;s massive infrastructure.</p>
+
+<p>As far as the &#8220;Geekxecutive Summary,&#8221; Google has provided:</p>
+
+<ul>
+<li><p><a href="http://code.google.com/appengine/docs/java/runtime.html">A Java 6 Virtual Machine</a> with a <a href="http://code.google.com/appengine/docs/java/jrewhitelist.html">Class Whitelist</a>. Not all classes in the standard JDK library are available. A notable missing member is the java.awt.* library, so if you&#8217;re using that for image processing, find an alternative (see one later) before porting to the App Engine.</p></li>
+<li><p>The Java Servlet Standard by way of the <a href="http://www.mortbay.org/jetty/">Jetty container</a>.</p></li>
+<li><p><a href="http://code.google.com/appengine/docs/java/runtime.html#The_Sandbox">A secured sandbox environment</a>, meaning 1) no spawned threads; 2) no arbitrary socket connections (you can use HTTP/HTTPS, see below); 3) No writing to the local filesystem - makes sense because you don&#8217;t know where you are on any given request.</p></li>
+</ul>
+
+
+<p>Several services are provided to you by Google as a Java developer:</p>
+
+<ul>
+<li><p><a href="http://code.google.com/appengine/docs/java/datastore/">The Datastore</a> - a schemaless object datastore, with a query engine and atomic transactions. This is accessible via Java Data Objects (JDO) 2.3, Java Persistence API (JPA) 1.0, or Google&#8217;s own low-level API&#8217;s.</p></li>
+<li><p>A <a href="http://code.google.com/appengine/docs/java/memcache/">Memcache</a> service for caching whatever objects you like, accessible via JCache JSR 107.</p></li>
+<li><p><a href="http://code.google.com/appengine/docs/java/urlfetch/">A URL fetch service</a> for accessing data on other systems, accessible via java.net.URLConnection.</p></li>
+<li><p><a href="http://code.google.com/appengine/docs/java/mail/">A Mail (JavaMail) service</a>.</p></li>
+<li><p><a href="http://code.google.com/appengine/docs/java/images/">An Image processing service</a>, a likely candidate for replacing AWT for image processing. Be careful, it binds you to Google&#8217;s services. You may want to write a wrapper for it.</p></li>
+<li><p><a href="http://code.google.com/appengine/docs/java/users/">Google Accounts for authentication</a>. Should you leverage this, anyone with a Google account can authenticate into your app.</p></li>
+</ul>
+
+
+<p>The nice thing about Google&#8217;s services is that where possible they always provided a way in through standards-based Java API&#8217;s.</p>
+
+<p>Now, on to tools:</p>
+
+<ul>
+<li><p><a href="http://code.google.com/appengine/docs/java/tools/ant.html">An Apache Ant component</a> for your automated build process.</p></li>
+<li><p><a href="http://code.google.com/appengine/docs/java/tools/eclipse.html">A very nice plugin</a> for the Eclipse IDE.</p></li>
+<li><p><a href="http://code.google.com/appengine/docs/java/gettingstarted/installing.html">The App Engine SDK</a> - Java API&#8217;s into all of Google&#8217;s services.</p></li>
+<li><p><a href="http://code.google.com/appengine/docs/java/tools/devserver.html">A Development Server</a> so that you can run a simulated Google environment on your local machine.</p></li>
+<li><p><a href="http://code.google.com/appengine/docs/java/tools/uploadinganapp.html">AppCfg</a> for command-line interaction with the App Engine platform.</p></li>
+</ul>
+
+
+<p>Probably the most significant piece to this puzzle is the fact that Google is not simply supporting Java the language, but Java the platform. It&#8217;s a standard JVM, so other languages running on the JVM will happily run on Google App Engine as well. At this writing, I knew of the following languages that are known to run:</p>
+
+<ul>
+<li><p>Java</p></li>
+<li><p>Groovy (and Grails as of 1.1.1)</p></li>
+<li><p>JRuby</p></li>
+<li><p>Scala</p></li>
+<li><p>Clojure</p></li>
+<li><p>Beanshell</p></li>
+<li><p>JavaScript (Rhino)</p></li>
+<li><p>Jython</p></li>
+</ul>
+
+
+<p>Here&#8217;s the screencast from my talk. Enjoy!</p>
+
+<p>[youtube=http://www.youtube.com/watch?v=hotbwYStwH8&hl;=en&fs;=1]</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/06/01/deploying-grails-to-morph-appspace-communityone-2009-lightning-talk/">Deploying Grails to Morph AppSpace: #CommunityOne 2009 Lightning Talk</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-06-01T23:56:06-05:00" pubdate data-updated="true">Jun 1<span>st</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I gave two lightning talks at <a href="http://developers.sun.com/events/communityone/2009/west/index.jsp">CommunityOne</a> today, the first of which described deploying <a href="http://grails.org">Grails</a> applications to <a href="http://mor.ph/products_appspace">Morph AppSpace</a>.</p>
+
+<p>For the uninitiated, Grails is a Ruby on Rails inspired full stack web development framework which brings &#8220;convention over configuration&#8221; and &#8220;DRY&#8221; into the Java web development arena. Unlike Rails, it is not an effort from scratch, but rather stands on the shoulders of proven giants in the Java world like the Spring framework and Hibernate. It does this using Groovy, the popular dynamic scripting language for the JVM, as a sort of &#8220;DSL for web development.&#8221; Find it at <a href="http://grails.org">http://grails.org</a>.</p>
+
+<p>Morph AppSpace on the other hand is a fully-configured and managed environment for hosting web applications, and currently supports Java, Grails, Rails, and PHP applications. It is a &#8220;platform as a service&#8221; (PaaS) provider that abstracts away the details of Amazon EC2 and S3 technologies. Systems architecture, backups, monitoring, failover, scalability - all of this is handled by Morph. You simply develop and deploy your application - Morph does the rest. Find it at <a href="http://mor.ph/products_appspace">http://mor.ph/products_appspace</a>.</p>
+
+<p>So to get going, visit <a href="http://mor.ph">http://mor.ph</a> and sign up for a free developer account. Create yourself a Java application subscription, and pick your choice of database (MySQL or PostgreSQL). Create the database, and then download two very important files into the root directory of your Grails project: deployment.properties, which contains the metadata describing your application to the Morph AppSpace platform, and morph_deployer.jar, which contains the client API to the platform.</p>
+
+<p>Next you&#8217;ll need to install the <a href="http://grails.org/plugin/morph-deploy">Grails morph-deploy plugin</a>. If you&#8217;re using Grails 1.1, you&#8217;ll need to checkout <a href="https://svn.codehaus.org/grails-plugins/grails-morph-deploy/trunk/">the trunk version from SVN</a>, as the version in the plugin repository is not 1.1 ready. Install this plugin locally by running &#8220;grails install-plugin $PATH_TO_PLUGIN.&#8221; Next, you&#8217;ll need to edit DataSource.groovy to contain the following:</p>
+
+<pre><code>production {
+        dataSource {
+            driverClassName = 'com.mysql.jdbc.Driver'
+            dbCreate = "update"
+            jndiName = "java:comp/env/jdbc/morph-ds"
+            dialect = 'org.hibernate.dialect.MySQLDialect'
+        }
+}
+</code></pre>
+
+<p>Finally, run &#8220;grails war&#8221; to build the war file, and &#8220;grails deploy&#8221; to upload your application to the platform. Once the upload is complete, visit the management interface and check the logs to see that you&#8217;ve successfully deployed. Once it&#8217;s finished, click on the link to your application. Happy Grails on the cloud!</p>
+
+<p>Here&#8217;s the screencast from my talk. Enjoy!</p>
+
+<p>[youtube=http://www.youtube.com/watch?v=JYPJ26-1YTM&hl;=en&fs;=1&border;=1]</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/06/01/connecting-with-people-at-javaone/">Connecting With People at #JavaOne</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-06-01T23:34:24-05:00" pubdate data-updated="true">Jun 1<span>st</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>So far one of the greatest things about JavaOne for me has been the opportunity to connect face-to-face with so many people that I&#8217;ve only communicated with digitally. I&#8217;ve also been able to catch up with folks that I&#8217;ve run into through other conferences, the JUG, and work:</p>
+
+<ul>
+<li><p>Finally met Aaron Houston and Mark DeHart from <a href="http://java.sun.com/community/usergroups/index.jsp">Sun JUG Programs</a>. These guys have supported the Memphis JUG from the very beginning and have kept us supplied with tons of cool swag, as well as a Sun SPOT that continues to be a hit. Great guys.</p></li>
+<li><p>Briefly chatted with <a href="http://weblogs.java.net/blog/caroljmcdonald/">Carol McDonald </a>from Sun. She was our very first JUG speaker and also had an extremely stressful encounter with our then new projector.</p></li>
+<li><p>Got to catch up with <a href="http://blog.springsource.com/author/keithd/">Keith Donald</a> of SpringSource on what he&#8217;s been up to with Spring and what we&#8217;ve been up to with our SRM project. Keith joined us for a week long consulting engagement earlier this year and fit in like another member of the team. He and Oleg Zhurakousky covered the JUG meeting that week as well and we had our largest attendance ever.</p></li>
+<li><p>Finally met <a href="http://weblogs.java.net/blog/van_riper/">Van Riper</a>, the man behind JUG-USA.</p></li>
+<li><p>Had a great dinner conversation with Abdel Remani, student JUG leader from California State University, Chico.</p></li>
+<li><p>Got to catch up with <a href="http://www.linkedin.com/in/davidgbooth">Dave Booth</a>, formerly the JUG program guy from JetBrains, now with GravityGears.</p></li>
+<li><p>Briefly chatted with <a href="http://www.linkedin.com/pub/wayne-fay/4/326/193">Wayne Fay</a>, one of our former JUG members now working in San Francisco.</p></li>
+</ul>
+
+
+<p>All in all it has been wonderful getting to connect with all of these folks, put faces to names, and share updates. Come to JavaOne. You get to meet neat folks!</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/06/01/on-the-ground-in-san-francisco/">On the Ground in San Francisco&#8230;</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-06-01T00:39:22-05:00" pubdate data-updated="true">Jun 1<span>st</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>&#8230;for my second trip to JavaOne. This is going to be an extremely busy week.</p>
+
+<p>Just as a quick update to those who thought I have fallen off of the face of the earth, I&#8217;ve been very busy these past few weeks finishing up a lot of loose ends. First off, May is a busy month for our family. With Mother&#8217;s Day, Wendy&#8217;s 30th Birthday, and Grant&#8217;s 1st Birthday, we&#8217;ve been doing quite a lot as a family. Second, I&#8217;ve been scrambling to finish off Wendy&#8217;s stationery store site, and I&#8217;m pleased to announce that <a href="http://www.duckduckgoosedesigns.com">http://www.duckduckgoosedesigns.com</a> went into production on Memorial Day!</p>
+
+<p>Last of all, I&#8217;ve been putting the finishing touches on my two lightning talks for Community One and my Java.net Community Corner podcast. In fact, I recorded the last demo video for my Google App Engine talk as I sat here in the Intercontinental Hotel.</p>
+
+<p>At any rate, I&#8217;ve got a packed schedule ahead, full of technical sessions, BOF&#8217;s, meetups, parties, etc. It&#8217;s the ultimate geek vacation. Stay tuned as I blog my way through. You can also pickup my Twitter feed for up-to-the-minute news. ;-)</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/05/11/grails-paypal-plugin-update/">Grails PayPal Plugin Update</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-05-11T16:16:48-05:00" pubdate data-updated="true">May 11<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Since I last posted on <a href="http://www.mattstine.com/2009/05/02/ive-forked-the-grails-paypal-plugin/">my fork of the Grails PayPal Plugin</a>, I&#8217;ve been invited to be a committer on the <a href="http://xircles.codehaus.org/projects/grails-plugins">Grails Plugins project at the Codehaus</a>. I&#8217;ll be incorporating my changes into the SVN repository there and updating the documentation on the main Grails Plugins website. Look for these updates coming soon!!!</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/05/11/career-20-toastmasters/">Career 2.0: Toastmasters</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-05-11T15:59:31-05:00" pubdate data-updated="true">May 11<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I&#8217;m currently making my second trip through <a href="http://agileartisans.com/main">Jared Richardson&#8217;s</a> excellent book <a href="http://www.lulu.com/content/5925115">Career 2.0: Take Control of Your Life</a>. In the &#8220;Public Speaking&#8221; chapter, one of the recommended avenues for public speaking practice is <a href="http://www.toastmasters.org">Toastmasters</a>. I first heard of Toastmasters&#8230;you guessed it, on my first trip through the book. Shortly after returning home from <a href="http://www.nofluffjuststuff.com/conference/st_louis/2009/03/index.html">NFJS St. Louis</a>, I decided to see if I could find a local club. Lo and behold, a Toastmasters club already meets on the St. Jude Children&#8217;s Research Hospital campus! I had no excuse but to check it out at this point.</p>
+
+<p>For the uninitiated, Toastmasters is an organization focused on helping individuals hone their communication and leadership skills in a safe environment. This is accomplished primarily through three different avenues:</p>
+
+<ul>
+<li><p>Serving in one of the meeting leadership roles, such as Toastmaster (the meeting facilitator);</p></li>
+<li><p>Giving a prepared speech/talk from the list of speech projects in the Toastmasters &#8220;coursework&#8221;;</p></li>
+<li><p>Speaking extemporaneously on one of several &#8220;table topics,&#8221; which are speaking prompts provided during the meeting.</p></li>
+</ul>
+
+
+<p>Participation in any of these avenues is immediately followed up with feedback from one or more people playing various &#8220;evaluator&#8221; roles. I couldn&#8217;t help but see the parallels to agile software development!</p>
+
+<p>I&#8217;ve now attended three meetings, and at the last meeting I decided to join up. The St. Jude club is an extremely friendly group, and several of its members are very accomplished public speakers. You can definitely tell that the Toastmasters experience has helped them enhance their communications skills. I&#8217;m looking forward to polishing my own.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/05/02/ive-forked-the-grails-paypal-plugin/">I&#8217;ve &#8220;Forked&#8221; the Grails PayPal Plugin&#8230;</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-05-02T00:59:46-05:00" pubdate data-updated="true">May 2<span>nd</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I&#8217;m currently completing the finishing touches on a new e-commerce site for my wife&#8217;s stationary business. We decided a long time ago to use <a href="http://www.paypal.com">PayPal</a> for all of the payment processing since we&#8217;ve had a great experience using it for our eBay selling. About a year ago Graeme Rocher polished off the last release of a <a href="http://grails.org/plugin/paypal">PayPal plugin</a> that is available in <a href="http://grails.org/plugin/home">the Grails Plugin repository</a>. It really is a very nice plugin, yet I had a couple of problems with it:</p>
+
+<ul>
+<li><p>It is only capable of handling payments for one item transactions via &#8220;Buy Now&#8221; buttons. I want to upload an entire shopping cart full of multiple items.</p></li>
+<li><p>It currently won&#8217;t handle shipping addresses. The site I&#8217;m building allows the user to maintain a list of shipping addresses, and I&#8217;d want to send the address information they choose along to PayPal.</p></li>
+<li><p>Minor issue: needed to upgrade the plugin to Grails 1.1.</p></li>
+</ul>
+
+
+<p>So, I decided this evening to fork the plugin. I want to leverage all of the great work that has been done thus far (especially with the IPN processing part - superb stuff), but I have to add in these two functions and do the version upgrade. Interestingly enough I couldn&#8217;t get the tests to run out of the box after the upgrade. No good developer likes to modify code without a stable running test suite, right? So what I ended up doing was creating a new Grails 1.1 plugin project and copying the original artifacts over. Once this was done all of the tests ran perfectly.</p>
+
+<p>So, at this point I&#8217;ve added function #1. You can now redirect to the &#8220;uploadCart&#8221; action. It assumes that you have already constructed a Payment object (now containing PaymentItems) and saved it, and then passed the transactionId along. I did this so that folks with multiple different ways of handling shopping carts could have some degree of flexibility - the onus is on you to map your cart to your Payment object correctly. The original functions implemented by Graeme are backward compatible, assuming only one PaymentItem in the Payment. I&#8217;ve run all of the original tests and also did some manual functional testing by running the plugin app against my own PayPal Sandbox account. So far so good. Look for more updates as this evolves. Once I get something I&#8217;m totally happy with I&#8217;ll see about getting it pushed back into the main plugin repo.</p>
+
+<p>Want to take a closer look? Visit <a href="http://github.com/mstine/grails-paypal-plugin/tree/master">http://github.com/mstine/grails-paypal-plugin/tree/master</a></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  <div class="pagination">
+    
+      <a class="prev" href="/blog/page/5/">&larr; Older</a>
+    
+    <a href="/blog/archives">Blog Archives</a>
+    
+    <a class="next" href="/blog/page/3/">Newer &rarr;</a>
+    
+  </div>
+</div>
+<aside class="sidebar">
+  
+    <section>
+	<h1>Hello, World!</h1>
+	<p>
+		<img src="http://mattstine.files.wordpress.com/2011/05/indiamug.jpg" width="173" height="213">
+	</p>
+	<p>
+		<a href="http://www.linkedin.com/in/mattstine"><img alt="View Matt Stine&#039;s profile on LinkedIn" src="http://www.linkedin.com/img/webpromo/btn_myprofile_160x33.gif" border="0" width="160" height="33"></a>
+	</p>
+</section><section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2011/05/16/design-meeting-patternsantipatterns/">Design Meeting Patterns/Antipatterns</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/01/05/selenium-conference-2011/">Selenium Conference 2011</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/01/02/2010-in-review-the-automated-analysis/">2010 in review: the automated analysis&#8230;</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2010/11/29/selenium-2-0-refcard/">Selenium 2.0 Refcard</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2010/11/10/agile-zone-roundup/">Agile Zone Roundup</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating&#8230;</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("mstine", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/mstine" class="twitter-follow-button" data-show-count="false">Follow @mstine</a>
+  
+</section>
+
+
+
+
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - Matt Stine -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'seekingsimplicity';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

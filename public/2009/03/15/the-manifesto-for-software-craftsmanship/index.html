@@ -1,0 +1,291 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>The Manifesto for Software Craftsmanship - Seeking Simplicity</title>
+  <meta name="author" content="Matt Stine">
+
+  
+  <meta name="description" content="So as I&#8217;m sitting here thumbing through my InfoQ feed on Google Reader, I come across the following posting: Software Craftsmanship Manifesto: &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://mattstine.com/2009/03/15/the-manifesto-for-software-craftsmanship">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Seeking Simplicity" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Seeking Simplicity</a></h1>
+  
+    <h2>A blog about programming, software architecture and everything else...</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:mattstine.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">The Manifesto for Software Craftsmanship</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-03-15T22:45:00-05:00" pubdate data-updated="true">Mar 15<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p><a href="http://5386.openphoto.net"><img src="http://openphoto.net/cgi-bin/image?image_id=5386" alt="" /></a>So as I&#8217;m sitting here thumbing through my <a href="http://www.infoq.com">InfoQ</a> feed on <a href="http://www.google.com/reader">Google Reader</a>, I come across the following posting: <a href="http://www.infoq.com/news/2009/03/software_craftsmanship">Software Craftsmanship Manifesto: A Call to Arms</a>. It seems that a group of &#8220;programming patriots&#8221; has struck again (see the <a href="http://agilemanifesto.org">Manifesto for Agile Software Development</a> - circa 2001), complete with a &#8220;founding document&#8221; look and feel. Clicking through <a href="http://manifesto.softwarecraftsmanship.org/">the source link</a>, one finds the following:</p>
+
+<blockquote><p>As aspiring Software Craftsmen we are raising the bar of professional software development by practicing it and helping others learn the craft. Through this work we have come to value:</p>
+
+<ul>
+<li><p>Not only working software, but also well-crafted software</p></li>
+<li><p>Not only responding to change, but also steadily adding value</p></li>
+<li><p>Not only individuals and interactions, but also a community of professionals</p></li>
+<li><p>Not only customer collaboration,but also productive partnerships</p></li>
+</ul>
+
+
+<p>That is, in pursuit of the items on the left we have found the items on the right to be indispensable.</p></blockquote>
+
+<p>© 2009, the undersigned. this statement may be freely copied in any form, but only in its entirety through this notice.</p>
+
+<p>You can&#8217;t even imagine my excitement in reading this. This statement of values is something that I have been trying to get across without having the needed words for quite some time.</p>
+
+<p>The motivation, says the InfoQ article, is right on target:</p>
+
+<blockquote><p>The members of the manifesto group answered two key questions: “How will it help solve the problems of crap code?” and “What will motivate &#8220;The developer just churning out code&#8221; to become a craftsman?” - the distinction is between the developer who is just getting it done vs the one getting it done right.</p></blockquote>
+
+<p>I have felt for a long time that the elements of craftsmanship are something sorely missing from our field. We, as programmers, are often so consumed with getting the job done that we do often neglect getting it done right. In our haste to move on to the next exciting project and/or technology, we neglect the tenets of simple design, test-driven development, merciless refactoring, clean code, etc. We&#8217;re often quite satisfied with the &#8220;hacky solution here&#8221; and the &#8220;quick and dirty solution there.&#8221;</p>
+
+<p>Quite frankly, I&#8217;ve had enough of that. I&#8217;m not satisfied when the contractor building my house cuts corners. I&#8217;m quite irritable when my mechanic does a less than thorough job with my car. Why should I expect my clients to settle for software built like that?</p>
+
+<p>So, to make this a practical rant, I thought I&#8217;d share a couple of the things that we&#8217;re doing in our team to move us in the right direction:</p>
+
+<ol>
+<li><p>First of all, we started a weekly &#8220;brown bag lunch/workshop,&#8221; inspired by Andy Hunt and Venkat Subramaniam&#8217;s discussion in <a href="http://pragprog.com/titles/pad/practices-of-an-agile-developer">Practices of an Agile Developer</a>.</p></li>
+<li><p>Second, we selected books to read as a team that will point us in the right direction. Our first two titles were <a href="http://pragprog.com/titles/tpp/the-pragmatic-programmer">The Pragmatic Programmer: From Journeyman to Master</a> (see, there&#8217;s craftsmanship right away!) and <a href="http://www.pearsonhighered.com/educator/academic/product/1,3110,0132350882,00.html">Clean Code: A Handbook of Agile Software Craftsmanship</a> (sense a pattern yet?).</p></li>
+<li><p>Third, we make a point of our weekly discussions to look at ways we can integrate the principles and practices that we&#8217;re learning into our daily work. An example: We&#8217;re working to integrate peer code review into our development process. The principles, patterns, and practices that we&#8217;re picking up from Clean Code will be informing us as we review code and look for possible improvements.</p></li>
+</ol>
+
+
+<p>So, with that said, tonight I became a signatory of the manifesto. <a href="http://manifesto.softwarecraftsmanship.org/sign/new">Why don&#8217;t you join me and fight the fight against crappy code!</a></p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Matt Stine</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-03-15T22:45:00-05:00" pubdate data-updated="true">Mar 15<span>th</span>, 2009</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/codeproject/'>CodeProject</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://mattstine.com/2009/03/15/the-manifesto-for-software-craftsmanship/" data-via="mstine" data-counturl="http://mattstine.com/2009/03/15/the-manifesto-for-software-craftsmanship/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2009/03/13/grailsdojo-ajax-file-upload/" title="Previous Post: Grails+Dojo Ajax File Upload">&laquo; Grails+Dojo Ajax File Upload</a>
+      
+      
+        <a class="basic-alignment right" href="/2009/03/26/need-a-textile-engine-look-no-further-than-plextile/" title="Next Post: Need a Textile engine? Look no further than Plextile!">Need a Textile engine? Look no further than Plextile! &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+	<h1>Hello, World!</h1>
+	<p>
+		<img src="http://mattstine.files.wordpress.com/2011/05/indiamug.jpg" width="173" height="213">
+	</p>
+	<p>
+		<a href="http://www.linkedin.com/in/mattstine"><img alt="View Matt Stine&#039;s profile on LinkedIn" src="http://www.linkedin.com/img/webpromo/btn_myprofile_160x33.gif" border="0" width="160" height="33"></a>
+	</p>
+</section><section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2011/05/16/design-meeting-patternsantipatterns/">Design Meeting Patterns/Antipatterns</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/01/05/selenium-conference-2011/">Selenium Conference 2011</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/01/02/2010-in-review-the-automated-analysis/">2010 in review: the automated analysis...</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2010/11/29/selenium-2-0-refcard/">Selenium 2.0 Refcard</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2010/11/10/agile-zone-roundup/">Agile Zone Roundup</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating...</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("mstine", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/mstine" class="twitter-follow-button" data-show-count="false">Follow @mstine</a>
+  
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - Matt Stine -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'seekingsimplicity';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

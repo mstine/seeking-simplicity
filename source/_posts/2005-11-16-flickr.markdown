@@ -1,0 +1,10 @@
+---
+date: '2005-11-16 12:10:00'
+layout: post
+slug: flickr
+status: publish
+title: Flickr
+wordpress_id: '14'
+---
+
+This is a test post from [![flickr](http://www.flickr.com/images/flickr_logo_blog.gif)](http://www.flickr.com/r/testpost), a fancy photo sharing thing.

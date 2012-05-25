@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: work | Seeking Simplicity]]></title>
+  <link href="http://mattstine.com/blog/categories/work/atom.xml" rel="self"/>
+  <link href="http://mattstine.com/"/>
+  <updated>2012-05-24T19:13:18-05:00</updated>
+  <id>http://mattstine.com/</id>
+  <author>
+    <name><![CDATA[Matt Stine]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Design Meeting Patterns/Antipatterns]]></title>
+    <link href="http://mattstine.com/2011/05/16/design-meeting-patternsantipatterns/"/>
+    <updated>2011-05-16T16:57:50-05:00</updated>
+    <id>http://mattstine.com/2011/05/16/design-meeting-patternsantipatterns</id>
+    <content type="html"><![CDATA[<p>For those of you that don't know, I recently returned to the technical ranks as a Software Architect after a three-year stint in management. To make a long story short, I now love my job again. Perhaps I'll write the long story in a future blog entry. On to the topic at hand. Today I led the first significant design discussion that I have led in quite a long time. A few minutes afterward, I was already reflecting on what had occurred and how. The very first thing that I noticed was my drastically different approach to the task. I felt that my facilitation skills were more mature and effective than I remember from previous similar engagements. I'm not sure if the time I spent in management (where I facilitated quite a few meetings, though much more business-focused ones) helped, but something certainly has.</p>
+
+<p>I also noticed several things that I'll call "pattern vs. antipattern" tugs of war. Quite often during the meeting I felt the group trying to move our discussion in one direction that I, for better or for worse, thought was ineffective. I would then redirect us on to what I felt was a better path. In true catalog form, here's the list:</p>
+
+<ul>
+<li><p><strong>Understand the Problem vs. Jump to the Solution</strong> - only a couple of minutes into our discussion solutions were being flung about like drunken darts. This situation almost always leads to suboptimal or faulty solutions. As a facilitator, try to ensure that the problem has been clearly stated. If at all possible, write it down on a whiteboard. Make sure everyone agrees that the problem as stated is the problem the group is there to solve. Sure enough, after performing this exercise, we all had a very different and clear understanding of the problem than that with which we walked in the door.</p></li>
+<li><p><strong>Assume the Worst vs. Assume the Best</strong> - occasionally the exact details of a requirement are unclear, and not assuming something will totally derail the design discussion. You have a couple of choices. The first is to halt the discussion and get the details cleared up. This is clearly the best solution, as you'll no longer have to assume anything. However, it can be the case that the person who can clear things up isn't available. Or in some cases, the question you'll be asking will require another meeting at another level of the organization. If you find yourself in that spot, and you can't wait (we couldn't!), then the best approach is to work from the worst possible case scenario. You'll then be in the best position to handle whatever answer comes your way. However, our tendency is often to assume the best ("That will <em>never</em> happen!"). Fight that tendency. However, whatever you choose, follow up at your earliest opportunity.</p></li>
+<li><p><strong>Basing Decisions on the Current Situation vs. Basing Decisions on History</strong> - many times the group wanted to veer off into safer territory. In some cases, a possible solution departed significantly from the current design. While this is a valid concern (we do want consistency of design across the system where possible), it is certainly not a trump card. Occasionally the situation at hand will merit a significant departure from the current design. Another way history can rear its ugly head is the assertion that we've always solved similar problems like 'x,' so we should do so with this problem as well. Again, note the word "similar." All problems are somewhat different and have their own eccentricities. So, rather than working from history, I pushed us back to a clean slate with the statement "Let's stop thinking about the past and start from scratch. We may very well come up with the same solution you guys are proposing, but I'd rather do so through our own objective analysis and not instinct." Guess what. We came up with a different solution that we all felt better about.</p></li>
+<li><p><strong>Shooting for the "Best" Solution vs. the "Easiest" Solution</strong> - now sometimes we can't afford the best solution. I grant that. However, I'm trying to fight the tendency to immediately jump to the "easiest thing that could possibly work." Often this pops up in the first P vs. AP - if we don't clearly understand the problem, sometimes an easy solution jumps out that doesn't deal with the underlying details we've yet to uncover. Also, sometimes the best solution is quite simple and elegant. It doesn't necessarily have to be harder and more complex than the easiest solution. In fact, sometimes the "easiest" solution leads to the most accidental complexity in the long-run. So, shoot for the best solution you can come up with and only then, optimize for cost.</p></li>
+<li><p><strong>Present Possible Solutions Objectively vs. My Solution is the Best!</strong> - one would hope that we all start here, but we don't. We tend to like our own solutions to problems and want them to "win." Our ego can get in the way of even hearing an alternate solution presented by another team member. I point you to <a href="http://www.code-magazine.com/Article.aspx?quickid=1105121">my colleague Ted Neward's post for more on "egoless programming."</a> So, as a facilitator, you've got to make sure that all solutions are presented objectively. I often had to say things like "OK, let's assume before we ever get started that this is a good solution to the problem and not hack away at it until its fully presented, and we all understand it." In the end, this insistence led us to choose a solution that none of us (myself included) originally thought we'd pick.</p></li>
+<li><p><strong>Validating from Code vs. Validating from Memory</strong> - more often than not, questions about the existing design/code/behavior will come up. Rather than scratching your head and trying to remember what you wrote six months ago, pull up the code and find out. I can't tell you the number of meetings I've attended where baseless assertions were made about existing code, only to require another meeting the next day to revisit the whole discussion once those assertions were proven wrong. Again, as a facilitator, I directed us to solve every problem for which all of the facts were available. We inserted placeholders in our solution where questions remained. Guess what we're doing now? Well, I'm blogging about the meeting, but the rest of us are validating from code. Tomorrow will fill in the blanks!</p></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Pomodoro: The First Iteration]]></title>
+    <link href="http://mattstine.com/2009/11/04/pomodoro-the-first-iteration/"/>
+    <updated>2009-11-04T15:44:32-06:00</updated>
+    <id>http://mattstine.com/2009/11/04/pomodoro-the-first-iteration</id>
+    <content type="html"><![CDATA[<p>I spent about an hour last night reading through Francesco Cirillo's e-book <em>The Pomodoro Technique</em>. Up until this point I knew the basics of the technique, but I really wanted to drill down and get the details. I won't explain those here - visit <a href="http://www.pomodorotechnique.com/">http://www.pomodorotechnique.com/</a> to get the lowdown. What I want to talk about is my experience applying the technique this morning.</p>
+
+<p>I managed to complete two Pomodoros. Each of the Pomodoros was filled with internal interruptions of various kinds. One of the first things that I observed was something that I already knew from yesterday's TADD post: I am definitely not used to focusing on one distinct task for any prolonged length of time. My mind was constantly bouncing around from idea to idea, almost as if my R-mode had a "memory leak." My first Pomodoro was primarily a reading task - I used it for my daily Bible reading and meditation. This part of my day brings it's focus challenges anyway, as I'm not doing anything tactile. I find its much easier to focus when I'm typing or writing something. The Pomodoro offered no relief from this, save a plan for dealing with the interruptions as they came up. First, note down that one happened with an apostrophe, and second, write the todo item or idea down on my inventory. This definitely helped to refocus my mind on the work at hand, but I still wish I could find a way to prevent those streamer thoughts from landing in the first place.</p>
+
+<p>The second thing that I observed was that my workspace is not at all setup to encourage focus. In recent months I've stopped using task-focused desktops in OS X, something that Neil Ford recommends in <em>The Productive Programmer</em>. I was reminded of this later in the day today reading <a href="http://memeagora.blogspot.com/2009/11/productivity-pron.html">his latest blog entry</a>. I think it would be a good idea to use my first Pomodoro of the day to setup task-based desktops for each of the tasks on my TODO list. I could fire up all of the programs necessary and drop them on to a space. Since a lot of my work is focused on web-based applications, I think I'll probably use Fluid (<a href="http://fluidapp.com/">http://fluidapp.com/</a>) to create site specific browsers for the web applications that I need for each task. Another thing that I need to do is turn off the ringer on my phones and the new message notifications on Entourage. One tool that I did already have in my arsenal is Doodim, which blacks out everything except for the currently focused window on OS X. The only problem with Doodim (<a href="http://www.lachoseinteractive.net/en/products/doodim/">http://www.lachoseinteractive.net/en/products/doodim/</a>) is that it doesn't work with external screens, so only my MacBook Pro's screen gets the benefits. I counteracted this by making sure that the window I was actively using was on the external screen and maximized, but this won't work for some tasks during which I might have multiple small windows to interact with.</p>
+
+<p>The final thing that I observed is that I still definitely live in an interruption-based work environment. My third attempt to complete a Pomodoro was repeated three times, and none of these times did I make it without having to stop and actively handle an external interruption. The difference? My office door was open. My first two Pomodoros were completed with the office door closed and my "Ssshhh...Genius at work!" sign on the door. This is going to be a tough one to handle. I don't want to keep my office door closed all day, for more reasons than one. First, I don't want to seem completely unapproachable. I'm a manager these days, and a huge part of my job is being available for people. For me, some interruptions will always be OK. But how can I sort those out prior to them happening? This is something I'll be stewing on over the next couple of days. Second, my office turns into an absolute OVEN when the door is closed for too long. We have a really strange HVAC system that completely overreacts to small changes in the temperature. Unfortunately, it always seems to think I need to be slow cooked. ::SIGH::</p>
+
+<p>So, there you have it. I've learned a lot - I observed quite a view things about my work patterns and my environment, and will be working over the next few days to make changes to both to support better focus. If you have any comments or suggestions, please feel free to comment. Thanks!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Haven't had much time to blog lately....]]></title>
+    <link href="http://mattstine.com/2007/08/17/havent-had-much-time-to-blog-lately/"/>
+    <updated>2007-08-17T15:54:00-05:00</updated>
+    <id>http://mattstine.com/2007/08/17/havent-had-much-time-to-blog-lately</id>
+    <content type="html"><![CDATA[<p><a href="http://2.bp.blogspot.com/_Vo63LRwAZbk/RsYLERQ4WSI/AAAAAAAAAP0/Z6Sap8em5GY/s1600-h/DSCN0706.JPG"><img src="http://2.bp.blogspot.com/_Vo63LRwAZbk/RsYLERQ4WSI/AAAAAAAAAP0/Z6Sap8em5GY/s400/DSCN0706.JPG" alt="" /></a></p>
+
+<p>....because we've been packing to move on top of all of our regular projects. St. Jude has nicely renovated a new building for us, so we developers are moving. This is where I'm headed on Monday:</p>
+
+<p><a href="http://1.bp.blogspot.com/_Vo63LRwAZbk/RsYMGBQ4WUI/AAAAAAAAAQE/jDsZtab8xBA/s1600-h/DSC_4433.JPG"><img src="http://1.bp.blogspot.com/_Vo63LRwAZbk/RsYMGBQ4WUI/AAAAAAAAAQE/jDsZtab8xBA/s400/DSC_4433.JPG" alt="" /></a>I'm both loving it and a little sad - I've been sitting in my desk for nearly my entire career as a software developer. I just know I'm going to park in the garage and come downstairs one morning to find my office gone. :-)</p>
+
+<p><a href="http://picasa.google.com/blogger/"><br/>
+</a></p>
+]]></content>
+  </entry>
+  
+</feed>

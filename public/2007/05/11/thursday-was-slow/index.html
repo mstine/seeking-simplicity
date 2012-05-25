@@ -1,0 +1,294 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Thursday was slow... - Seeking Simplicity</title>
+  <meta name="author" content="Matt Stine">
+
+  
+  <meta name="description" content="for me, not for JavaOne. Of course I was a good little programmer and used the schedule builder to sign up for all of my sessions. I edited them a &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://mattstine.com/2007/05/11/thursday-was-slow">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Seeking Simplicity" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Seeking Simplicity</a></h1>
+  
+    <h2>A blog about programming, software architecture and everything else...</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:mattstine.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Thursday Was Slow...</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2007-05-11T22:17:00-05:00" pubdate data-updated="true">May 11<span>th</span>, 2007</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>for me, not for JavaOne. Of course I was a good little programmer and used the schedule builder to sign up for all of my sessions. I edited them a bit after the first two keynotes. Even then, I had one lone session scheduled for Thursday morning (that wasn&#8217;t really directly applicable to my work, it just looked interesting), and then two sessions in the afternoon, the first starting at 4:10. I decided to skip out on the morning session and do a little shopping at Pier 39. The highlight was a &#8220;Bucket of Boat Trash&#8221; and clam chowder at the Bubba Gump Shrimp Company. And yes, we Ole Miss Rebels are represented as far out as the end of Pier 39:</p>
+
+<p><a href="http://picasaweb.google.com/matt.stine/SanFranciscoJavaOne2007/photo#5063511710562298018"><img src="http://lh4.google.com/image/matt.stine/RkU1ErgYqKI/AAAAAAAAAMA/6BJ0mkhqgn8/s288/DSCN1117.JPG" alt="" /></a></p>
+
+<p>The two sessions that I attended were:</p>
+
+<ul>
+<li>RubyTooling: State of the Art</li>
+<li>Using Ajax with POJC (Plain Old JavaServer Faces Components)</li>
+</ul>
+
+
+<p>I attended the first session simply to get a little more detail on all of the hype surrounding Ruby tooling support in NetBeans 6. What I got was even more than I bargained for. The project leaders actually walked us through not only the features that were available, but how they were implemented. I had never really thought about the problems with providing code completion and refactoring with a dynamically-typed language. It was really cool to see the thought process that went into their solutions. I&#8217;d love to hear a similar discussion from the JetBrains guys, as the Ruby support in IntelliJ IDEA is quite good as well.</p>
+
+<p>For me the second session was the best of the conference for me up until that point, and arguably it still is after attending Friday&#8217;s sessions. Craig McClanahan, of Struts fame, was the main speaker and was joined by his colleagues Matthew Bohm and Jayashri Visvanathan. What made this session so good for me was that they presented a problem - &#8220;How can I add Ajax behaviors to my JavaServer™ Faces technology based application, without throwing away my investment in existing component libraries?&#8221; - and then provided three different solutions to that problem - low, medium, and high level.</p>
+
+<p>The low level consisted of simply using the HTML event pass-through attributes that are implemented by most standard JSF components (onClick, onBlur, etc.). One could use an existing JavaScript framework such as Dojo to send an XMLHttpRequest and then map that request to a Servlet or JSF handler using a technology such as Shale Remoting. The response could be sent back as JSON data which could then be transformed into the desired UI update.</p>
+
+<p>The medium level consisted of actually extending existing JSF components and adding the desired Ajax behavior. Due to time constraints they didn&#8217;t cover this solution in detail, but they did provide a link to a detailed discussion in the Java BluePrints catalog: https://blueprints.dev.java.net/bpcatalog/ee5/ajax/extendingRenderFunctionality.html</p>
+
+<p>The high level solutions addressed the following needs (copied directly from the slides):</p>
+
+<p>● Partial page submit—gather up a particular set of<br/>
+input element values, and send them to a bit of server<br/>
+side business logic<br/>
+● Partial page refresh—the business logic needs to<br/>
+refresh the content of one or more subtrees of the<br/>
+client side DOM<br/>
+● Synchronization—the benefits of synchronizing the<br/>
+server side state<br/>
+● Don’t repeat yourself (DRY)—reuse existing<br/>
+components and renderers for partial page updates</p>
+
+<p>To address these issues, the speakers highlighted two add-on frameworks:</p>
+
+<p>● Ajax4JSF (http://labs.jboss.com/portal/jbossajax4jsf)<br/>
+● Dynamic Faces (https://jsf-extensions.dev.java.net/)</p>
+
+<p>I was quite impressed with both of these frameworks. One of my colleagues is currently implementing Ajax behavior in a Facelets-based application using Ajax4JSF and he is quite happy with it. Dynamic Faces looked really awesome, especially its tooling support in NetBeans (actually I&#8217;m quite impressed with the overall JSF support in NetBeans - I&#8217;ll definitely be adding it to my tool belt). The highlight of the presentation was Matt&#8217;s video of him building an entire currency trading application in 28 minutes - except it was &#8220;fast-played&#8221; to finish in 3 1/2 minutes and set to techno music. Matt wowed us with his dancing abilities while we watched true RAD. The crowd went wild!</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Matt Stine</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2007-05-11T22:17:00-05:00" pubdate data-updated="true">May 11<span>th</span>, 2007</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/netbeans/'>NetBeans</a>, <a class='category' href='/blog/categories/ajax/'>ajax</a>, <a class='category' href='/blog/categories/jsf/'>jsf</a>, <a class='category' href='/blog/categories/restaurants/'>restaurants</a>, <a class='category' href='/blog/categories/ruby/'>ruby</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://mattstine.com/2007/05/11/thursday-was-slow/" data-via="mstine" data-counturl="http://mattstine.com/2007/05/11/thursday-was-slow/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2007/05/10/wednesday-was-ajax-day/" title="Previous Post: Wednesday was AJAX Day">&laquo; Wednesday was AJAX Day</a>
+      
+      
+        <a class="basic-alignment right" href="/2007/05/11/and-then-it-was-over/" title="Next Post: And then it was over...">And then it was over... &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+	<h1>Hello, World!</h1>
+	<p>
+		<img src="http://mattstine.files.wordpress.com/2011/05/indiamug.jpg" width="173" height="213">
+	</p>
+	<p>
+		<a href="http://www.linkedin.com/in/mattstine"><img alt="View Matt Stine&#039;s profile on LinkedIn" src="http://www.linkedin.com/img/webpromo/btn_myprofile_160x33.gif" border="0" width="160" height="33"></a>
+	</p>
+</section><section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2011/05/16/design-meeting-patternsantipatterns/">Design Meeting Patterns/Antipatterns</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/01/05/selenium-conference-2011/">Selenium Conference 2011</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/01/02/2010-in-review-the-automated-analysis/">2010 in review: the automated analysis...</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2010/11/29/selenium-2-0-refcard/">Selenium 2.0 Refcard</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2010/11/10/agile-zone-roundup/">Agile Zone Roundup</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating...</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("mstine", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/mstine" class="twitter-follow-button" data-show-count="false">Follow @mstine</a>
+  
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - Matt Stine -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'seekingsimplicity';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

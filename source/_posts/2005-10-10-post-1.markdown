@@ -1,0 +1,10 @@
+---
+date: '2005-10-10 11:37:00'
+layout: post
+slug: post-1
+status: publish
+title: 'Post #1'
+wordpress_id: '3'
+---
+
+This is my first post to this blog.  I've just returned to work after spending the last week at TheServerSide.com's Java in Action conference in Orlando, FL.  Got to take the family with me and spend a day at Magic Kingdom.  A good trip, and learned a lot of new technologies.

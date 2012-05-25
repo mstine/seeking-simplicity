@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: ipod | Seeking Simplicity]]></title>
+  <link href="http://mattstine.com/blog/categories/ipod/atom.xml" rel="self"/>
+  <link href="http://mattstine.com/"/>
+  <updated>2012-05-24T19:13:18-05:00</updated>
+  <id>http://mattstine.com/</id>
+  <author>
+    <name><![CDATA[Matt Stine]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[My iPod is on rice]]></title>
+    <link href="http://mattstine.com/2009/03/13/my-ipod-is-on-rice/"/>
+    <updated>2009-03-13T11:55:00-05:00</updated>
+    <id>http://mattstine.com/2009/03/13/my-ipod-is-on-rice</id>
+    <content type="html"><![CDATA[<p>Let me set the stage for you. I'm driving home happily listening to Ted Neward discuss the merits of Scala on the Javaworld podcast. As I pull into the driveway I see my wife waving frantically in the window. As geek brain struggles to process this, home brain kicks into gear. She needs me in the house now! I jump out of the car and slam the door shut, leaving all of the belongings I typically carry in the house.</p>
+
+<p>I enter the house to find that a wasp has some how gotten in and is terrorizing the family. What ensues is roughly 15 minutes of wasp hunting. Wasp dead - end of story. Or so I thought.</p>
+
+<p>As I'm driving my iPod (attached to the iTrip FM transmitter/charger) typically sits in my lap (for some reason I get the least FM interference that way). What I didn't notice in my hasty departure from the vehicle is that my iPod nano flew out of the vehicle and was hanging by the iTrip cable. Unaware of this, I slammed the door on the cable and walked away.</p>
+
+<p>This in and of itself wasn't a huge problem. Leaving it that way for approximately 24 hours - most of which included rather steady rainfall - was.</p>
+
+<p>So, a quick Google search finds that the consensus approach seems to be sticking the iPod in a cup of dry rice to soak up the moisture. So there you have it - my iPod is on rice. I hope it works. Stay tuned.</p>
+]]></content>
+  </entry>
+  
+</feed>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: bookreviews | Seeking Simplicity]]></title>
+  <link href="http://mattstine.com/blog/categories/bookreviews/atom.xml" rel="self"/>
+  <link href="http://mattstine.com/"/>
+  <updated>2012-05-24T19:13:18-05:00</updated>
+  <id>http://mattstine.com/</id>
+  <author>
+    <name><![CDATA[Matt Stine]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[First thoughts on "Seven Languages in Seven Weeks..."]]></title>
+    <link href="http://mattstine.com/2010/05/06/first-thoughts-on-seven-languages-in-seven-weeks/"/>
+    <updated>2010-05-06T13:35:28-05:00</updated>
+    <id>http://mattstine.com/2010/05/06/first-thoughts-on-seven-languages-in-seven-weeks</id>
+    <content type="html"><![CDATA[<p>I recently started reading the beta copy of Bruce Tate's <a href="http://pragprog.com/titles/btlang/seven-languages-in-seven-weeks"><em>Seven Languages in Seven Weeks</em></a> from the Pragmatic Bookshelf. While I'm certainly NOT on pace to actually complete the book in seven weeks, I have been steadily plodding along. Reading this book takes me back to my days as an undergraduate computer science student at the University of Mississippi. As with most CS programs, we were all required to take a "Survey of Programming Languages" course toward the end of the curriculum. Tate's book is very similiar to walking through this course, except:</p>
+
+<ol>
+<li><p>Tate's text and suggested exercises are intensely practical, targeted at actually getting something useful done in the language.</p></li>
+<li><p>The language selection is entirely relevant to today's practitioner. Chances are good that you'll use a language from this set in your day job sometime in the next decade. Ignoring that, chances are good that you'll use some language that is a "close cousin" of a language from this set.</p></li>
+<li><p>Your thinking about programming in general will be challenged by each chapter. This is not a leisurely read. You cannot "coast" through this course.</p></li>
+</ol>
+
+
+<p>At present I'm slowly working through the chapter devoted to Io. Io is a prototype-based language, close-cousins with Lua (of recent iPhone game development controversy) and JavaScript (can't think of a practical use for this guy...umm...oh wait!). I've very much enjoyed Bruce's treatment of the language, with his descriptions of the feature being as "visual" as words can effectively be - who else could liken languages to popular movie characters and get away with it? Before working through Io, Bruce and I tackled Ruby together. Ruby is an old and unfortunately neglected friend of mine. We've had our fun together doing a couple of small Rails applications, JUG talks and a (so far) unsuccessful trek into the world of OSGi, but unfortunately we haven't hit the big time in my day job. Working through this chapter really served to reignite my enthusiasm for the language, especially as it relates to the rich ecosystem of testing tools available in the Ruby and Rails communities.</p>
+
+<p>In short, only two chapters in I'd thoroughly recommend that you purchase this book. Like <a href="http://oreilly.com/catalog/9780596100940"><em>Beyond Java</em></a> before it, Bruce has again challenged us to step outside of our comfort zone. If nothing else, you've got seven kickstarts into learning your "Language of the Year."</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Book Review: Career 2.0 - Take Control of Your Life]]></title>
+    <link href="http://mattstine.com/2009/06/17/book-review-career-20-take-control-of-your-life/"/>
+    <updated>2009-06-17T11:49:53-05:00</updated>
+    <id>http://mattstine.com/2009/06/17/book-review-career-20-take-control-of-your-life</id>
+    <content type="html"><![CDATA[<p>I've finally published my review of the EXCELLENT book by Jared Richardson and Matthew Bass at DZone. Check it out here: <a href="http://books.dzone.com/reviews/career-20-take-control-your">http://books.dzone.com/reviews/career-20-take-control-your</a>.</p>
+]]></content>
+  </entry>
+  
+</feed>

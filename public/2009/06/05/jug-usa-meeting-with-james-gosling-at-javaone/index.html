@@ -1,0 +1,276 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>JUG-USA Meeting with James Gosling at #JavaOne - Seeking Simplicity</title>
+  <meta name="author" content="Matt Stine">
+
+  
+  <meta name="description" content="On Wednesday morning, JUG-USA was fortunate enough to get about 45 minutes with the &#8220;Father of Java&#8221; himself, James Gosling. Each year &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://mattstine.com/2009/06/05/jug-usa-meeting-with-james-gosling-at-javaone">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Seeking Simplicity" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Seeking Simplicity</a></h1>
+  
+    <h2>A blog about programming, software architecture and everything else...</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:mattstine.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">JUG-USA Meeting With James Gosling at #JavaOne</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-06-05T02:00:59-05:00" pubdate data-updated="true">Jun 5<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p><img src="http://mattstine.files.wordpress.com/2009/06/dscn0912.jpg?w=220" alt="James Gosling" /> On Wednesday morning, JUG-USA was fortunate enough to get about 45 minutes with the &#8220;Father of Java&#8221; himself, James Gosling. Each year at JavaOne, Sun distributes registration discount codes to interested JUG&#8217;s. The JUG with the most registrations using their code gets this meeting. JUG-USA&#8217;s founding allowed us to use a bit of strength in numbers to wrestle this crown from the bigger European JUG&#8217;s for the first time that I know of.</p>
+
+<p>The session was setup as an informal Q&amp;A. I took furious notes on several of the questions that were most interesting to me, and I&#8217;ll do my best to collate them into something intelligible here. <em><strong>Note that where I use quotes it&#8217;s mostly to set off his answers&#8230;please don&#8217;t take them as direct, but as paraphrases.</strong></em></p>
+
+<p>The first couple of questions surrounded web buzz. James sees Web 2.0 as &#8220;hype for folks who want to sell their books.&#8221; When asked about the semantic web, he says his feelings are mostly positive, but maybe its an answer searching for a question. He feels that some parts of it will never perform.</p>
+
+<p>When asked about Scala, I was pleased to hear him say, &#8220;I like Scala a lot. They&#8217;re doing some pretty nice stuff.&#8221; He talked about how functional languages lend themselves to proving properties of programs, which can then lead to automatic decomposition onto multiprocessor systems. He wishes that the Scala guys would focus more on this aspect. He also said that he fears that Scala is almost going down the Perl route of making things &#8220;too concise&#8221; and that it&#8217;s still awfully hard for many programmers to &#8220;get&#8221; the functional stuff.</p>
+
+<p>The next question was a rather predictable one - &#8220;James, now that you have the benefit of 14 years of experience with the Java language, is there anything you would have done differently?&#8221; Funny thing was the first thing out of his mouth was that the current AWT event model would have been one of the first things to go. Generics and closures were things he quickly mentioned that he wanted to have done, but he also said that there was quite a bit of arguing within the Java team about polishing for years vs. shipping the language. James said he felt like there was a certain window of opportunity out there that they needed to ship the language within to be successful (and it looks like they hit it). Continuing on down the list, James mentioned Eiffel-style precondtions and postconditions and type inferencing. He explained that the entire type system was designed to make C programmers comfortable, and at the time that was clearly the right decision. He state that at this point, the C/C++ comfort factor counts for nothing, and remarked that the casting syntax in Java is just &#8220;dumb.&#8221; A follow-up question surrounded whether or not primitives should be a part of the language. James called this a hard problem, asserting that a &#8220;uniform type model can lead to bumpy behavior or bad performance.&#8221; He said that the Scala specification gets around this with a dual object hierarchy (I need to look this up to see what he means.). He continued to talk about the definition of equality vs. identity, explaining that primitives can&#8217;t have identity; in fact, they may never exist except as a figment of the compilers imagination, optimized away (my notes are fuzzy on this&#8230;when I get the recording I&#8217;ll clean this up).</p>
+
+<p>The next question surrounded a statement that one attendee of the recent Google I/O conference heard, that threads are &#8220;deprecated&#8221; as a concurrency model. James immediately retorted that concurrency has very many ideas around it, and that it has been an active Ph.D. thesis generator for 30+ years. He mentioned competing models such as Actors in Scala and Erlang, and Communicating Sequential Processes (CSP) process algebra from Occam. He asserted that with CSP most people typically don&#8217;t &#8220;think that way very well. People with Math degrees think it&#8217;s cool, but everybody else is kind of like&#8230;huh?&#8221; He stated that no data sharing between threads makes a lot of problems go away, but that often times casting problems that way can be intractable. A big quotable: &#8220;All of the different threading paradigms feel to me like whack-a-mole.&#8221; He closed the concurrency question by mentioning Guy Steele&#8217;s work on Fortress, where they are doing automatic decomposition from functional constructs into multiple threads of execution, making all of this issue transparent to the programmer.</p>
+
+<p>Since this is getting pretty long, I&#8217;ll mention that James says he knows that Larry Ellison, Oracle CEO (and Sun &#8220;suitor&#8221;) has downloaded JavaFX and personally written apps with it, saying it is &#8220;pretty darn tasty!&#8221; (Again, don&#8217;t take this as quoted&#8230;it&#8217;s definitely paraphrased).</p>
+
+<p>Other quotables: &#8220;Android - it&#8217;s hard to know what to think about it. It seems like a corner hobby project, chaos looking for a place to happen.&#8221;</p>
+
+<p>&#8220;The exception system was DESIGNED to be a complete PITA.&#8221;</p>
+
+<p>All-in-all, a great time was had by all. Thanks James for your time, it was definitely fascinating hearing your thoughts on so may different areas of the Java landscape.</p>
+
+<p><img src="http://mattstine.files.wordpress.com/2009/06/jug-usa-gosling-grouppic-900.jpg" alt="JUG-USA with James Gosling" /></p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Matt Stine</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-06-05T02:00:59-05:00" pubdate data-updated="true">Jun 5<span>th</span>, 2009</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/javaone2009/'>javaone2009</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://mattstine.com/2009/06/05/jug-usa-meeting-with-james-gosling-at-javaone/" data-via="mstine" data-counturl="http://mattstine.com/2009/06/05/jug-usa-meeting-with-james-gosling-at-javaone/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2009/06/04/more-connecting-at-javaone-2009/" title="Previous Post: More connecting at #JavaOne 2009">&laquo; More connecting at #JavaOne 2009</a>
+      
+      
+        <a class="basic-alignment right" href="/2009/06/09/javaone-2009-return-of-the-puzzlers-schlock-and-awe/" title="Next Post: #JavaOne 2009 Return of the Puzzlers: Schlock and Awe">#JavaOne 2009 Return of the Puzzlers: Schlock and Awe &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+	<h1>Hello, World!</h1>
+	<p>
+		<img src="http://mattstine.files.wordpress.com/2011/05/indiamug.jpg" width="173" height="213">
+	</p>
+	<p>
+		<a href="http://www.linkedin.com/in/mattstine"><img alt="View Matt Stine&#039;s profile on LinkedIn" src="http://www.linkedin.com/img/webpromo/btn_myprofile_160x33.gif" border="0" width="160" height="33"></a>
+	</p>
+</section><section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2011/05/16/design-meeting-patternsantipatterns/">Design Meeting Patterns/Antipatterns</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/01/05/selenium-conference-2011/">Selenium Conference 2011</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/01/02/2010-in-review-the-automated-analysis/">2010 in review: the automated analysis...</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2010/11/29/selenium-2-0-refcard/">Selenium 2.0 Refcard</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2010/11/10/agile-zone-roundup/">Agile Zone Roundup</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating...</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("mstine", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/mstine" class="twitter-follow-button" data-show-count="false">Follow @mstine</a>
+  
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - Matt Stine -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'seekingsimplicity';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

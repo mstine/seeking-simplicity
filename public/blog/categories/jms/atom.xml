@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: jms | Seeking Simplicity]]></title>
+  <link href="http://mattstine.com/blog/categories/jms/atom.xml" rel="self"/>
+  <link href="http://mattstine.com/"/>
+  <updated>2012-05-24T19:13:18-05:00</updated>
+  <id>http://mattstine.com/</id>
+  <author>
+    <name><![CDATA[Matt Stine]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[I'm speaking at the March Memphis JUG meeting]]></title>
+    <link href="http://mattstine.com/2009/03/13/im-speaking-at-the-march-memphis-jug-meeting/"/>
+    <updated>2009-03-13T12:24:00-05:00</updated>
+    <id>http://mattstine.com/2009/03/13/im-speaking-at-the-march-memphis-jug-meeting</id>
+    <content type="html"><![CDATA[<p>I learned a great deal about JMS from Mark Richards at last weekend's NFJS Gateway Software Symposium, and I thought I'd share it with the Memphis Java community. Take a look at <a href="http://www.memphisjug.org">http://www.memphisjug.org</a> for details!</p>
+]]></content>
+  </entry>
+  
+</feed>

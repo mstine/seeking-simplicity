@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: java | Seeking Simplicity]]></title>
+  <link href="http://mattstine.com/blog/categories/java/atom.xml" rel="self"/>
+  <link href="http://mattstine.com/"/>
+  <updated>2012-05-24T19:13:18-05:00</updated>
+  <id>http://mattstine.com/</id>
+  <author>
+    <name><![CDATA[Matt Stine]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[OSGi on Rails?]]></title>
+    <link href="http://mattstine.com/2010/04/29/osgi-on-rails/"/>
+    <updated>2010-04-29T12:33:40-05:00</updated>
+    <id>http://mattstine.com/2010/04/29/osgi-on-rails</id>
+    <content type="html"><![CDATA[<p>I've seen quite a few blogs/articles/etc. lately related to the adoption (or lack thereof) of OSGi in the mainstream web application/enterprise application space. A nice summation of these is encapsulated in this excerpt from a comment by Peter Kriens on DZone (you'll find it in the comments section for <a href="http://java.dzone.com/articles/osgi-perspectives">http://java.dzone.com/articles/osgi-perspectives</a>:</p>
+
+<blockquote><p>Yes, one of the next frontiers is to make OSGi easier to use for the web app developers. The solid foundation is there, so stop whining and help us create the tools, books, and tutorials that will make OSGi palatable in those markets.</p></blockquote>
+
+<p>There's nothing like a call to action to get me stirred up. It's no secret that I think OSGi is an excellent tool for tackling the complexity of enterprise applications (see my talks on the NFJS tour this year: <a href="http://www.nofluffjuststuff.com/conference/speaker/matt_stine">http://www.nofluffjuststuff.com/conference/speaker/matt_stine</a>). However, I will readily admit that the learning curve for tackling any non-trivial application in OSGi is rather steep. My bar for non-trivial is quite low - try learning OSGi while simultaneously attempting to get a mainstream framework like Hibernate working properly.</p>
+
+<p>I think that what we need is a tool that will enable a developer new to OSGi to get an OSGi-enabled web application up and running fairly readily. In fact, I think it would be good to absolutely minimize the amount of OSGi know-how required to get a basic web application into production, while at the same time leaving all of OSGi available just under the covers so that it can be easily accessed when I know what I need and how to use it. So here's my proposal:</p>
+
+<p>1) Follow in the footsteps of AppFuse, Grails, Rails, Roo, etc. and put together a web application toolkit that will allow one to instantly spin-up a deployable OSGI-enabled web application.
+2) Since we're talking about catering to mainstream here, Java the language ought to be the primary language used for development. With that said, we should not put up any barriers to using other languages available on the JVM.
+3) Bootstrap a DB-agnostic persistence layer leveraging JPA and make it easily accessible across the application bundles.
+4) Bootstrap a dependency injection framework for OSGi services based on the Blueprint standard.
+5) Bootstrap a security layer and provide a basic user/role security module with provided login, logout, etc. facilities.
+6) Pick a set of modern Java web application frameworks (e.g. Spring MVC, Struts 2, etc.) and make them easily pluggable.
+7) Wrap a nice build system around all of this that leverages a modern build tool (e.g. Gradle or Maven 3), the best of the PAX Tools features (especially Pax Construct, Exam, and Runner), and good facilities for automated testing.</p>
+
+<p>So, who's with me? I'm open to any suggestions/comments/rants, etc.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[JUG Leadership Lessons Learned on SlideShare]]></title>
+    <link href="http://mattstine.com/2010/04/02/jug-leadership-lessons-learned-on-slideshare/"/>
+    <updated>2010-04-02T14:48:39-05:00</updated>
+    <id>http://mattstine.com/2010/04/02/jug-leadership-lessons-learned-on-slideshare</id>
+    <content type="html"><![CDATA[<p>I've been playing a bit with <a href="http://www.slideshare.net">SlideShare</a> today and I took the opportunity to upload the slides from my <a href="http://weblogs.java.net/blog/2009/07/02/how-start-and-grow-jug-community-corner-2009-podcast">Java.net Community Corner interview with Kevin Farnham at JavaOne 2009</a>. SlideShare has a nice feature that allows you to sync up the audio from an MP3 file with your slides, and since both were available, I thought I'd give it a try. The interface is extremely easy to use and I'm very happy with the outcome.</p>
+
+<p>This talk covers the various things I've learned about leading a Java User Group over the past few years. I would say that these are definitely applicable to leading any type of user group, so even if you aren't a Java person, you might find some meat here. Enjoy!</p>
+
+<p>[slideshare id=3622125&amp;doc=jugleadershiplessonslearned-100402140624-phpapp02]</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Making Java "Groovier" with LambdaJ]]></title>
+    <link href="http://mattstine.com/2009/10/09/making-java-groovier-with-lambdaj/"/>
+    <updated>2009-10-09T09:37:06-05:00</updated>
+    <id>http://mattstine.com/2009/10/09/making-java-groovier-with-lambdaj</id>
+    <content type="html"><![CDATA[<p>I spent the better part of yesterday tracing my way through the codebase for a large-scale enterprise application that my team is building right now, and I happened upon the following piece of code:</p>
+
+<p>``` java
+//...imports excluded for clarity
+public class BusinessActivityBinMetaClassHelper {
+//...
+   public static List<Long> getSrmMetaClassIdListJava(List<BusinessActivityBinMetaClass> businessActivityBinMetaClassList) {</p>
+
+<pre><code>  List&lt;Long&gt; srmMetaClassIdList = new ArrayList&lt;Long?();
+
+  if(businessActivityBinMetaClassList != null) {
+     for(BusinessActivityBinMetaClass businessActivityBinMetaClass : businessActivityBinMetaClassList) {
+         if(businessActivityBinMetaClass.getSrmMetaClass() != null &amp;&amp; businessActivityBinMetaClass.getSrmMetaClass().getSrmMetaClassId() != null) {
+           srmMetaClassIdList.add
+              (businessActivityBinMetaClass.getSrmMetaClass().getSrmMetaClassId());
+        }
+     }
+  }
+
+  return srmMetaClassIdList;
+</code></pre>
+
+<p>   }
+//...
+}
+```</p>
+
+<p>As I read this code, I thought "This just SCREAMS a need for Groovy's closure iterators." So, last night I quickly hacked out fully-equivalent Groovy version of the code:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">class</span> <span class="nc">GroovyExample</span> <span class="o">{&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>   <span class="kd">static</span> <span class="n">def</span> <span class="n">getSrmMetaClassIdListGroovy</span><span class="o">(</span><span class="n">def</span> <span class="n">businessActivityBinMetaClassList</span><span class="o">)</span> <span class="o">{&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span>  <span class="n">businessActivityBinMetaClassList</span><span class="o">?.</span><span class="na">collect</span> <span class="o">{</span> <span class="n">it</span><span class="o">?.</span><span class="na">srmMetaClass</span><span class="o">?.</span><span class="na">srmMetaClassId</span> <span class="o">}.</span><span class="na">findAll</span> <span class="o">{</span> <span class="n">it</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">}</span> <span class="o">?:</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&amp;</span><span class="n">lt</span><span class="o">;</span><span class="n">Long</span><span class="o">&amp;</span><span class="n">gt</span><span class="o">;();</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>   <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>Whew! Much nicer. What did we get out of this? Well...</p>
+
+<ul>
+<li><p>Groovy's dynamic typing cleaned up all of the unnecessary type declarations - the only static typing is where we return an empty ArrayList of Longs if the argument to our method is null (a bit of odd behavior, but required to make this code equivalent to the parent Java code.</p></li>
+<li><p>We were saved 4 painful null checks by the use of Groovy's null safe dereferencing operator (?.) and the simplified ternary operator otherwise affectionately known as the "Elvis Operator" (?:).</p></li>
+<li><p>Using Groovy's collect method, we were able to transform the original list into a list containing Long values by passing in a closure that pulls out the property value of interest.</p></li>
+<li><p>Because we're using null safe dereferencing, we are actually inserting nulls into our list if any of the dereferencing fails. Therefore, Groovy's findAll Collection filtering method comes to the rescue. We simply provide it with a closure that returns true for all of the values we want to keep - in this case, "it != null."</p></li>
+<li><p>Perhaps most importantly, we've shorted our code from 11 lines (including whitespace lines for clarity) to ONE LINE that much more clearly expresses the intent of the code.</p></li>
+</ul>
+
+
+<p>Great - why don't we just rewrite the entire application is Groovy? Well, hold on just a minute. At the time we started this application, as much as some of us loved Groovy, we just didn't have enough Groovy mindshare to go there yet. On top of that, we were already experimenting with several new architectural ideas and technologies, and Groovy would have added yet one more risk to the puzzle. I say all this to acknowledge that sometimes you just can't move to another language for one reason or another, regardless of how attractive its features may be.</p>
+
+<p>But let's take a queue from the <em>Pragmatic Programmer</em> and explore the LOTY (Language of the Year) concept one more time. One of the reasons that you're encouraged to learn new languages is to change the way you program in your main language. You may learn Groovy, Scala, Clojure, Ruby, etc., etc., etc. and never use them in your day job - and yet the experience of coding in a new language with new constructs and idioms will necessarily change the way you THINK about programming in every other language.</p>
+
+<p>So, let's think about the possibility of coding something that is much more similar to the Groovy version and yet stick with regular Java code. Fortunately, there are several libraries out there that bring much of the flavor and power of Groovy's closure iterators to Java. I'd like to focus in on one of them, LambdaJ (<a href="http://code.google.com/p/lambdaj/">http://code.google.com/p/lambdaj/</a>).</p>
+
+<p>LambdaJ provides constructs that allow us to "...manipulate collections in a pseudo-functional and statically typed way." Let's take a look at this example implementing using LambdaJ:</p>
+
+<p>``` java
+//...some imports excluded for clarity
+import ch.lambdaj.function.convert.Converter
+import static ch.lambdaj.Lambda.<em>
+import static org.hamcrest.Matchers.</em></p>
+
+<p>public class BusinessActivityBinMetaClassHelper {
+//...
+   public static List<Long> getSrmMetaClassIdListJava(List<BusinessActivityBinMetaClass> businessActivityBinMetaClassList) {</p>
+
+<pre><code>  return (businessActivityBinMetaClassList != null) ? filter(notNullValue(),convert(businessActivityBinMetaClassList, new IdExtractor())) : new ArrayList&lt;Long&gt;();
+</code></pre>
+
+<p>   }</p>
+
+<p>   class IdExtractor implements Converter&lt;BusinessActivityBinMetaClass,Long> {</p>
+
+<pre><code>Long convert(BusinessActivityBinMetaClass from) {
+   if (from.getSrmMetaClass() != null &amp;&amp; from.getSrmMetaClass().getSrmMetaClassId() != null) {
+      return from.getSrmMetaClass().getSrmMetaClassId();
+   }
+</code></pre>
+
+<p>   }
+}
+```</p>
+
+<p>Not quite as nice as the Groovy code - we got A LOT out of the null-safe dereference and Elvis operators. However, our overall intent is still a bit clearer. Let's analyze:</p>
+
+<ul>
+<li><p>First we need to implement one of LambdaJ's Converters. A Converter is nothing more than a generic Interface that defines one method: T convert(F from), where F is the type we're converting from and T is the type we're converting to. In this case, we want to convert an object of type BusinessActivityBinMetaClass to an object of type Long. Our implementation determines how this conversion takes place, in this case by extracting the id property from its child.</p></li>
+<li><p>Next, after statically importing the methods of ch.lambdaj.Lambda, we call the convert method, passing it our List and our newly implemented Converter. This gives us the equivalent of Groovy's collect method, with the Converter taking the place of the closure.</p></li>
+<li><p>We're still shoving nulls into our List with this implementation, so we further filter our list using LambdaJ's "filter" method, passing it the list returned by "filter," and a <a href="http://code.google.com/p/hamcrest/">Hamcrest</a> matcher that returns only notNullValue()'s.</p></li>
+<li><p>Finally, we use our old friend the ternary operator to return the empty ArrayList of Long values if our method argument is null.</p></li>
+</ul>
+
+
+<p>If you don't count the Converter implementation, we've gotten ourselves down to 2 lines of code (1 if you don't mind long lines). In this case I implemented IdExtractor as a named inner class - you could do this with an anonymous inner class and it would look a lot more like a closure, but the added noise of all of the null checking made the undesirable for me. Perhaps if your code has less noise (or guarantees that values aren't null), that would be a better approach.</p>
+
+<p>Another alternative is to make IdExtractor a top-level class that, if general enough, could be reused throughout the codebase. The benefit of this is that you now have a nice code unit rather than a battery of static methods in a utility class, and unit testing becomes much more clean and elegant.</p>
+
+<p>So, we've still made some progress and made our code a bit more Groovy. I encourage you to explore LambdaJ's feature set and see how it might make your code a bit more concise with clearer intent. And just to stir up a little controversy, look what would have happened in Java 7 had the null safe dereference and Elvis operator's made <a href="http://blogs.sun.com/darcy/entry/project_coin_final_five">the Project Coin cut</a>:</p>
+
+<p>``` java
+//...some imports excluded for clarity
+import ch.lambdaj.function.convert.Converter
+import static ch.lambdaj.Lambda.<em>
+import static org.hamcrest.Matchers.</em></p>
+
+<p>public class BusinessActivityBinMetaClassHelper {
+//...
+   public static List<Long> getSrmMetaClassIdListLambdaJ(List<BusinessActivityBinMetaClass> businessActivityBinMetaClassList) {</p>
+
+<pre><code>  return filter(notNullValue(),convert(businessActivityBinMetaClassList,
+     new Converter&lt;BusinessActivityBinMetaClass,Long&gt; {
+        Long apply(BusinessActivityBinMetaClass from) { return from?.getSrmMetaClass()?.getSrmMetaClassId()}
+     })) ?: new ArrayList&lt;Long&gt;();
+</code></pre>
+
+<p>   }
+}
+```</p>
+
+<p>Nice, huh? ;-)</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[I'm speaking at the March Memphis JUG meeting]]></title>
+    <link href="http://mattstine.com/2009/03/13/im-speaking-at-the-march-memphis-jug-meeting/"/>
+    <updated>2009-03-13T12:24:00-05:00</updated>
+    <id>http://mattstine.com/2009/03/13/im-speaking-at-the-march-memphis-jug-meeting</id>
+    <content type="html"><![CDATA[<p>I learned a great deal about JMS from Mark Richards at last weekend's NFJS Gateway Software Symposium, and I thought I'd share it with the Memphis Java community. Take a look at <a href="http://www.memphisjug.org">http://www.memphisjug.org</a> for details!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[On our way to the Gateway Software Symposium]]></title>
+    <link href="http://mattstine.com/2008/02/08/on-our-way-to-the-gateway-software-symposium/"/>
+    <updated>2008-02-08T15:49:00-06:00</updated>
+    <id>http://mattstine.com/2008/02/08/on-our-way-to-the-gateway-software-symposium</id>
+    <content type="html"><![CDATA[<p>We're taking most of our team to the St. Louis, Missouri, edition of the <a href="http://www.nofluffjuststuff.com">No Fluff Just Stuff</a> 2008 tour. This will be my first actual NFJS event. I attended the <a href="http://www.thespringexperience.com">Spring Experience</a> in 2007, which was put on by the NFJS guys, so I expect this event in St. Louis to be great. Since we're based in Memphis, St. Louis is only about a 4 1/2 hour drive. We're all going to pile in a van and road trip. It should be a great time.</p>
+
+<p>I'm going to have a hard time choosing sessions: Neal Ford, Scott Davis, David Geary, Jeff Brown, and Bryan Sletten all have sessions that I'd like to attend, several of which are in conflict. I hope they do post-conference video delivery of these sessions just like they're doing for the Spring Experience.</p>
+
+<p>If anyone's going to be there, let's do dinner one night and you can meet some of the St. Jude team.</p>
+]]></content>
+  </entry>
+  
+</feed>

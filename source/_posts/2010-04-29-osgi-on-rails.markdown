@@ -1,0 +1,34 @@
+---
+date: '2010-04-29 12:33:40'
+layout: post
+slug: osgi-on-rails
+status: publish
+title: OSGi on Rails?
+wordpress_id: '306'
+categories:
+- java
+- osgi
+---
+
+I've seen quite a few blogs/articles/etc. lately related to the adoption (or lack thereof) of OSGi in the mainstream web application/enterprise application space. A nice summation of these is encapsulated in this excerpt from a comment by Peter Kriens on DZone (you'll find it in the comments section for [http://java.dzone.com/articles/osgi-perspectives](http://java.dzone.com/articles/osgi-perspectives):
+
+
+
+> 
+Yes, one of the next frontiers is to make OSGi easier to use for the web app developers. The solid foundation is there, so stop whining and help us create the tools, books, and tutorials that will make OSGi palatable in those markets.
+
+
+
+There's nothing like a call to action to get me stirred up. It's no secret that I think OSGi is an excellent tool for tackling the complexity of enterprise applications (see my talks on the NFJS tour this year: [http://www.nofluffjuststuff.com/conference/speaker/matt_stine](http://www.nofluffjuststuff.com/conference/speaker/matt_stine)). However, I will readily admit that the learning curve for tackling any non-trivial application in OSGi is rather steep. My bar for non-trivial is quite low - try learning OSGi while simultaneously attempting to get a mainstream framework like Hibernate working properly.
+
+I think that what we need is a tool that will enable a developer new to OSGi to get an OSGi-enabled web application up and running fairly readily. In fact, I think it would be good to absolutely minimize the amount of OSGi know-how required to get a basic web application into production, while at the same time leaving all of OSGi available just under the covers so that it can be easily accessed when I know what I need and how to use it. So here's my proposal:
+
+1) Follow in the footsteps of AppFuse, Grails, Rails, Roo, etc. and put together a web application toolkit that will allow one to instantly spin-up a deployable OSGI-enabled web application.
+2) Since we're talking about catering to mainstream here, Java the language ought to be the primary language used for development. With that said, we should not put up any barriers to using other languages available on the JVM.
+3) Bootstrap a DB-agnostic persistence layer leveraging JPA and make it easily accessible across the application bundles.
+4) Bootstrap a dependency injection framework for OSGi services based on the Blueprint standard.
+5) Bootstrap a security layer and provide a basic user/role security module with provided login, logout, etc. facilities.
+6) Pick a set of modern Java web application frameworks (e.g. Spring MVC, Struts 2, etc.) and make them easily pluggable.
+7) Wrap a nice build system around all of this that leverages a modern build tool (e.g. Gradle or Maven 3), the best of the PAX Tools features (especially Pax Construct, Exam, and Runner), and good facilities for automated testing.
+
+So, who's with me? I'm open to any suggestions/comments/rants, etc.

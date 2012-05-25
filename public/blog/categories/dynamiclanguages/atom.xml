@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: dynamiclanguages | Seeking Simplicity]]></title>
+  <link href="http://mattstine.com/blog/categories/dynamiclanguages/atom.xml" rel="self"/>
+  <link href="http://mattstine.com/"/>
+  <updated>2012-05-24T19:13:18-05:00</updated>
+  <id>http://mattstine.com/</id>
+  <author>
+    <name><![CDATA[Matt Stine]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[LOTY...Part Deux]]></title>
+    <link href="http://mattstine.com/2009/04/06/lotypart-deux/"/>
+    <updated>2009-04-06T22:31:58-05:00</updated>
+    <id>http://mattstine.com/2009/04/06/lotypart-deux</id>
+    <content type="html"><![CDATA[<p><img src="http://mattstine.files.wordpress.com/2009/04/scala_vs_clojure.jpg" alt="scala_vs_clojure" /><a href="http://mattstine.files.wordpress.com/2009/04/scala_vs_clojure.jpg2009/04/02/loty-time-again-scala-or-clojure">A few days ago I pontificated</a> on my need to choose a new "Language of the Year." Right now I'm attempting to choose between <a href="http://www.scala-lang.org/">Scala</a> and <a href="http://clojure.org/">Clojure</a>. If nothing else, I've learned from this exercise that asking the community for feedback is a GOOD thing. Your comments have been very helpful.</p>
+
+<p>To summarize:</p>
+
+<ol>
+<li><p>As far as the polls go, Scala is in the lead by a margin of 4 to 2.</p></li>
+<li><p>Two of the Scala votes have been simple +1's, and two have provided a supporting argument.</p></li>
+<li><p>Both Clojure voters have provided a supporting argument.</p></li>
+<li><p>So, to make this a bit more of a fair fight, I'm only going to consider the "supported votes" at this point. This leads to the obvious result of a tie!</p></li>
+</ol>
+
+
+<p>So, what to do?</p>
+
+<p>The argument for using Scala is that it is a functional/OO hybrid, so it will be easier to slide into. Interestingly enough, the argument against using Scala is that it is a functional/OO hybrid, so it will be easier to slide back into OO/imperative habits! Clojure, being more of a purely functional language, will be harder to get into initially, but will force me to think functionally. Hmmm...</p>
+
+<p>So here's my idea. Let's do this the agile way. What I'd like to do is complete a timeboxed spike (in terms of actual time spent learning the language, not calendar time - I'm doing this in my spare time, and I've got my wife, four kids, and three other side projects competing for my attention!) of roughly two weeks in each language. The first week of the spike would be spent getting comfortable with the syntax, reading articles/documentation/blogs/etc., writing "Hello, World!" etc. The second week of the spike would be spent solving the same problem in each language, preferably a problem sitting in the functional sweet spot.</p>
+
+<p>How does this sound to everyone? And to follow up, does anyone have a suggested problem I might tackle? Cheers!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[LOTY Time Again: Scala or Clojure?!?!]]></title>
+    <link href="http://mattstine.com/2009/04/02/loty-time-again-scala-or-clojure/"/>
+    <updated>2009-04-02T15:21:21-05:00</updated>
+    <id>http://mattstine.com/2009/04/02/loty-time-again-scala-or-clojure</id>
+    <content type="html"><![CDATA[<p>In 2007 <a href="http://www.mattstine.com/2007/07/10/my-professional-development-goals-for-2007-2008/">I established several professional development goals</a> (<a href="http://www.mattstine.com/2008/01/02/mid-year-review-my-professional-development-goals-for-2007-2008/">and later reported my progress on these</a>), one of which was to learn Groovy and Grails. This goal stemmed from the continually referenced idea from <em>The Pragmatic Programmer</em> to "learn a new language every year." This idea has become so ubiquitous that it even has it's own four-letter acronym, LOTY (Language of the Year).</p>
+
+<p>Since establishing and reporting on these goals, I've had several things get in the way of fully realizing all of them. However, I can safely say that in the last two years I have mastered enough Groovy and Grails that they no longer fit in the LOTY category. At this point they're really not showing my anything that is causing any paradigm shifts for me. They're comfortable. When I learn a new feature, it just seems to make sense, and nothing surprises me anymore. Languages like these aren't good LOTY candidates because one of the purposes of learning a LOTY is to challenge and change your ideas about programming. Groovy doesn't do this for me anymore. It's time to move on (not to say that I'm dropping Groovy and Grails as a tool - I'm using them more now than ever - they're just not a learning tool for me anymore).</p>
+
+<p>So, at this point I want to delve into a language that attempts to tackle the concurrent/multicore programming challenge. I'd like to stay on the JVM because I appreciate the benefits that it brings as a platform, so for now Erlang is out. The two leading candidates in the JVM/concurrent/multicore arena seem to be <a href="http://www.scala-lang.org/">Scala</a> and <a href="http://clojure.org/">Clojure</a>. An added benefit of both of these languages is that they support the functional paradigm, something I haven't really played with since my computer science education days and a very interesting language named Haskell.</p>
+
+<p>Scala is a multiparadigm language, supporting both object-oriented and functional constructs. It is statically typed, yet offers very nice type inference. Clojure, on the other hand, is a functional Lisp derivative with almost no OO constructs that is dynamically typed. Both are designed to enable concurrent programming. Which one do I choose? I open the floor for comments.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[It seems to be the year of the dynamic/scripting language]]></title>
+    <link href="http://mattstine.com/2007/05/08/it-seems-to-be-the-year-of-the-dynamicscripting-language/"/>
+    <updated>2007-05-08T17:57:00-05:00</updated>
+    <id>http://mattstine.com/2007/05/08/it-seems-to-be-the-year-of-the-dynamicscripting-language</id>
+    <content type="html"><![CDATA[<p><a href="http://picasaweb.google.com/matt.stine/SanFranciscoJavaOne2007/photo#5062324250889201762"><img src="http://lh6.google.com/image/matt.stine/RkD9FbgYqGI/AAAAAAAAALY/NEPT0IawaRY/s288/DSCN1113.JPG" alt="" /></a></p>
+
+<p>It has been a whirlwind of a day. I've been to two keynotes (close to 5 hours of information there) and one technical session. Couple that information with what I heard at Java University yesterday, and you find many common themes. One that keeps coming up is the emerging trend of making other languages, particularly dynamic/scripting languages, first-class citizens on the JVM.</p>
+
+<p>According to Wikipedia, "Dynamic programming language is a term used broadly in computer science to describe a class of high level programming languages that execute at runtime many common behaviors that other languages might perform during compilation, if at all. These behaviors could include extension of the program, by adding new code, or by extending objects and definitions, or by modifying the type system, all during program execution. These behaviors can be emulated in nearly any language of sufficient complexity, but dynamic languages provide direct tools to make use of them." This definition seems to fit quite nicely with what I've heard the last two days. A couple of dynamic languages I've heard A LOT about are Groovy and Ruby.</p>
+
+<p>Yes, Ruby and its most popular framework, Ruby on Rails, have survived the initial hype. They are here to stay. Not only that, they seem poised to make a serious impact on the way we will do web application development over the next several years. Sun made a HUGE splash when they decided to hire the core developers of JRuby, the project which in its current pre-1.0 release already runs 98% of Ruby on Rails as a first-class citizen on the JVM. Not only that, you can now create a WAR file from a Ruby on Rails application and deploy it to any Java application server! I'll write more on this in another entry as I attended a full technical session on it.</p>
+
+<p>If you're too uncomfortable getting away from Java, why not try Groovy? After all, it is a JSR (241). All of Java syntax is legal in Groovy, plus a lot more. Groovy is a dynamic scripting language like Ruby and also compiles to bytecode, making it a first-class citizen on the JVM. It has its own MVC framework, Grails (formerly Groovy on Rails), which is a direct competitor to Ruby on Rails. I've already written on Groovy and Grails in an earlier entry.</p>
+
+<p>I plan to attend some additional sessions focused on these dynamic languages, as it seems they will be really important in the years to come.</p>
+]]></content>
+  </entry>
+  
+</feed>

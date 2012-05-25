@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: general | Seeking Simplicity]]></title>
+  <link href="http://mattstine.com/blog/categories/general/atom.xml" rel="self"/>
+  <link href="http://mattstine.com/"/>
+  <updated>2012-05-24T19:13:18-05:00</updated>
+  <id>http://mattstine.com/</id>
+  <author>
+    <name><![CDATA[Matt Stine]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[2010 in review: the automated analysis...]]></title>
+    <link href="http://mattstine.com/2011/01/02/2010-in-review-the-automated-analysis/"/>
+    <updated>2011-01-02T20:28:25-06:00</updated>
+    <id>http://mattstine.com/2011/01/02/2010-in-review-the-automated-analysis</id>
+    <content type="html"><![CDATA[<p>The stats helper monkeys at WordPress.com mulled over how this blog did in 2010, and here's a high level summary of its overall blog health:</p>
+
+<p><img src="http://s0.wp.com/i/annual-recap/meter-healthy3.gif" alt="Healthy blog!" /></p>
+
+<p>The <em>Blog-Health-o-Meter™</em> reads Fresher than ever.</p>
+
+<h2>Crunchy numbers</h2>
+
+<pre><code>            ![Featured image](http://s0.wp.com/i/annual-recap/abstract-stats-1.png)
+</code></pre>
+
+<p><em>A helper monkey made this abstract painting, inspired by your stats.</em></p>
+
+<p>A Boeing 747-400 passenger jet can hold 416 passengers.  This blog was viewed about <strong>6,600</strong> times in 2010.  That's about 16 full 747s.</p>
+
+<p>In 2010, there were <strong>15</strong> new posts, growing the total archive of this blog to 115 posts. There were <strong>24</strong> pictures uploaded, taking up a total of 979kb. That's about 2 pictures per month.</p>
+
+<p>The busiest day of the year was June 4th with <strong>139</strong> views. The most popular post that day was <a href="http://mattstine.com/2010/06/03/dont-build-software-thats-too-smart/">Don't build software that's TOO smart!</a>.</p>
+
+<h2>Where did they come from?</h2>
+
+<p>The top referring sites in 2010 were <strong>agile.dzone.com</strong>, <strong>java.dzone.com</strong>, <strong>twitter.com</strong>, <strong>Google Reader</strong>, and <strong>javablogs.com</strong>.</p>
+
+<p>Some visitors came searching, mostly for <strong>matt stine</strong>, <strong>groovy http post</strong>, <strong>groovy post</strong>, <strong>groovy url post</strong>, and <strong>groovy url encode</strong>.</p>
+
+<h2>Attractions in 2010</h2>
+
+<p>These are the posts and pages that got the most views in 2010.</p>
+
+<p>1</p>
+
+<pre><code>                [Don't build software that's TOO smart!](http://mattstine.com/2010/06/03/dont-build-software-thats-too-smart/) June 2010  
+</code></pre>
+
+<p>1 comment</p>
+
+<p>2</p>
+
+<pre><code>                [Groovy: Post to a URL](http://mattstine.com/2009/04/25/groovy-post-to-a-url/) April 2009  
+</code></pre>
+
+<p>4 comments</p>
+
+<p>3</p>
+
+<pre><code>                [Resume](http://mattstine.com/resume/) March 2009                                           
+</code></pre>
+
+<p>4</p>
+
+<pre><code>                [Deploying Grails with Groovy](http://mattstine.com/2009/03/29/deploying-grails-with-groovy/) March 2009                                            
+</code></pre>
+
+<p>5</p>
+
+<pre><code>                [LOTY Time Again: Scala or Clojure?!?!](http://mattstine.com/2009/04/02/loty-time-again-scala-or-clojure/) April 2009  
+</code></pre>
+
+<p>17 comments</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[My iPod is on rice]]></title>
+    <link href="http://mattstine.com/2009/03/13/my-ipod-is-on-rice/"/>
+    <updated>2009-03-13T11:55:00-05:00</updated>
+    <id>http://mattstine.com/2009/03/13/my-ipod-is-on-rice</id>
+    <content type="html"><![CDATA[<p>Let me set the stage for you. I'm driving home happily listening to Ted Neward discuss the merits of Scala on the Javaworld podcast. As I pull into the driveway I see my wife waving frantically in the window. As geek brain struggles to process this, home brain kicks into gear. She needs me in the house now! I jump out of the car and slam the door shut, leaving all of the belongings I typically carry in the house.</p>
+
+<p>I enter the house to find that a wasp has some how gotten in and is terrorizing the family. What ensues is roughly 15 minutes of wasp hunting. Wasp dead - end of story. Or so I thought.</p>
+
+<p>As I'm driving my iPod (attached to the iTrip FM transmitter/charger) typically sits in my lap (for some reason I get the least FM interference that way). What I didn't notice in my hasty departure from the vehicle is that my iPod nano flew out of the vehicle and was hanging by the iTrip cable. Unaware of this, I slammed the door on the cable and walked away.</p>
+
+<p>This in and of itself wasn't a huge problem. Leaving it that way for approximately 24 hours - most of which included rather steady rainfall - was.</p>
+
+<p>So, a quick Google search finds that the consensus approach seems to be sticking the iPod in a cup of dry rice to soak up the moisture. So there you have it - my iPod is on rice. I hope it works. Stay tuned.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[It's been a long time...]]></title>
+    <link href="http://mattstine.com/2009/03/12/its-been-a-long-time/"/>
+    <updated>2009-03-12T21:32:00-05:00</updated>
+    <id>http://mattstine.com/2009/03/12/its-been-a-long-time</id>
+    <content type="html"><![CDATA[<p>...since I actively spent any time blogging. What you don't know is that it has been a long time since I've done any writing whatsoever. The last two posts on this blog revolved around the birth of my first son, Grant Dawson, on May 16, 2009. This was one of several events that took place almost a year ago that sent me directly into a whirlwind of activity that found me barely keeping my head above water.</p>
+
+<p>It was also about this time that I found myself newly promoted into front-line management. The team that I entered first in 2000 as a Bioinformatics Intern during my last summer as an undergraduate, and then as a Software Engineer/Web Developer I following graduation in 2001, was now mine to lead. After doing this job now for nearly a year, I can safely say that my career as a developer has both prepared me for this role and left me completely bankrupt when faced with the responsibilities that are now mine. More on this to come.</p>
+
+<p>Another event that transpired in May was the sale of our first home. It had been on the market since March, and we "paused" the showings as Grant's arrival became imminent. It was near the end of May that we received both our first and our last post-Grant showing phone call. I remarked to Wendy - "these folks are going to buy the house." And buy it they did. Unfortunately for us, we had no idea whatsoever where we were going to move. What ensued was a chaotic whirlwind of house hunting which ended with us making an offer on a house that wasn't even on the market. And that's the house I'm sitting in while I write this first entry of 2009. Ask me to tell you the story sometime - it's a good one.</p>
+
+<p>So, why I'm I here? Why not just leave the blogging task. After all, isn't blogging passe at this point?</p>
+
+<p>I credit my return to the blogosphere to an incredible book by Jared Richardson and Matthew Bass - <a href="http://www.lulu.com/content/5925115">Career 2.0: Take Control of Your Life</a>. The basic premise of this book is to "Actively manage your career." One of the ways by which the authors share how to do this is writing - sharing what you know with the community at-large. Of course what they shared was no surprise to me. I already knew all too well the career benefits associated with blogging. What I needed was a proverbial "kick in the pants." And that's what Career 2.0 did for me. If you're in the software industry - take that back, I don't care what industry you're in (these principles are transcendent) - do yourself a favor and read this book. It will change something about your life, guaranteed.</p>
+
+<p>So, with that, let's start the conversation again. I'm looking forward to where it might lead. Cheers!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Introducing Grant Dawson Stine]]></title>
+    <link href="http://mattstine.com/2008/05/18/introducing-grant-dawson-stine/"/>
+    <updated>2008-05-18T14:11:00-05:00</updated>
+    <id>http://mattstine.com/2008/05/18/introducing-grant-dawson-stine</id>
+    <content type="html"><![CDATA[<p>So I haven't blogged in quite awhile. I've been rather busy - here's one VERY important reason why. Grant was born Friday, May 16, 2008, weighing in at 9 pounds 4 ounces and 22 inches long. Mom and baby are doing wonderfully, but as you can see, Dad is in a bit of shock!</p>
+
+<p><a href="http://4.bp.blogspot.com/_Vo63LRwAZbk/SDCAMcjQJGI/AAAAAAAAAfA/5LZWAyRyOfs/s1600-h/P5160099.jpg"><img src="http://4.bp.blogspot.com/_Vo63LRwAZbk/SDCAMcjQJGI/AAAAAAAAAfA/5LZWAyRyOfs/s400/P5160099.jpg" alt="" /></a></p>
+
+<p><a href="http://1.bp.blogspot.com/_Vo63LRwAZbk/SDCAMsjQJHI/AAAAAAAAAfI/5frhZqimCJM/s1600-h/P5160126.jpg"><img src="http://1.bp.blogspot.com/_Vo63LRwAZbk/SDCAMsjQJHI/AAAAAAAAAfI/5frhZqimCJM/s400/P5160126.jpg" alt="" /></a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Greetings from San Francisco!]]></title>
+    <link href="http://mattstine.com/2007/05/05/greetings-from-san-francisco/"/>
+    <updated>2007-05-05T16:18:00-05:00</updated>
+    <id>http://mattstine.com/2007/05/05/greetings-from-san-francisco</id>
+    <content type="html"><![CDATA[<p><a href="http://picasaweb.google.com/matt.stine/SanFranciscoJavaOne2007/photo#5061188923529143090"><img src="http://lh3.google.com/image/matt.stine/Rjz0grgYozI/AAAAAAAAAAs/tgIAHcd27AE/s288/DSCN0998.JPG" alt="" /></a></p>
+
+<p>This is the view from my quaint little hotel room at the Hotel Nikko in downtown San Francisco, California. I arrived here after a long morning of travel. First ~4 hours of flight from Memphis, TN to San Francisco International, followed by traversing the airport maze to find the BART (Bay Area Rapid Transit) train station. Once I found the right station, it was another 15 minutes of waiting on a train followed by a 40 minute train ride. Almost home? Not quite. As I ride the escalator out of the subway, I realize just what a country boy I am. There are literally hundreds of people crawling around on the streets, and here I am, toting a large rolling suitcase, a laptop, and a backpack, and looking totally clueless! Where is my hotel? I was definitely a prime target for predators just looking to make a quick buck. Within seconds I heard, "Where you looking to go? I've got a map." I quickly responds with "I've got it, thanks." Of course, I didn't have it. But I didn't have 20 bucks for the guy either! Not a few more steps up the sidewalk I'm confronted by Indian monks wanting to share their religion with me. I did have a nice conversation with this guy and got him to take one of my pocket Gospels of John (thank you Pocket Testament League!). Finally a nice family pointed me in the right direction. I figured out that if you look like you're on a mission and you know what you're doing, people don't come up to you, so I put on my best serious face and headed for the Hotel Nikko. Now here I am, and from my window I've got a nice view of the pool area which is surrounded by an interesting looking rock garden:</p>
+
+<p><a href="http://picasaweb.google.com/matt.stine/SanFranciscoJavaOne2007/photo#5061188992248619858"><img src="http://lh3.google.com/image/matt.stine/Rjz0krgYo1I/AAAAAAAAAA8/G7sMo_WekFc/s288/DSCN1000.JPG" alt="" /></a></p>
+
+<p>I also can see what looks like a potentially good Thai restaurant on the corner:</p>
+
+<p><a href="http://picasaweb.google.com/matt.stine/SanFranciscoJavaOne2007/photo#5061188940709012290"><img src="http://lh3.google.com/image/matt.stine/Rjz0hrgYo0I/AAAAAAAAAA0/poC9lBKXNDw/s288/DSCN0999.JPG" alt="" /></a></p>
+
+<p>The reviews on Google Maps look promising!</p>
+
+<p>On a final note for this entry, I desperately miss my family. Our goodbye at Memphis International was tear-filled, especially by Wendy. I haven't been this far away from them in a LOOOOONG time. In fact, Abby was only about 10 months old the last time I went on a business trip without them. Isabella and Ali Kate weren't even conceived yet! I managed to get a web camera for the trip, so I'm going to send them a video message every day. Check your email sweetheart! I love you all SO MUCH!</p>
+]]></content>
+  </entry>
+  
+</feed>

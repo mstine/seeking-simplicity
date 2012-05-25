@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: developer | Seeking Simplicity]]></title>
+  <link href="http://mattstine.com/blog/categories/developer/atom.xml" rel="self"/>
+  <link href="http://mattstine.com/"/>
+  <updated>2012-05-24T19:13:18-05:00</updated>
+  <id>http://mattstine.com/</id>
+  <author>
+    <name><![CDATA[Matt Stine]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Raible’s Wiki: AppFuseRoadmap]]></title>
+    <link href="http://mattstine.com/2006/08/15/raiblee28099s-wiki-appfuseroadmap/"/>
+    <updated>2006-08-15T09:44:00-05:00</updated>
+    <id>http://mattstine.com/2006/08/15/raiblee28099s-wiki-appfuseroadmap</id>
+    <content type="html"><![CDATA[<p>Raible updated the <a href="http://raibledesigns.com/wiki/AppFuseRoadmap.html">AppFuseRoadmap</a> yesterday. I’m really excited about where the project is going. XDoclet has been a good friend, but I’m really happy to see its demise in favor of annotations. JDK 5 and JSP 2.0 will also be really helpful - I’ve wanted to leverage these technologies for a long time, but haven’t had an easy way to do so. I think the most interesting thing for me will be the switch over to Maven 2. I have absolutely ZERO experience with Maven, other that seeing the pretty websites that it generates for many of my favorite open source projects. I consider myself to be something of an Ant wizard, so I hope that I’ll be able to leverage that experience in Maven.</p>
+
+<p>It looks like TestNG replacing JUnit is a nice-to-have for 2.0 - I hope this becomes a configuration option. I don’t know anything about TestNG. Perhaps it’s time to learn. <img src="http://www.analienandastranger.com/wp-includes/images/smilies/icon_smile.gif" alt=":-)" /></p>
+
+<p>AppFuse 2.2 is where things are really going to start getting cool. Convention over configuration (ala RoR) will really speed development, and features by plugin will make my life really easier. I spend a lot of time stripping things out that I don’t need for particular projects - the time I save by using AppFuse is worth the pain of stripping them out - so this will be yet another way that AppFuse will make Java EE development a pleasure.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Seven simple reasons to use AppFuse]]></title>
+    <link href="http://mattstine.com/2006/08/09/seven-simple-reasons-to-use-appfuse/"/>
+    <updated>2006-08-09T09:40:00-05:00</updated>
+    <id>http://mattstine.com/2006/08/09/seven-simple-reasons-to-use-appfuse</id>
+    <content type="html"><![CDATA[<p>I’ve wanted for some time now to write a blog entry promoting my favorite open source project - AppFuse. Since I started developing web applications using AppFuse as a base, I can truly say that I’ve rediscovered the joy of software development. I’ve found no other technology or methodology that has allowed me to place as much focus as I now do on solving business problems and not on technology ramp-up or figuring out the eccentricities of “framework X.” In this article, <a href="http://raibledesigns.com/">Matt Raible</a>, the founder of the <a href="http://www.appfuse.org/">AppFuse</a> project, humbly states very compelling reasons that you should use AppFuse for your J2EE development. To summarize, here are the 7 reaons:</p>
+
+<ol>
+<li>Testing</li>
+<li>Integration</li>
+<li>Automation</li>
+<li>Security Features and Extensibility</li>
+<li>Code Generation with AppGen</li>
+<li>Documentation</li>
+<li>Community</li>
+</ol>
+
+
+<p>Read the article to get the meat:</p>
+
+<p><a href="http://www-128.ibm.com/developerworks/java/library/j-appfuse/">Seven simple reasons to use AppFuse</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Stiff asks, Matt answers]]></title>
+    <link href="http://mattstine.com/2006/07/24/stiff-asks-matt-answers/"/>
+    <updated>2006-07-24T09:34:00-05:00</updated>
+    <id>http://mattstine.com/2006/07/24/stiff-asks-matt-answers</id>
+    <content type="html"><![CDATA[<p>I found an interesting article this morning by way of <a href="http://digg.com/programming">Digg.com Programming</a>: <a href="http://sztywny.titaniumhosting.com/2006/07/23/stiff-asks-great-programmers-answers/">Stiff asks, great programmers answer</a>. The author posed 5 questions to some of the more well-known programmers of today, and their answers made for very interesting reading. Not to say that I'm a great programmer or anything, but I thought it might be a fun thought exercise to answer these questions myself. Here we go:</p>
+
+<p><strong>How did you learn programming? Were any schools of any use? Or maybe you didn't even bother with attending any schools <img src="http://www.analienandastranger.com/wp-includes/images/smilies/icon_smile.gif" alt=":)" />  ?</strong></p>
+
+<p>How did I learn programming? There have been several different stages of my development as a programmer. I started out copying BASIC programs from magazines into my Atari 800 and then modifying them to see what would happen. This progressed through the Commodore 64 and Apple II. In the 8th grade I earned the distinction of “Best Programmer,” not that that means very much - I figured out how to make the U.S. flag program run with only a handful of lines of code using loop and control structures vs. typing out the entire graphics display line by line.</p>
+
+<p>In High School I jumped to the exciting world of Quick Basic. I can't remember the exact name of the course I took, but it was not very far above the level of what I did in Middle School/Junior High, nor was it very far below the level of my intro-level course in College. As I recall, we spent a lot of time hacking the machines to see what we could do with them. Of course you couldn't do anything cool like change your class schedule ala Hackers.</p>
+
+<p>At some point I decided I would major in Computer Science at the University of Mississippi. I really enjoyed my time at Ole Miss, and I learned a lot - unfortunately, I also picked up a lot of bad programming habits. You ask were schools of any use? Definitely - one of my favorite professors secured me an internship at St. Jude, which led to my current and only full-time software development job. It wasn't until I started developing real code for real clients that I got truly serious about programming as a profession. It was then that I learned that hacking out quick and dirty scripts that worked most of the time and would get past a graduate assistant's grading wasn't what programming was all about. I think the turning point of my career was when I attended XP/Agile Universe in 2002. It was here that I really started to grasp agility, test-driven development, refactoring, and simple design - principles and practices that I consider essential to developing software of any magnitude.</p>
+
+<p><strong>What do you think is the most important skill every programmer should possess?</strong></p>
+
+<p>I'll answer this question very much like David Heinemeier Hansson answered the 10-100 times question below. I think the ability to quickly view a problem in the abstract and then mentally apply Occam's razor to it until you have what is needed for implementation is essential to programming. When I'm not managing a project team/schedule - i.e. I'm actually doing software development - I would consider this to be the core of what I do every day.</p>
+
+<p><strong>Do you think mathematics and/or physics are important skills for a programmer? Why?</strong></p>
+
+<p>I can't remember ever using any of the physics I've learned. Take that back, the concept of the electromagnetic field was useful when I was trying to understand Mass Spectrometry, which is at the heart of several of my clients' work. Mathematics, on the other hand, is key. The concepts I learned in my discrete mathematics course seem to lie under the surface of many of the problems that I face. Even if I don't directly apply the mathematics on a day-to-day basis, the “way of thinking” that you develop when studying mathematics really sharpens you as a programmer in my opinion.</p>
+
+<p><strong>What do you think will be the next big thing in computer programming? X-oriented programming, Y language, quantum computers, etc?</strong></p>
+
+<p>Like many of those interviewed, I'm not into fortune telling and/or hype. The next big thing always quickly becomes yesterday's news as we cut through the hype to the core value of what product/technique/practice X offers. We then integrate that core value into our regular day-to-day toolset and then go back to business as usual.</p>
+
+<p><strong>If you had three months to learn one relatively new technology, which one would you choose?</strong></p>
+
+<p>THREE MONTHS?!?!? WOW! Although it isn't that new, it's still fairly new to me. I would spend the next three months learning everything I can about <a href="http://www.springframework.org/">the Spring framework</a>.</p>
+
+<p><strong>What do you think makes some programmers 10 or 100 times more productive than others?</strong></p>
+
+<p>This flies in the face of a lot of the agile methodologies out there, but I think solving as many problems as you can without interrupting any of your other team members will turn you into an uber-productive programmer. I taught myself 90% of what I know through self-study and independent troubleshooting. If every time you have an issue with your work you quickly run to someone on your team that “knows that software/technology/issue better,” you'll never advance past infancy as a programmer. Just like babies have to be spoon-fed, so do infant programmers. You have to learn how to feed yourself. The next time you have a problem in code that you're not familiar with, trace the execution, line-by-line. Understand for yourself how the program works. If you run across a technology or API that you're not familiar with, study the available resources related to it. “Google it” for crying out loud. The more you do this, the better you'll get at it. Soon you'll find yourself asking questions of your team members only about 5% of the time, and you'll become the most productive member of your team. Don't believe me? Give it a try.</p>
+
+<p><strong>What are your favorite tools (operating system, programming/scripting language, text editor, version control system, shell, database engine, other tools you can't live without) and why do you like them more than others?</strong></p>
+
+<p>My current tool set includes IntelliJ IDEA (as well as a smattering of Eclipse when I need it), <a href="http://www.appfuse.org/">AppFuse</a> - probably the best thing that has ever happened to J2EE development, Cygwin, Tomcat, and MySQL. If I'm doing anything else in a text editor besides coding, vim is my friend. Wiki-wise we're very invested in Confluence - it rocks as a wiki. Of course I really can't live without Firefox - besides my IDE I probably spend more time there than anywhere else.</p>
+
+<p><strong>What is your favorite book related to computer programming?</strong></p>
+
+<p>I think I have to call a tie here between <a href="http://www.amazon.com/gp/product/0135974445/sr=8-2/qid=1153761714/ref=pd_bbs_2/102-7769528-6502532?ie=UTF8">Agile Software Development, Principles, Patterns, and Practices</a> by Robert C. Martin and <a href="http://www.amazon.com/gp/product/0131016490/sr=1-1/qid=1153761786/ref=pd_bbs_1/102-7769528-6502532?ie=UTF8&amp;s=books">Test Driven Development: A Practical Guide</a> by David Astels.  Both of these books were instrumental in my development as a more agile developer.</p>
+
+<p><strong>What is your favorite book NOT related to computer programming?</strong></p>
+
+<p>This is an easy one - the Bible.  My main translation is the <a href="http://www.esv.org/">English Standard Version</a>.</p>
+
+<p>If I had to choose a book that wasn't the Bible, it would be <a href="http://www.livingwaters.com/Merchant2/merchant.mv?Screen=PROD&amp;Product_Code=102">The Way of the Master</a> by Ray Comfort.  This book literally changed my life.</p>
+
+<p><strong>What are your favorite music bands/performers/composers?</strong></p>
+
+<p>Right now my favorite artists include The David Crowder Band, Casting Crowns, and Todd Agnew.</p>
+]]></content>
+  </entry>
+  
+</feed>

@@ -1,0 +1,24 @@
+---
+date: '2009-11-04 15:44:32'
+layout: post
+slug: pomodoro-the-first-iteration
+status: publish
+title: 'Pomodoro: The First Iteration'
+wordpress_id: '276'
+categories:
+- agile
+- goals
+- office
+- Pomodoro
+- work
+---
+
+I spent about an hour last night reading through Francesco Cirillo's e-book _The Pomodoro Technique_. Up until this point I knew the basics of the technique, but I really wanted to drill down and get the details. I won't explain those here - visit [http://www.pomodorotechnique.com/](http://www.pomodorotechnique.com/) to get the lowdown. What I want to talk about is my experience applying the technique this morning.
+
+I managed to complete two Pomodoros. Each of the Pomodoros was filled with internal interruptions of various kinds. One of the first things that I observed was something that I already knew from yesterday's TADD post: I am definitely not used to focusing on one distinct task for any prolonged length of time. My mind was constantly bouncing around from idea to idea, almost as if my R-mode had a "memory leak." My first Pomodoro was primarily a reading task - I used it for my daily Bible reading and meditation. This part of my day brings it's focus challenges anyway, as I'm not doing anything tactile. I find its much easier to focus when I'm typing or writing something. The Pomodoro offered no relief from this, save a plan for dealing with the interruptions as they came up. First, note down that one happened with an apostrophe, and second, write the todo item or idea down on my inventory. This definitely helped to refocus my mind on the work at hand, but I still wish I could find a way to prevent those streamer thoughts from landing in the first place.
+
+The second thing that I observed was that my workspace is not at all setup to encourage focus. In recent months I've stopped using task-focused desktops in OS X, something that Neil Ford recommends in _The Productive Programmer_. I was reminded of this later in the day today reading [his latest blog entry](http://memeagora.blogspot.com/2009/11/productivity-pron.html). I think it would be a good idea to use my first Pomodoro of the day to setup task-based desktops for each of the tasks on my TODO list. I could fire up all of the programs necessary and drop them on to a space. Since a lot of my work is focused on web-based applications, I think I'll probably use Fluid ([http://fluidapp.com/](http://fluidapp.com/)) to create site specific browsers for the web applications that I need for each task. Another thing that I need to do is turn off the ringer on my phones and the new message notifications on Entourage. One tool that I did already have in my arsenal is Doodim, which blacks out everything except for the currently focused window on OS X. The only problem with Doodim ([http://www.lachoseinteractive.net/en/products/doodim/](http://www.lachoseinteractive.net/en/products/doodim/)) is that it doesn't work with external screens, so only my MacBook Pro's screen gets the benefits. I counteracted this by making sure that the window I was actively using was on the external screen and maximized, but this won't work for some tasks during which I might have multiple small windows to interact with.
+
+The final thing that I observed is that I still definitely live in an interruption-based work environment. My third attempt to complete a Pomodoro was repeated three times, and none of these times did I make it without having to stop and actively handle an external interruption. The difference? My office door was open. My first two Pomodoros were completed with the office door closed and my "Ssshhh...Genius at work!" sign on the door. This is going to be a tough one to handle. I don't want to keep my office door closed all day, for more reasons than one. First, I don't want to seem completely unapproachable. I'm a manager these days, and a huge part of my job is being available for people. For me, some interruptions will always be OK. But how can I sort those out prior to them happening? This is something I'll be stewing on over the next couple of days. Second, my office turns into an absolute OVEN when the door is closed for too long. We have a really strange HVAC system that completely overreacts to small changes in the temperature. Unfortunately, it always seems to think I need to be slow cooked. ::SIGH::
+
+So, there you have it. I've learned a lot - I observed quite a view things about my work patterns and my environment, and will be working over the next few days to make changes to both to support better focus. If you have any comments or suggestions, please feel free to comment. Thanks!

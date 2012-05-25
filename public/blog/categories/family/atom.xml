@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: family | Seeking Simplicity]]></title>
+  <link href="http://mattstine.com/blog/categories/family/atom.xml" rel="self"/>
+  <link href="http://mattstine.com/"/>
+  <updated>2012-05-24T19:13:18-05:00</updated>
+  <id>http://mattstine.com/</id>
+  <author>
+    <name><![CDATA[Matt Stine]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Isabella featured on Totally Tots]]></title>
+    <link href="http://mattstine.com/2009/06/25/isabella-featured-on-totally-tots/"/>
+    <updated>2009-06-25T13:10:22-05:00</updated>
+    <id>http://mattstine.com/2009/06/25/isabella-featured-on-totally-tots</id>
+    <content type="html"><![CDATA[<p><a href="http://totallytots.blogspot.com/2009/06/meetisabella.html"><img src="http://mattstine.files.wordpress.com/2009/06/meet_bella.jpg" alt="meet_bella" /></a></p>
+
+<p>Isabella, my second oldest daughter, just made the cutoff <a href="http://totallytots.blogspot.com/2009/06/meetisabella.html">to be featured</a> on one of the very popular "Mommy Blogs" out there, Totally Tots. Way to go Bella!</p>
+]]></content>
+  </entry>
+  
+</feed>

@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: grails | Seeking Simplicity]]></title>
+  <link href="http://mattstine.com/blog/categories/grails/atom.xml" rel="self"/>
+  <link href="http://mattstine.com/"/>
+  <updated>2012-05-24T19:13:18-05:00</updated>
+  <id>http://mattstine.com/</id>
+  <author>
+    <name><![CDATA[Matt Stine]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Securing Grails Plugin Artifacts with Filters]]></title>
+    <link href="http://mattstine.com/2009/11/10/securing-grails-plugin-artifacts-with-filters/"/>
+    <updated>2009-11-10T13:50:11-06:00</updated>
+    <id>http://mattstine.com/2009/11/10/securing-grails-plugin-artifacts-with-filters</id>
+    <content type="html"><![CDATA[<p>So you've just installed the handy dandy Spring Security plugin (http://grails.org/plugin/acegi), which makes it incredibly easy to secure entire Grails controllers and/or controller actions with annotations, such as the following:</p>
+
+<p>This is enabled by turning on controller annotations in your SecurityConfig.groovy file:</p>
+
+<p>So all is now good in our project. We can secure either controllers or actions with annotations, enabling us to declaratively setup security side-by-side with the code that we're securing in a very straightforward manner. You can continue developing your Grails applications with glee, fully assured that security is no longer an issue. But wait, one day you decide to install one of the many useful Grails plugins that add controller artifacts to your application. Lo and behold, you have no way to secure those controllers! Of course, you could descend into $USER_HOME/.grails/$GRAILS_VERSION/projects/projectName/plugins/pluginX and hack the source code for your individual instance of the plugin. This ought to work, but you're now rather constrained in that every time you update the plugin you'll need to remember to go make this manual change. That doesn't sound very agile at all, does it? OK, so how about forking the plugin? This is a little bit better, but now you have the burden of merging changes from the global plugin repository to yours every time a new release happens. This is better, but still a bit cumbersome. How about becoming a committer and adding it to the global source? Of course not. Not everyone will want to secure their plugins the same way you do, and you've just introduced a rather unnecessary dependency on the Spring Security plugin. I say all this in an attempt to paint a grim picture. In reality, we're actually in very good shape. Grails Filters to the rescue!</p>
+
+<p>All that you need to do is create a Grails filter that will match requests to the plugin artifact in question and then delegate to Spring Security for authorization. If they are authorized, you simply return true. If not, you can direct them to your login screen. It's this simple:</p>
+
+<p>As you can see here, I've secured both the Blurb plugin and the Settings plugin in this manner by requiring that the logged in user be in the ROLE_ADMIN role. Now as Glen Smith would say, that's a snack!</p>
+
+<p><em><strong>Update:</strong> <a href="http://burtbeckwith.com/blog/">Burt Beckwith</a> enlightened me to an approach that will get this done without the use of filters that will also direct you to the requested URL after login rather than the main page. Unfortunately I've never been able to track this down before. Just add the following to SecurityConfig.groovy:</em></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Deploying Grails to Morph AppSpace: #CommunityOne 2009 Lightning Talk]]></title>
+    <link href="http://mattstine.com/2009/06/01/deploying-grails-to-morph-appspace-communityone-2009-lightning-talk/"/>
+    <updated>2009-06-01T23:56:06-05:00</updated>
+    <id>http://mattstine.com/2009/06/01/deploying-grails-to-morph-appspace-communityone-2009-lightning-talk</id>
+    <content type="html"><![CDATA[<p>I gave two lightning talks at <a href="http://developers.sun.com/events/communityone/2009/west/index.jsp">CommunityOne</a> today, the first of which described deploying <a href="http://grails.org">Grails</a> applications to <a href="http://mor.ph/products_appspace">Morph AppSpace</a>.</p>
+
+<p>For the uninitiated, Grails is a Ruby on Rails inspired full stack web development framework which brings "convention over configuration" and "DRY" into the Java web development arena. Unlike Rails, it is not an effort from scratch, but rather stands on the shoulders of proven giants in the Java world like the Spring framework and Hibernate. It does this using Groovy, the popular dynamic scripting language for the JVM, as a sort of "DSL for web development." Find it at <a href="http://grails.org">http://grails.org</a>.</p>
+
+<p>Morph AppSpace on the other hand is a fully-configured and managed environment for hosting web applications, and currently supports Java, Grails, Rails, and PHP applications. It is a "platform as a service" (PaaS) provider that abstracts away the details of Amazon EC2 and S3 technologies. Systems architecture, backups, monitoring, failover, scalability - all of this is handled by Morph. You simply develop and deploy your application - Morph does the rest. Find it at <a href="http://mor.ph/products_appspace">http://mor.ph/products_appspace</a>.</p>
+
+<p>So to get going, visit <a href="http://mor.ph">http://mor.ph</a> and sign up for a free developer account. Create yourself a Java application subscription, and pick your choice of database (MySQL or PostgreSQL). Create the database, and then download two very important files into the root directory of your Grails project: deployment.properties, which contains the metadata describing your application to the Morph AppSpace platform, and morph_deployer.jar, which contains the client API to the platform.</p>
+
+<p>Next you'll need to install the <a href="http://grails.org/plugin/morph-deploy">Grails morph-deploy plugin</a>. If you're using Grails 1.1, you'll need to checkout <a href="https://svn.codehaus.org/grails-plugins/grails-morph-deploy/trunk/">the trunk version from SVN</a>, as the version in the plugin repository is not 1.1 ready. Install this plugin locally by running "grails install-plugin $PATH_TO_PLUGIN." Next, you'll need to edit DataSource.groovy to contain the following:</p>
+
+<pre><code>production {
+        dataSource {
+            driverClassName = 'com.mysql.jdbc.Driver'
+            dbCreate = "update"
+            jndiName = "java:comp/env/jdbc/morph-ds"
+            dialect = 'org.hibernate.dialect.MySQLDialect'
+        }
+}
+</code></pre>
+
+<p>Finally, run "grails war" to build the war file, and "grails deploy" to upload your application to the platform. Once the upload is complete, visit the management interface and check the logs to see that you've successfully deployed. Once it's finished, click on the link to your application. Happy Grails on the cloud!</p>
+
+<p>Here's the screencast from my talk. Enjoy!</p>
+
+<p>[youtube=http://www.youtube.com/watch?v=JYPJ26-1YTM&hl;=en&fs;=1&border;=1]</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Grails PayPal Plugin Update]]></title>
+    <link href="http://mattstine.com/2009/05/11/grails-paypal-plugin-update/"/>
+    <updated>2009-05-11T16:16:48-05:00</updated>
+    <id>http://mattstine.com/2009/05/11/grails-paypal-plugin-update</id>
+    <content type="html"><![CDATA[<p>Since I last posted on <a href="http://www.mattstine.com/2009/05/02/ive-forked-the-grails-paypal-plugin/">my fork of the Grails PayPal Plugin</a>, I've been invited to be a committer on the <a href="http://xircles.codehaus.org/projects/grails-plugins">Grails Plugins project at the Codehaus</a>. I'll be incorporating my changes into the SVN repository there and updating the documentation on the main Grails Plugins website. Look for these updates coming soon!!!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[I've "forked" the Grails PayPal Plugin...]]></title>
+    <link href="http://mattstine.com/2009/05/02/ive-forked-the-grails-paypal-plugin/"/>
+    <updated>2009-05-02T00:59:46-05:00</updated>
+    <id>http://mattstine.com/2009/05/02/ive-forked-the-grails-paypal-plugin</id>
+    <content type="html"><![CDATA[<p>I'm currently completing the finishing touches on a new e-commerce site for my wife's stationary business. We decided a long time ago to use <a href="http://www.paypal.com">PayPal</a> for all of the payment processing since we've had a great experience using it for our eBay selling. About a year ago Graeme Rocher polished off the last release of a <a href="http://grails.org/plugin/paypal">PayPal plugin</a> that is available in <a href="http://grails.org/plugin/home">the Grails Plugin repository</a>. It really is a very nice plugin, yet I had a couple of problems with it:</p>
+
+<ul>
+<li><p>It is only capable of handling payments for one item transactions via "Buy Now" buttons. I want to upload an entire shopping cart full of multiple items.</p></li>
+<li><p>It currently won't handle shipping addresses. The site I'm building allows the user to maintain a list of shipping addresses, and I'd want to send the address information they choose along to PayPal.</p></li>
+<li><p>Minor issue: needed to upgrade the plugin to Grails 1.1.</p></li>
+</ul>
+
+
+<p>So, I decided this evening to fork the plugin. I want to leverage all of the great work that has been done thus far (especially with the IPN processing part - superb stuff), but I have to add in these two functions and do the version upgrade. Interestingly enough I couldn't get the tests to run out of the box after the upgrade. No good developer likes to modify code without a stable running test suite, right? So what I ended up doing was creating a new Grails 1.1 plugin project and copying the original artifacts over. Once this was done all of the tests ran perfectly.</p>
+
+<p>So, at this point I've added function #1. You can now redirect to the "uploadCart" action. It assumes that you have already constructed a Payment object (now containing PaymentItems) and saved it, and then passed the transactionId along. I did this so that folks with multiple different ways of handling shopping carts could have some degree of flexibility - the onus is on you to map your cart to your Payment object correctly. The original functions implemented by Graeme are backward compatible, assuming only one PaymentItem in the Payment. I've run all of the original tests and also did some manual functional testing by running the plugin app against my own PayPal Sandbox account. So far so good. Look for more updates as this evolves. Once I get something I'm totally happy with I'll see about getting it pushed back into the main plugin repo.</p>
+
+<p>Want to take a closer look? Visit <a href="http://github.com/mstine/grails-paypal-plugin/tree/master">http://github.com/mstine/grails-paypal-plugin/tree/master</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Grails, Prototype, Script.aculo.us - Persistent Grid Sorting Goodness]]></title>
+    <link href="http://mattstine.com/2009/04/25/grails-prototype-scriptaculous-persistent-grid-sorting-goodness/"/>
+    <updated>2009-04-25T00:14:40-05:00</updated>
+    <id>http://mattstine.com/2009/04/25/grails-prototype-scriptaculous-persistent-grid-sorting-goodness</id>
+    <content type="html"><![CDATA[<p>Ever wanted to do drag-n-drop sorting of a grid of images on a page and persist it? Here's my solution using Grails, Prototype, and Script.aculo.us.</p>
+
+<p>Basically what prompted this was the need for my wife to be able to sort the various product images that she had on a screen at any given time in any way that she pleased, and it had to be easy to work with. What follows is by no means a complete solution to this problem, but it represents where I am in the development process and may be useful to you, my hapless reader.</p>
+
+<p>Here's some GSP code which basically lays out a grid of product images, 3 wide by <em>n</em> deep:</p>
+
+<pre><code>&lt;div id="productThumbContainer"&gt;
+  &lt;g:set var="rowIndex" value="${0}"/&gt;
+&lt;g:each in="${products}" var="product" status="index"&gt;
+  &lt;g:if test="${index % 3 == 0}"&gt;
+    &lt;div id="productRow${rowIndex}" class="span-20 last product-row"&gt;
+  &lt;/g:if&gt;
+  &lt;div id="product_${product.id}" class="span-6 product &lt;g:if test="${(index % 3 == 2) || ((products.size() - index) == 1)}"&gt;last&lt;/g:if&gt;&lt;g:else&gt;append-1&lt;/g:else&gt;"&gt;
+    &lt;img src="${resource(dir: grailsApplication.config.store.productImages.webPath, file: product?.thumbnailImage?.name)}" width="230" class="productImage"&gt;
+    &lt;h3&gt;&lt;g:link controller="product" action="show" id="${product.id}"&gt;${product.name}&lt;/g:link&gt;&lt;/h3&gt;
+  &lt;/div&gt;
+  &lt;g:if test="${(index % 3 == 2) || ((products.size() - index) == 1)}"&gt;
+    &lt;/div&gt;
+    &lt;g:set var="rowIndex" value="${rowIndex + 1}"/&gt;
+  &lt;/g:if&gt;
+&lt;/g:each&gt;
+&lt;/div&gt;
+</code></pre>
+
+<p>Now here's where the magic happens:</p>
+
+<pre><code>document.observe('dom:loaded', function() {
+      var productRows = $$('.product-row');
+
+      var options = {
+        constraint: false,
+        overlap: 'horizontal',
+        containment: productRows,
+        dropOnEmpty: true,
+        tag: 'div',
+        onUpdate: updateRows
+      };
+
+      productRows.each(function(item) {
+        Sortable.create(item, options);
+      });
+
+      $('persistOrderingButton').observe('click', function(event) {
+          var sortString = '';
+          productRows.each(function(row) {
+              sortString += '&amp;';
+              sortString += Sortable.serialize(row);
+          });
+          &lt;g:remoteFunction action="sortProducts" params="sortString" update="ajaxMessage" onSuccess="\$('ajaxMessage').show()"/&gt;
+      });
+});
+</code></pre>
+
+<p>What we've got here is, failure to communicate...oops, wrong synapse there...what we've got here is a Prototype selector that grabs everything with the class ".product-row." It then takes these and creates a Scriptaculous Sortable for each of them, providing the object-literal "options." Notice the "containment" option which allows you to drag products back and forth between the various rows.</p>
+
+<p>Delving deeper into the magic is the callback function "updateRows." This guy is my favorite Javascript creation in quite some time:</p>
+
+<pre><code>function updateRows(list) {
+      var children = list.childElements();
+
+      if (children.size() &lt; 3) {
+
+        //If I'm the last row, who cares!
+        if (list.next() != null) {
+          var prevRow = list.previous();
+
+          if (prevRow != null) {
+            var lastChild = prevRow.childElements()[prevRow.childElements().size() - 1].remove();
+            list.insert({top:lastChild});
+            updateRows(prevRow);
+          } else {
+            var lastRow = list.up().childElements()[list.up().childElements().size() - 1];
+            var lastChild = lastRow.childElements()[lastRow.childElements().size() - 1].remove();
+            list.insert({top:lastChild});
+            updateRows(lastRow);
+          }
+        }
+      } else if (children.size() == 3) {
+        //Do nothing...gets me out of the recursion I hope!
+      } else {
+        var nextRow = list.next();
+        var lastChild = children[children.size() - 1].remove();
+
+        if (nextRow != null) {
+          nextRow.insert({top:lastChild});
+          updateRows(nextRow);
+        } else {
+          var topRow = list.up().childElements()[0];
+          topRow.insert({top:lastChild});
+          updateRows(topRow);
+        }
+      }
+
+      var i = 0;
+      Sortable.sequence(list).each(function(item) {
+        var productId = 'product_' + item;
+        if (i &lt; 2) {
+          $(productId).removeClassName('last');
+          $(productId).removeClassName('append-1');
+          $(productId).addClassName('append-1');
+        } else {
+          $(productId).removeClassName('last');
+          $(productId).removeClassName('append-1');
+          $(productId).addClassName('last');
+        }
+        i++;
+      });
+}
+</code></pre>
+
+<p>This function is organized around the fact that the only valid state for a grid of n-rows will be n-1 rows of 3 products, followed by one row of 1 &lt;= numProducts &lt;= 3. In most cases, if you drag a product from one row to another, you are violating that rule by creating a row with 2 products and a row with 4 products. This function solves the problem by recursively shifting the products down until reaching a stable state again.</p>
+
+<p>There's a bit of noise there at the bottom of the function. I'm using Blueprint CSS to do the layout for this application and I need to shift the various Blueprint classes around once everything is settled.</p>
+
+<p>Finally, here's the persistence of the data when we click save:</p>
+
+<pre><code>def sortProducts = {
+    TreeMap rowMap = new TreeMap()
+
+    params.each {key, value -&gt;
+      def matcher = key =~ /productRow(.*)\[\]/
+      if (matcher.matches()) {
+        def rowId = matcher[0][1]
+        rowMap[rowId] = value
+      }
+    }
+
+    def productIds = []
+    rowMap.values().each { row -&gt;
+      row.each {
+        productIds &lt;&lt; it.toLong()
+      }
+    }
+
+    shoppingService.saveSortOrder(productIds)
+
+    render("Product sort order saved!")
+}
+</code></pre>
+
+<p>and the logic from shoppingService.saveSortOrder():</p>
+
+<pre><code>def saveSortOrder(def productIds) {
+    def productsToSort = Product.findAllByIdInList(productIds)
+
+    def productMap = [:]
+    def sortIndexList = []
+
+    productsToSort.each {
+      productMap[it.id] = it
+      sortIndexList &lt;&lt; it.sortIndex
+    }
+
+    sortIndexList.sort()
+    sortIndexList = sortIndexList.reverse()
+
+    productIds.each {
+      productMap[it].sortIndex = sortIndexList.pop()
+    }
+
+    productsToSort.each {
+      it.save()
+    }
+}
+</code></pre>
+
+<p>You might wonder why this is so complex. What I haven't fully described is the way products are organized into a hierarchy of various categories. When you're sorting a screen, you're only sorting a subset of the products that are in that particular category. However, the sort order is maintained across the entire product set in the database. So, this logic basically just shifts around the existing sort indicies, placing them in their new relative order.</p>
+
+<p>Anyway, I don't know how generally applicable this code is, but I had fun writing it and I hope you can get some use out of it. Cheers!</p>
+]]></content>
+  </entry>
+  
+</feed>

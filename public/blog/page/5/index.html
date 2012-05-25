@@ -1,0 +1,857 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Seeking Simplicity</title>
+  <meta name="author" content="Matt Stine">
+
+  
+  <meta name="description" content="So I&#8217;m in the midst of planning my next toy project, specifically with an aim to build something for the cloud, be it Google App Engine, Mor.ph &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://mattstine.com/blog/page/5">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Seeking Simplicity" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Seeking Simplicity</a></h1>
+  
+    <h2>A blog about programming, software architecture and everything else...</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:mattstine.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/04/30/functional-programming-blog-aggregator-in-the-works/">Functional Programming Blog Aggregator in the Works&#8230;</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-04-30T13:31:58-05:00" pubdate data-updated="true">Apr 30<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>So I&#8217;m in the midst of planning my next toy project, specifically with an aim to build something for the cloud, be it <a href="http://code.google.com/appengine">Google App Engine</a>, <a href="http://mor.ph">Mor.ph</a>, <a href="http://aws.amazon.com/ec2/">EC2</a>, etc. (that part is still up for grabs). What I&#8217;d like to do is an opt-in blog aggregation site focused around functional programming. It would be very similar to what <a href="http://blogs.bytecode.com.au/glen/">Glen Smith</a> has done with <a href="http://groovyblogs.org">groovyblogs.org</a>. Groovyblogs is currently my number one referral site and is generating about 20% of the traffic for this blog. I think it is a great way to find out what blogs are out there in a given space, and there doesn&#8217;t seem to be an equivalent for the functional space. Since my LOTY interest is focused in the functional space, particularly around Scala and Clojure, and my TOTY interest is the cloud technologies out there, it seems like the perfect marriage.</p>
+
+<p>So here&#8217;s my question. Would you be interested in using such a site? As a reader, blogger, or both? Please sound off. Thanks!</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/04/27/joels-builderbuilder-in-groovy/">Joel&#8217;s BuilderBuilder in Groovy</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-04-27T21:54:07-05:00" pubdate data-updated="true">Apr 27<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="http://joelneely.wordpress.com/">Joel Neely</a> started <a href="http://joelneely.wordpress.com/2009/04/25/builderbuilder-the-agenda/">a series</a> <a href="http://joelneely.wordpress.com/2009/04/27/builderbuilder-the-task/">of posts</a> over the weekend detailing a proposed exploration of what Functional Programming means &#8220;to me as a practicing OO software developer?&#8221; The task at hand is to look at the generation of Data Transfer Objects which include a static inner class that functions as a builder. Since I&#8217;m exploring both Clojure and Scala right now, Joel has asked me to play along.</p>
+
+<p>After reading the task definition today, I couldn&#8217;t resist taking a crack at the problem in Groovy, especially since tackling a Builder DSL is not something I&#8217;ve gone after before.</p>
+
+<p>So, here&#8217;s how I&#8217;ll use my DTOBuilder to produce the output Joel described:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="n">def</span> <span class="n">bldr</span> <span class="o">=</span> <span class="k">new</span> <span class="n">DtoBuilder</span><span class="o">()</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">println</span> <span class="n">bldr</span><span class="o">.</span><span class="na">build</span> <span class="o">{</span>
+</span><span class='line'>  <span class="n">packageName</span> <span class="err">&#39;</span><span class="n">edu</span><span class="o">.</span><span class="na">bogusu</span><span class="o">.</span><span class="na">registration</span><span class="err">&#39;</span>
+</span><span class='line'>  <span class="n">name</span> <span class="err">&#39;</span><span class="n">Student</span><span class="err">&#39;</span>
+</span><span class='line'>  <span class="n">field</span><span class="o">(</span><span class="nl">name:</span><span class="err">&#39;</span><span class="n">id</span><span class="err">&#39;</span><span class="o">,</span> <span class="nl">type:</span><span class="err">&#39;</span><span class="n">String</span><span class="err">&#39;</span><span class="o">)</span>
+</span><span class='line'>  <span class="n">field</span><span class="o">(</span><span class="nl">name:</span><span class="err">&#39;</span><span class="n">firstName</span><span class="err">&#39;</span><span class="o">,</span> <span class="nl">type:</span><span class="err">&#39;</span><span class="n">String</span><span class="err">&#39;</span><span class="o">)</span>
+</span><span class='line'>  <span class="n">field</span><span class="o">(</span><span class="nl">name:</span><span class="err">&#39;</span><span class="n">lastName</span><span class="err">&#39;</span><span class="o">,</span> <span class="nl">type:</span><span class="err">&#39;</span><span class="n">String</span><span class="err">&#39;</span><span class="o">)</span>
+</span><span class='line'>  <span class="n">field</span><span class="o">(</span><span class="nl">name:</span><span class="err">&#39;</span><span class="n">hoursEarned</span><span class="err">&#39;</span><span class="o">,</span> <span class="nl">type:</span><span class="err">&#39;</span><span class="kt">int</span><span class="err">&#39;</span><span class="o">)</span>
+</span><span class='line'>  <span class="n">field</span><span class="o">(</span><span class="nl">name:</span><span class="err">&#39;</span><span class="n">gpa</span><span class="err">&#39;</span><span class="o">,</span> <span class="nl">type:</span><span class="err">&#39;</span><span class="kt">float</span><span class="err">&#39;</span><span class="o">)</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
+
+<p>Pretty concise, eh? <a href="http://github.com/mstine/BuilderBuilder/blob/1008235f88177910eb94af165ade3aedae2955a3/src/DtoBuilder.groovy">Check out the implementation of it at GitHub</a>. I&#8217;ll be posting all of my code related to this series at this location (and hopefully Joel will join in as well).</p>
+
+<p>One thing you&#8217;ll notice is that I&#8217;m still operating primarily in OO style. My next task is to refactor this code, still written in Groovy, but using as much functional-style as I can squeeze out of the language. Until next time&#8230;</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/04/25/groovy-post-to-a-url/">Groovy: Post to a URL</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-04-25T23:09:11-05:00" pubdate data-updated="true">Apr 25<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>If you&#8217;ve ever worked with the brilliant <a href="http://recaptcha.net/">Recaptcha</a> service, you&#8217;ll know that their REST API requires an HTTP POST rather than a GET. As I had only used GET requests thus far, I googled around and found a pretty easy solution:</p>
+
+<pre><code>private def evaluateCaptcha(def remoteIp, def challenge, def response) {
+    def config = recaptchaService.getRecaptchaConfig()
+
+    def urlString = "http://api-verify.recaptcha.net/verify"
+    def queryString = "privatekey=${config.recaptcha.privateKey}&amp;remoteip=${remoteIp}&amp;challenge=${challenge}&amp;response=${URLEncoder.encode(response)}"
+
+    def url = new URL(urlString)
+    def connection = url.openConnection()
+    connection.setRequestMethod("POST")
+    connection.doOutput = true
+
+    def writer = new OutputStreamWriter(connection.outputStream)
+    writer.write(queryString)
+    writer.flush()
+    writer.close()
+    connection.connect()
+
+    def recaptchaResponse = connection.content.text
+    log.debug(recaptchaResponse)
+
+    recaptchaResponse.startsWith("true")
+}
+</code></pre>
+
+<p>I have to credit <a href="http://www.fiascode.com/programming/putting-google-finance-to-rest-with-groovy/">Justin Spradlin</a> for the code that ultimately got me here. Consider this a +1.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/04/25/grails-prototype-scriptaculous-persistent-grid-sorting-goodness/">Grails, Prototype, Script.aculo.us - Persistent Grid Sorting Goodness</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-04-25T00:14:40-05:00" pubdate data-updated="true">Apr 25<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Ever wanted to do drag-n-drop sorting of a grid of images on a page and persist it? Here&#8217;s my solution using Grails, Prototype, and Script.aculo.us.</p>
+
+<p>Basically what prompted this was the need for my wife to be able to sort the various product images that she had on a screen at any given time in any way that she pleased, and it had to be easy to work with. What follows is by no means a complete solution to this problem, but it represents where I am in the development process and may be useful to you, my hapless reader.</p>
+
+<p>Here&#8217;s some GSP code which basically lays out a grid of product images, 3 wide by <em>n</em> deep:</p>
+
+<pre><code>&lt;div id="productThumbContainer"&gt;
+  &lt;g:set var="rowIndex" value="${0}"/&gt;
+&lt;g:each in="${products}" var="product" status="index"&gt;
+  &lt;g:if test="${index % 3 == 0}"&gt;
+    &lt;div id="productRow${rowIndex}" class="span-20 last product-row"&gt;
+  &lt;/g:if&gt;
+  &lt;div id="product_${product.id}" class="span-6 product &lt;g:if test="${(index % 3 == 2) || ((products.size() - index) == 1)}"&gt;last&lt;/g:if&gt;&lt;g:else&gt;append-1&lt;/g:else&gt;"&gt;
+    &lt;img src="${resource(dir: grailsApplication.config.store.productImages.webPath, file: product?.thumbnailImage?.name)}" width="230" class="productImage"&gt;
+    &lt;h3&gt;&lt;g:link controller="product" action="show" id="${product.id}"&gt;${product.name}&lt;/g:link&gt;&lt;/h3&gt;
+  &lt;/div&gt;
+  &lt;g:if test="${(index % 3 == 2) || ((products.size() - index) == 1)}"&gt;
+    &lt;/div&gt;
+    &lt;g:set var="rowIndex" value="${rowIndex + 1}"/&gt;
+  &lt;/g:if&gt;
+&lt;/g:each&gt;
+&lt;/div&gt;
+</code></pre>
+
+<p>Now here&#8217;s where the magic happens:</p>
+
+<pre><code>document.observe('dom:loaded', function() {
+      var productRows = $$('.product-row');
+
+      var options = {
+        constraint: false,
+        overlap: 'horizontal',
+        containment: productRows,
+        dropOnEmpty: true,
+        tag: 'div',
+        onUpdate: updateRows
+      };
+
+      productRows.each(function(item) {
+        Sortable.create(item, options);
+      });
+
+      $('persistOrderingButton').observe('click', function(event) {
+          var sortString = '';
+          productRows.each(function(row) {
+              sortString += '&amp;';
+              sortString += Sortable.serialize(row);
+          });
+          &lt;g:remoteFunction action="sortProducts" params="sortString" update="ajaxMessage" onSuccess="\$('ajaxMessage').show()"/&gt;
+      });
+});
+</code></pre>
+
+<p>What we&#8217;ve got here is, failure to communicate&#8230;oops, wrong synapse there&#8230;what we&#8217;ve got here is a Prototype selector that grabs everything with the class &#8220;.product-row.&#8221; It then takes these and creates a Scriptaculous Sortable for each of them, providing the object-literal &#8220;options.&#8221; Notice the &#8220;containment&#8221; option which allows you to drag products back and forth between the various rows.</p>
+
+<p>Delving deeper into the magic is the callback function &#8220;updateRows.&#8221; This guy is my favorite Javascript creation in quite some time:</p>
+
+<pre><code>function updateRows(list) {
+      var children = list.childElements();
+
+      if (children.size() &lt; 3) {
+
+        //If I'm the last row, who cares!
+        if (list.next() != null) {
+          var prevRow = list.previous();
+
+          if (prevRow != null) {
+            var lastChild = prevRow.childElements()[prevRow.childElements().size() - 1].remove();
+            list.insert({top:lastChild});
+            updateRows(prevRow);
+          } else {
+            var lastRow = list.up().childElements()[list.up().childElements().size() - 1];
+            var lastChild = lastRow.childElements()[lastRow.childElements().size() - 1].remove();
+            list.insert({top:lastChild});
+            updateRows(lastRow);
+          }
+        }
+      } else if (children.size() == 3) {
+        //Do nothing...gets me out of the recursion I hope!
+      } else {
+        var nextRow = list.next();
+        var lastChild = children[children.size() - 1].remove();
+
+        if (nextRow != null) {
+          nextRow.insert({top:lastChild});
+          updateRows(nextRow);
+        } else {
+          var topRow = list.up().childElements()[0];
+          topRow.insert({top:lastChild});
+          updateRows(topRow);
+        }
+      }
+
+      var i = 0;
+      Sortable.sequence(list).each(function(item) {
+        var productId = 'product_' + item;
+        if (i &lt; 2) {
+          $(productId).removeClassName('last');
+          $(productId).removeClassName('append-1');
+          $(productId).addClassName('append-1');
+        } else {
+          $(productId).removeClassName('last');
+          $(productId).removeClassName('append-1');
+          $(productId).addClassName('last');
+        }
+        i++;
+      });
+}
+</code></pre>
+
+<p>This function is organized around the fact that the only valid state for a grid of n-rows will be n-1 rows of 3 products, followed by one row of 1 &lt;= numProducts &lt;= 3. In most cases, if you drag a product from one row to another, you are violating that rule by creating a row with 2 products and a row with 4 products. This function solves the problem by recursively shifting the products down until reaching a stable state again.</p>
+
+<p>There&#8217;s a bit of noise there at the bottom of the function. I&#8217;m using Blueprint CSS to do the layout for this application and I need to shift the various Blueprint classes around once everything is settled.</p>
+
+<p>Finally, here&#8217;s the persistence of the data when we click save:</p>
+
+<pre><code>def sortProducts = {
+    TreeMap rowMap = new TreeMap()
+
+    params.each {key, value -&gt;
+      def matcher = key =~ /productRow(.*)\[\]/
+      if (matcher.matches()) {
+        def rowId = matcher[0][1]
+        rowMap[rowId] = value
+      }
+    }
+
+    def productIds = []
+    rowMap.values().each { row -&gt;
+      row.each {
+        productIds &lt;&lt; it.toLong()
+      }
+    }
+
+    shoppingService.saveSortOrder(productIds)
+
+    render("Product sort order saved!")
+}
+</code></pre>
+
+<p>and the logic from shoppingService.saveSortOrder():</p>
+
+<pre><code>def saveSortOrder(def productIds) {
+    def productsToSort = Product.findAllByIdInList(productIds)
+
+    def productMap = [:]
+    def sortIndexList = []
+
+    productsToSort.each {
+      productMap[it.id] = it
+      sortIndexList &lt;&lt; it.sortIndex
+    }
+
+    sortIndexList.sort()
+    sortIndexList = sortIndexList.reverse()
+
+    productIds.each {
+      productMap[it].sortIndex = sortIndexList.pop()
+    }
+
+    productsToSort.each {
+      it.save()
+    }
+}
+</code></pre>
+
+<p>You might wonder why this is so complex. What I haven&#8217;t fully described is the way products are organized into a hierarchy of various categories. When you&#8217;re sorting a screen, you&#8217;re only sorting a subset of the products that are in that particular category. However, the sort order is maintained across the entire product set in the database. So, this logic basically just shifts around the existing sort indicies, placing them in their new relative order.</p>
+
+<p>Anyway, I don&#8217;t know how generally applicable this code is, but I had fun writing it and I hope you can get some use out of it. Cheers!</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/04/24/latest-wordle/">Latest Wordle</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-04-24T23:30:32-05:00" pubdate data-updated="true">Apr 24<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="http://twitter.com/puredanger">Alex Miller&#8217;s Twitter background</a> inspired me to generate a Wordle from my feed. How fitting that &#8220;Code&#8221; is more prominent than anything.</p>
+
+<p><a href="http://www.wordle.net/gallery/wrdl/780295/Matt_Stine%27s_Blog_Feed"><img src="http://www.wordle.net/thumb/wrdl/780295/Matt_Stine%27s_Blog_Feed" alt="Wordle: Matt Stine's Blog Feed" /></a></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/04/24/hello-clojure/">Hello, Clojure!</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-04-24T17:12:23-05:00" pubdate data-updated="true">Apr 24<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><pre><code>; Hello World!
+(defn hello [name]
+  (println "Hello, " name))
+
+(hello "World!")
+</code></pre>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/04/06/lotypart-deux/">LOTY&#8230;Part Deux</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-04-06T22:31:58-05:00" pubdate data-updated="true">Apr 6<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><img src="http://mattstine.files.wordpress.com/2009/04/scala_vs_clojure.jpg" alt="scala_vs_clojure" /><a href="http://mattstine.files.wordpress.com/2009/04/scala_vs_clojure.jpg2009/04/02/loty-time-again-scala-or-clojure">A few days ago I pontificated</a> on my need to choose a new &#8220;Language of the Year.&#8221; Right now I&#8217;m attempting to choose between <a href="http://www.scala-lang.org/">Scala</a> and <a href="http://clojure.org/">Clojure</a>. If nothing else, I&#8217;ve learned from this exercise that asking the community for feedback is a GOOD thing. Your comments have been very helpful.</p>
+
+<p>To summarize:</p>
+
+<ol>
+<li><p>As far as the polls go, Scala is in the lead by a margin of 4 to 2.</p></li>
+<li><p>Two of the Scala votes have been simple +1&#8217;s, and two have provided a supporting argument.</p></li>
+<li><p>Both Clojure voters have provided a supporting argument.</p></li>
+<li><p>So, to make this a bit more of a fair fight, I&#8217;m only going to consider the &#8220;supported votes&#8221; at this point. This leads to the obvious result of a tie!</p></li>
+</ol>
+
+
+<p>So, what to do?</p>
+
+<p>The argument for using Scala is that it is a functional/OO hybrid, so it will be easier to slide into. Interestingly enough, the argument against using Scala is that it is a functional/OO hybrid, so it will be easier to slide back into OO/imperative habits! Clojure, being more of a purely functional language, will be harder to get into initially, but will force me to think functionally. Hmmm&#8230;</p>
+
+<p>So here&#8217;s my idea. Let&#8217;s do this the agile way. What I&#8217;d like to do is complete a timeboxed spike (in terms of actual time spent learning the language, not calendar time - I&#8217;m doing this in my spare time, and I&#8217;ve got my wife, four kids, and three other side projects competing for my attention!) of roughly two weeks in each language. The first week of the spike would be spent getting comfortable with the syntax, reading articles/documentation/blogs/etc., writing &#8220;Hello, World!&#8221; etc. The second week of the spike would be spent solving the same problem in each language, preferably a problem sitting in the functional sweet spot.</p>
+
+<p>How does this sound to everyone? And to follow up, does anyone have a suggested problem I might tackle? Cheers!</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/04/02/loty-time-again-scala-or-clojure/">LOTY Time Again: Scala or Clojure?!?!</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-04-02T15:21:21-05:00" pubdate data-updated="true">Apr 2<span>nd</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>In 2007 <a href="http://www.mattstine.com/2007/07/10/my-professional-development-goals-for-2007-2008/">I established several professional development goals</a> (<a href="http://www.mattstine.com/2008/01/02/mid-year-review-my-professional-development-goals-for-2007-2008/">and later reported my progress on these</a>), one of which was to learn Groovy and Grails. This goal stemmed from the continually referenced idea from <em>The Pragmatic Programmer</em> to &#8220;learn a new language every year.&#8221; This idea has become so ubiquitous that it even has it&#8217;s own four-letter acronym, LOTY (Language of the Year).</p>
+
+<p>Since establishing and reporting on these goals, I&#8217;ve had several things get in the way of fully realizing all of them. However, I can safely say that in the last two years I have mastered enough Groovy and Grails that they no longer fit in the LOTY category. At this point they&#8217;re really not showing my anything that is causing any paradigm shifts for me. They&#8217;re comfortable. When I learn a new feature, it just seems to make sense, and nothing surprises me anymore. Languages like these aren&#8217;t good LOTY candidates because one of the purposes of learning a LOTY is to challenge and change your ideas about programming. Groovy doesn&#8217;t do this for me anymore. It&#8217;s time to move on (not to say that I&#8217;m dropping Groovy and Grails as a tool - I&#8217;m using them more now than ever - they&#8217;re just not a learning tool for me anymore).</p>
+
+<p>So, at this point I want to delve into a language that attempts to tackle the concurrent/multicore programming challenge. I&#8217;d like to stay on the JVM because I appreciate the benefits that it brings as a platform, so for now Erlang is out. The two leading candidates in the JVM/concurrent/multicore arena seem to be <a href="http://www.scala-lang.org/">Scala</a> and <a href="http://clojure.org/">Clojure</a>. An added benefit of both of these languages is that they support the functional paradigm, something I haven&#8217;t really played with since my computer science education days and a very interesting language named Haskell.</p>
+
+<p>Scala is a multiparadigm language, supporting both object-oriented and functional constructs. It is statically typed, yet offers very nice type inference. Clojure, on the other hand, is a functional Lisp derivative with almost no OO constructs that is dynamically typed. Both are designed to enable concurrent programming. Which one do I choose? I open the floor for comments.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/04/01/the-developer-iteration/">The Developer Iteration</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-04-01T16:56:59-05:00" pubdate data-updated="true">Apr 1<span>st</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I recently gave a 90 minute talk at work covering quite a bit of ground related to Agile Software Development. If I had to sum up agile development in one word, it would be FEEDBACK. Venkat Subramaniam and Andy Hunt give one of the best definitions of agile I&#8217;ve ever seen in their book, <em>Practices of an Agile Developer</em>:</p>
+
+<blockquote><p><em>Agile development uses feedback to make constant adjustments in a highly collaborative environment.</em></p></blockquote>
+
+<p>Here&#8217;s my graphical representation of this quote:</p>
+
+<p><img src="http://mattstine.files.wordpress.com/2009/04/aws_fb_1012.jpg?w=300" alt="Agile Feedback Loop" /></p>
+
+<p>I decomposed this into an &#8220;ecosystem&#8221; of multiple feedback loops:</p>
+
+<p><img src="http://mattstine.files.wordpress.com/2009/04/aws_fb_2013.jpg?w=300" alt="Developer to Code" /></p>
+
+<p><img src="http://mattstine.files.wordpress.com/2009/04/aws_fb_3025.jpg?w=300" alt="Developer to Developer" /></p>
+
+<p><img src="http://mattstine.files.wordpress.com/2009/04/aws_fb_4033.jpg?w=300" alt="Team to Client" /></p>
+
+<p>What I&#8217;d like to focus on in this post is what I consider to be the heart of the &#8220;Developer to Code&#8221; feedback loop: <strong>The Developer Iteration</strong>.</p>
+
+<p>You see, iterations aren&#8217;t just for teams. Indeed they are also for developers. So many times I have witnessed individuals struggling to participate fully in an agile project because when they return to their desks, for all intents and purposes, they are pretending to be a waterfall. They spend days analyzing a feature, code for days without sharing any code, test the happy path toward the end of the iteration, and attempt a big bang integration on the last day. I&#8217;ll be the first to admit that I myself tried to code this way and had a couple of realizations after a short time:</p>
+
+<ul>
+<li><p>Something felt completely unnatural about it, especially in the context of what we were trying to do as a team&#8230;</p></li>
+<li><p>I was awfully miserable, especially at the end of the iteration.</p></li>
+</ul>
+
+
+<p>So, what does the developer iteration look like? It is essentially a microcosm of events that occur during a regular team iteration:</p>
+
+<ol>
+<li><p>Look at your feature or task, and plan out what you have to do.</p></li>
+<li><p>Break the work into small chunks, where each chunk leaves the system in a stable state, yet that much closer to the feature or task being complete.</p></li>
+<li><p>Develop each chunk (preferably using Test-Driven Development), unit and integration testing your work along the way.</p></li>
+<li><p>Check-in your code EVERY TIME you again arrive at a stable state.</p></li>
+</ol>
+
+
+<p>I&#8217;ll give my definition of stability: A system with NO broken tests. How do we maintain stability? Here are several &#8220;smaller&#8221; steps that should immediately proceed your check-in step:</p>
+
+<ol>
+<li><p>Run the tests on your development machine, fixing all broken ones until you reach 100% passing with the code you have.</p></li>
+<li><p>Check out the latest code from your version control system, thereby integrating your team&#8217;s changes with your own.</p></li>
+<li><p>Run the tests AGAIN, fixing all broken ones until you reach 100% passing with the integrated code. At this point, your system is stable locally.</p></li>
+<li><p>Check-in the code! Now the entire team has a stable, fully-integrated system.</p></li>
+</ol>
+
+
+<p>So, what&#8217;s the point of all this? Look at how much feedback you&#8217;re giving yourself along the way! Each time you stop and run the tests, you&#8217;re getting feedback about the stability of your code. Not only that, but your constant striving for 100% stability greatly enhances your ability to refactor your code to keep it clean. You&#8217;re able to constantly refine the code, creating smaller methods, more cohesive classes, and an overall simpler and better design combined with the confidence that your system is functionally equivalent to what you started with prior to refactoring.</p>
+
+<p>Yet another benefit is an enhanced ability to timebox yourself. Working this way enhances your ability to plan to be &#8220;done&#8221; by the end of the day, as you&#8217;re never very far from your next stable state. Go home with a stable system, and find a stable system when you get back in the morning. Doesn&#8217;t that feel great? Even if you can&#8217;t reach a stable state by the time you head home, there&#8217;s always the throwaway option. Just revert your changes and go home with stable code. Try again with a fresh mind the next morning. Again, if you&#8217;re working the developer iteration, you haven&#8217;t written that much code since your last stable state anyway. :-)</p>
+
+<p>Try it out. I&#8217;m not a salesman. I&#8217;m a satisfied customer.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/04/01/awesome-april-fools-joke/">Awesome April Fools Joke</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-04-01T15:58:57-05:00" pubdate data-updated="true">Apr 1<span>st</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I didn&#8217;t have one this year, but Expedia did. Check it out!</p>
+
+<p><a href="http://www.expedia.com/daily/mars/flights-to-mars/?mcicid=Mars_us"><img src="http://media.expedia.com/media/content/expus/graphics/other/dawnstar/et.jpg" alt="Flights to Mars - Expedia Blog Badge" /></a></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  <div class="pagination">
+    
+      <a class="prev" href="/blog/page/6/">&larr; Older</a>
+    
+    <a href="/blog/archives">Blog Archives</a>
+    
+    <a class="next" href="/blog/page/4/">Newer &rarr;</a>
+    
+  </div>
+</div>
+<aside class="sidebar">
+  
+    <section>
+	<h1>Hello, World!</h1>
+	<p>
+		<img src="http://mattstine.files.wordpress.com/2011/05/indiamug.jpg" width="173" height="213">
+	</p>
+	<p>
+		<a href="http://www.linkedin.com/in/mattstine"><img alt="View Matt Stine&#039;s profile on LinkedIn" src="http://www.linkedin.com/img/webpromo/btn_myprofile_160x33.gif" border="0" width="160" height="33"></a>
+	</p>
+</section><section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2011/05/16/design-meeting-patternsantipatterns/">Design Meeting Patterns/Antipatterns</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/01/05/selenium-conference-2011/">Selenium Conference 2011</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/01/02/2010-in-review-the-automated-analysis/">2010 in review: the automated analysis&#8230;</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2010/11/29/selenium-2-0-refcard/">Selenium 2.0 Refcard</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2010/11/10/agile-zone-roundup/">Agile Zone Roundup</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating&#8230;</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("mstine", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/mstine" class="twitter-follow-button" data-show-count="false">Follow @mstine</a>
+  
+</section>
+
+
+
+
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - Matt Stine -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'seekingsimplicity';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

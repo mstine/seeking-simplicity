@@ -1,0 +1,280 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Deploying Grails to Morph AppSpace: #CommunityOne 2009 Lightning Talk - Seeking Simplicity</title>
+  <meta name="author" content="Matt Stine">
+
+  
+  <meta name="description" content="I gave two lightning talks at CommunityOne today, the first of which described deploying Grails applications to Morph AppSpace. For the uninitiated, &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://mattstine.com/2009/06/01/deploying-grails-to-morph-appspace-communityone-2009-lightning-talk">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Seeking Simplicity" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Seeking Simplicity</a></h1>
+  
+    <h2>A blog about programming, software architecture and everything else...</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:mattstine.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Deploying Grails to Morph AppSpace: #CommunityOne 2009 Lightning Talk</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-06-01T23:56:06-05:00" pubdate data-updated="true">Jun 1<span>st</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>I gave two lightning talks at <a href="http://developers.sun.com/events/communityone/2009/west/index.jsp">CommunityOne</a> today, the first of which described deploying <a href="http://grails.org">Grails</a> applications to <a href="http://mor.ph/products_appspace">Morph AppSpace</a>.</p>
+
+<p>For the uninitiated, Grails is a Ruby on Rails inspired full stack web development framework which brings &#8220;convention over configuration&#8221; and &#8220;DRY&#8221; into the Java web development arena. Unlike Rails, it is not an effort from scratch, but rather stands on the shoulders of proven giants in the Java world like the Spring framework and Hibernate. It does this using Groovy, the popular dynamic scripting language for the JVM, as a sort of &#8220;DSL for web development.&#8221; Find it at <a href="http://grails.org">http://grails.org</a>.</p>
+
+<p>Morph AppSpace on the other hand is a fully-configured and managed environment for hosting web applications, and currently supports Java, Grails, Rails, and PHP applications. It is a &#8220;platform as a service&#8221; (PaaS) provider that abstracts away the details of Amazon EC2 and S3 technologies. Systems architecture, backups, monitoring, failover, scalability - all of this is handled by Morph. You simply develop and deploy your application - Morph does the rest. Find it at <a href="http://mor.ph/products_appspace">http://mor.ph/products_appspace</a>.</p>
+
+<p>So to get going, visit <a href="http://mor.ph">http://mor.ph</a> and sign up for a free developer account. Create yourself a Java application subscription, and pick your choice of database (MySQL or PostgreSQL). Create the database, and then download two very important files into the root directory of your Grails project: deployment.properties, which contains the metadata describing your application to the Morph AppSpace platform, and morph_deployer.jar, which contains the client API to the platform.</p>
+
+<p>Next you&#8217;ll need to install the <a href="http://grails.org/plugin/morph-deploy">Grails morph-deploy plugin</a>. If you&#8217;re using Grails 1.1, you&#8217;ll need to checkout <a href="https://svn.codehaus.org/grails-plugins/grails-morph-deploy/trunk/">the trunk version from SVN</a>, as the version in the plugin repository is not 1.1 ready. Install this plugin locally by running &#8220;grails install-plugin $PATH_TO_PLUGIN.&#8221; Next, you&#8217;ll need to edit DataSource.groovy to contain the following:</p>
+
+<pre><code>production {
+        dataSource {
+            driverClassName = 'com.mysql.jdbc.Driver'
+            dbCreate = "update"
+            jndiName = "java:comp/env/jdbc/morph-ds"
+            dialect = 'org.hibernate.dialect.MySQLDialect'
+        }
+}
+</code></pre>
+
+<p>Finally, run &#8220;grails war&#8221; to build the war file, and &#8220;grails deploy&#8221; to upload your application to the platform. Once the upload is complete, visit the management interface and check the logs to see that you&#8217;ve successfully deployed. Once it&#8217;s finished, click on the link to your application. Happy Grails on the cloud!</p>
+
+<p>Here&#8217;s the screencast from my talk. Enjoy!</p>
+
+<p>[youtube=http://www.youtube.com/watch?v=JYPJ26-1YTM&hl;=en&fs;=1&border;=1]</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Matt Stine</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-06-01T23:56:06-05:00" pubdate data-updated="true">Jun 1<span>st</span>, 2009</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/cloud/'>cloud</a>, <a class='category' href='/blog/categories/grails/'>grails</a>, <a class='category' href='/blog/categories/javaone2009/'>javaone2009</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://mattstine.com/2009/06/01/deploying-grails-to-morph-appspace-communityone-2009-lightning-talk/" data-via="mstine" data-counturl="http://mattstine.com/2009/06/01/deploying-grails-to-morph-appspace-communityone-2009-lightning-talk/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2009/06/01/connecting-with-people-at-javaone/" title="Previous Post: Connecting with people at #JavaOne">&laquo; Connecting with people at #JavaOne</a>
+      
+      
+        <a class="basic-alignment right" href="/2009/06/02/java-technology-on-google-app-engine-communityone-2009-lightning-talk/" title="Next Post: Java™ Technology on Google App Engine: #CommunityOne 2009 Lightning Talk">Java™ Technology on Google App Engine: #CommunityOne 2009 Lightning Talk &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+	<h1>Hello, World!</h1>
+	<p>
+		<img src="http://mattstine.files.wordpress.com/2011/05/indiamug.jpg" width="173" height="213">
+	</p>
+	<p>
+		<a href="http://www.linkedin.com/in/mattstine"><img alt="View Matt Stine&#039;s profile on LinkedIn" src="http://www.linkedin.com/img/webpromo/btn_myprofile_160x33.gif" border="0" width="160" height="33"></a>
+	</p>
+</section><section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2011/05/16/design-meeting-patternsantipatterns/">Design Meeting Patterns/Antipatterns</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/01/05/selenium-conference-2011/">Selenium Conference 2011</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/01/02/2010-in-review-the-automated-analysis/">2010 in review: the automated analysis...</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2010/11/29/selenium-2-0-refcard/">Selenium 2.0 Refcard</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2010/11/10/agile-zone-roundup/">Agile Zone Roundup</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating...</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("mstine", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/mstine" class="twitter-follow-button" data-show-count="false">Follow @mstine</a>
+  
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - Matt Stine -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'seekingsimplicity';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

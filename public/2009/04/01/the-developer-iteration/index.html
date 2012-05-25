@@ -1,0 +1,306 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>The Developer Iteration - Seeking Simplicity</title>
+  <meta name="author" content="Matt Stine">
+
+  
+  <meta name="description" content="I recently gave a 90 minute talk at work covering quite a bit of ground related to Agile Software Development. If I had to sum up agile development &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://mattstine.com/2009/04/01/the-developer-iteration">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Seeking Simplicity" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Seeking Simplicity</a></h1>
+  
+    <h2>A blog about programming, software architecture and everything else...</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:mattstine.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">The Developer Iteration</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-04-01T16:56:59-05:00" pubdate data-updated="true">Apr 1<span>st</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>I recently gave a 90 minute talk at work covering quite a bit of ground related to Agile Software Development. If I had to sum up agile development in one word, it would be FEEDBACK. Venkat Subramaniam and Andy Hunt give one of the best definitions of agile I&#8217;ve ever seen in their book, <em>Practices of an Agile Developer</em>:</p>
+
+<blockquote><p><em>Agile development uses feedback to make constant adjustments in a highly collaborative environment.</em></p></blockquote>
+
+<p>Here&#8217;s my graphical representation of this quote:</p>
+
+<p><img src="http://mattstine.files.wordpress.com/2009/04/aws_fb_1012.jpg?w=300" alt="Agile Feedback Loop" /></p>
+
+<p>I decomposed this into an &#8220;ecosystem&#8221; of multiple feedback loops:</p>
+
+<p><img src="http://mattstine.files.wordpress.com/2009/04/aws_fb_2013.jpg?w=300" alt="Developer to Code" /></p>
+
+<p><img src="http://mattstine.files.wordpress.com/2009/04/aws_fb_3025.jpg?w=300" alt="Developer to Developer" /></p>
+
+<p><img src="http://mattstine.files.wordpress.com/2009/04/aws_fb_4033.jpg?w=300" alt="Team to Client" /></p>
+
+<p>What I&#8217;d like to focus on in this post is what I consider to be the heart of the &#8220;Developer to Code&#8221; feedback loop: <strong>The Developer Iteration</strong>.</p>
+
+<p>You see, iterations aren&#8217;t just for teams. Indeed they are also for developers. So many times I have witnessed individuals struggling to participate fully in an agile project because when they return to their desks, for all intents and purposes, they are pretending to be a waterfall. They spend days analyzing a feature, code for days without sharing any code, test the happy path toward the end of the iteration, and attempt a big bang integration on the last day. I&#8217;ll be the first to admit that I myself tried to code this way and had a couple of realizations after a short time:</p>
+
+<ul>
+<li><p>Something felt completely unnatural about it, especially in the context of what we were trying to do as a team&#8230;</p></li>
+<li><p>I was awfully miserable, especially at the end of the iteration.</p></li>
+</ul>
+
+
+<p>So, what does the developer iteration look like? It is essentially a microcosm of events that occur during a regular team iteration:</p>
+
+<ol>
+<li><p>Look at your feature or task, and plan out what you have to do.</p></li>
+<li><p>Break the work into small chunks, where each chunk leaves the system in a stable state, yet that much closer to the feature or task being complete.</p></li>
+<li><p>Develop each chunk (preferably using Test-Driven Development), unit and integration testing your work along the way.</p></li>
+<li><p>Check-in your code EVERY TIME you again arrive at a stable state.</p></li>
+</ol>
+
+
+<p>I&#8217;ll give my definition of stability: A system with NO broken tests. How do we maintain stability? Here are several &#8220;smaller&#8221; steps that should immediately proceed your check-in step:</p>
+
+<ol>
+<li><p>Run the tests on your development machine, fixing all broken ones until you reach 100% passing with the code you have.</p></li>
+<li><p>Check out the latest code from your version control system, thereby integrating your team&#8217;s changes with your own.</p></li>
+<li><p>Run the tests AGAIN, fixing all broken ones until you reach 100% passing with the integrated code. At this point, your system is stable locally.</p></li>
+<li><p>Check-in the code! Now the entire team has a stable, fully-integrated system.</p></li>
+</ol>
+
+
+<p>So, what&#8217;s the point of all this? Look at how much feedback you&#8217;re giving yourself along the way! Each time you stop and run the tests, you&#8217;re getting feedback about the stability of your code. Not only that, but your constant striving for 100% stability greatly enhances your ability to refactor your code to keep it clean. You&#8217;re able to constantly refine the code, creating smaller methods, more cohesive classes, and an overall simpler and better design combined with the confidence that your system is functionally equivalent to what you started with prior to refactoring.</p>
+
+<p>Yet another benefit is an enhanced ability to timebox yourself. Working this way enhances your ability to plan to be &#8220;done&#8221; by the end of the day, as you&#8217;re never very far from your next stable state. Go home with a stable system, and find a stable system when you get back in the morning. Doesn&#8217;t that feel great? Even if you can&#8217;t reach a stable state by the time you head home, there&#8217;s always the throwaway option. Just revert your changes and go home with stable code. Try again with a fresh mind the next morning. Again, if you&#8217;re working the developer iteration, you haven&#8217;t written that much code since your last stable state anyway. :-)</p>
+
+<p>Try it out. I&#8217;m not a salesman. I&#8217;m a satisfied customer.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Matt Stine</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-04-01T16:56:59-05:00" pubdate data-updated="true">Apr 1<span>st</span>, 2009</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/codeproject/'>CodeProject</a>, <a class='category' href='/blog/categories/agile/'>agile</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://mattstine.com/2009/04/01/the-developer-iteration/" data-via="mstine" data-counturl="http://mattstine.com/2009/04/01/the-developer-iteration/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2009/04/01/awesome-april-fools-joke/" title="Previous Post: Awesome April Fools Joke">&laquo; Awesome April Fools Joke</a>
+      
+      
+        <a class="basic-alignment right" href="/2009/04/02/loty-time-again-scala-or-clojure/" title="Next Post: LOTY Time Again: Scala or Clojure?!?!">LOTY Time Again: Scala or Clojure?!?! &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+	<h1>Hello, World!</h1>
+	<p>
+		<img src="http://mattstine.files.wordpress.com/2011/05/indiamug.jpg" width="173" height="213">
+	</p>
+	<p>
+		<a href="http://www.linkedin.com/in/mattstine"><img alt="View Matt Stine&#039;s profile on LinkedIn" src="http://www.linkedin.com/img/webpromo/btn_myprofile_160x33.gif" border="0" width="160" height="33"></a>
+	</p>
+</section><section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2011/05/16/design-meeting-patternsantipatterns/">Design Meeting Patterns/Antipatterns</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/01/05/selenium-conference-2011/">Selenium Conference 2011</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/01/02/2010-in-review-the-automated-analysis/">2010 in review: the automated analysis...</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2010/11/29/selenium-2-0-refcard/">Selenium 2.0 Refcard</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2010/11/10/agile-zone-roundup/">Agile Zone Roundup</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating...</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("mstine", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/mstine" class="twitter-follow-button" data-show-count="false">Follow @mstine</a>
+  
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - Matt Stine -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'seekingsimplicity';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,272 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>OSGi on Rails? - Seeking Simplicity</title>
+  <meta name="author" content="Matt Stine">
+
+  
+  <meta name="description" content="I&#8217;ve seen quite a few blogs/articles/etc. lately related to the adoption (or lack thereof) of OSGi in the mainstream web application/enterprise &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://mattstine.com/2010/04/29/osgi-on-rails">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Seeking Simplicity" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Seeking Simplicity</a></h1>
+  
+    <h2>A blog about programming, software architecture and everything else...</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:mattstine.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">OSGi on Rails?</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-04-29T12:33:40-05:00" pubdate data-updated="true">Apr 29<span>th</span>, 2010</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>I&#8217;ve seen quite a few blogs/articles/etc. lately related to the adoption (or lack thereof) of OSGi in the mainstream web application/enterprise application space. A nice summation of these is encapsulated in this excerpt from a comment by Peter Kriens on DZone (you&#8217;ll find it in the comments section for <a href="http://java.dzone.com/articles/osgi-perspectives">http://java.dzone.com/articles/osgi-perspectives</a>:</p>
+
+<blockquote><p>Yes, one of the next frontiers is to make OSGi easier to use for the web app developers. The solid foundation is there, so stop whining and help us create the tools, books, and tutorials that will make OSGi palatable in those markets.</p></blockquote>
+
+<p>There&#8217;s nothing like a call to action to get me stirred up. It&#8217;s no secret that I think OSGi is an excellent tool for tackling the complexity of enterprise applications (see my talks on the NFJS tour this year: <a href="http://www.nofluffjuststuff.com/conference/speaker/matt_stine">http://www.nofluffjuststuff.com/conference/speaker/matt_stine</a>). However, I will readily admit that the learning curve for tackling any non-trivial application in OSGi is rather steep. My bar for non-trivial is quite low - try learning OSGi while simultaneously attempting to get a mainstream framework like Hibernate working properly.</p>
+
+<p>I think that what we need is a tool that will enable a developer new to OSGi to get an OSGi-enabled web application up and running fairly readily. In fact, I think it would be good to absolutely minimize the amount of OSGi know-how required to get a basic web application into production, while at the same time leaving all of OSGi available just under the covers so that it can be easily accessed when I know what I need and how to use it. So here&#8217;s my proposal:</p>
+
+<p>1) Follow in the footsteps of AppFuse, Grails, Rails, Roo, etc. and put together a web application toolkit that will allow one to instantly spin-up a deployable OSGI-enabled web application.
+2) Since we&#8217;re talking about catering to mainstream here, Java the language ought to be the primary language used for development. With that said, we should not put up any barriers to using other languages available on the JVM.
+3) Bootstrap a DB-agnostic persistence layer leveraging JPA and make it easily accessible across the application bundles.
+4) Bootstrap a dependency injection framework for OSGi services based on the Blueprint standard.
+5) Bootstrap a security layer and provide a basic user/role security module with provided login, logout, etc. facilities.
+6) Pick a set of modern Java web application frameworks (e.g. Spring MVC, Struts 2, etc.) and make them easily pluggable.
+7) Wrap a nice build system around all of this that leverages a modern build tool (e.g. Gradle or Maven 3), the best of the PAX Tools features (especially Pax Construct, Exam, and Runner), and good facilities for automated testing.</p>
+
+<p>So, who&#8217;s with me? I&#8217;m open to any suggestions/comments/rants, etc.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Matt Stine</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-04-29T12:33:40-05:00" pubdate data-updated="true">Apr 29<span>th</span>, 2010</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/java/'>java</a>, <a class='category' href='/blog/categories/osgi/'>osgi</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://mattstine.com/2010/04/29/osgi-on-rails/" data-via="mstine" data-counturl="http://mattstine.com/2010/04/29/osgi-on-rails/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2010/04/02/jug-leadership-lessons-learned-on-slideshare/" title="Previous Post: JUG Leadership Lessons Learned on SlideShare">&laquo; JUG Leadership Lessons Learned on SlideShare</a>
+      
+      
+        <a class="basic-alignment right" href="/2010/05/06/first-thoughts-on-seven-languages-in-seven-weeks/" title="Next Post: First thoughts on "Seven Languages in Seven Weeks..."">First thoughts on "Seven Languages in Seven Weeks..." &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+	<h1>Hello, World!</h1>
+	<p>
+		<img src="http://mattstine.files.wordpress.com/2011/05/indiamug.jpg" width="173" height="213">
+	</p>
+	<p>
+		<a href="http://www.linkedin.com/in/mattstine"><img alt="View Matt Stine&#039;s profile on LinkedIn" src="http://www.linkedin.com/img/webpromo/btn_myprofile_160x33.gif" border="0" width="160" height="33"></a>
+	</p>
+</section><section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2011/05/16/design-meeting-patternsantipatterns/">Design Meeting Patterns/Antipatterns</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/01/05/selenium-conference-2011/">Selenium Conference 2011</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/01/02/2010-in-review-the-automated-analysis/">2010 in review: the automated analysis...</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2010/11/29/selenium-2-0-refcard/">Selenium 2.0 Refcard</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2010/11/10/agile-zone-roundup/">Agile Zone Roundup</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating...</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("mstine", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/mstine" class="twitter-follow-button" data-show-count="false">Follow @mstine</a>
+  
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - Matt Stine -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'seekingsimplicity';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
