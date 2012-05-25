@@ -5,6 +5,7 @@ slug: first-thoughts-on-seven-languages-in-seven-weeks
 status: publish
 title: First thoughts on "Seven Languages in Seven Weeks..."
 wordpress_id: '310'
+comments: true
 categories:
 - bookreviews
 ---

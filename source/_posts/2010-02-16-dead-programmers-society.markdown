@@ -5,6 +5,7 @@ slug: dead-programmers-society
 status: publish
 title: Dead Programmers Society
 wordpress_id: '285'
+comments: true
 categories:
 - development
 - programming

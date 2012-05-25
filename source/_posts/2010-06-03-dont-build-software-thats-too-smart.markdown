@@ -5,6 +5,7 @@ slug: dont-build-software-thats-too-smart
 status: publish
 title: Don't build software that's TOO smart!
 wordpress_id: '355'
+comments: true
 categories:
 - agile
 - development

@@ -5,6 +5,7 @@ slug: osgi-on-rails
 status: publish
 title: OSGi on Rails?
 wordpress_id: '306'
+comments: true
 categories:
 - java
 - osgi

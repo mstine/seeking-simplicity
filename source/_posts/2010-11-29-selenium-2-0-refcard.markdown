@@ -5,6 +5,7 @@ slug: selenium-2-0-refcard
 status: publish
 title: Selenium 2.0 Refcard
 wordpress_id: '400'
+comments: true
 categories:
 - refcardz
 - testing

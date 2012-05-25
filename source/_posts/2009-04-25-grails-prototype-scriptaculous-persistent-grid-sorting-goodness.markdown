@@ -5,6 +5,7 @@ slug: grails-prototype-scriptaculous-persistent-grid-sorting-goodness
 status: publish
 title: Grails, Prototype, Script.aculo.us - Persistent Grid Sorting Goodness
 wordpress_id: '139'
+comments: true
 categories:
 - ajax
 - CodeProject

@@ -5,6 +5,7 @@ slug: design-meeting-patternsantipatterns
 status: publish
 title: Design Meeting Patterns/Antipatterns
 wordpress_id: '429'
+comments: true
 categories:
 - design
 - development

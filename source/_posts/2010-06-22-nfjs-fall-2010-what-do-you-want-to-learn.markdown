@@ -5,6 +5,7 @@ slug: nfjs-fall-2010-what-do-you-want-to-learn
 status: publish
 title: 'NFJS Fall 2010: What do you want to learn?'
 wordpress_id: '362'
+comments: true
 categories:
 - nfjs
 ---

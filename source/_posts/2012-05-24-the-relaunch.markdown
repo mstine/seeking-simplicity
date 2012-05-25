@@ -4,6 +4,7 @@ layout: post
 slug: the-relaunch
 status: publish
 title: The Relaunch
+comments: true
 categories:
 - writing
 ---

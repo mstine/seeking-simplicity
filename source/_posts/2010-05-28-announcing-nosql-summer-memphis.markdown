@@ -5,6 +5,7 @@ slug: announcing-nosql-summer-memphis
 status: publish
 title: Announcing NOSQL Summer Memphis
 wordpress_id: '352'
+comments: true
 categories:
 - cloud
 - jug

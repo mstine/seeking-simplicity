@@ -5,6 +5,7 @@ slug: loty-time-again-scala-or-clojure
 status: publish
 title: 'LOTY Time Again: Scala or Clojure?!?!'
 wordpress_id: '113'
+comments: true
 categories:
 - CodeProject
 - dynamiclanguages
