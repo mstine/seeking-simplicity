@@ -4,7 +4,7 @@
   <title><![CDATA[Category: cloud | Seeking Simplicity]]></title>
   <link href="http://mattstine.com/blog/categories/cloud/atom.xml" rel="self"/>
   <link href="http://mattstine.com/"/>
-  <updated>2012-05-29T18:44:42-05:00</updated>
+  <updated>2013-05-29T00:09:28-05:00</updated>
   <id>http://mattstine.com/</id>
   <author>
     <name><![CDATA[Matt Stine]]></name>
@@ -12,6 +12,21 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Into the Crucible]]></title>
+    <link href="http://mattstine.com/2013/05/29/into-the-crucible/"/>
+    <updated>2013-05-29T09:00:00-05:00</updated>
+    <id>http://mattstine.com/2013/05/29/into-the-crucible</id>
+    <content type="html"><![CDATA[<p>Wow...it seems I only post to this blog toward the end of May. Well, that all changes now. You see, as of June 3, 2013, this blog is going to become one of many aspects of my new "day job." On Monday, I start my life as a Community Engineer with <a href="http://cloudfoundry.com">Cloud Foundry</a> by <a href="http://goPivotal.com">Pivotal</a>. What's a Community Engineer? Quite honestly, I'm not completely sure of the answer to that question yet. But given the many conversations I've had over the past few weeks, it seemingly fits right in with the bridge-building roles I've played many times over the course of my career. In this case, I have one foot squarely planted in the world of Cloud Foundry engineering, and one foot squarely planted out in the world with you guys and gals - the community. My job is to help you understand how we are quite literally seeking to "build a new platform for a new era."</p>
+
+<p>Of course, this is a journey that for me started a few years ago. In my previous life as a front-line development manager, I helped lead an agile transformation within my team with "ruthless automation" playing a central role in everything that our team did. However, it seemed that the better we "did agile," the more pain we felt when dealing with those outside of our circle of control. It was only years later, after reading Eliyahu Goldratt's <a href="http://en.wikipedia.org/wiki/The_Goal_(novel)">The Goal</a> and coming to an understanding of his <a href="http://en.wikipedia.org/wiki/Theory_of_Constraints">Theory of Constraints</a>, that I realized what was happening. Our constraints had moved "out of the plant," if you will, and landed in the world of operations. Even without this understanding, I developed a keen interest in this newly emerging topic called "DevOps" and began to explore the ideas emerging around agile operations and infrastructure as code. I started playing with tools like Puppet, Chef, and Vagrant, and taught sessions on all three of them at the Project Automation Experience in 2011.</p>
+
+<p>You can read my <a href="http://www.mattstine.com/2012/05/24/the-relaunch/">last entry</a> and find out that not much later I joined VMware as a Senior Consultant for its Cloud Application Platform. I was hired into that role based on my extensive background in enterprise Java and the Spring ecosystem, but it was nothing short of a staffing accident that I found myself thrust into a role on a virtualization platform provisioning team helping to build out a private self-service cloud! I was steadily getting carried further away from my role as an application architect, steadily becoming assimilated into that mysterious world of web operations that I knew so little about. These experiences, along with my continued reading and thinking about the worlds of DevOps, Lean, and Kanban, have quite literally changed the way I look at the world of software engineering (or as I prefer to think of it now, value delivery through product engineering that just so happens to involve software!). These experiences have formed around me a <a href="http://en.wikipedia.org/wiki/Crucible">crucible</a>, melting me that I might be poured into a new professional mold.</p>
+
+<p>So now it's time to plunge into the world of building the leading <a href="http://wattersjames.com/2013/03/04/my-fork-you-shirt/">open</a> platform as a service, and to help YOU experience the <a href="https://twitter.com/mstine/status/339570787914760195">HUGE can of @cloudfoundry awesome</a> that we at Pivotal are about to unleash on the world. Sound good to you? <a href="http://blog.cloudfoundry.com/2013/05/16/want-to-contribute-to-cloud-foundry-come-on-in/">Join us!</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Announcing NOSQL Summer Memphis]]></title>

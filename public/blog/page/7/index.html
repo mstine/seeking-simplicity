@@ -9,7 +9,7 @@
   <meta name="author" content="Matt Stine">
 
   
-  <meta name="description" content="We&#8217;re taking most of our team to the St. Louis, Missouri, edition of the No Fluff Just Stuff 2008 tour. This will be my first actual NFJS event &hellip;">
+  <meta name="description" content="So I haven&#8217;t blogged in quite awhile. I&#8217;ve been rather busy - here&#8217;s one VERY important reason why. Grant was born Friday, May 16, &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -49,7 +49,7 @@
   <header role="banner"><hgroup>
   <h1><a href="/">Seeking Simplicity</a></h1>
   
-    <h2>A blog about programming, software architecture and everything else...</h2>
+    <h2>A blog about DevOps, clouds, architecture, and everything else...</h2>
   
 </hgroup>
 
@@ -76,6 +76,46 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2008/05/18/introducing-grant-dawson-stine/">Introducing Grant Dawson Stine</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-05-18T14:11:00-05:00" pubdate data-updated="true">May 18<span>th</span>, 2008</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>So I haven&#8217;t blogged in quite awhile. I&#8217;ve been rather busy - here&#8217;s one VERY important reason why. Grant was born Friday, May 16, 2008, weighing in at 9 pounds 4 ounces and 22 inches long. Mom and baby are doing wonderfully, but as you can see, Dad is in a bit of shock!</p>
+
+<p><a href="http://4.bp.blogspot.com/_Vo63LRwAZbk/SDCAMcjQJGI/AAAAAAAAAfA/5LZWAyRyOfs/s1600-h/P5160099.jpg"><img src="http://4.bp.blogspot.com/_Vo63LRwAZbk/SDCAMcjQJGI/AAAAAAAAAfA/5LZWAyRyOfs/s400/P5160099.jpg" alt="" /></a></p>
+
+<p><a href="http://1.bp.blogspot.com/_Vo63LRwAZbk/SDCAMsjQJHI/AAAAAAAAAfI/5frhZqimCJM/s1600-h/P5160126.jpg"><img src="http://1.bp.blogspot.com/_Vo63LRwAZbk/SDCAMsjQJHI/AAAAAAAAAfI/5frhZqimCJM/s400/P5160126.jpg" alt="" /></a></p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -572,58 +612,6 @@ Once again, thanks for a great conference. It was easily the best all-around tha
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2007/12/15/the-state-of-the-art-in-dependency-injection-rod-johnson/">The State of the Art in Dependency Injection: Rod Johnson</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2007-12-15T10:06:00-06:00" pubdate data-updated="true">Dec 15<span>th</span>, 2007</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>This was a truly fascinating talk. If you ever wanted to learn the entire history and landscape of dependency injection (DI), this was your opportunity. I really didn&#8217;t realize how deep of a topic DI really is.</p>
-
-<p>According to Rod, DI had its beginnings in 2002, in the Interface 21 Framework that was born from his seminal work, <a href="http://www.amazon.com/Expert-One-One-Design-Development/dp/1861007841">Expert One-on-One J2EE Design and Development</a>. In the beginning, DI was done solely through setter injection (SI), with external metadata (usually in XML). 2003 gave us Spring 0.9, which had the same DI model, but added FactoryBeans for indirection and proxy-based AOP (enabling among other things, declarative transaction management). With Spring, DI was always just one enabler of a complete enterprise solution. Contrast that with <a href="http://www.picocontainer.org/">PicoContainer</a>, also arriving on the scene in 2003, which was an ultra-lightweight DI-only container. PicoContainer brought us several innovations, including constructor injection, automatic resolution by type, and an attempt to dispense with external configuration.</p>
-
-<p>Rod then discussed the Pros and Cons of Constructor Injection (CI). On the Pro side, we see that CI is great for immutable objects, can be used with existing code, enforces that the necessary dependencies are provided at object construction, and allows developers to dispense with methods like afterPropertiesSet(). On the Con side, there are no default arguments in Java, which forces us to ALWAYS provide all of the necessary dependencies, constructor overriding can be somewhat messy, and constructor argument names are not usually available through reflection, which forces us to depend on argument order for dependency resolution.</p>
-
-<p>Spring 1.0, which arrived in late 2003, incorporated some of PicoContainer&#8217;s innovation: CI, &#8220;Autowiring&#8221; by type and by name, as well as the ability to mix CI and SI. Here Rod reflected on Spring&#8217;s pragmatic philosophy, whereby they are more than willing to incorporate the good ideas that others had first.</p>
-
-<p>Spring 1.1 brought us method injection, a unique Spring feature, which solved the problem of long-lived managed objects which depend on short-lived objects. It also brought us Factory Methods. You now had the ability to create objects through invoking static factory methods or instance methods on other beans.</p>
-
-<p>With the finalization of the <a href="http://java.sun.com/products/ejb/docs.html">EJB 3.0 standard</a> in May 2006, several new ideas became available in the world of DI: annotation-based DI, annotations for callback methods (e.g. @PostConstruct), scanning for annotations without any external configuration needed for a deployment unit, and field injection (FI). These EJB standard brought with it a new philosophy - that annotations are a superior model and that externalization should be a second-class citizen. The Pros of this standard? One big one - no configuration is necessary for simple cases. The Cons? Rod listed several: resources could only be injected from JNDI, no CI, limited control over object lifecycle, unsuitability for fine-grained object graphs, effectively usable ONLY with annotations, as the XML configuration option is so verbose, and it isn&#8217;t just DI - it brings along with it enforcement of many obsolete EJB concepts (such as bean instance pooling).</p>
-
-<p>Spring 2.0 arrived in late 2005 with its own share of innovations: integration with <a href="http://www.eclipse.org/aspectj/">AspectJ</a>, the ability to inject anything with an AspectJ aspect via @Configurable, namespaces to provide an XML-based DSL for external configuration, the @Required annotation, and pluggable scopes to manage the object lifecycle. About that same time, JBoss Seam introduced many strange ideas (that I didn&#8217;t quite grasp from Rod&#8217;s explanation): bijection, outjection, and subversion of control.</p>
-
-<p>Some additional players on the field include Spring Java Config, which is a DSL for configuration in Java, <a href="http://code.google.com/p/google-guice/">Google Guice 1.0</a>, and the <a href="http://jcp.org/en/jsr/detail?id=299">JSR-299 Web Beans spec</a>, which Rod described as &#8220;blogware&#8221; in that there is currently no available implementation.</p>
-
-<p>Finally we got to Spring 2.5, released last month. Rod didn&#8217;t have his slides printed or available on the web (argh!), so about this time my hand was really hurting from taking furious notes, and I simply gave up. Fortunately, most of what Rod covered was redundant from some of the other sessions, so I&#8217;ll have or will blog about it later. About the only thing I really don&#8217;t have good notes on is Spring Java Config, which he discussed pretty extensively. If you want to learn more about it, check out <a href="http://www.springframework.org/javaconfig">http://www.springframework.org/javaconfig</a>.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/8/">&larr; Older</a>
@@ -649,6 +637,10 @@ Once again, thanks for a great conference. It was easily the best all-around tha
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2013/05/29/into-the-crucible/">Into the Crucible</a>
+      </li>
+    
+      <li class="post">
         <a href="/2012/05/24/the-relaunch/">The Relaunch</a>
       </li>
     
@@ -662,10 +654,6 @@ Once again, thanks for a great conference. It was easily the best all-around tha
     
       <li class="post">
         <a href="/2011/01/02/2010-in-review-the-automated-analysis/">2010 in review: the automated analysis&#8230;</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2010/11/29/selenium-2-0-refcard/">Selenium 2.0 Refcard</a>
       </li>
     
   </ul>
@@ -698,7 +686,7 @@ Once again, thanks for a great conference. It was easily the best all-around tha
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2012 - Matt Stine -
+  Copyright &copy; 2013 - Matt Stine -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 
