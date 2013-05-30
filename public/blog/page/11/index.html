@@ -9,7 +9,7 @@
   <meta name="author" content="Matt Stine">
 
   
-  <meta name="description" content="Raible updated the AppFuseRoadmap yesterday. I’m really excited about where the project is going. XDoclet has been a good friend, but I’m really &hellip;">
+  <meta name="description" content="I’m sure everyone is sick of reading this same rant over and over, but I just had to add more fuel to the fire. I’m attempting to implement access &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -76,6 +76,47 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2006/08/16/java-needs-closures/">Java Needs Closures</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2006-08-16T09:45:00-05:00" pubdate data-updated="true">Aug 16<span>th</span>, 2006</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I’m sure everyone is sick of reading this same rant over and over, but I just had to add more fuel to the fire. I’m attempting to implement access privilege delegation in a JSF application - basically, users can delegate their ability to do “stuff” in our application to other users. I have a backing bean that has several methods that are called by the JSF components, returning whether or not to render that component based on security privileges. Well, I now have to make all of those methods aware of delegation! I have something like this in several methods:</p>
+
+<pre><code>boolean notX = (loggedInUser.isX());&lt;br&gt;&lt;/br&gt;if (notX) {&lt;br&gt;&lt;/br&gt;  boolean result = false;&lt;br&gt;&lt;/br&gt;  Set delegations = loggedInUser.getDelegations();&lt;br&gt;&lt;/br&gt;  for (Iterator i = delegations.iterator(); i.hasNext();) {&lt;br&gt;&lt;/br&gt;     User delegator = (User) i.next();&lt;br&gt;&lt;/br&gt;     if (delegator.isX()) {&lt;br&gt;&lt;/br&gt;        result = true;&lt;br&gt;&lt;/br&gt;        break;&lt;br&gt;&lt;/br&gt;     }&lt;br&gt;&lt;/br&gt;  }&lt;br&gt;&lt;/br&gt;  return result;&lt;br&gt;&lt;/br&gt;} else {&lt;br&gt;&lt;/br&gt;  return true;&lt;br&gt;&lt;/br&gt;}&lt;br&gt;&lt;/br&gt;
+</code></pre>
+
+<p>Now, it would be nice if I could extract the contents of that if block into a new method, say “checkDelegations()”. Unfortunately, the isX() that I need to call is different for every method following this pattern. I’d like to be able to pass a function that calls isX() on the delegator into the checkDelegations() method. No dice in Java. Does anyone else have a solution to this problem?</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -488,51 +529,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2005/11/15/my-spiritual-father-goes-home/">My Spiritual Father Goes Home</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2005-11-15T14:05:00-06:00" pubdate data-updated="true">Nov 15<span>th</span>, 2005</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><a href="http://photos1.blogger.com/blogger/2695/522/1600/Adrian_Rogers2.jpg"><img src="http://photos1.blogger.com/blogger/2695/522/320/Adrian_Rogers2.jpg" alt="" /></a><br/>
-This morning, Dr. Adrian Rogers walked into glory. Dr. Rogers was my first pastor. I never had the opportunity to share this with him, but he is ultimately the man who led me to a saving knowledge of Jesus Christ. I experienced false conversion as a child, was never baptized, and never experienced the true change of heart that comes from the new birth. Shortly after our marriage, my wife and I joined Bellevue Baptist Church, where I was then baptized. I realized that I knew very little about the foundations of my faith, so when I learned that Dr. Rogers taught a course on Wednesday nights called &#8220;Back to the Basics: What Every Christian Ought to Know,&#8221; I quickly signed up. It was the second or third week of the class when Dr. Rogers spoke on the subject, &#8220;How to Be Saved and Know It.&#8221; During this class Dr. Rogers revealed that as a young man he had struggled with doubting his salvation.</p>
-
-<p>Quoting from <a href="http://www.bellevue.org/templates/cusbellevue1103/details.asp?id=1360&amp;PID=33044&amp;mast=">this message</a>, Adrian Rogers said, &#8220;One night I looked up into the heavens and said, &#8216;God, I&#8217;ve got to have assurance. I don&#8217;t know if I&#8217;m lost and the Holy Spirit has me under conviction, or I&#8217;m saved and the devil is trying to get me to doubt my salvation. But one thing I know: You said if I would believe on You, You would save me. So, Lord, right now, I trust You to save me.&#8217;&#8221;</p>
-
-<p>I went home that evening and prayed that very prayer, and the rest is spiritual history. Though I didn&#8217;t become instantly perfect (and I&#8217;m still quite far away from perfection), I finally experienced that change of heart and life that comes from salvation. I&#8217;ve since been baptized again (to get it in the right order), as after the self-examination commanded by <a href="http://www.biblegateway.com/passage/?search=2%20Corinthians%2013:5;&amp;version=31;">2 Corinthians 13:5</a> I realized that that night was when I was truly saved.   So, to Heaven I send a heartfelt thank you to Dr. Adrian Rogers, and I look forward to seeing him again one day.</p>
-
-<p>Besides him leading me to Christ, if that wasn&#8217;t enough, I&#8217;ve learned a great deal from Dr. Rogers about what it means to be a man of God and a great husband and father. He&#8217;s taught me from the pulpit, from books, and from personal example. He truly was, and still is, a good and faithful servant of the Lord Jesus Christ.</p>
-
-<p>For more information about the passing of Dr. Rogers, visit <a href="http://www.adrianrogers.org/">http://www.adrianrogers.org</a>.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/12/">&larr; Older</a>
@@ -558,6 +554,10 @@ This morning, Dr. Adrian Rogers walked into glory. Dr. Rogers was my first pasto
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2013/05/29/clojure-on-cloud-foundry/">Clojure on Cloud Foundry</a>
+      </li>
+    
+      <li class="post">
         <a href="/2013/05/29/into-the-crucible/">Into the Crucible</a>
       </li>
     
@@ -571,10 +571,6 @@ This morning, Dr. Adrian Rogers walked into glory. Dr. Rogers was my first pasto
     
       <li class="post">
         <a href="/2011/01/05/selenium-conference-2011/">Selenium Conference 2011</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/01/02/2010-in-review-the-automated-analysis/">2010 in review: the automated analysis&#8230;</a>
       </li>
     
   </ul>

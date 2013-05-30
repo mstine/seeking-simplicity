@@ -9,7 +9,7 @@
   <meta name="author" content="Matt Stine">
 
   
-  <meta name="description" content="So you&#8217;ve just installed the handy dandy Spring Security plugin (http://grails.org/plugin/acegi), which makes it incredibly easy to secure &hellip;">
+  <meta name="description" content="If anyone&#8217;s interested, here&#8217;s a clue as to what I&#8217;m working on in 2010: ">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -76,6 +76,44 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2010/01/06/lotytoty-for-2010/">LOTY/TOTY for 2010</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-01-06T14:25:09-06:00" pubdate data-updated="true">Jan 6<span>th</span>, 2010</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>If anyone&#8217;s interested, here&#8217;s a clue as to what I&#8217;m working on in 2010:</p>
+
+<p><img src="http://mattstine.files.wordpress.com/2010/05/helloiphone.jpg" alt="" /></p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -696,131 +734,6 @@ JUGS Community: <a href="http://community.java.net/jugs/">http://community.java.
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2009/06/09/javaone-2009-return-of-the-puzzlers-schlock-and-awe/">#JavaOne 2009 Return of the Puzzlers: Schlock and Awe</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-06-09T20:19:30-05:00" pubdate data-updated="true">Jun 9<span>th</span>, 2009</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>For several years now, Neal Gafter (Microsoft) and Joshua Block (Google), have made a habit of presenting various incarnations of this technical session, focused on what they call &#8220;Java Puzzlers.&#8221; Java Puzzlers are nothing more than short Java programs with curious behavior. It is a somewhat interactive session, with each puzzler&#8217;s code listing followed by a four possible choices (A,B,C,D) to answer the question: &#8220;What does it print?&#8221; Neal and Joshua &#8220;require&#8221; that every attendee vote for their answer. After the vote, they reveal the correct answer and how to fix the problem. At the end of each problem presentation is the most important part, which is the Java programming principle that is illuminated by the puzzler. These are important tools to carry with you as you go forth a develop your Java code.</p>
-
-<p>The following is a listing of the problem titles that were presented:</p>
-
-<ol>
-<li><p>Life&#8217;s Persistent Questions</p></li>
-<li><p>Instruments of Torture</p></li>
-<li><p>Iterator Titillator</p></li>
-<li><p>Searching for the One</p></li>
-<li><p>Cogito Ergo Sum</p></li>
-<li><p>Thread Friendly</p></li>
-<li><p>When Words Collide</p></li>
-</ol>
-
-
-<p>I&#8217;m going to spend my time focused on the last puzzler, as it was the one for which I was ABSOLUTELY CERTAIN that I knew the correct answer. Here&#8217;s the code listing:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">PrintWords</span> <span class="o">{</span>
-</span><span class='line'>  <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
-</span><span class='line'>    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span>
-</span><span class='line'>      <span class="n">Words</span><span class="o">.</span><span class="na">FIRST</span> <span class="o">+</span> <span class="s">&quot; &quot;</span> <span class="o">+</span> <span class="n">Words</span><span class="o">.</span><span class="na">SECOND</span> <span class="o">+</span> <span class="s">&quot; &quot;</span> <span class="o">+</span> <span class="n">Words</span><span class="o">.</span><span class="na">THIRD</span><span class="o">);</span>
-</span><span class='line'>  <span class="o">}</span>
-</span><span class='line'><span class="o">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Words</span> <span class="o">{</span> <span class="c1">// Compile PrintWords against this version</span>
-</span><span class='line'>  <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">FIRST</span>  <span class="o">=</span> <span class="s">&quot;the&quot;</span><span class="o">;</span>
-</span><span class='line'>  <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">SECOND</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
-</span><span class='line'>  <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">THIRD</span>  <span class="o">=</span> <span class="s">&quot;set&quot;</span><span class="o">;</span>
-</span><span class='line'><span class="o">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Words</span> <span class="o">{</span> <span class="c1">// Run against this version</span>
-</span><span class='line'>  <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">FIRST</span>  <span class="o">=</span> <span class="s">&quot;physics&quot;</span><span class="o">;</span>
-</span><span class='line'>  <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">SECOND</span> <span class="o">=</span> <span class="s">&quot;chemistry&quot;</span><span class="o">;</span>
-</span><span class='line'>  <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">THIRD</span>  <span class="o">=</span> <span class="s">&quot;biology&quot;</span><span class="o">;</span>
-</span><span class='line'><span class="o">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>So here&#8217;s the problem. We have two versions of class &#8220;Words.&#8221; We compile class &#8220;PrintWords&#8221; against the first version and we then run the class against the second version. What does it print out? I used my trusty &#8220;seasoned Java programmer&#8221; knowledge to assert that the program would print &#8220;the null set.&#8221; Why? Well, any seasoned Java programmer realizes that static final variables (or &#8220;constant variables&#8221; - what a curious concept) are inlined by the compiler. So it&#8217;s quite obvious that &#8220;the&#8221; would be inlined wherever FIRST appears, null would be inlined wherever SECOND appears, and &#8220;set&#8221; would be inlined wherever THIRD appears.</p>
-
-<p>Imagine my frustration when Josh and Neil announced that the program would in fact print &#8220;the chemistry set.&#8221; As it turns out, null cannot be inlined! It is not a constant variable. So when we run our Java program, the JVM smartly picks up the non-null value of SECOND that is is able to find in the new version of Words.</p>
-
-<p>Simply because this one got me, I wanted to highlight it for my readers. The &#8220;moral&#8221; of this story is that only primitives and strings can be constant, and that null is not a constant. One should use a constant field ONLY if its value will NEVER change. For final fields whose value may change, they suggest the use of an ident() method:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="c1">// Returns its argument</span>
-</span><span class='line'><span class="kd">private</span> <span class="kd">static</span> <span class="n">String</span> <span class="nf">ident</span><span class="o">(</span><span class="n">String</span> <span class="n">s</span><span class="o">)</span> <span class="o">{</span>
-</span><span class='line'>  <span class="k">return</span> <span class="n">s</span><span class="o">;</span>
-</span><span class='line'><span class="o">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1">// None of these fields are constant variables</span>
-</span><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Words</span> <span class="o">{</span>
-</span><span class='line'>  <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">FIRST</span>  <span class="o">=</span> <span class="n">ident</span><span class="o">(</span><span class="s">&quot;the&quot;</span><span class="o">);</span>
-</span><span class='line'>  <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">SECOND</span> <span class="o">=</span> <span class="n">ident</span><span class="o">(</span><span class="kc">null</span><span class="o">);</span>
-</span><span class='line'><span class="o">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p></p>
-
-<p>The compile will not inline the call to ident.</p>
-
-<p>Want more? Pick up a copy of Neal and Josh&#8217;s book, <em>Java Puzzlers: Traps, Pitfalls, and Corner Cases!</em></p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/4/">&larr; Older</a>
@@ -846,6 +759,10 @@ JUGS Community: <a href="http://community.java.net/jugs/">http://community.java.
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2013/05/29/clojure-on-cloud-foundry/">Clojure on Cloud Foundry</a>
+      </li>
+    
+      <li class="post">
         <a href="/2013/05/29/into-the-crucible/">Into the Crucible</a>
       </li>
     
@@ -859,10 +776,6 @@ JUGS Community: <a href="http://community.java.net/jugs/">http://community.java.
     
       <li class="post">
         <a href="/2011/01/05/selenium-conference-2011/">Selenium Conference 2011</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/01/02/2010-in-review-the-automated-analysis/">2010 in review: the automated analysis&#8230;</a>
       </li>
     
   </ul>

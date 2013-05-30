@@ -4,7 +4,7 @@
   <title><![CDATA[Category: cloudfoundry | Seeking Simplicity]]></title>
   <link href="http://mattstine.com/blog/categories/cloudfoundry/atom.xml" rel="self"/>
   <link href="http://mattstine.com/"/>
-  <updated>2013-05-29T00:09:28-05:00</updated>
+  <updated>2013-05-29T23:19:16-05:00</updated>
   <id>http://mattstine.com/</id>
   <author>
     <name><![CDATA[Matt Stine]]></name>
@@ -12,6 +12,220 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Clojure on Cloud Foundry]]></title>
+    <link href="http://mattstine.com/2013/05/29/clojure-on-cloud-foundry/"/>
+    <updated>2013-05-29T22:10:00-05:00</updated>
+    <id>http://mattstine.com/2013/05/29/clojure-on-cloud-foundry</id>
+    <content type="html"><![CDATA[<p>I was inspired by Brian McClain's <a href="http://catdevrandom.me/blog/2013/05/16/buildpacks-in-cloud-foundry-v2/">post on bringing Haskell to Cloud Foundry</a> using Cloud Foundry v2 buildpacks, so I decided to go on a buildpack journey of my own. Since Clojure is the language I most enjoying "toying around with," I thought I'd try to deploy a simple Clojure web application using the <a href="https://github.com/mstine/heroku-buildpack-clojure">Heroku Clojure Buildpack</a>.</p>
+
+<p>To reiterate some of the coolness around buildpacks, they are what allows a PaaS like Cloud Foundry or Heroku to support various runtimes without first building that support into the core platform. If your favorite language or framework runtime isn't available, there's absolutely nothing stopping you from providing your own buildpack to support it. Stuff can get crazy -- McClain has even <a href="https://twitter.com/BrianMMcClain/status/339479905974751232">hinted at bringing FORTRAN support to Cloud Foundry</a>.</p>
+
+<p>I decided for my experiment to build a VERY basic "Hello World" style application using <a href="https://github.com/ring-clojure/ring">Ring</a>, which is "a Clojure web applications library inspired by Python's WSGI and Ruby's Rack." The easiest way to get started building Ring applications is to utilize the popular Clojure build tool <a href="http://github.com/technomancy/leiningen">Leiningen</a>.</p>
+
+<p>First I started by creating a new project:</p>
+
+<p><code>bash
+$ lein new hello-cf
+$ cd hello-cf
+</code></p>
+
+<p>The next task was to add the Ring dependencies to my <code>project.clj</code> file:</p>
+
+<p>``` clojure
+(defproject hello-cf "0.1.0-SNAPSHOT"
+  :min-lein-version "2.0.0"
+  :description "Hello Clojure on Cloud Foundry!"
+  :license {:name "Eclipse Public License"</p>
+
+<pre><code>        :url "http://www.eclipse.org/legal/epl-v10.html"}
+</code></pre>
+
+<p>  :dependencies [[org.clojure/clojure "1.4.0"]</p>
+
+<pre><code>             [ring/ring-core "1.1.8"]
+             [ring/ring-jetty-adapter "1.1.8"]])
+</code></pre>
+
+<p>```</p>
+
+<p>Then it was time to create the Ring application itself, by editing <code>src/hello_cf/core.clj</code>:</p>
+
+<p>``` clojure
+(ns hello-cf.core
+  (:use [ring.adapter.jetty :only [run-jetty]]))</p>
+
+<p>(defn handler [request]
+  {:status 200
+   :headers {"Content-Type" "text/html"}
+   :body "Hello Cloud Foundry from heroku-buildpack-clojure!"})</p>
+
+<p>(defn -main [port]
+  (run-jetty handler {:port (Integer. port)}))
+```</p>
+
+<p>Let's break this down a bit. The <code>handler</code> function will handle any HTTP request that hits our application, and will return an "OK" response containing a pleasant message indicating that we've succeeded. That's really about it. Our application is complete. We can test it out by running the following:</p>
+
+<p><code>bash
+$ lein trampoline run -m hello-cf.core 8080
+2013-05-29 22:42:52.576:INFO:oejs.Server:jetty-7.6.1.v20120215
+2013-05-29 22:42:52.804:INFO:oejs.AbstractConnector:Started SelectChannelConnector@0.0.0.0:8080
+</code></p>
+
+<p>Hitting <code>http://localhost:8080</code> in the browser confirms that we're well on our way. Now it's time to trying pushing the application to Cloud Foundry. As Brian stated in his blog, one of the stellar aspects of Cloud Foundry buildpacks is that they are approximately the same as Heroku buildpacks. Practically, this means that one <em>should</em> be able to utilize a Heroku buildpack on Cloud Foundry with minimal or no modifications. Let's put that theory to the test, shall we? Before we do, let's create a <code>Procfile</code> quickly to let the buildpack know what we want to run:</p>
+
+<p><code>
+web: lein with-profile production trampoline run -m hello-cf.core $PORT
+</code></p>
+
+<p>And on with the push:</p>
+
+<p>``` bash
+cf push hello-cf --buildpack=git://github.com/heroku/heroku-buildpack-clojure.git
+Using manifest file manifest.yml</p>
+
+<p>Creating hello-cf... OK</p>
+
+<p>1: hello-cf
+2: none
+Subdomain> hello-cf</p>
+
+<p>1: mstine.cf-app.com
+2: none
+Domain> mstine.cf-app.com</p>
+
+<p>Binding hello-cf.mstine.cf-app.com to hello-cf... OK
+Uploading hello-cf... OK
+Starting hello-cf... OK
+-----> Downloaded app package (12K)
+Initialized empty Git repository in /tmp/buildpacks/heroku-buildpack-clojure.git/.git/
+Installing heroku-buildpack-clojure.git.
+-----> Installing OpenJDK 1.6...done
+-----> Installing Leiningen</p>
+
+<pre><code>   Downloading: leiningen-2.1.2-standalone.jar
+   Writing: lein script
+</code></pre>
+
+<p>-----> Building with Leiningen</p>
+
+<pre><code>   Running: lein with-profile production compile :all
+   Retrieving lein-standalone-repl/lein-standalone-repl/0.1.5/lein-standalone-repl-0.1.5.pom from clojars
+   Retrieving lein-standalone-repl/lein-standalone-repl/0.1.5/lein-standalone-repl-0.1.5.jar from clojars
+   Performing task 'compile' with profile(s): 'production'
+   Retrieving org/clojure/clojure/1.4.0/clojure-1.4.0.pom from
+   ...
+   Compiling hello-cf.core
+</code></pre>
+
+<p>-----> Uploading staged droplet (66M)
+-----> Uploaded droplet
+Checking hello-cf...
+Staging in progress...
+Staging in progress...
+Staging in progress...
+Staging in progress...
+Staging in progress...
+Staging in progress...
+Staging in progress...
+  0/1 instances: 1 starting
+  0/1 instances: 1 down
+  0/1 instances: 1 starting
+  0/1 instances: 1 flapping
+Application failed to start.
+```</p>
+
+<p>Drat. Let's take a quick look at the logs to see what may be awry:</p>
+
+<p><code>bash
+Reading logs/stderr.log... OK
+/home/vcap/app/.lein/bin/lein: line 42: java: command not found
+</code></p>
+
+<p>Ah-hah! Looks like the existing buildpack is making some assumptions about the structure of our application that no longer hold true on Cloud Foundry. So, I followed in Brian's footsteps and <a href="https://github.com/mstine/heroku-buildpack-clojure">forked away</a>. One small <a href="https://github.com/mstine/heroku-buildpack-clojure/commit/fd2c46cc23267fa2d808123d2fd58f4295da4b85">commit</a> looks like it ought to fix the problem. Let's give it another try:</p>
+
+<p>``` bash
+cf push hello-cf --buildpack=git://github.com/mstine/heroku-buildpack-clojure.git
+Using manifest file manifest.yml</p>
+
+<p>Not applying manifest changes without --reset
+See <code>cf diff</code> for more details.</p>
+
+<p>Uploading hello-cf... OK
+Changes:
+  buildpack: 'git://github.com/heroku/heroku-buildpack-clojure.git' -> 'git://github.com/mstine/heroku-buildpack-clojure.git'
+Updating hello-cf... OK
+Stopping hello-cf... OK</p>
+
+<p>Starting hello-cf... OK
+-----> Downloaded app package (8.0K)
+-----> Downloaded app buildpack cache (17M)
+Initialized empty Git repository in /tmp/buildpacks/heroku-buildpack-clojure.git/.git/
+Installing heroku-buildpack-clojure.git.
+-----> Installing OpenJDK 1.6...done
+-----> Using cached Leiningen 2.1.2</p>
+
+<pre><code>   Writing: lein script
+</code></pre>
+
+<p>-----> Building with Leiningen</p>
+
+<pre><code>   Running: lein with-profile production compile :all
+   Performing task 'compile' with profile(s): 'production'
+   Compiling hello-cf.core
+</code></pre>
+
+<p>-----> Uploading staged droplet (66M)
+-----> Uploaded droplet
+Checking hello-cf...
+Staging in progress...
+Staging in progress...
+Staging in progress...
+Staging in progress...
+Staging in progress...
+Staging in progress...
+Staging in progress...
+Staging in progress...
+Staging in progress...
+Staging in progress...
+Staging in progress...
+  0/1 instances: 1 starting
+  0/1 instances: 1 starting
+  0/1 instances: 1 starting
+  0/1 instances: 1 starting
+  0/1 instances: 1 starting
+  0/1 instances: 1 starting
+  0/1 instances: 1 starting
+  0/1 instances: 1 starting
+  0/1 instances: 1 starting
+  0/1 instances: 1 starting
+  0/1 instances: 1 starting
+  0/1 instances: 1 starting
+  0/1 instances: 1 starting
+  0/1 instances: 1 starting
+  0/1 instances: 1 starting
+  0/1 instances: 1 starting
+  0/1 instances: 1 starting
+  1/1 instances: 1 running
+OK
+```</p>
+
+<p>BOOM!</p>
+
+<p>I quickly pointed my browser, and as yesterday's tweet indicates, success:</p>
+
+<blockquote class="twitter-tweet" data-partner="tweetdeck"><p>Yeah...that just happened. cc: <a href="https://twitter.com/cloudfoundry">@cloudfoundry</a> <a href="https://twitter.com/search?q=%23clojure&amp;src=hash">#clojure</a> <a href="https://twitter.com/search?q=%23buildpacks&amp;src=hash">#buildpacks</a> <a href="https://twitter.com/search?q=%23winning&amp;src=hash">#winning</a> <a href="http://t.co/9lJHqmWQPw">pic.twitter.com/9lJHqmWQPw</a></p>&mdash; Matt Stine (@mstine) <a href="https://twitter.com/mstine/statuses/339248683151417344">May 28, 2013</a></blockquote>
+
+
+<script async src="http://mattstine.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+<p></p>
+
+<p>Score another win for Cloud Foundry's buildpack support. I'm now toying with the idea of doing something of a world tour of LISP on Cloud Foundry. My next candidate may be <a href="https://github.com/evhan/heroku-buildpack-chicken">Scheme</a>.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Into the Crucible]]></title>
