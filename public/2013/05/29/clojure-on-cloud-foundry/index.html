@@ -1,0 +1,593 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Clojure on Cloud Foundry - Seeking Simplicity</title>
+  <meta name="author" content="Matt Stine">
+
+  
+  <meta name="description" content="I was inspired by Brian McClain&#8217;s post on bringing Haskell to Cloud Foundry using Cloud Foundry v2 buildpacks, so I decided to go on a &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://mattstine.com/2013/05/29/clojure-on-cloud-foundry">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Seeking Simplicity" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-8534802-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Seeking Simplicity</a></h1>
+  
+    <h2>A blog about DevOps, clouds, architecture, and everything else...</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:mattstine.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Clojure on Cloud Foundry</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-05-29T22:10:00-05:00" pubdate data-updated="true">May 29<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>I was inspired by Brian McClain&#8217;s <a href="http://catdevrandom.me/blog/2013/05/16/buildpacks-in-cloud-foundry-v2/">post on bringing Haskell to Cloud Foundry</a> using Cloud Foundry v2 buildpacks, so I decided to go on a buildpack journey of my own. Since Clojure is the language I most enjoying &#8220;toying around with,&#8221; I thought I&#8217;d try to deploy a simple Clojure web application using the <a href="https://github.com/mstine/heroku-buildpack-clojure">Heroku Clojure Buildpack</a>.</p>
+
+<p>To reiterate some of the coolness around buildpacks, they are what allows a PaaS like Cloud Foundry or Heroku to support various runtimes without first building that support into the core platform. If your favorite language or framework runtime isn&#8217;t available, there&#8217;s absolutely nothing stopping you from providing your own buildpack to support it. Stuff can get crazy &#8211; McClain has even <a href="https://twitter.com/BrianMMcClain/status/339479905974751232">hinted at bringing FORTRAN support to Cloud Foundry</a>.</p>
+
+<p>I decided for my experiment to build a VERY basic &#8220;Hello World&#8221; style application using <a href="https://github.com/ring-clojure/ring">Ring</a>, which is &#8220;a Clojure web applications library inspired by Python&#8217;s WSGI and Ruby&#8217;s Rack.&#8221; The easiest way to get started building Ring applications is to utilize the popular Clojure build tool <a href="http://github.com/technomancy/leiningen">Leiningen</a>.</p>
+
+<p>First I started by creating a new project:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>lein new hello-cf
+</span><span class='line'><span class="nv">$ </span><span class="nb">cd </span>hello-cf
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
+
+<p>The next task was to add the Ring dependencies to my <code>project.clj</code> file:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">defproject </span><span class="nv">hello-cf</span> <span class="s">&quot;0.1.0-SNAPSHOT&quot;</span>
+</span><span class='line'>  <span class="ss">:min-lein-version</span> <span class="s">&quot;2.0.0&quot;</span>
+</span><span class='line'>  <span class="ss">:description</span> <span class="s">&quot;Hello Clojure on Cloud Foundry!&quot;</span>
+</span><span class='line'>  <span class="ss">:license</span> <span class="p">{</span><span class="ss">:name</span> <span class="s">&quot;Eclipse Public License&quot;</span>
+</span><span class='line'>            <span class="ss">:url</span> <span class="s">&quot;http://www.eclipse.org/legal/epl-v10.html&quot;</span><span class="p">}</span>
+</span><span class='line'>  <span class="ss">:dependencies</span> <span class="p">[[</span><span class="nv">org.clojure/clojure</span> <span class="s">&quot;1.4.0&quot;</span><span class="p">]</span>
+</span><span class='line'>                 <span class="p">[</span><span class="nv">ring/ring-core</span> <span class="s">&quot;1.1.8&quot;</span><span class="p">]</span>
+</span><span class='line'>                 <span class="p">[</span><span class="nv">ring/ring-jetty-adapter</span> <span class="s">&quot;1.1.8&quot;</span><span class="p">]])</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Then it was time to create the Ring application itself, by editing <code>src/hello_cf/core.clj</code>:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">ns </span><span class="nv">hello-cf.core</span>
+</span><span class='line'>  <span class="p">(</span><span class="ss">:use</span> <span class="p">[</span><span class="nv">ring.adapter.jetty</span> <span class="ss">:only</span> <span class="p">[</span><span class="nv">run-jetty</span><span class="p">]]))</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="nv">handler</span> <span class="p">[</span><span class="nv">request</span><span class="p">]</span>
+</span><span class='line'>  <span class="p">{</span><span class="ss">:status</span> <span class="mi">200</span>
+</span><span class='line'>   <span class="ss">:headers</span> <span class="p">{</span><span class="s">&quot;Content-Type&quot;</span> <span class="s">&quot;text/html&quot;</span><span class="p">}</span>
+</span><span class='line'>   <span class="ss">:body</span> <span class="s">&quot;Hello Cloud Foundry from heroku-buildpack-clojure!&quot;</span><span class="p">})</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="nv">-main</span> <span class="p">[</span><span class="nv">port</span><span class="p">]</span>
+</span><span class='line'>  <span class="p">(</span><span class="nf">run-jetty</span> <span class="nv">handler</span> <span class="p">{</span><span class="ss">:port</span> <span class="p">(</span><span class="nf">Integer.</span> <span class="nv">port</span><span class="p">)}))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Let&#8217;s break this down a bit. The <code>handler</code> function will handle any HTTP request that hits our application, and will return an &#8220;OK&#8221; response containing a pleasant message indicating that we&#8217;ve succeeded. That&#8217;s really about it. Our application is complete. We can test it out by running the following:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>lein trampoline run -m hello-cf.core 8080
+</span><span class='line'>2013-05-29 22:42:52.576:INFO:oejs.Server:jetty-7.6.1.v20120215
+</span><span class='line'>2013-05-29 22:42:52.804:INFO:oejs.AbstractConnector:Started SelectChannelConnector@0.0.0.0:8080
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Hitting <code>http://localhost:8080</code> in the browser confirms that we&#8217;re well on our way. Now it&#8217;s time to trying pushing the application to Cloud Foundry. As Brian stated in his blog, one of the stellar aspects of Cloud Foundry buildpacks is that they are approximately the same as Heroku buildpacks. Practically, this means that one <em>should</em> be able to utilize a Heroku buildpack on Cloud Foundry with minimal or no modifications. Let&#8217;s put that theory to the test, shall we? Before we do, let&#8217;s create a <code>Procfile</code> quickly to let the buildpack know what we want to run:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>web: lein with-profile production trampoline run -m hello-cf.core <span class="nv">$PORT</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>And on with the push:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>cf push hello-cf --buildpack<span class="o">=</span>git://github.com/heroku/heroku-buildpack-clojure.git
+</span><span class='line'>Using manifest file manifest.yml
+</span><span class='line'>
+</span><span class='line'>Creating hello-cf... OK
+</span><span class='line'>
+</span><span class='line'>1: hello-cf
+</span><span class='line'>2: none
+</span><span class='line'>Subdomain&gt; hello-cf
+</span><span class='line'>
+</span><span class='line'>1: mstine.cf-app.com
+</span><span class='line'>2: none
+</span><span class='line'>Domain&gt; mstine.cf-app.com
+</span><span class='line'>
+</span><span class='line'>Binding hello-cf.mstine.cf-app.com to hello-cf... OK
+</span><span class='line'>Uploading hello-cf... OK
+</span><span class='line'>Starting hello-cf... OK
+</span><span class='line'>-----&gt; Downloaded app package <span class="o">(</span>12K<span class="o">)</span>
+</span><span class='line'>Initialized empty Git repository in /tmp/buildpacks/heroku-buildpack-clojure.git/.git/
+</span><span class='line'>Installing heroku-buildpack-clojure.git.
+</span><span class='line'>-----&gt; Installing OpenJDK 1.6...done
+</span><span class='line'>-----&gt; Installing Leiningen
+</span><span class='line'>       Downloading: leiningen-2.1.2-standalone.jar
+</span><span class='line'>       Writing: lein script
+</span><span class='line'>-----&gt; Building with Leiningen
+</span><span class='line'>       Running: lein with-profile production compile :all
+</span><span class='line'>       Retrieving lein-standalone-repl/lein-standalone-repl/0.1.5/lein-standalone-repl-0.1.5.pom from clojars
+</span><span class='line'>       Retrieving lein-standalone-repl/lein-standalone-repl/0.1.5/lein-standalone-repl-0.1.5.jar from clojars
+</span><span class='line'>       Performing task <span class="s1">&#39;compile&#39;</span> with profile<span class="o">(</span>s<span class="o">)</span>: <span class="s1">&#39;production&#39;</span>
+</span><span class='line'>       Retrieving org/clojure/clojure/1.4.0/clojure-1.4.0.pom from
+</span><span class='line'>       ...
+</span><span class='line'>       Compiling hello-cf.core
+</span><span class='line'>-----&gt; Uploading staged droplet <span class="o">(</span>66M<span class="o">)</span>
+</span><span class='line'>-----&gt; Uploaded droplet
+</span><span class='line'>Checking hello-cf...
+</span><span class='line'>Staging in progress...
+</span><span class='line'>Staging in progress...
+</span><span class='line'>Staging in progress...
+</span><span class='line'>Staging in progress...
+</span><span class='line'>Staging in progress...
+</span><span class='line'>Staging in progress...
+</span><span class='line'>Staging in progress...
+</span><span class='line'>  0/1 instances: 1 starting
+</span><span class='line'>  0/1 instances: 1 down
+</span><span class='line'>  0/1 instances: 1 starting
+</span><span class='line'>  0/1 instances: 1 flapping
+</span><span class='line'>Application failed to start.
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Drat. Let&#8217;s take a quick look at the logs to see what may be awry:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>Reading logs/stderr.log... OK
+</span><span class='line'>/home/vcap/app/.lein/bin/lein: line 42: java: <span class="nb">command </span>not found
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Ah-hah! Looks like the existing buildpack is making some assumptions about the structure of our application that no longer hold true on Cloud Foundry. So, I followed in Brian&#8217;s footsteps and <a href="https://github.com/mstine/heroku-buildpack-clojure">forked away</a>. One small <a href="https://github.com/mstine/heroku-buildpack-clojure/commit/fd2c46cc23267fa2d808123d2fd58f4295da4b85">commit</a> looks like it ought to fix the problem. Let&#8217;s give it another try:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>cf push hello-cf --buildpack<span class="o">=</span>git://github.com/mstine/heroku-buildpack-clojure.git
+</span><span class='line'>Using manifest file manifest.yml
+</span><span class='line'>
+</span><span class='line'>Not applying manifest changes without --reset
+</span><span class='line'>See <span class="sb">`</span>cf diff<span class="sb">`</span> <span class="k">for </span>more details.
+</span><span class='line'>
+</span><span class='line'>Uploading hello-cf... OK
+</span><span class='line'>Changes:
+</span><span class='line'>  buildpack: <span class="s1">&#39;git://github.com/heroku/heroku-buildpack-clojure.git&#39;</span> -&gt; <span class="s1">&#39;git://github.com/mstine/heroku-buildpack-clojure.git&#39;</span>
+</span><span class='line'>Updating hello-cf... OK
+</span><span class='line'>Stopping hello-cf... OK
+</span><span class='line'>
+</span><span class='line'>Starting hello-cf... OK
+</span><span class='line'>-----&gt; Downloaded app package <span class="o">(</span>8.0K<span class="o">)</span>
+</span><span class='line'>-----&gt; Downloaded app buildpack cache <span class="o">(</span>17M<span class="o">)</span>
+</span><span class='line'>Initialized empty Git repository in /tmp/buildpacks/heroku-buildpack-clojure.git/.git/
+</span><span class='line'>Installing heroku-buildpack-clojure.git.
+</span><span class='line'>-----&gt; Installing OpenJDK 1.6...done
+</span><span class='line'>-----&gt; Using cached Leiningen 2.1.2
+</span><span class='line'>       Writing: lein script
+</span><span class='line'>-----&gt; Building with Leiningen
+</span><span class='line'>       Running: lein with-profile production compile :all
+</span><span class='line'>       Performing task <span class="s1">&#39;compile&#39;</span> with profile<span class="o">(</span>s<span class="o">)</span>: <span class="s1">&#39;production&#39;</span>
+</span><span class='line'>       Compiling hello-cf.core
+</span><span class='line'>-----&gt; Uploading staged droplet <span class="o">(</span>66M<span class="o">)</span>
+</span><span class='line'>-----&gt; Uploaded droplet
+</span><span class='line'>Checking hello-cf...
+</span><span class='line'>Staging in progress...
+</span><span class='line'>Staging in progress...
+</span><span class='line'>Staging in progress...
+</span><span class='line'>Staging in progress...
+</span><span class='line'>Staging in progress...
+</span><span class='line'>Staging in progress...
+</span><span class='line'>Staging in progress...
+</span><span class='line'>Staging in progress...
+</span><span class='line'>Staging in progress...
+</span><span class='line'>Staging in progress...
+</span><span class='line'>Staging in progress...
+</span><span class='line'>  0/1 instances: 1 starting
+</span><span class='line'>  0/1 instances: 1 starting
+</span><span class='line'>  0/1 instances: 1 starting
+</span><span class='line'>  0/1 instances: 1 starting
+</span><span class='line'>  0/1 instances: 1 starting
+</span><span class='line'>  0/1 instances: 1 starting
+</span><span class='line'>  0/1 instances: 1 starting
+</span><span class='line'>  0/1 instances: 1 starting
+</span><span class='line'>  0/1 instances: 1 starting
+</span><span class='line'>  0/1 instances: 1 starting
+</span><span class='line'>  0/1 instances: 1 starting
+</span><span class='line'>  0/1 instances: 1 starting
+</span><span class='line'>  0/1 instances: 1 starting
+</span><span class='line'>  0/1 instances: 1 starting
+</span><span class='line'>  0/1 instances: 1 starting
+</span><span class='line'>  0/1 instances: 1 starting
+</span><span class='line'>  0/1 instances: 1 starting
+</span><span class='line'>  1/1 instances: 1 running
+</span><span class='line'>OK
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>BOOM!</p>
+
+<p>I quickly pointed my browser, and as yesterday&#8217;s tweet indicates, success:</p>
+
+<blockquote class="twitter-tweet" data-partner="tweetdeck"><p>Yeah&#8230;that just happened. cc: <a href="https://twitter.com/cloudfoundry">@cloudfoundry</a> <a href="https://twitter.com/search?q=%23clojure&amp;src=hash">#clojure</a> <a href="https://twitter.com/search?q=%23buildpacks&amp;src=hash">#buildpacks</a> <a href="https://twitter.com/search?q=%23winning&amp;src=hash">#winning</a> <a href="http://t.co/9lJHqmWQPw">pic.twitter.com/9lJHqmWQPw</a></p>&mdash; Matt Stine (@mstine) <a href="https://twitter.com/mstine/statuses/339248683151417344">May 28, 2013</a></blockquote>
+
+
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+<p></p>
+
+<p>Score another win for Cloud Foundry&#8217;s buildpack support. I&#8217;m now toying with the idea of doing something of a world tour of LISP on Cloud Foundry. My next candidate may be <a href="https://github.com/evhan/heroku-buildpack-chicken">Scheme</a>.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Matt Stine</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-05-29T22:10:00-05:00" pubdate data-updated="true">May 29<span>th</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/clojure/'>clojure</a>, <a class='category' href='/blog/categories/cloudfoundry/'>cloudfoundry</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://mattstine.com/2013/05/29/clojure-on-cloud-foundry/" data-via="mstine" data-counturl="http://mattstine.com/2013/05/29/clojure-on-cloud-foundry/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2013/05/29/into-the-crucible/" title="Previous Post: Into the Crucible">&laquo; Into the Crucible</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+	<h1>Hello, World!</h1>
+	<p>
+		<img src="http://mattstine.files.wordpress.com/2011/05/indiamug.jpg" width="173" height="213">
+	</p>
+	<p>
+		<a href="http://www.linkedin.com/in/mattstine"><img alt="View Matt Stine&#039;s profile on LinkedIn" src="http://www.linkedin.com/img/webpromo/btn_myprofile_160x33.gif" border="0" width="160" height="33"></a>
+	</p>
+</section><section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2013/05/29/clojure-on-cloud-foundry/">Clojure on Cloud Foundry</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/05/29/into-the-crucible/">Into the Crucible</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/05/24/the-relaunch/">The Relaunch</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/05/16/design-meeting-patternsantipatterns/">Design Meeting Patterns/Antipatterns</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/01/05/selenium-conference-2011/">Selenium Conference 2011</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating...</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("mstine", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/mstine" class="twitter-follow-button" data-show-count="false">Follow @mstine</a>
+  
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Matt Stine -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'seekingsimplicity';
+      
+        
+        //var disqus_developer = 1;
+        var disqus_identifier = 'http://mattstine.com/2013/05/29/clojure-on-cloud-foundry/';
+        var disqus_url = 'http://mattstine.com/2013/05/29/clojure-on-cloud-foundry/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
