@@ -1,0 +1,7 @@
+--- 
+applications: 
+- name: blog
+  memory: 256M
+  instances: 1
+  url: blog.cfapps.io
+  path: .
