@@ -4,7 +4,7 @@
   <title><![CDATA[Category: grails | Seeking Simplicity]]></title>
   <link href="http://mattstine.com/blog/categories/grails/atom.xml" rel="self"/>
   <link href="http://mattstine.com/"/>
-  <updated>2013-06-28T23:21:40-05:00</updated>
+  <updated>2013-07-10T21:05:06-07:00</updated>
   <id>http://mattstine.com/</id>
   <author>
     <name><![CDATA[Matt Stine]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Securing Grails Plugin Artifacts with Filters]]></title>
     <link href="http://mattstine.com/2009/11/10/securing-grails-plugin-artifacts-with-filters/"/>
-    <updated>2009-11-10T13:50:11-06:00</updated>
+    <updated>2009-11-10T13:50:11-08:00</updated>
     <id>http://mattstine.com/2009/11/10/securing-grails-plugin-artifacts-with-filters</id>
     <content type="html"><![CDATA[<p>So you've just installed the handy dandy Spring Security plugin (http://grails.org/plugin/acegi), which makes it incredibly easy to secure entire Grails controllers and/or controller actions with annotations, such as the following:</p>
 
@@ -35,7 +35,7 @@
   <entry>
     <title type="html"><![CDATA[Deploying Grails to Morph AppSpace: #CommunityOne 2009 Lightning Talk]]></title>
     <link href="http://mattstine.com/2009/06/01/deploying-grails-to-morph-appspace-communityone-2009-lightning-talk/"/>
-    <updated>2009-06-01T23:56:06-05:00</updated>
+    <updated>2009-06-01T23:56:06-07:00</updated>
     <id>http://mattstine.com/2009/06/01/deploying-grails-to-morph-appspace-communityone-2009-lightning-talk</id>
     <content type="html"><![CDATA[<p>I gave two lightning talks at <a href="http://developers.sun.com/events/communityone/2009/west/index.jsp">CommunityOne</a> today, the first of which described deploying <a href="http://grails.org">Grails</a> applications to <a href="http://mor.ph/products_appspace">Morph AppSpace</a>.</p>
 
@@ -68,7 +68,7 @@
   <entry>
     <title type="html"><![CDATA[Grails PayPal Plugin Update]]></title>
     <link href="http://mattstine.com/2009/05/11/grails-paypal-plugin-update/"/>
-    <updated>2009-05-11T16:16:48-05:00</updated>
+    <updated>2009-05-11T16:16:48-07:00</updated>
     <id>http://mattstine.com/2009/05/11/grails-paypal-plugin-update</id>
     <content type="html"><![CDATA[<p>Since I last posted on <a href="http://www.mattstine.com/2009/05/02/ive-forked-the-grails-paypal-plugin/">my fork of the Grails PayPal Plugin</a>, I've been invited to be a committer on the <a href="http://xircles.codehaus.org/projects/grails-plugins">Grails Plugins project at the Codehaus</a>. I'll be incorporating my changes into the SVN repository there and updating the documentation on the main Grails Plugins website. Look for these updates coming soon!!!</p>
 ]]></content>
@@ -77,7 +77,7 @@
   <entry>
     <title type="html"><![CDATA[I've "forked" the Grails PayPal Plugin...]]></title>
     <link href="http://mattstine.com/2009/05/02/ive-forked-the-grails-paypal-plugin/"/>
-    <updated>2009-05-02T00:59:46-05:00</updated>
+    <updated>2009-05-02T00:59:46-07:00</updated>
     <id>http://mattstine.com/2009/05/02/ive-forked-the-grails-paypal-plugin</id>
     <content type="html"><![CDATA[<p>I'm currently completing the finishing touches on a new e-commerce site for my wife's stationary business. We decided a long time ago to use <a href="http://www.paypal.com">PayPal</a> for all of the payment processing since we've had a great experience using it for our eBay selling. About a year ago Graeme Rocher polished off the last release of a <a href="http://grails.org/plugin/paypal">PayPal plugin</a> that is available in <a href="http://grails.org/plugin/home">the Grails Plugin repository</a>. It really is a very nice plugin, yet I had a couple of problems with it:</p>
 
@@ -99,7 +99,7 @@
   <entry>
     <title type="html"><![CDATA[Grails, Prototype, Script.aculo.us - Persistent Grid Sorting Goodness]]></title>
     <link href="http://mattstine.com/2009/04/25/grails-prototype-scriptaculous-persistent-grid-sorting-goodness/"/>
-    <updated>2009-04-25T00:14:40-05:00</updated>
+    <updated>2009-04-25T00:14:40-07:00</updated>
     <id>http://mattstine.com/2009/04/25/grails-prototype-scriptaculous-persistent-grid-sorting-goodness</id>
     <content type="html"><![CDATA[<p>Ever wanted to do drag-n-drop sorting of a grid of images on a page and persist it? Here's my solution using Grails, Prototype, and Script.aculo.us.</p>
 

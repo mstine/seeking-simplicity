@@ -4,7 +4,7 @@
   <title><![CDATA[Category: deployment | Seeking Simplicity]]></title>
   <link href="http://mattstine.com/blog/categories/deployment/atom.xml" rel="self"/>
   <link href="http://mattstine.com/"/>
-  <updated>2013-06-28T23:21:40-05:00</updated>
+  <updated>2013-07-10T21:05:06-07:00</updated>
   <id>http://mattstine.com/</id>
   <author>
     <name><![CDATA[Matt Stine]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Deploying Grails with Groovy]]></title>
     <link href="http://mattstine.com/2009/03/29/deploying-grails-with-groovy/"/>
-    <updated>2009-03-29T03:38:09-05:00</updated>
+    <updated>2009-03-29T03:38:09-07:00</updated>
     <id>http://mattstine.com/2009/03/29/deploying-grails-with-groovy</id>
     <content type="html"><![CDATA[<p>Interesting title, eh? Maybe this one will make it through Glen's filter at <a href="http://groovyblogs.org">GroovyBlogs.org</a>.</p>
 

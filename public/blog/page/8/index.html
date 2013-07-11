@@ -9,7 +9,7 @@
   <meta name="author" content="Matt Stine">
 
   
-  <meta name="description" content="Well it had to end eventually. As you can see, I&#8217;m hopelessly behind on my blog entries, having only made it through my first day of sessions. &hellip;">
+  <meta name="description" content="Well, after a short hiatus of getting back to &#8220;real&#8221; work, I&#8217;m going to attempt to squeeze in another Spring Experience 2007 entry &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -82,6 +82,65 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/2007/12/21/web-application-data-access-patterns-keith-donald/">Web Application Data Access Patterns: Keith Donald</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2007-12-21T15:48:00-08:00" pubdate data-updated="true">Dec 21<span>st</span>, 2007</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Well, after a short hiatus of getting back to &#8220;real&#8221; work, I&#8217;m going to attempt to squeeze in another Spring Experience 2007 entry. This particular session was my first of Friday morning. I&#8217;ve always enjoyed Keith Donald as a speaker, having first heard him at <a href="http://www.theserverside.com/tt/articles/content/JIApresentations/Donald.pdf">TheServerSide.com&#8217;s Java In Action conference in 2005</a>, and again during his <a href="http://mattatjavaone2007.blogspot.com/2007/05/java-university-developing-enterprise.html">Java University session at JavaOne 2007</a>.</p>
+
+<p>Keith began with a discussion of why we need patterns. In his opinion, patterns simply provide a way of thinking about a particular approach to a problem. One could liken them to blueprints. They typically have a name, a description of the problem being solved, a description of the solution approach, and finally a selection of implementation guidelines and considerations. Pretty nice summation.</p>
+
+<p>The particular patterns that Keith planned to discuss surrounded the different data access patterns typically found in web applications.</p>
+
+<p>Keith began by discussing the &#8220;Unit of Work&#8221; pattern, which he defined as a unit of interaction with a shared resource that executes independently of other units. These interactions exhibit <a href="http://en.wikipedia.org/wiki/ACID">ACID properties</a>, and a database transaction provides a typical  example. In the context of an ORM such as Hibernate, a Unit of Work tracks changes to the object graph during a transaction and then synchronizes those changes with the database when the transaction is complete. Keith followed this discussion with an implementation example from his &#8220;Reward Network&#8221; sample application.</p>
+
+<p>Keith followed this discussion with two of what I&#8217;ll call &#8220;subpatterns&#8221; of the Unit of Work pattern: Pessimistic and Optimistic Locking. With pessimistic locking, you prevent other units from accessing your data during a given unit of work, and then release the &#8220;lock&#8221; as soon as possible. This locking is performed to prevent a <a href="http://en.wikipedia.org/wiki/Race_condition">race condition</a>, resulting in an inconsistent state in your model. Keith briefly illustrated implementation of pessimistic locking with Hibernate.</p>
+
+<p>It&#8217;s always interesting when someone asks a slightly off-topic question which ends up in a take home gem of information. At this point, someone asked if the implementations that Keith was showing showcased Spring&#8217;s Hibernate support. To this Keith surprised me by answering (and I paraphrase), &#8220;Hibernate&#8217;s native API&#8217;s are much more mature and powerful now, so we recommend you use those rather than Spring&#8217;s Hibernate API wrapper. Why add another dependency?&#8221; He then proceeded to recommend Rossen Stoyanchev&#8217;s Saturday morning session on &#8220;Working with Hibernate in a Spring 2.5 Environment&#8221; (blog entry to come later!). One of the better quotes of the conference came during this aside as well:</p>
+
+<blockquote><p><em>Whenever you can eliminate a dependency, you should.</em><br/>
+- Keith Donald</p></blockquote>
+
+<p>Well, back to the presentation. Keith then moved into a discussion of Optimistic Locking. Here, within a business transaction that executes across a series of system transactions, you use optimistic locking to prevent corruption of shared data. An examples is where several users can edit account information concurrently, but the frequency of concurrent access is fairly low. Data integrity is still at risk, so you use optimistic locking to handle those infrequent cases. Keith them demonstrated the use of <a href="http://www.hibernate.org/hib_docs/reference/en/html/transactions.html#transactions-optimistic">Hibernate versioning to implement optimistic locking</a>.</p>
+
+<p>Keith next moved into a discussion of the controversial &#8220;Open Session in View&#8221; pattern. This is a specialized technical pattern where by the Hibernate session is kept open for the duration of a given web request. It is generally used as a &#8220;quick fix&#8221; to prevent lazy loading exceptions in the view tier. This is generally considered a bad thing, as you end up with a great deal of &#8220;N+1 Select&#8221; situations while rendering the view, resulting in way too much SQL executed against the database. Typically, the need to use this pattern reveals a flaw in the design of your model or queries. For example, since you generally know how far in the object graph you&#8217;ll need to go for a specific view, you should load those relationships eagerly for that use case. You may also consider whether or not a given object association is appropriate to begin with.</p>
+
+<p>The final major pattern that Keith discussed was the &#8220;Conversational Persistence Context&#8221; pattern that is present in the upcoming Spring Web Flow 2.0 release. It is essentially a more flexible variation of the Open Session in View pattern, where by you can have an open session spanning multiple requests during a long-running user interaction context, or &#8220;conversation.&#8221; To be perfectly honest, I still don&#8217;t quite &#8220;get&#8221; this pattern beyond that, probably because I don&#8217;t know much about Web Flow or it&#8217;s cousins (e.g. Seam, Web Beans JSR-299).</p>
+
+<p>Keith closed with a very brief description of Master Detail, where you show an overview of objects in a collection and then allow drilling down into object details, and Paging, where you allow users to easily browse through a list of items of interest. I raised a point of contention with Keith at this point. His example implementation showed delegation of the paging concern to the DAO layer, rather than implementing that concern in the View layer. When I asked him where he thought it belonged, he thought it was obvious that it belonged in the DAO layer. I then let on that we had this debate in our team and decided the the concern belonged in the View layer. Why should I run the same query multiple times just to page through the data? Why not load the entire data set and then let the View tier decide how to page through it? Keith gracefully acknowledged my point.</p>
+
+<p>All in all, this was a great session, if for no other reason than it reminded me of some best practices in this area and let me in on the little secret about using native Hibernate API&#8217;s rather than Spring&#8217;s Hibernate template. Nice job, Keith.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/2007/12/15/goodbye-spring-experience-2007/">Goodbye Spring Experience 2007!</a></h1>
     
     
@@ -98,7 +157,7 @@
   
 
 
-<time datetime="2007-12-15T22:09:00-06:00" pubdate data-updated="true">Dec 15<span>th</span>, 2007</time>
+<time datetime="2007-12-15T22:09:00-08:00" pubdate data-updated="true">Dec 15<span>th</span>, 2007</time>
         
       </p>
     
@@ -150,7 +209,7 @@ Once again, thanks for a great conference. It was easily the best all-around tha
   
 
 
-<time datetime="2007-12-15T10:06:00-06:00" pubdate data-updated="true">Dec 15<span>th</span>, 2007</time>
+<time datetime="2007-12-15T10:06:00-08:00" pubdate data-updated="true">Dec 15<span>th</span>, 2007</time>
         
       </p>
     
@@ -202,7 +261,7 @@ Once again, thanks for a great conference. It was easily the best all-around tha
   
 
 
-<time datetime="2007-12-14T15:40:00-06:00" pubdate data-updated="true">Dec 14<span>th</span>, 2007</time>
+<time datetime="2007-12-14T15:40:00-08:00" pubdate data-updated="true">Dec 14<span>th</span>, 2007</time>
         
       </p>
     
@@ -246,7 +305,7 @@ Once again, thanks for a great conference. It was easily the best all-around tha
   
 
 
-<time datetime="2007-12-14T15:20:00-06:00" pubdate data-updated="true">Dec 14<span>th</span>, 2007</time>
+<time datetime="2007-12-14T15:20:00-08:00" pubdate data-updated="true">Dec 14<span>th</span>, 2007</time>
         
       </p>
     
@@ -298,7 +357,7 @@ To break down part one as quickly as possible, Spring supports virtually EVERYTH
   
 
 
-<time datetime="2007-12-13T21:20:00-06:00" pubdate data-updated="true">Dec 13<span>th</span>, 2007</time>
+<time datetime="2007-12-13T21:20:00-08:00" pubdate data-updated="true">Dec 13<span>th</span>, 2007</time>
         
       </p>
     
@@ -336,7 +395,7 @@ To break down part one as quickly as possible, Spring supports virtually EVERYTH
   
 
 
-<time datetime="2007-12-13T17:32:00-06:00" pubdate data-updated="true">Dec 13<span>th</span>, 2007</time>
+<time datetime="2007-12-13T17:32:00-08:00" pubdate data-updated="true">Dec 13<span>th</span>, 2007</time>
         
       </p>
     
@@ -393,7 +452,7 @@ To break down part one as quickly as possible, Spring supports virtually EVERYTH
   
 
 
-<time datetime="2007-12-13T14:02:00-06:00" pubdate data-updated="true">Dec 13<span>th</span>, 2007</time>
+<time datetime="2007-12-13T14:02:00-08:00" pubdate data-updated="true">Dec 13<span>th</span>, 2007</time>
         
       </p>
     
@@ -435,7 +494,7 @@ I do tend to agree with him. The pace at which Spring is innovating and addressi
   
 
 
-<time datetime="2007-11-08T09:22:00-06:00" pubdate data-updated="true">Nov 8<span>th</span>, 2007</time>
+<time datetime="2007-11-08T09:22:00-08:00" pubdate data-updated="true">Nov 8<span>th</span>, 2007</time>
         
       </p>
     
@@ -473,7 +532,7 @@ I do tend to agree with him. The pace at which Spring is innovating and addressi
   
 
 
-<time datetime="2007-10-12T17:03:00-05:00" pubdate data-updated="true">Oct 12<span>th</span>, 2007</time>
+<time datetime="2007-10-12T17:03:00-07:00" pubdate data-updated="true">Oct 12<span>th</span>, 2007</time>
         
       </p>
     
@@ -481,57 +540,6 @@ I do tend to agree with him. The pace at which Spring is innovating and addressi
 
 
   <div class="entry-content"><p><a href="http://www.javalobby.org/articles/ajax-construction-kit/">My first book review</a> for <a href="http://www.javalobby.org">Javalobby</a> was published today!</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2007/09/05/please-support-me-in-the-2007-walk-to-cure-diabetes/">Please Support Me in the 2007 Walk to Cure Diabetes</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2007-09-05T11:00:00-05:00" pubdate data-updated="true">Sep 5<span>th</span>, 2007</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>This year, I&#8217;ll be taking part in JDRF&#8217;s Walk to Cure Diabetes, along with one-half million other walkers across the country, as we try to reach our goal of raising $90 million.</p>
-
-<p>Type 1, or juvenile, diabetes, is a devastating disease that affects millions of people - a large and growing percentage of them children. One of them is my oldest daughter, Abby, who is three years old.</p>
-
-<p>Since Abby&#8217;s diagnosis, she&#8217;s had her fingers pricked over 800 times already. She&#8217;s received more than 200 shots in her arms, legs, and tummy. Over the course of her life, she&#8217;ll continue to receive daily insulin injections and finger pricks. She must take insulin to stay alive. We must constantly monitor her glucose levels to ward off complications such as blindness, kidney failure, and stroke. Abby must maintain strict control of her diet every day (even on birthdays and holidays), check her blood sugar at least 6 times a day, and take insulin at least twice a day.</p>
-
-<p>There is some good news, though. For the first time, scientists are predicting that we CAN expect to see a cure well within our lifetime! This is exactly what we&#8217;re wishing for, so we&#8217;ve formed a team called &#8220;Wishing With Abby,&#8221; and we&#8217;d love to have your help.</p>
-
-<p>Please visit my Walk Web page if you would like to donate online or see how close I am to<br/>
-reaching my personal goal:</p>
-
-<p><a href="http://walk.jdrf.org/walker.cfm?id=86761462">http://walk.jdrf.org/walker.cfm?id=86761462</a></p>
-
-<p>Follow this link to make a donation:</p>
-
-<p><a href="http://walk.jdrf.org/support.cfm?id=86761462">http://walk.jdrf.org/support.cfm?id=86761462</a></p>
 </div>
   
   
@@ -564,6 +572,10 @@ reaching my personal goal:</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2013/07/10/blue-green-deployments-on-cloudfoundry/">Blue-Green Deployments on Cloud Foundry</a>
+      </li>
+    
+      <li class="post">
         <a href="/2013/05/29/clojure-on-cloud-foundry/">Clojure on Cloud Foundry</a>
       </li>
     
@@ -577,10 +589,6 @@ reaching my personal goal:</p>
     
       <li class="post">
         <a href="/2011/05/16/design-meeting-patternsantipatterns/">Design Meeting Patterns/Antipatterns</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/01/05/selenium-conference-2011/">Selenium Conference 2011</a>
       </li>
     
   </ul>

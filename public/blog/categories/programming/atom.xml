@@ -4,7 +4,7 @@
   <title><![CDATA[Category: programming | Seeking Simplicity]]></title>
   <link href="http://mattstine.com/blog/categories/programming/atom.xml" rel="self"/>
   <link href="http://mattstine.com/"/>
-  <updated>2013-06-28T23:21:40-05:00</updated>
+  <updated>2013-07-10T21:05:06-07:00</updated>
   <id>http://mattstine.com/</id>
   <author>
     <name><![CDATA[Matt Stine]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Dead Programmers Society]]></title>
     <link href="http://mattstine.com/2010/02/16/dead-programmers-society/"/>
-    <updated>2010-02-16T22:42:40-06:00</updated>
+    <updated>2010-02-16T22:42:40-08:00</updated>
     <id>http://mattstine.com/2010/02/16/dead-programmers-society</id>
     <content type="html"><![CDATA[<p>A local Pastor once gave the <a href="http://holding2truth.blogspot.com/2009/01/strange-sounding-advice.html">advice of introducing ourselves</a> <a href="http://holding2truth.blogspot.com/2009/02/strange-advice-introducing-our-kids-to.html">and our kids to dead people</a>. It is his belief that if his kids grow up idolizing the likes of Eric Liddell, Jim Elliot, and Hudson Taylor, they would be far better off than by looking up to many of our so-called "heroes" of today. I happen to agree with his advice, but that's not the subject of tonight's blog entry.</p>
 
@@ -41,7 +41,7 @@
   <entry>
     <title type="html"><![CDATA[LOTY Time Again: Scala or Clojure?!?!]]></title>
     <link href="http://mattstine.com/2009/04/02/loty-time-again-scala-or-clojure/"/>
-    <updated>2009-04-02T15:21:21-05:00</updated>
+    <updated>2009-04-02T15:21:21-07:00</updated>
     <id>http://mattstine.com/2009/04/02/loty-time-again-scala-or-clojure</id>
     <content type="html"><![CDATA[<p>In 2007 <a href="http://www.mattstine.com/2007/07/10/my-professional-development-goals-for-2007-2008/">I established several professional development goals</a> (<a href="http://www.mattstine.com/2008/01/02/mid-year-review-my-professional-development-goals-for-2007-2008/">and later reported my progress on these</a>), one of which was to learn Groovy and Grails. This goal stemmed from the continually referenced idea from <em>The Pragmatic Programmer</em> to "learn a new language every year." This idea has become so ubiquitous that it even has it's own four-letter acronym, LOTY (Language of the Year).</p>
 
@@ -56,7 +56,7 @@
   <entry>
     <title type="html"><![CDATA[Mid-Year Review: My Professional Development Goals for 2007-2008]]></title>
     <link href="http://mattstine.com/2008/01/02/mid-year-review-my-professional-development-goals-for-2007-2008/"/>
-    <updated>2008-01-02T17:33:00-06:00</updated>
+    <updated>2008-01-02T17:33:00-08:00</updated>
     <id>http://mattstine.com/2008/01/02/mid-year-review-my-professional-development-goals-for-2007-2008</id>
     <content type="html"><![CDATA[<p>Back in July I posted my professional development goals for the year (My performance review is annually in July, so it's a good time to set goals.), and it seemed like a good idea to take a look at my progress while doing the "New Year's Resolution" thing.</p>
 
@@ -134,7 +134,7 @@
   <entry>
     <title type="html"><![CDATA[My Professional Development Goals for 2007-2008]]></title>
     <link href="http://mattstine.com/2007/07/10/my-professional-development-goals-for-2007-2008/"/>
-    <updated>2007-07-10T14:14:00-05:00</updated>
+    <updated>2007-07-10T14:14:00-07:00</updated>
     <id>http://mattstine.com/2007/07/10/my-professional-development-goals-for-2007-2008</id>
     <content type="html"><![CDATA[<p>I posted earlier on my desire to <a href="http://matt-stine.blogspot.com/2007/07/help-me-become-better-programmer.html">become a better programmer</a>. Well, I've since put together a plan of action for the next twelve months. I've based some of these goals on suggestions from The Pragmatic Programmer by Andy Hunt and Dave Thomas.</p>
 
@@ -206,7 +206,7 @@
   <entry>
     <title type="html"><![CDATA[Help me become a better programmer!]]></title>
     <link href="http://mattstine.com/2007/07/02/help-me-become-a-better-programmer/"/>
-    <updated>2007-07-02T15:12:00-05:00</updated>
+    <updated>2007-07-02T15:12:00-07:00</updated>
     <id>http://mattstine.com/2007/07/02/help-me-become-a-better-programmer</id>
     <content type="html"><![CDATA[<p>I have decided to embark upon a quest to become a better programmer. I would really like to improve my understanding of the computer science that underlies my day-to-day tasks, particularly as it relates to programming language design as well as algorithm design and complexity analysis. I would also like to improve my analytical and problem solving skills. I've found that I'm really good at learning new technologies and quickly bringing them to bear on web application development problems, but take me out of that problem space and I get nervous rather quickly.</p>
 

@@ -4,7 +4,7 @@
   <title><![CDATA[Seeking Simplicity]]></title>
   <link href="http://mattstine.com/atom.xml" rel="self"/>
   <link href="http://mattstine.com/"/>
-  <updated>2013-06-28T23:21:40-05:00</updated>
+  <updated>2013-07-10T21:05:06-07:00</updated>
   <id>http://mattstine.com/</id>
   <author>
     <name><![CDATA[Matt Stine]]></name>
@@ -14,9 +14,355 @@
 
   
   <entry>
+    <title type="html"><![CDATA[Blue-Green Deployments on Cloud Foundry]]></title>
+    <link href="http://mattstine.com/2013/07/10/blue-green-deployments-on-cloudfoundry/"/>
+    <updated>2013-07-10T20:10:00-07:00</updated>
+    <id>http://mattstine.com/2013/07/10/blue-green-deployments-on-cloudfoundry</id>
+    <content type="html"><![CDATA[<p>One of the great things about Cloud Foundry is that it is a great enabler. Tall words. But what do they mean? Essentially, Cloud Foundry (and any other well-designed PaaS) enables us to do things as developers and operators that would be extremely difficult in a traditional deployment environments. One particularly valuable area of enablement is our new found ability to practice <a href="http://continuousdelivery.com/">Continous Delivery</a>, meaning that we continuously prove our ability to deliver working software by continuously treating each code commit to a system as if it could be deployed to a production environment. We do this by shipping these commits through what&#8217;s called a &#8220;deployment pipeline,&#8221; which consists of a series of build-test-deploy cycles that prove out a commit&#8217;s suitability for production deployment. At the end of the pipeline we can either deploy automatically to our production environment (i.e. continuous deployment), or we can have a business decision to deploy that &#8220;deployable artifact&#8221; or not.</p>
+
+<p>One particular practice associated with Continuous Delivery is <a href="http://martinfowler.com/bliki/BlueGreenDeployment.html">Blue-Green Deployments</a>. Martin Fowler describes these very well at the link provided, but I&#8217;ll summarize briefly here:</p>
+
+<ul>
+<li>Cut-over to a new software version is tricky, and must be quick in order to minimize downtime events.</li>
+<li>Blue-green deployments ensure the parallel existence of two, identical (as possible) production environments.</li>
+<li>At any given point, only one (e.g. blue) services production traffic.</li>
+<li>New deploys are made to the other (e.g. green) environment. Final smoke testing is performed here.</li>
+<li>When green is determined ready, we begin routing traffic to it.</li>
+<li>We then stop routing traffic to blue.</li>
+</ul>
+
+
+<p>Of course, there are several concerns that must be dealt with at the application level in order for this to work (datastores should support concurrent usage by two app versions, long running requests may be killed, etc.). What we&#8217;ll focus on in this post is how Cloud Foundry supports the mechanics summarized above.</p>
+
+<p>We&#8217;ll begin with a basic Spring application named <code>ms-spr-demo</code>. This app takes users to a simple web page announcing the ubiquitous &#8220;Hello World!&#8221; message. We&#8217;ll utilize the <code>cf</code> command-line interface to push the application:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>cf push --path build/libs/cf-demo.war
+</span><span class='line'>Name&gt; ms-spr-demo
+</span><span class='line'>
+</span><span class='line'>Instances&gt; 1
+</span><span class='line'>
+</span><span class='line'>Memory Limit&gt; 512M
+</span><span class='line'>
+</span><span class='line'>Creating ms-spr-demo... OK
+</span><span class='line'>
+</span><span class='line'>1: ms-spr-demo
+</span><span class='line'>2: none
+</span><span class='line'>Subdomain&gt; ms-spr-demo
+</span><span class='line'>
+</span><span class='line'>1: cfapps.io
+</span><span class='line'>2: mattstine.com
+</span><span class='line'>3: none
+</span><span class='line'>Domain&gt; 1
+</span><span class='line'>
+</span><span class='line'>Creating route ms-spr-demo.cfapps.io... OK
+</span><span class='line'>Binding ms-spr-demo.cfapps.io to ms-spr-demo... OK
+</span><span class='line'>
+</span><span class='line'>Create services <span class="k">for </span>application?&gt; n
+</span><span class='line'>
+</span><span class='line'>Save configuration?&gt; y
+</span><span class='line'>
+</span><span class='line'>Saving to manifest.yml... OK
+</span><span class='line'>Uploading ms-spr-demo... OK
+</span><span class='line'>Starting ms-spr-demo... OK
+</span><span class='line'>-----&gt; Downloaded app package <span class="o">(</span>9.5M<span class="o">)</span>
+</span><span class='line'>Installing java.
+</span><span class='line'>Downloading JDK...
+</span><span class='line'>Copying openjdk-1.7.0_25.tar.gz from the buildpack cache ...
+</span><span class='line'>Unpacking JDK to .jdk
+</span><span class='line'>Downloading Tomcat: apache-tomcat-7.0.41.tar.gz
+</span><span class='line'>Copying apache-tomcat-7.0.41.tar.gz from the buildpack cache ...
+</span><span class='line'>Unpacking Tomcat to .tomcat
+</span><span class='line'>Copying mysql-connector-java-5.1.12.jar from the buildpack cache ...
+</span><span class='line'>Copying postgresql-9.0-801.jdbc4.jar from the buildpack cache ...
+</span><span class='line'>Copying auto-reconfiguration-0.6.8.jar from the buildpack cache ...
+</span><span class='line'>-----&gt; Uploading droplet <span class="o">(</span>48M<span class="o">)</span>
+</span><span class='line'>-----&gt; Uploaded droplet
+</span><span class='line'>Checking ms-spr-demo...
+</span><span class='line'>Staging in progress...
+</span><span class='line'>Staging in progress...
+</span><span class='line'>Staging in progress...
+</span><span class='line'>Staging in progress...
+</span><span class='line'>Staging in progress...
+</span><span class='line'>Staging in progress...
+</span><span class='line'>Staging in progress...
+</span><span class='line'>  0/1 instances: 1 starting
+</span><span class='line'>  0/1 instances: 1 starting
+</span><span class='line'>  0/1 instances: 1 starting
+</span><span class='line'>  0/1 instances: 1 starting
+</span><span class='line'>  0/1 instances: 1 starting
+</span><span class='line'>  0/1 instances: 1 starting
+</span><span class='line'>  0/1 instances: 1 starting
+</span><span class='line'>  0/1 instances: 1 starting
+</span><span class='line'>  0/1 instances: 1 starting
+</span><span class='line'>  1/1 instances: 1 running
+</span><span class='line'>OK
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The end result of this <code>cf push</code> event is that an application is now serving requests at <code>http://ms-spr-demo.cfapps.io</code>. The following graphic shows the state of our system, with the CF Router sending traffic to our application:</p>
+
+<p><img class="center" src="http://mattstine.com/images/blue-green/BlueGreen1.png"></p>
+
+<p>Next, we make a slight change to our application. Rather that saying &#8220;Hello World!&#8221; we decide to make it say &#8220;Goodbye World!&#8221; We build a new war file for the application. Rather than letting <code>cf</code> prompt us this time, we&#8217;ll make use of the <code>manifest.yml</code> file that we saved from our previous push. However, we&#8217;ll rename the application and provide a new route. Take a look:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>---
+</span><span class='line'>applications:
+</span><span class='line'>- name: ms-spr-demo-green
+</span><span class='line'>  memory: 512M
+</span><span class='line'>  instances: 1
+</span><span class='line'>  url: ms-spr-demo-green.cfapps.io
+</span><span class='line'>  path: build/libs/cf-demo.war
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>As you can see, we&#8217;re calling our new application version <code>ms-spr-demo-green</code> and we&#8217;re mapping it to the URL <code>ms-spr-demo-green.cfapps.io</code>. Let&#8217;s push the application:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>Using manifest file manifest.yml
+</span><span class='line'>
+</span><span class='line'>Creating ms-spr-demo-green... OK
+</span><span class='line'>
+</span><span class='line'>1: ms-spr-demo-green
+</span><span class='line'>2: none
+</span><span class='line'>Subdomain&gt; ms-spr-demo-green
+</span><span class='line'>
+</span><span class='line'>1: cfapps.io
+</span><span class='line'>2: mattstine.com
+</span><span class='line'>3: none
+</span><span class='line'>Domain&gt; 1
+</span><span class='line'>
+</span><span class='line'>Creating route ms-spr-demo-green.cfapps.io... OK
+</span><span class='line'>Binding ms-spr-demo-green.cfapps.io to ms-spr-demo-green... OK
+</span><span class='line'>Uploading ms-spr-demo-green... OK
+</span><span class='line'>Starting ms-spr-demo-green... OK
+</span><span class='line'>-----&gt; Downloaded app package <span class="o">(</span>9.5M<span class="o">)</span>
+</span><span class='line'>Installing java.
+</span><span class='line'>Downloading JDK...
+</span><span class='line'>Copying openjdk-1.7.0_25.tar.gz from the buildpack cache ...
+</span><span class='line'>Unpacking JDK to .jdk
+</span><span class='line'>Downloading Tomcat: apache-tomcat-7.0.41.tar.gz
+</span><span class='line'>Copying apache-tomcat-7.0.41.tar.gz from the buildpack cache ...
+</span><span class='line'>Unpacking Tomcat to .tomcat
+</span><span class='line'>Copying mysql-connector-java-5.1.12.jar from the buildpack cache ...
+</span><span class='line'>Copying postgresql-9.0-801.jdbc4.jar from the buildpack cache ...
+</span><span class='line'>Copying auto-reconfiguration-0.6.8.jar from the buildpack cache ...
+</span><span class='line'>-----&gt; Uploading droplet <span class="o">(</span>48M<span class="o">)</span>
+</span><span class='line'>-----&gt; Uploaded droplet
+</span><span class='line'>Checking ms-spr-demo-green...
+</span><span class='line'>Staging in progress...
+</span><span class='line'>Staging in progress...
+</span><span class='line'>Staging in progress...
+</span><span class='line'>Staging in progress...
+</span><span class='line'>Staging in progress...
+</span><span class='line'>Staging in progress...
+</span><span class='line'>Staging in progress...
+</span><span class='line'>Staging in progress...
+</span><span class='line'>Staging in progress...
+</span><span class='line'>Staging in progress...
+</span><span class='line'>Staging in progress...
+</span><span class='line'>Staging in progress...
+</span><span class='line'>Staging in progress...
+</span><span class='line'>Staging in progress...
+</span><span class='line'>Staging in progress...
+</span><span class='line'>Staging in progress...
+</span><span class='line'>Staging in progress...
+</span><span class='line'>Staging in progress...
+</span><span class='line'>Staging in progress...
+</span><span class='line'>Staging in progress...
+</span><span class='line'>Staging in progress...
+</span><span class='line'>Staging in progress...
+</span><span class='line'>Staging in progress...
+</span><span class='line'>Staging in progress...
+</span><span class='line'>Staging in progress...
+</span><span class='line'>Staging in progress...
+</span><span class='line'>Staging in progress...
+</span><span class='line'>Staging in progress...
+</span><span class='line'>Staging in progress...
+</span><span class='line'>  0/1 instances: 1 starting
+</span><span class='line'>  0/1 instances: 1 starting
+</span><span class='line'>  0/1 instances: 1 starting
+</span><span class='line'>  0/1 instances: 1 starting
+</span><span class='line'>  0/1 instances: 1 starting
+</span><span class='line'>  0/1 instances: 1 starting
+</span><span class='line'>  0/1 instances: 1 starting
+</span><span class='line'>  1/1 instances: 1 running
+</span><span class='line'>OK
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>We now have two instances of the application running, each of them using distinct routes:</p>
+
+<p><img class="center" src="http://mattstine.com/images/blue-green/BlueGreen2.png"></p>
+
+<p>Now it&#8217;s time for the magic to happen. We&#8217;ll map our original URL route (<code>ms-spr-demo.cfapps.io</code>) to our &#8220;green&#8221; instance. This is accomplished very simply by using <code>cf</code>:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>cf map --app ms-spr-demo-green --host ms-spr-demo --domain cfapps.io
+</span><span class='line'>Binding ms-spr-demo.cfapps.io to ms-spr-demo-green... OK
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The CF router immediately begins to load balance requests between each instance of the application, as shown here:</p>
+
+<p><img class="center" src="http://mattstine.com/images/blue-green/BlueGreen3.png"></p>
+
+<p>Now our router will send requests to <code>ms-spr-demo.cfapps.io</code> to both instances of the application, while <code>ms-spr-demo-green.cfapps.io</code> only services the &#8220;green&#8221; instance. Once we determine that all is well, it&#8217;s time to stop routing requests to the &#8220;blue&#8221; instance. This is just as simple using <code>cf</code>:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>cf unmap --url ms-spr-demo.cfapps.io --app ms-spr-demo
+</span><span class='line'>Unbinding ms-spr-demo.cfapps.io from ms-spr-demo... OK
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Our &#8220;blue&#8221; instance is now no longer receiving any web traffic:</p>
+
+<p><img class="center" src="http://mattstine.com/images/blue-green/BlueGreen4.png"></p>
+
+<p>We can now decomission our &#8220;blue&#8221; instance, or we can leave it around for a period of time in case we decide we need to roll back our changes. The important thing is that our customers suffered absolutely no downtime!</p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[Clojure on Cloud Foundry]]></title>
     <link href="http://mattstine.com/2013/05/29/clojure-on-cloud-foundry/"/>
-    <updated>2013-05-29T22:10:00-05:00</updated>
+    <updated>2013-05-29T22:10:00-07:00</updated>
     <id>http://mattstine.com/2013/05/29/clojure-on-cloud-foundry</id>
     <content type="html"><![CDATA[<p>I was inspired by Brian McClain&#8217;s <a href="http://catdevrandom.me/blog/2013/05/16/buildpacks-in-cloud-foundry-v2/">post on bringing Haskell to Cloud Foundry</a> using Cloud Foundry v2 buildpacks, so I decided to go on a buildpack journey of my own. Since Clojure is the language I most enjoying &#8220;toying around with,&#8221; I thought I&#8217;d try to deploy a simple Clojure web application using the <a href="https://github.com/mstine/heroku-buildpack-clojure">Heroku Clojure Buildpack</a>.</p>
 
@@ -343,7 +689,7 @@
   <entry>
     <title type="html"><![CDATA[Into the Crucible]]></title>
     <link href="http://mattstine.com/2013/05/29/into-the-crucible/"/>
-    <updated>2013-05-29T09:00:00-05:00</updated>
+    <updated>2013-05-29T09:00:00-07:00</updated>
     <id>http://mattstine.com/2013/05/29/into-the-crucible</id>
     <content type="html"><![CDATA[<p>Wow&#8230;it seems I only post to this blog toward the end of May. Well, that all changes now. You see, as of June 3, 2013, this blog is going to become one of many aspects of my new &#8220;day job.&#8221; On Monday, I start my life as a Community Engineer with <a href="http://cloudfoundry.com">Cloud Foundry</a> by <a href="http://goPivotal.com">Pivotal</a>. What&#8217;s a Community Engineer? Quite honestly, I&#8217;m not completely sure of the answer to that question yet. But given the many conversations I&#8217;ve had over the past few weeks, it seemingly fits right in with the bridge-building roles I&#8217;ve played many times over the course of my career. In this case, I have one foot squarely planted in the world of Cloud Foundry engineering, and one foot squarely planted out in the world with you guys and gals - the community. My job is to help you understand how we are quite literally seeking to &#8220;build a new platform for a new era.&#8221;</p>
 
@@ -358,7 +704,7 @@
   <entry>
     <title type="html"><![CDATA[The Relaunch]]></title>
     <link href="http://mattstine.com/2012/05/24/the-relaunch/"/>
-    <updated>2012-05-24T19:45:00-05:00</updated>
+    <updated>2012-05-24T19:45:00-07:00</updated>
     <id>http://mattstine.com/2012/05/24/the-relaunch</id>
     <content type="html"><![CDATA[<p>I have rebooted this blog many times over the last several years. If you&#8217;ve been a reader of my blog in the past, you will have noticed significant changes. If you&#8217;re new here, welcome!</p>
 
@@ -385,7 +731,7 @@
   <entry>
     <title type="html"><![CDATA[Design Meeting Patterns/Antipatterns]]></title>
     <link href="http://mattstine.com/2011/05/16/design-meeting-patternsantipatterns/"/>
-    <updated>2011-05-16T16:57:50-05:00</updated>
+    <updated>2011-05-16T16:57:50-07:00</updated>
     <id>http://mattstine.com/2011/05/16/design-meeting-patternsantipatterns</id>
     <content type="html"><![CDATA[<p>For those of you that don&#8217;t know, I recently returned to the technical ranks as a Software Architect after a three-year stint in management. To make a long story short, I now love my job again. Perhaps I&#8217;ll write the long story in a future blog entry. On to the topic at hand. Today I led the first significant design discussion that I have led in quite a long time. A few minutes afterward, I was already reflecting on what had occurred and how. The very first thing that I noticed was my drastically different approach to the task. I felt that my facilitation skills were more mature and effective than I remember from previous similar engagements. I&#8217;m not sure if the time I spent in management (where I facilitated quite a few meetings, though much more business-focused ones) helped, but something certainly has.</p>
 
@@ -406,7 +752,7 @@
   <entry>
     <title type="html"><![CDATA[Selenium Conference 2011]]></title>
     <link href="http://mattstine.com/2011/01/05/selenium-conference-2011/"/>
-    <updated>2011-01-05T12:18:23-06:00</updated>
+    <updated>2011-01-05T12:18:23-08:00</updated>
     <id>http://mattstine.com/2011/01/05/selenium-conference-2011</id>
     <content type="html"><![CDATA[<p>I completed an interest survey for a potential Selenium-focused conference several weeks ago, and I&#8217;m excited to let you know that the &#8220;powers that be&#8221; have decided that the conference is going to happen! I have already submitted my &#8220;Executable Specifications: Automating Your Requirements Document with Geb and Spock&#8221; talk as a potential session. Whether it makes the conference program or not, I plan on attending the event. Here are the details:</p>
 
@@ -423,7 +769,7 @@
   <entry>
     <title type="html"><![CDATA[2010 in review: the automated analysis...]]></title>
     <link href="http://mattstine.com/2011/01/02/2010-in-review-the-automated-analysis/"/>
-    <updated>2011-01-02T20:28:25-06:00</updated>
+    <updated>2011-01-02T20:28:25-08:00</updated>
     <id>http://mattstine.com/2011/01/02/2010-in-review-the-automated-analysis</id>
     <content type="html"><![CDATA[<p>The stats helper monkeys at WordPress.com mulled over how this blog did in 2010, and here&#8217;s a high level summary of its overall blog health:</p>
 
@@ -490,7 +836,7 @@
   <entry>
     <title type="html"><![CDATA[Selenium 2.0 Refcard]]></title>
     <link href="http://mattstine.com/2010/11/29/selenium-2-0-refcard/"/>
-    <updated>2010-11-29T15:44:18-06:00</updated>
+    <updated>2010-11-29T15:44:18-08:00</updated>
     <id>http://mattstine.com/2010/11/29/selenium-2-0-refcard</id>
     <content type="html"><![CDATA[<p><a href="http://refcardz.dzone.com/refcardz/getting-started-selenium-20?oid=hom31797"><img src="http://mattstine.files.wordpress.com/2010/11/31797.png" alt="" /></a>Today DZone released my first Refcard: &#8221;<a href="http://refcardz.dzone.com/refcardz/getting-started-selenium-20?oid=hom31797">Selenium 2.0: Using the WebDriver API to Create Robust User Acceptance Tests</a>.&#8221; I have been interested in writing a Refcard for a long time but have never pulled the trigger. For whatever reason, I decided to jump on the bandwagon last month. Writing this card was quite a challenge, as it&#8217;s difficult to boil down a big topic into only six pages while keeping it useful. Thus far the feedback from the community has been largely positive.</p>
 
@@ -501,7 +847,7 @@
   <entry>
     <title type="html"><![CDATA[Agile Zone Roundup]]></title>
     <link href="http://mattstine.com/2010/11/10/agile-zone-roundup/"/>
-    <updated>2010-11-10T08:53:15-06:00</updated>
+    <updated>2010-11-10T08:53:15-08:00</updated>
     <id>http://mattstine.com/2010/11/10/agile-zone-roundup</id>
     <content type="html"><![CDATA[<p>I&#8217;ve been really quiet on this blog lately. There have been multiple reasons for that. I&#8217;ve been extremely busy preparing for conferences this Fall including SpringOne/2GX and The Rich Web Experience. I&#8217;ve also stayed busy writing for DZone. I have my first DZone Refcard coming out soon, which is focused on Web Driver/Selenium 2. I&#8217;ve also been writing my regular articles for Agile Zone. Here&#8217;s a roundup:</p>
 
@@ -522,7 +868,7 @@
   <entry>
     <title type="html"><![CDATA[The Seven Wastes of Software Development]]></title>
     <link href="http://mattstine.com/2010/11/10/the-seven-wastes-of-software-development/"/>
-    <updated>2010-11-10T08:44:29-06:00</updated>
+    <updated>2010-11-10T08:44:29-08:00</updated>
     <id>http://mattstine.com/2010/11/10/the-seven-wastes-of-software-development</id>
     <content type="html"><![CDATA[<p>In late September I completed an eight-part article series for Agile Zone entitled &#8220;The Seven Wastes of Software Development.&#8221; This series discussed Mary and Tom Poppendieck&#8217;s mapping of Shigeo Shingo&#8217;s &#8220;Seven Wastes of Lean Manufacturing&#8221; into the software development world. This has been a very popular series, having been viewed a total of 57,887 times at this writing. Here&#8217;s a set of links to the series:</p>
 
@@ -543,7 +889,7 @@
   <entry>
     <title type="html"><![CDATA[The Agile Guerilla Series]]></title>
     <link href="http://mattstine.com/2010/09/05/the-agile-guerilla-series/"/>
-    <updated>2010-09-05T20:28:43-05:00</updated>
+    <updated>2010-09-05T20:28:43-07:00</updated>
     <id>http://mattstine.com/2010/09/05/the-agile-guerilla-series</id>
     <content type="html"><![CDATA[<p>I recently completed a series of articles for Agile Zone entitled &#8220;The Agile Guerilla.&#8221; Those of you that have seen me on the No Fluff Just Stuff tour this year may recognize a talk by the same name. They are one and the same concept: my attempt to reach the masses with strategies for introducing change, specifically moving to agility, into organizations from the grassroots level.</p>
 
@@ -565,7 +911,7 @@
   <entry>
     <title type="html"><![CDATA[More Agile Zone Articles!]]></title>
     <link href="http://mattstine.com/2010/08/02/more-agile-zone-articles/"/>
-    <updated>2010-08-02T08:44:04-05:00</updated>
+    <updated>2010-08-02T08:44:04-07:00</updated>
     <id>http://mattstine.com/2010/08/02/more-agile-zone-articles</id>
     <content type="html"><![CDATA[<p>Just to prove that I am writing, just not here, I thought I&#8217;d post another collection of links to my latest Agile Zone articles:</p>
 
@@ -586,7 +932,7 @@
   <entry>
     <title type="html"><![CDATA[I'm in the zone...Agile Zone.]]></title>
     <link href="http://mattstine.com/2010/07/20/im-in-the-zone-agile-zone/"/>
-    <updated>2010-07-20T22:38:09-05:00</updated>
+    <updated>2010-07-20T22:38:09-07:00</updated>
     <id>http://mattstine.com/2010/07/20/im-in-the-zone-agile-zone</id>
     <content type="html"><![CDATA[<p>My apologies to my colleagues down the street at <a href="http://www.autozone.com">AutoZone</a>, but I just had to do that. :-)</p>
 
@@ -612,7 +958,7 @@
   <entry>
     <title type="html"><![CDATA[Two new NFJS talks for this fall!]]></title>
     <link href="http://mattstine.com/2010/07/06/two-new-nfjs-talks-for-this-fall/"/>
-    <updated>2010-07-06T21:40:00-05:00</updated>
+    <updated>2010-07-06T21:40:00-07:00</updated>
     <id>http://mattstine.com/2010/07/06/two-new-nfjs-talks-for-this-fall</id>
     <content type="html"><![CDATA[<p>I&#8217;m excited to announce that I am working up two brand new talks for this Fall to go along side my regular fare. Both of these talks are already scheduled for shows in Boston, MA and Seattle, WA.</p>
 
@@ -650,7 +996,7 @@
   <entry>
     <title type="html"><![CDATA[NFJS Fall 2010: What do you want to learn?]]></title>
     <link href="http://mattstine.com/2010/06/22/nfjs-fall-2010-what-do-you-want-to-learn/"/>
-    <updated>2010-06-22T10:06:16-05:00</updated>
+    <updated>2010-06-22T10:06:16-07:00</updated>
     <id>http://mattstine.com/2010/06/22/nfjs-fall-2010-what-do-you-want-to-learn</id>
     <content type="html"><![CDATA[<p>Hi everyone! I&#8217;m currently in the process of developing new talks for my Fall 2010 NFJS tour dates. While I don&#8217;t know yet where I&#8217;ll be speaking, I can tell you that I&#8217;ve registered availability for the following shows:</p>
 
@@ -685,7 +1031,7 @@
   <entry>
     <title type="html"><![CDATA[Don't build software that's TOO smart!]]></title>
     <link href="http://mattstine.com/2010/06/03/dont-build-software-thats-too-smart/"/>
-    <updated>2010-06-03T17:00:35-05:00</updated>
+    <updated>2010-06-03T17:00:35-07:00</updated>
     <id>http://mattstine.com/2010/06/03/dont-build-software-thats-too-smart</id>
     <content type="html"><![CDATA[<p>I had an extremely successful meeting with one of our clients yesterday. We were discussing how we wanted to go about migrating her laboratory from its current system (one that we built several years ago) to our new lab management platform. At some point during the discussion I made the statement, &#8220;We tried to make the previous system too smart! We&#8217;re not repeating that mistake this time.&#8221; Of course, she was in complete agreement with that principle. I&#8217;ve had similar interactions with our other clients that are making migrations (rather than encountering our system for the first time on this new version), and although I&#8217;ve never explicitly stated the principle that way, similar sentiments have abounded.</p>
 
@@ -700,7 +1046,7 @@
   <entry>
     <title type="html"><![CDATA[Announcing NOSQL Summer Memphis]]></title>
     <link href="http://mattstine.com/2010/05/28/announcing-nosql-summer-memphis/"/>
-    <updated>2010-05-28T09:21:43-05:00</updated>
+    <updated>2010-05-28T09:21:43-07:00</updated>
     <id>http://mattstine.com/2010/05/28/announcing-nosql-summer-memphis</id>
     <content type="html"><![CDATA[<p>I recently stumbled across the <a href="http://nosqlsummer.org/">NOSQL Summer</a> website via my friend Alex Miller&#8217;s <a href="http://tech.puredanger.com/2010/05/25/nosql-summer-st-louis/">blog</a>. The idea is to setup a summer reading club focused around databases and distributed systems. Groups will gather &#8220;worldwide&#8221; to discuss various papers and the hopefully submit the substance of their discussions back to the NOSQL Summer website in the form of annotated papers.</p>
 
@@ -715,7 +1061,7 @@
   <entry>
     <title type="html"><![CDATA[First thoughts on "Seven Languages in Seven Weeks..."]]></title>
     <link href="http://mattstine.com/2010/05/06/first-thoughts-on-seven-languages-in-seven-weeks/"/>
-    <updated>2010-05-06T13:35:28-05:00</updated>
+    <updated>2010-05-06T13:35:28-07:00</updated>
     <id>http://mattstine.com/2010/05/06/first-thoughts-on-seven-languages-in-seven-weeks</id>
     <content type="html"><![CDATA[<p>I recently started reading the beta copy of Bruce Tate&#8217;s <a href="http://pragprog.com/titles/btlang/seven-languages-in-seven-weeks"><em>Seven Languages in Seven Weeks</em></a> from the Pragmatic Bookshelf. While I&#8217;m certainly NOT on pace to actually complete the book in seven weeks, I have been steadily plodding along. Reading this book takes me back to my days as an undergraduate computer science student at the University of Mississippi. As with most CS programs, we were all required to take a &#8220;Survey of Programming Languages&#8221; course toward the end of the curriculum. Tate&#8217;s book is very similiar to walking through this course, except:</p>
 
@@ -735,7 +1081,7 @@
   <entry>
     <title type="html"><![CDATA[OSGi on Rails?]]></title>
     <link href="http://mattstine.com/2010/04/29/osgi-on-rails/"/>
-    <updated>2010-04-29T12:33:40-05:00</updated>
+    <updated>2010-04-29T12:33:40-07:00</updated>
     <id>http://mattstine.com/2010/04/29/osgi-on-rails</id>
     <content type="html"><![CDATA[<p>I&#8217;ve seen quite a few blogs/articles/etc. lately related to the adoption (or lack thereof) of OSGi in the mainstream web application/enterprise application space. A nice summation of these is encapsulated in this excerpt from a comment by Peter Kriens on DZone (you&#8217;ll find it in the comments section for <a href="http://java.dzone.com/articles/osgi-perspectives">http://java.dzone.com/articles/osgi-perspectives</a>:</p>
 
@@ -760,38 +1106,13 @@
   <entry>
     <title type="html"><![CDATA[JUG Leadership Lessons Learned on SlideShare]]></title>
     <link href="http://mattstine.com/2010/04/02/jug-leadership-lessons-learned-on-slideshare/"/>
-    <updated>2010-04-02T14:48:39-05:00</updated>
+    <updated>2010-04-02T14:48:39-07:00</updated>
     <id>http://mattstine.com/2010/04/02/jug-leadership-lessons-learned-on-slideshare</id>
     <content type="html"><![CDATA[<p>I&#8217;ve been playing a bit with <a href="http://www.slideshare.net">SlideShare</a> today and I took the opportunity to upload the slides from my <a href="http://weblogs.java.net/blog/2009/07/02/how-start-and-grow-jug-community-corner-2009-podcast">Java.net Community Corner interview with Kevin Farnham at JavaOne 2009</a>. SlideShare has a nice feature that allows you to sync up the audio from an MP3 file with your slides, and since both were available, I thought I&#8217;d give it a try. The interface is extremely easy to use and I&#8217;m very happy with the outcome.</p>
 
 <p>This talk covers the various things I&#8217;ve learned about leading a Java User Group over the past few years. I would say that these are definitely applicable to leading any type of user group, so even if you aren&#8217;t a Java person, you might find some meat here. Enjoy!</p>
 
 <p>[slideshare id=3622125&amp;doc=jugleadershiplessonslearned-100402140624-phpapp02]</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Dead Programmers Society]]></title>
-    <link href="http://mattstine.com/2010/02/16/dead-programmers-society/"/>
-    <updated>2010-02-16T22:42:40-06:00</updated>
-    <id>http://mattstine.com/2010/02/16/dead-programmers-society</id>
-    <content type="html"><![CDATA[<p>A local Pastor once gave the <a href="http://holding2truth.blogspot.com/2009/01/strange-sounding-advice.html">advice of introducing ourselves</a> <a href="http://holding2truth.blogspot.com/2009/02/strange-advice-introducing-our-kids-to.html">and our kids to dead people</a>. It is his belief that if his kids grow up idolizing the likes of Eric Liddell, Jim Elliot, and Hudson Taylor, they would be far better off than by looking up to many of our so-called &#8220;heroes&#8221; of today. I happen to agree with his advice, but that&#8217;s not the subject of tonight&#8217;s blog entry.</p>
-
-<p>I think that this advice is very applicable to us as software developers today. While our industry is still young enough that a great many of our &#8220;founding fathers&#8221; are still around, it is surprising to see how often their work and contributions go unnoticed by the vast majority of us. At the January Memphis/Mid-South Java User Group meeting, our program focused on books that all of us as developers should read. Four of us gave our takes on the topic. Joel Neely, one of a few people that I learn from every time I get near them, pulled yet another rabbit out of his hat by focusing on several books, all of which had been published before the majority of us were out of diapers! One book struck me in particular: <em>A Discipline of Programming</em> by Edsgar W. Dijkstra. In it EWD &#8220;presents a formal approach to developing (non-deterministic!) algorithms, using what we would now call a DSL for algorithm design. Incidentally, that book was published in 1976.&#8221; (Thanks Joel for the excellent summary). I&#8217;d like to pull out just a couple of quotes from that book:</p>
-
-<p><em>A most important, but also a most elusive, aspect of any tool is its influence on the habits of those who train themselves in its use. If the tool is a programming language, this influence is - whether we like it or not - an influence on our thinking habits.</em></p>
-
-<p>Just out of curiosity, does this sound anything at all to you like the frequent admonitions to learn a &#8220;language of the year (LOTY)?&#8221; Of course that isn&#8217;t the context of EWD&#8217;s quote, but the underlying principle remains the same. Almost universally accompanying that admonition is a statement along the lines of &#8220;even if you never use it in your day job, it will affect THE WAY YOU THINK about programming during your day job.&#8221;</p>
-
-<p><em>&#8230;a carefully chosen separation of concerns is essential for the design of in all respects, high quality programs&#8230;</em></p>
-
-<p>Does &#8220;loosely coupled, highly cohesive, modular architecture&#8221; come to mind?</p>
-
-<p><em>&#8230;the fact that programming languages could be used as a vehicle for instructing existing automatic computers, has for a long time been regarded as their most important property&#8230;we shall try to redress the balance, and we shall do so by regarding the fact that our algorithms could actually be carried out be a computer as a lucky accidental circumstance that need not occupy a central position in our considerations&#8230;I view a programming language primarily as a vehicle for the description of (potentially highly sophisticated) abstract mechanisms.</em></p>
-
-<p>I hear so much of what is bandied about today as &#8220;new&#8221; embodied in this quote. The calls to liberate programming from its &#8220;C&#8221; roots by banishing primitives, because hey, primitives are only their to keep &#8220;Java from being too slow!&#8221; The calls to favor &#8220;essence over ceremony&#8221; in language design by eliminating boilerplate code in favor of sensible defaults that clear away the noise from the algorithmic intent that we&#8217;re trying to communicate. The constant reminders that it&#8217;s more important for our code to be readable to humans, not to computers, because that&#8217;s what compilers are for.</p>
-
-<p>What&#8217;s the point? The point is that most, if not all, of the ideas that are &#8220;new&#8221; today are simply restatements of past ideas in a different context. A wise man, one much wiser than I, once said &#8220;&#8230;there is nothing new under the sun&#8221; (Ecclesiastes 1:9). Edsgar W. Dijkstra passed from this earth in 2002, but his ideas live on, and they are very much applicable to software developers today. There are may others like him: Donald Knuth, John McCarthy, Alan Turing, David Gries - some dead, some alive, but all giants upon whose shoulders we stand. We would do well to consider their words.</p>
 ]]></content>
   </entry>
   

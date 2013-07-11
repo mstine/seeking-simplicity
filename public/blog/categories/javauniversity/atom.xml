@@ -4,7 +4,7 @@
   <title><![CDATA[Category: javauniversity | Seeking Simplicity]]></title>
   <link href="http://mattstine.com/blog/categories/javauniversity/atom.xml" rel="self"/>
   <link href="http://mattstine.com/"/>
-  <updated>2013-06-28T23:21:40-05:00</updated>
+  <updated>2013-07-10T21:05:06-07:00</updated>
   <id>http://mattstine.com/</id>
   <author>
     <name><![CDATA[Matt Stine]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Java University: Rapid Web Site Development with Groovy and Grails]]></title>
     <link href="http://mattstine.com/2007/05/07/java-university-rapid-web-site-development-with-groovy-and-grails/"/>
-    <updated>2007-05-07T16:47:00-05:00</updated>
+    <updated>2007-05-07T16:47:00-07:00</updated>
     <id>http://mattstine.com/2007/05/07/java-university-rapid-web-site-development-with-groovy-and-grails</id>
     <content type="html"><![CDATA[<p>I'm currently sitting in this session - Graeme Rocher is the presenter. He is the creator of Grails, which is Groovy's answer to the Ruby on Rails like development experience. He's currently doing Q&amp;A, so I thought I'd take the opportunity to write a short entry. So far this session is awesome! Graeme is a great presenter and has had the perfect balance of slides and live coding. Unfortunately they ran out of slides before I got to the presentation (more on the sometimes laughable logistics at JavaOne later), so I'm having trouble remember details to write about (they've promised to email me the slides). The first part of the session was an introduction to Groovy, Java's "scripting" language. I had NO IDEA just how cool and powerful Groovy was. I am especially impressed with its MetaClass concept, whereby you can override almost every behavior of the Java language that you can imagine - method calling, operator overloading, etc. Imagine being able to do AOP type things without using AOP. Not only that, it has all of my favorite pet features like "everything is an object," closures, dynamic lists, etc. It's an OOP nuts dream. I'll write more later.</p>
 ]]></content>
@@ -25,7 +25,7 @@
   <entry>
     <title type="html"><![CDATA[Java University: Developing Enterprise Applications with the Spring Framework]]></title>
     <link href="http://mattstine.com/2007/05/07/java-university-developing-enterprise-applications-with-the-spring-framework/"/>
-    <updated>2007-05-07T15:09:00-05:00</updated>
+    <updated>2007-05-07T15:09:00-07:00</updated>
     <id>http://mattstine.com/2007/05/07/java-university-developing-enterprise-applications-with-the-spring-framework</id>
     <content type="html"><![CDATA[<p>This was the first session that I attended at Java University. You could take either a full-day course or two half-day courses - I elected to do the latter. Keith Donald, project lead for Spring WebFlow, presented. I have quite a bit of Spring experience already through AppFuse, but I was hoping to get a more complete view of Spring as most of what I have learned is from tinkering with existing systems. Keith promised that we'd build a system from the ground up, so it sounded like I'd get what I bargained for.</p>
 

@@ -1,0 +1,612 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Blue-Green Deployments on Cloud Foundry - Seeking Simplicity</title>
+  <meta name="author" content="Matt Stine">
+
+  
+  <meta name="description" content="One of the great things about Cloud Foundry is that it is a great enabler. Tall words. But what do they mean? Essentially, Cloud Foundry (and any &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://mattstine.com/2013/07/10/blue-green-deployments-on-cloudfoundry">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Seeking Simplicity" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-8534802-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Seeking Simplicity</a></h1>
+  
+    <h2>A blog about DevOps, clouds, architecture, and everything else...</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:mattstine.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Blue-Green Deployments on Cloud Foundry</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-10T20:10:00-07:00" pubdate data-updated="true">Jul 10<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>One of the great things about Cloud Foundry is that it is a great enabler. Tall words. But what do they mean? Essentially, Cloud Foundry (and any other well-designed PaaS) enables us to do things as developers and operators that would be extremely difficult in a traditional deployment environments. One particularly valuable area of enablement is our new found ability to practice <a href="http://continuousdelivery.com/">Continous Delivery</a>, meaning that we continuously prove our ability to deliver working software by continuously treating each code commit to a system as if it could be deployed to a production environment. We do this by shipping these commits through what&#8217;s called a &#8220;deployment pipeline,&#8221; which consists of a series of build-test-deploy cycles that prove out a commit&#8217;s suitability for production deployment. At the end of the pipeline we can either deploy automatically to our production environment (i.e. continuous deployment), or we can have a business decision to deploy that &#8220;deployable artifact&#8221; or not.</p>
+
+<p>One particular practice associated with Continuous Delivery is <a href="http://martinfowler.com/bliki/BlueGreenDeployment.html">Blue-Green Deployments</a>. Martin Fowler describes these very well at the link provided, but I&#8217;ll summarize briefly here:</p>
+
+<ul>
+<li>Cut-over to a new software version is tricky, and must be quick in order to minimize downtime events.</li>
+<li>Blue-green deployments ensure the parallel existence of two, identical (as possible) production environments.</li>
+<li>At any given point, only one (e.g. blue) services production traffic.</li>
+<li>New deploys are made to the other (e.g. green) environment. Final smoke testing is performed here.</li>
+<li>When green is determined ready, we begin routing traffic to it.</li>
+<li>We then stop routing traffic to blue.</li>
+</ul>
+
+
+<p>Of course, there are several concerns that must be dealt with at the application level in order for this to work (datastores should support concurrent usage by two app versions, long running requests may be killed, etc.). What we&#8217;ll focus on in this post is how Cloud Foundry supports the mechanics summarized above.</p>
+
+<p>We&#8217;ll begin with a basic Spring application named <code>ms-spr-demo</code>. This app takes users to a simple web page announcing the ubiquitous &#8220;Hello World!&#8221; message. We&#8217;ll utilize the <code>cf</code> command-line interface to push the application:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>cf push --path build/libs/cf-demo.war
+</span><span class='line'>Name&gt; ms-spr-demo
+</span><span class='line'>
+</span><span class='line'>Instances&gt; 1
+</span><span class='line'>
+</span><span class='line'>Memory Limit&gt; 512M
+</span><span class='line'>
+</span><span class='line'>Creating ms-spr-demo... OK
+</span><span class='line'>
+</span><span class='line'>1: ms-spr-demo
+</span><span class='line'>2: none
+</span><span class='line'>Subdomain&gt; ms-spr-demo
+</span><span class='line'>
+</span><span class='line'>1: cfapps.io
+</span><span class='line'>2: mattstine.com
+</span><span class='line'>3: none
+</span><span class='line'>Domain&gt; 1
+</span><span class='line'>
+</span><span class='line'>Creating route ms-spr-demo.cfapps.io... OK
+</span><span class='line'>Binding ms-spr-demo.cfapps.io to ms-spr-demo... OK
+</span><span class='line'>
+</span><span class='line'>Create services <span class="k">for </span>application?&gt; n
+</span><span class='line'>
+</span><span class='line'>Save configuration?&gt; y
+</span><span class='line'>
+</span><span class='line'>Saving to manifest.yml... OK
+</span><span class='line'>Uploading ms-spr-demo... OK
+</span><span class='line'>Starting ms-spr-demo... OK
+</span><span class='line'>-----&gt; Downloaded app package <span class="o">(</span>9.5M<span class="o">)</span>
+</span><span class='line'>Installing java.
+</span><span class='line'>Downloading JDK...
+</span><span class='line'>Copying openjdk-1.7.0_25.tar.gz from the buildpack cache ...
+</span><span class='line'>Unpacking JDK to .jdk
+</span><span class='line'>Downloading Tomcat: apache-tomcat-7.0.41.tar.gz
+</span><span class='line'>Copying apache-tomcat-7.0.41.tar.gz from the buildpack cache ...
+</span><span class='line'>Unpacking Tomcat to .tomcat
+</span><span class='line'>Copying mysql-connector-java-5.1.12.jar from the buildpack cache ...
+</span><span class='line'>Copying postgresql-9.0-801.jdbc4.jar from the buildpack cache ...
+</span><span class='line'>Copying auto-reconfiguration-0.6.8.jar from the buildpack cache ...
+</span><span class='line'>-----&gt; Uploading droplet <span class="o">(</span>48M<span class="o">)</span>
+</span><span class='line'>-----&gt; Uploaded droplet
+</span><span class='line'>Checking ms-spr-demo...
+</span><span class='line'>Staging in progress...
+</span><span class='line'>Staging in progress...
+</span><span class='line'>Staging in progress...
+</span><span class='line'>Staging in progress...
+</span><span class='line'>Staging in progress...
+</span><span class='line'>Staging in progress...
+</span><span class='line'>Staging in progress...
+</span><span class='line'>  0/1 instances: 1 starting
+</span><span class='line'>  0/1 instances: 1 starting
+</span><span class='line'>  0/1 instances: 1 starting
+</span><span class='line'>  0/1 instances: 1 starting
+</span><span class='line'>  0/1 instances: 1 starting
+</span><span class='line'>  0/1 instances: 1 starting
+</span><span class='line'>  0/1 instances: 1 starting
+</span><span class='line'>  0/1 instances: 1 starting
+</span><span class='line'>  0/1 instances: 1 starting
+</span><span class='line'>  1/1 instances: 1 running
+</span><span class='line'>OK
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The end result of this <code>cf push</code> event is that an application is now serving requests at <code>http://ms-spr-demo.cfapps.io</code>. The following graphic shows the state of our system, with the CF Router sending traffic to our application:</p>
+
+<p><img class="center" src="/images/blue-green/BlueGreen1.png"></p>
+
+<p>Next, we make a slight change to our application. Rather that saying &#8220;Hello World!&#8221; we decide to make it say &#8220;Goodbye World!&#8221; We build a new war file for the application. Rather than letting <code>cf</code> prompt us this time, we&#8217;ll make use of the <code>manifest.yml</code> file that we saved from our previous push. However, we&#8217;ll rename the application and provide a new route. Take a look:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>---
+</span><span class='line'>applications:
+</span><span class='line'>- name: ms-spr-demo-green
+</span><span class='line'>  memory: 512M
+</span><span class='line'>  instances: 1
+</span><span class='line'>  url: ms-spr-demo-green.cfapps.io
+</span><span class='line'>  path: build/libs/cf-demo.war
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>As you can see, we&#8217;re calling our new application version <code>ms-spr-demo-green</code> and we&#8217;re mapping it to the URL <code>ms-spr-demo-green.cfapps.io</code>. Let&#8217;s push the application:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>Using manifest file manifest.yml
+</span><span class='line'>
+</span><span class='line'>Creating ms-spr-demo-green... OK
+</span><span class='line'>
+</span><span class='line'>1: ms-spr-demo-green
+</span><span class='line'>2: none
+</span><span class='line'>Subdomain&gt; ms-spr-demo-green
+</span><span class='line'>
+</span><span class='line'>1: cfapps.io
+</span><span class='line'>2: mattstine.com
+</span><span class='line'>3: none
+</span><span class='line'>Domain&gt; 1
+</span><span class='line'>
+</span><span class='line'>Creating route ms-spr-demo-green.cfapps.io... OK
+</span><span class='line'>Binding ms-spr-demo-green.cfapps.io to ms-spr-demo-green... OK
+</span><span class='line'>Uploading ms-spr-demo-green... OK
+</span><span class='line'>Starting ms-spr-demo-green... OK
+</span><span class='line'>-----&gt; Downloaded app package <span class="o">(</span>9.5M<span class="o">)</span>
+</span><span class='line'>Installing java.
+</span><span class='line'>Downloading JDK...
+</span><span class='line'>Copying openjdk-1.7.0_25.tar.gz from the buildpack cache ...
+</span><span class='line'>Unpacking JDK to .jdk
+</span><span class='line'>Downloading Tomcat: apache-tomcat-7.0.41.tar.gz
+</span><span class='line'>Copying apache-tomcat-7.0.41.tar.gz from the buildpack cache ...
+</span><span class='line'>Unpacking Tomcat to .tomcat
+</span><span class='line'>Copying mysql-connector-java-5.1.12.jar from the buildpack cache ...
+</span><span class='line'>Copying postgresql-9.0-801.jdbc4.jar from the buildpack cache ...
+</span><span class='line'>Copying auto-reconfiguration-0.6.8.jar from the buildpack cache ...
+</span><span class='line'>-----&gt; Uploading droplet <span class="o">(</span>48M<span class="o">)</span>
+</span><span class='line'>-----&gt; Uploaded droplet
+</span><span class='line'>Checking ms-spr-demo-green...
+</span><span class='line'>Staging in progress...
+</span><span class='line'>Staging in progress...
+</span><span class='line'>Staging in progress...
+</span><span class='line'>Staging in progress...
+</span><span class='line'>Staging in progress...
+</span><span class='line'>Staging in progress...
+</span><span class='line'>Staging in progress...
+</span><span class='line'>Staging in progress...
+</span><span class='line'>Staging in progress...
+</span><span class='line'>Staging in progress...
+</span><span class='line'>Staging in progress...
+</span><span class='line'>Staging in progress...
+</span><span class='line'>Staging in progress...
+</span><span class='line'>Staging in progress...
+</span><span class='line'>Staging in progress...
+</span><span class='line'>Staging in progress...
+</span><span class='line'>Staging in progress...
+</span><span class='line'>Staging in progress...
+</span><span class='line'>Staging in progress...
+</span><span class='line'>Staging in progress...
+</span><span class='line'>Staging in progress...
+</span><span class='line'>Staging in progress...
+</span><span class='line'>Staging in progress...
+</span><span class='line'>Staging in progress...
+</span><span class='line'>Staging in progress...
+</span><span class='line'>Staging in progress...
+</span><span class='line'>Staging in progress...
+</span><span class='line'>Staging in progress...
+</span><span class='line'>Staging in progress...
+</span><span class='line'>  0/1 instances: 1 starting
+</span><span class='line'>  0/1 instances: 1 starting
+</span><span class='line'>  0/1 instances: 1 starting
+</span><span class='line'>  0/1 instances: 1 starting
+</span><span class='line'>  0/1 instances: 1 starting
+</span><span class='line'>  0/1 instances: 1 starting
+</span><span class='line'>  0/1 instances: 1 starting
+</span><span class='line'>  1/1 instances: 1 running
+</span><span class='line'>OK
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>We now have two instances of the application running, each of them using distinct routes:</p>
+
+<p><img class="center" src="/images/blue-green/BlueGreen2.png"></p>
+
+<p>Now it&#8217;s time for the magic to happen. We&#8217;ll map our original URL route (<code>ms-spr-demo.cfapps.io</code>) to our &#8220;green&#8221; instance. This is accomplished very simply by using <code>cf</code>:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>cf map --app ms-spr-demo-green --host ms-spr-demo --domain cfapps.io
+</span><span class='line'>Binding ms-spr-demo.cfapps.io to ms-spr-demo-green... OK
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The CF router immediately begins to load balance requests between each instance of the application, as shown here:</p>
+
+<p><img class="center" src="/images/blue-green/BlueGreen3.png"></p>
+
+<p>Now our router will send requests to <code>ms-spr-demo.cfapps.io</code> to both instances of the application, while <code>ms-spr-demo-green.cfapps.io</code> only services the &#8220;green&#8221; instance. Once we determine that all is well, it&#8217;s time to stop routing requests to the &#8220;blue&#8221; instance. This is just as simple using <code>cf</code>:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>cf unmap --url ms-spr-demo.cfapps.io --app ms-spr-demo
+</span><span class='line'>Unbinding ms-spr-demo.cfapps.io from ms-spr-demo... OK
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Our &#8220;blue&#8221; instance is now no longer receiving any web traffic:</p>
+
+<p><img class="center" src="/images/blue-green/BlueGreen4.png"></p>
+
+<p>We can now decomission our &#8220;blue&#8221; instance, or we can leave it around for a period of time in case we decide we need to roll back our changes. The important thing is that our customers suffered absolutely no downtime!</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Matt Stine</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-10T20:10:00-07:00" pubdate data-updated="true">Jul 10<span>th</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/cloud/'>cloud</a>, <a class='category' href='/blog/categories/cloudfoundry/'>cloudfoundry</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://mattstine.com/2013/07/10/blue-green-deployments-on-cloudfoundry/" data-via="mstine" data-counturl="http://mattstine.com/2013/07/10/blue-green-deployments-on-cloudfoundry/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2013/05/29/clojure-on-cloud-foundry/" title="Previous Post: Clojure on Cloud Foundry">&laquo; Clojure on Cloud Foundry</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+	<h1>Hello, World!</h1>
+	<p>
+		<img src="http://mattstine.files.wordpress.com/2011/05/indiamug.jpg" width="173" height="213">
+	</p>
+	<p>
+		<a href="http://www.linkedin.com/in/mattstine"><img alt="View Matt Stine&#039;s profile on LinkedIn" src="http://www.linkedin.com/img/webpromo/btn_myprofile_160x33.gif" border="0" width="160" height="33"></a>
+	</p>
+</section><section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2013/07/10/blue-green-deployments-on-cloudfoundry/">Blue-Green Deployments on Cloud Foundry</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/05/29/clojure-on-cloud-foundry/">Clojure on Cloud Foundry</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/05/29/into-the-crucible/">Into the Crucible</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/05/24/the-relaunch/">The Relaunch</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/05/16/design-meeting-patternsantipatterns/">Design Meeting Patterns/Antipatterns</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating...</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("mstine", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/mstine" class="twitter-follow-button" data-show-count="false">Follow @mstine</a>
+  
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Matt Stine -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'seekingsimplicity';
+      
+        
+        //var disqus_developer = 1;
+        var disqus_identifier = 'http://mattstine.com/2013/07/10/blue-green-deployments-on-cloudfoundry/';
+        var disqus_url = 'http://mattstine.com/2013/07/10/blue-green-deployments-on-cloudfoundry/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

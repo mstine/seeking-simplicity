@@ -4,7 +4,7 @@
   <title><![CDATA[Category: ajax | Seeking Simplicity]]></title>
   <link href="http://mattstine.com/blog/categories/ajax/atom.xml" rel="self"/>
   <link href="http://mattstine.com/"/>
-  <updated>2013-06-28T23:21:40-05:00</updated>
+  <updated>2013-07-10T21:05:06-07:00</updated>
   <id>http://mattstine.com/</id>
   <author>
     <name><![CDATA[Matt Stine]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Grails, Prototype, Script.aculo.us - Persistent Grid Sorting Goodness]]></title>
     <link href="http://mattstine.com/2009/04/25/grails-prototype-scriptaculous-persistent-grid-sorting-goodness/"/>
-    <updated>2009-04-25T00:14:40-05:00</updated>
+    <updated>2009-04-25T00:14:40-07:00</updated>
     <id>http://mattstine.com/2009/04/25/grails-prototype-scriptaculous-persistent-grid-sorting-goodness</id>
     <content type="html"><![CDATA[<p>Ever wanted to do drag-n-drop sorting of a grid of images on a page and persist it? Here's my solution using Grails, Prototype, and Script.aculo.us.</p>
 
@@ -193,7 +193,7 @@
   <entry>
     <title type="html"><![CDATA[Ajax Integration Guide for 2008: Jeremy Grelle]]></title>
     <link href="http://mattstine.com/2007/12/14/ajax-integration-guide-for-2008-jeremy-grelle/"/>
-    <updated>2007-12-14T15:40:00-06:00</updated>
+    <updated>2007-12-14T15:40:00-08:00</updated>
     <id>http://mattstine.com/2007/12/14/ajax-integration-guide-for-2008-jeremy-grelle</id>
     <content type="html"><![CDATA[<p>This talk looked really exciting going in. Jeremy is a member of the Spring Web Products team and the lead of Spring Faces, as well as a member of the JSF 2.0 Expert Group. He describes himself as the resident Ajax freak at SpringSource. Jeremy began by discussing the current Ajax landscape, highlighting what he believes are the important features a successful framework must deliver, and then identifying the frameworks he considers to be the cream of the crop. No surprises here on the list: Prototype/Scriptaculous, jQuery, YUI, Ext, and Dojo. He then gave a brief high-level overview of each framework - I really didn't learn anything new here, as I've been following these frameworks for quite awhile. He mentioned the commonality that all of these frameworks are about more than asynchronous client-server communication - they're about improving your client-side code and user experience. See Dion's May 2007 comment that Ajax "was never about the acronym - it's about building killer websites." What is good about all of these frameworks is that you can use all of them in an unobtrusive manner and progressively enhance your UI. This gives you the ability to only Ajaxify what you need and also get graceful degradation.</p>
 
@@ -210,7 +210,7 @@
   <entry>
     <title type="html"><![CDATA[Thursday was slow...]]></title>
     <link href="http://mattstine.com/2007/05/11/thursday-was-slow/"/>
-    <updated>2007-05-11T22:17:00-05:00</updated>
+    <updated>2007-05-11T22:17:00-07:00</updated>
     <id>http://mattstine.com/2007/05/11/thursday-was-slow</id>
     <content type="html"><![CDATA[<p>for me, not for JavaOne. Of course I was a good little programmer and used the schedule builder to sign up for all of my sessions. I edited them a bit after the first two keynotes. Even then, I had one lone session scheduled for Thursday morning (that wasn't really directly applicable to my work, it just looked interesting), and then two sessions in the afternoon, the first starting at 4:10. I decided to skip out on the morning session and do a little shopping at Pier 39. The highlight was a "Bucket of Boat Trash" and clam chowder at the Bubba Gump Shrimp Company. And yes, we Ole Miss Rebels are represented as far out as the end of Pier 39:</p>
 
@@ -257,7 +257,7 @@ components and renderers for partial page updates</p>
   <entry>
     <title type="html"><![CDATA[Wednesday was AJAX Day]]></title>
     <link href="http://mattstine.com/2007/05/10/wednesday-was-ajax-day/"/>
-    <updated>2007-05-10T18:49:00-05:00</updated>
+    <updated>2007-05-10T18:49:00-07:00</updated>
     <id>http://mattstine.com/2007/05/10/wednesday-was-ajax-day</id>
     <content type="html"><![CDATA[<p>Not officially, but nearly every session I attended had something to do with AJAX:</p>
 

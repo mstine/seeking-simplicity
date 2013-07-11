@@ -4,7 +4,7 @@
   <title><![CDATA[Category: dynamiclanguages | Seeking Simplicity]]></title>
   <link href="http://mattstine.com/blog/categories/dynamiclanguages/atom.xml" rel="self"/>
   <link href="http://mattstine.com/"/>
-  <updated>2013-06-28T23:21:40-05:00</updated>
+  <updated>2013-07-10T21:05:06-07:00</updated>
   <id>http://mattstine.com/</id>
   <author>
     <name><![CDATA[Matt Stine]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[LOTY...Part Deux]]></title>
     <link href="http://mattstine.com/2009/04/06/lotypart-deux/"/>
-    <updated>2009-04-06T22:31:58-05:00</updated>
+    <updated>2009-04-06T22:31:58-07:00</updated>
     <id>http://mattstine.com/2009/04/06/lotypart-deux</id>
     <content type="html"><![CDATA[<p><img src="http://mattstine.files.wordpress.com/2009/04/scala_vs_clojure.jpg" alt="scala_vs_clojure" /><a href="http://mattstine.files.wordpress.com/2009/04/scala_vs_clojure.jpg2009/04/02/loty-time-again-scala-or-clojure">A few days ago I pontificated</a> on my need to choose a new "Language of the Year." Right now I'm attempting to choose between <a href="http://www.scala-lang.org/">Scala</a> and <a href="http://clojure.org/">Clojure</a>. If nothing else, I've learned from this exercise that asking the community for feedback is a GOOD thing. Your comments have been very helpful.</p>
 
@@ -43,7 +43,7 @@
   <entry>
     <title type="html"><![CDATA[LOTY Time Again: Scala or Clojure?!?!]]></title>
     <link href="http://mattstine.com/2009/04/02/loty-time-again-scala-or-clojure/"/>
-    <updated>2009-04-02T15:21:21-05:00</updated>
+    <updated>2009-04-02T15:21:21-07:00</updated>
     <id>http://mattstine.com/2009/04/02/loty-time-again-scala-or-clojure</id>
     <content type="html"><![CDATA[<p>In 2007 <a href="http://www.mattstine.com/2007/07/10/my-professional-development-goals-for-2007-2008/">I established several professional development goals</a> (<a href="http://www.mattstine.com/2008/01/02/mid-year-review-my-professional-development-goals-for-2007-2008/">and later reported my progress on these</a>), one of which was to learn Groovy and Grails. This goal stemmed from the continually referenced idea from <em>The Pragmatic Programmer</em> to "learn a new language every year." This idea has become so ubiquitous that it even has it's own four-letter acronym, LOTY (Language of the Year).</p>
 
@@ -58,7 +58,7 @@
   <entry>
     <title type="html"><![CDATA[It seems to be the year of the dynamic/scripting language]]></title>
     <link href="http://mattstine.com/2007/05/08/it-seems-to-be-the-year-of-the-dynamicscripting-language/"/>
-    <updated>2007-05-08T17:57:00-05:00</updated>
+    <updated>2007-05-08T17:57:00-07:00</updated>
     <id>http://mattstine.com/2007/05/08/it-seems-to-be-the-year-of-the-dynamicscripting-language</id>
     <content type="html"><![CDATA[<p><a href="http://picasaweb.google.com/matt.stine/SanFranciscoJavaOne2007/photo#5062324250889201762"><img src="http://lh6.google.com/image/matt.stine/RkD9FbgYqGI/AAAAAAAAALY/NEPT0IawaRY/s288/DSCN1113.JPG" alt="" /></a></p>
 

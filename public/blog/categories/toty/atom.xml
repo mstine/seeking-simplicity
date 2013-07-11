@@ -4,7 +4,7 @@
   <title><![CDATA[Category: toty | Seeking Simplicity]]></title>
   <link href="http://mattstine.com/blog/categories/toty/atom.xml" rel="self"/>
   <link href="http://mattstine.com/"/>
-  <updated>2013-06-28T23:21:40-05:00</updated>
+  <updated>2013-07-10T21:05:06-07:00</updated>
   <id>http://mattstine.com/</id>
   <author>
     <name><![CDATA[Matt Stine]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Functional programming blog aggregator in the works...]]></title>
     <link href="http://mattstine.com/2009/04/30/functional-programming-blog-aggregator-in-the-works/"/>
-    <updated>2009-04-30T13:31:58-05:00</updated>
+    <updated>2009-04-30T13:31:58-07:00</updated>
     <id>http://mattstine.com/2009/04/30/functional-programming-blog-aggregator-in-the-works</id>
     <content type="html"><![CDATA[<p>So I'm in the midst of planning my next toy project, specifically with an aim to build something for the cloud, be it <a href="http://code.google.com/appengine">Google App Engine</a>, <a href="http://mor.ph">Mor.ph</a>, <a href="http://aws.amazon.com/ec2/">EC2</a>, etc. (that part is still up for grabs). What I'd like to do is an opt-in blog aggregation site focused around functional programming. It would be very similar to what <a href="http://blogs.bytecode.com.au/glen/">Glen Smith</a> has done with <a href="http://groovyblogs.org">groovyblogs.org</a>. Groovyblogs is currently my number one referral site and is generating about 20% of the traffic for this blog. I think it is a great way to find out what blogs are out there in a given space, and there doesn't seem to be an equivalent for the functional space. Since my LOTY interest is focused in the functional space, particularly around Scala and Clojure, and my TOTY interest is the cloud technologies out there, it seems like the perfect marriage.</p>
 

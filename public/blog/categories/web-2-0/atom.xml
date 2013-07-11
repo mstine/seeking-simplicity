@@ -4,7 +4,7 @@
   <title><![CDATA[Category: web 2.0 | Seeking Simplicity]]></title>
   <link href="http://mattstine.com/blog/categories/web-2-0/atom.xml" rel="self"/>
   <link href="http://mattstine.com/"/>
-  <updated>2013-06-28T23:21:40-05:00</updated>
+  <updated>2013-07-10T21:05:06-07:00</updated>
   <id>http://mattstine.com/</id>
   <author>
     <name><![CDATA[Matt Stine]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Practical JRuby on Rails Web 2.0 Projects]]></title>
     <link href="http://mattstine.com/2008/01/25/practical-jruby-on-rails-web-20-projects/"/>
-    <updated>2008-01-25T14:29:00-06:00</updated>
+    <updated>2008-01-25T14:29:00-08:00</updated>
     <id>http://mattstine.com/2008/01/25/practical-jruby-on-rails-web-20-projects</id>
     <content type="html"><![CDATA[<p>Are Java's days numbered as a web development technology? With buzzwords like Ruby, Rails, and Web 2.0 zipping around the web development community, one may begin to wonder. Could Java's lifespan be extended by finding synergy between Java and Ruby? On the scene comes JRuby, the definitive implementation of Ruby for the JVM. In his new book from Apress, Ola Bini guides the reader through the development of four Web 2.0 projects using JRuby on Rails. I think that Bini does a masterful job of always using the right tool for the right job. <a href="http://java.dzone.com/reviews/practical-jruby-rails-web-20-p">Read my review for complete details.</a></p>
 ]]></content>

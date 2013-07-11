@@ -4,7 +4,7 @@
   <title><![CDATA[Category: scriptaculous | Seeking Simplicity]]></title>
   <link href="http://mattstine.com/blog/categories/scriptaculous/atom.xml" rel="self"/>
   <link href="http://mattstine.com/"/>
-  <updated>2013-06-28T23:21:40-05:00</updated>
+  <updated>2013-07-10T21:05:06-07:00</updated>
   <id>http://mattstine.com/</id>
   <author>
     <name><![CDATA[Matt Stine]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Grails, Prototype, Script.aculo.us - Persistent Grid Sorting Goodness]]></title>
     <link href="http://mattstine.com/2009/04/25/grails-prototype-scriptaculous-persistent-grid-sorting-goodness/"/>
-    <updated>2009-04-25T00:14:40-05:00</updated>
+    <updated>2009-04-25T00:14:40-07:00</updated>
     <id>http://mattstine.com/2009/04/25/grails-prototype-scriptaculous-persistent-grid-sorting-goodness</id>
     <content type="html"><![CDATA[<p>Ever wanted to do drag-n-drop sorting of a grid of images on a page and persist it? Here's my solution using Grails, Prototype, and Script.aculo.us.</p>
 

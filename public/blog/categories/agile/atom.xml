@@ -4,7 +4,7 @@
   <title><![CDATA[Category: agile | Seeking Simplicity]]></title>
   <link href="http://mattstine.com/blog/categories/agile/atom.xml" rel="self"/>
   <link href="http://mattstine.com/"/>
-  <updated>2013-06-28T23:21:40-05:00</updated>
+  <updated>2013-07-10T21:05:06-07:00</updated>
   <id>http://mattstine.com/</id>
   <author>
     <name><![CDATA[Matt Stine]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Selenium Conference 2011]]></title>
     <link href="http://mattstine.com/2011/01/05/selenium-conference-2011/"/>
-    <updated>2011-01-05T12:18:23-06:00</updated>
+    <updated>2011-01-05T12:18:23-08:00</updated>
     <id>http://mattstine.com/2011/01/05/selenium-conference-2011</id>
     <content type="html"><![CDATA[<p>I completed an interest survey for a potential Selenium-focused conference several weeks ago, and I'm excited to let you know that the "powers that be" have decided that the conference is going to happen! I have already submitted my "Executable Specifications: Automating Your Requirements Document with Geb and Spock" talk as a potential session. Whether it makes the conference program or not, I plan on attending the event. Here are the details:</p>
 
@@ -33,7 +33,7 @@
   <entry>
     <title type="html"><![CDATA[Agile Zone Roundup]]></title>
     <link href="http://mattstine.com/2010/11/10/agile-zone-roundup/"/>
-    <updated>2010-11-10T08:53:15-06:00</updated>
+    <updated>2010-11-10T08:53:15-08:00</updated>
     <id>http://mattstine.com/2010/11/10/agile-zone-roundup</id>
     <content type="html"><![CDATA[<p>I've been really quiet on this blog lately. There have been multiple reasons for that. I've been extremely busy preparing for conferences this Fall including SpringOne/2GX and The Rich Web Experience. I've also stayed busy writing for DZone. I have my first DZone Refcard coming out soon, which is focused on Web Driver/Selenium 2. I've also been writing my regular articles for Agile Zone. Here's a roundup:</p>
 
@@ -54,7 +54,7 @@
   <entry>
     <title type="html"><![CDATA[The Seven Wastes of Software Development]]></title>
     <link href="http://mattstine.com/2010/11/10/the-seven-wastes-of-software-development/"/>
-    <updated>2010-11-10T08:44:29-06:00</updated>
+    <updated>2010-11-10T08:44:29-08:00</updated>
     <id>http://mattstine.com/2010/11/10/the-seven-wastes-of-software-development</id>
     <content type="html"><![CDATA[<p>In late September I completed an eight-part article series for Agile Zone entitled "The Seven Wastes of Software Development." This series discussed Mary and Tom Poppendieck's mapping of Shigeo Shingo's "Seven Wastes of Lean Manufacturing" into the software development world. This has been a very popular series, having been viewed a total of 57,887 times at this writing. Here's a set of links to the series:</p>
 
@@ -75,7 +75,7 @@
   <entry>
     <title type="html"><![CDATA[The Agile Guerilla Series]]></title>
     <link href="http://mattstine.com/2010/09/05/the-agile-guerilla-series/"/>
-    <updated>2010-09-05T20:28:43-05:00</updated>
+    <updated>2010-09-05T20:28:43-07:00</updated>
     <id>http://mattstine.com/2010/09/05/the-agile-guerilla-series</id>
     <content type="html"><![CDATA[<p>I recently completed a series of articles for Agile Zone entitled "The Agile Guerilla." Those of you that have seen me on the No Fluff Just Stuff tour this year may recognize a talk by the same name. They are one and the same concept: my attempt to reach the masses with strategies for introducing change, specifically moving to agility, into organizations from the grassroots level.</p>
 
@@ -97,7 +97,7 @@
   <entry>
     <title type="html"><![CDATA[More Agile Zone Articles!]]></title>
     <link href="http://mattstine.com/2010/08/02/more-agile-zone-articles/"/>
-    <updated>2010-08-02T08:44:04-05:00</updated>
+    <updated>2010-08-02T08:44:04-07:00</updated>
     <id>http://mattstine.com/2010/08/02/more-agile-zone-articles</id>
     <content type="html"><![CDATA[<p>Just to prove that I am writing, just not here, I thought I'd post another collection of links to my latest Agile Zone articles:</p>
 

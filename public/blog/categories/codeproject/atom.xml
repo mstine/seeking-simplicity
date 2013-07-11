@@ -4,7 +4,7 @@
   <title><![CDATA[Category: CodeProject | Seeking Simplicity]]></title>
   <link href="http://mattstine.com/blog/categories/codeproject/atom.xml" rel="self"/>
   <link href="http://mattstine.com/"/>
-  <updated>2013-06-28T23:21:40-05:00</updated>
+  <updated>2013-07-10T21:05:06-07:00</updated>
   <id>http://mattstine.com/</id>
   <author>
     <name><![CDATA[Matt Stine]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[I've "forked" the Grails PayPal Plugin...]]></title>
     <link href="http://mattstine.com/2009/05/02/ive-forked-the-grails-paypal-plugin/"/>
-    <updated>2009-05-02T00:59:46-05:00</updated>
+    <updated>2009-05-02T00:59:46-07:00</updated>
     <id>http://mattstine.com/2009/05/02/ive-forked-the-grails-paypal-plugin</id>
     <content type="html"><![CDATA[<p>I'm currently completing the finishing touches on a new e-commerce site for my wife's stationary business. We decided a long time ago to use <a href="http://www.paypal.com">PayPal</a> for all of the payment processing since we've had a great experience using it for our eBay selling. About a year ago Graeme Rocher polished off the last release of a <a href="http://grails.org/plugin/paypal">PayPal plugin</a> that is available in <a href="http://grails.org/plugin/home">the Grails Plugin repository</a>. It really is a very nice plugin, yet I had a couple of problems with it:</p>
 
@@ -38,7 +38,7 @@
   <entry>
     <title type="html"><![CDATA[Groovy: Post to a URL]]></title>
     <link href="http://mattstine.com/2009/04/25/groovy-post-to-a-url/"/>
-    <updated>2009-04-25T23:09:11-05:00</updated>
+    <updated>2009-04-25T23:09:11-07:00</updated>
     <id>http://mattstine.com/2009/04/25/groovy-post-to-a-url</id>
     <content type="html"><![CDATA[<p>If you've ever worked with the brilliant <a href="http://recaptcha.net/">Recaptcha</a> service, you'll know that their REST API requires an HTTP POST rather than a GET. As I had only used GET requests thus far, I googled around and found a pretty easy solution:</p>
 
@@ -73,7 +73,7 @@
   <entry>
     <title type="html"><![CDATA[Grails, Prototype, Script.aculo.us - Persistent Grid Sorting Goodness]]></title>
     <link href="http://mattstine.com/2009/04/25/grails-prototype-scriptaculous-persistent-grid-sorting-goodness/"/>
-    <updated>2009-04-25T00:14:40-05:00</updated>
+    <updated>2009-04-25T00:14:40-07:00</updated>
     <id>http://mattstine.com/2009/04/25/grails-prototype-scriptaculous-persistent-grid-sorting-goodness</id>
     <content type="html"><![CDATA[<p>Ever wanted to do drag-n-drop sorting of a grid of images on a page and persist it? Here's my solution using Grails, Prototype, and Script.aculo.us.</p>
 
@@ -250,7 +250,7 @@
   <entry>
     <title type="html"><![CDATA[LOTY...Part Deux]]></title>
     <link href="http://mattstine.com/2009/04/06/lotypart-deux/"/>
-    <updated>2009-04-06T22:31:58-05:00</updated>
+    <updated>2009-04-06T22:31:58-07:00</updated>
     <id>http://mattstine.com/2009/04/06/lotypart-deux</id>
     <content type="html"><![CDATA[<p><img src="http://mattstine.files.wordpress.com/2009/04/scala_vs_clojure.jpg" alt="scala_vs_clojure" /><a href="http://mattstine.files.wordpress.com/2009/04/scala_vs_clojure.jpg2009/04/02/loty-time-again-scala-or-clojure">A few days ago I pontificated</a> on my need to choose a new "Language of the Year." Right now I'm attempting to choose between <a href="http://www.scala-lang.org/">Scala</a> and <a href="http://clojure.org/">Clojure</a>. If nothing else, I've learned from this exercise that asking the community for feedback is a GOOD thing. Your comments have been very helpful.</p>
 
@@ -277,7 +277,7 @@
   <entry>
     <title type="html"><![CDATA[LOTY Time Again: Scala or Clojure?!?!]]></title>
     <link href="http://mattstine.com/2009/04/02/loty-time-again-scala-or-clojure/"/>
-    <updated>2009-04-02T15:21:21-05:00</updated>
+    <updated>2009-04-02T15:21:21-07:00</updated>
     <id>http://mattstine.com/2009/04/02/loty-time-again-scala-or-clojure</id>
     <content type="html"><![CDATA[<p>In 2007 <a href="http://www.mattstine.com/2007/07/10/my-professional-development-goals-for-2007-2008/">I established several professional development goals</a> (<a href="http://www.mattstine.com/2008/01/02/mid-year-review-my-professional-development-goals-for-2007-2008/">and later reported my progress on these</a>), one of which was to learn Groovy and Grails. This goal stemmed from the continually referenced idea from <em>The Pragmatic Programmer</em> to "learn a new language every year." This idea has become so ubiquitous that it even has it's own four-letter acronym, LOTY (Language of the Year).</p>
 

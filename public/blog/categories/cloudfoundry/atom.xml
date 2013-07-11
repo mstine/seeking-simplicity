@@ -4,7 +4,7 @@
   <title><![CDATA[Category: cloudfoundry | Seeking Simplicity]]></title>
   <link href="http://mattstine.com/blog/categories/cloudfoundry/atom.xml" rel="self"/>
   <link href="http://mattstine.com/"/>
-  <updated>2013-06-28T23:21:40-05:00</updated>
+  <updated>2013-07-10T21:05:06-07:00</updated>
   <id>http://mattstine.com/</id>
   <author>
     <name><![CDATA[Matt Stine]]></name>
@@ -14,9 +14,215 @@
 
   
   <entry>
+    <title type="html"><![CDATA[Blue-Green Deployments on Cloud Foundry]]></title>
+    <link href="http://mattstine.com/2013/07/10/blue-green-deployments-on-cloudfoundry/"/>
+    <updated>2013-07-10T20:10:00-07:00</updated>
+    <id>http://mattstine.com/2013/07/10/blue-green-deployments-on-cloudfoundry</id>
+    <content type="html"><![CDATA[<p>One of the great things about Cloud Foundry is that it is a great enabler. Tall words. But what do they mean? Essentially, Cloud Foundry (and any other well-designed PaaS) enables us to do things as developers and operators that would be extremely difficult in a traditional deployment environments. One particularly valuable area of enablement is our new found ability to practice <a href="http://continuousdelivery.com/">Continous Delivery</a>, meaning that we continuously prove our ability to deliver working software by continuously treating each code commit to a system as if it could be deployed to a production environment. We do this by shipping these commits through what's called a "deployment pipeline," which consists of a series of build-test-deploy cycles that prove out a commit's suitability for production deployment. At the end of the pipeline we can either deploy automatically to our production environment (i.e. continuous deployment), or we can have a business decision to deploy that "deployable artifact" or not.</p>
+
+<p>One particular practice associated with Continuous Delivery is <a href="http://martinfowler.com/bliki/BlueGreenDeployment.html">Blue-Green Deployments</a>. Martin Fowler describes these very well at the link provided, but I'll summarize briefly here:</p>
+
+<ul>
+<li>Cut-over to a new software version is tricky, and must be quick in order to minimize downtime events.</li>
+<li>Blue-green deployments ensure the parallel existence of two, identical (as possible) production environments.</li>
+<li>At any given point, only one (e.g. blue) services production traffic.</li>
+<li>New deploys are made to the other (e.g. green) environment. Final smoke testing is performed here.</li>
+<li>When green is determined ready, we begin routing traffic to it.</li>
+<li>We then stop routing traffic to blue.</li>
+</ul>
+
+
+<p>Of course, there are several concerns that must be dealt with at the application level in order for this to work (datastores should support concurrent usage by two app versions, long running requests may be killed, etc.). What we'll focus on in this post is how Cloud Foundry supports the mechanics summarized above.</p>
+
+<p>We'll begin with a basic Spring application named <code>ms-spr-demo</code>. This app takes users to a simple web page announcing the ubiquitous "Hello World!" message. We'll utilize the <code>cf</code> command-line interface to push the application:</p>
+
+<p>``` bash
+$ cf push --path build/libs/cf-demo.war
+Name> ms-spr-demo</p>
+
+<p>Instances> 1</p>
+
+<p>Memory Limit> 512M</p>
+
+<p>Creating ms-spr-demo... OK</p>
+
+<p>1: ms-spr-demo
+2: none
+Subdomain> ms-spr-demo</p>
+
+<p>1: cfapps.io
+2: mattstine.com
+3: none
+Domain> 1</p>
+
+<p>Creating route ms-spr-demo.cfapps.io... OK
+Binding ms-spr-demo.cfapps.io to ms-spr-demo... OK</p>
+
+<p>Create services for application?> n</p>
+
+<p>Save configuration?> y</p>
+
+<p>Saving to manifest.yml... OK
+Uploading ms-spr-demo... OK
+Starting ms-spr-demo... OK
+-----> Downloaded app package (9.5M)
+Installing java.
+Downloading JDK...
+Copying openjdk-1.7.0_25.tar.gz from the buildpack cache ...
+Unpacking JDK to .jdk
+Downloading Tomcat: apache-tomcat-7.0.41.tar.gz
+Copying apache-tomcat-7.0.41.tar.gz from the buildpack cache ...
+Unpacking Tomcat to .tomcat
+Copying mysql-connector-java-5.1.12.jar from the buildpack cache ...
+Copying postgresql-9.0-801.jdbc4.jar from the buildpack cache ...
+Copying auto-reconfiguration-0.6.8.jar from the buildpack cache ...
+-----> Uploading droplet (48M)
+-----> Uploaded droplet
+Checking ms-spr-demo...
+Staging in progress...
+Staging in progress...
+Staging in progress...
+Staging in progress...
+Staging in progress...
+Staging in progress...
+Staging in progress...
+  0/1 instances: 1 starting
+  0/1 instances: 1 starting
+  0/1 instances: 1 starting
+  0/1 instances: 1 starting
+  0/1 instances: 1 starting
+  0/1 instances: 1 starting
+  0/1 instances: 1 starting
+  0/1 instances: 1 starting
+  0/1 instances: 1 starting
+  1/1 instances: 1 running
+OK
+```</p>
+
+<p>The end result of this <code>cf push</code> event is that an application is now serving requests at <code>http://ms-spr-demo.cfapps.io</code>. The following graphic shows the state of our system, with the CF Router sending traffic to our application:</p>
+
+<p><img class="center" src="/images/blue-green/BlueGreen1.png"></p>
+
+<p>Next, we make a slight change to our application. Rather that saying "Hello World!" we decide to make it say "Goodbye World!" We build a new war file for the application. Rather than letting <code>cf</code> prompt us this time, we'll make use of the <code>manifest.yml</code> file that we saved from our previous push. However, we'll rename the application and provide a new route. Take a look:</p>
+
+<h2>``` </h2>
+
+<p>applications:
+- name: ms-spr-demo-green
+  memory: 512M
+  instances: 1
+  url: ms-spr-demo-green.cfapps.io
+  path: build/libs/cf-demo.war
+```</p>
+
+<p>As you can see, we're calling our new application version <code>ms-spr-demo-green</code> and we're mapping it to the URL <code>ms-spr-demo-green.cfapps.io</code>. Let's push the application:</p>
+
+<p>``` bash
+Using manifest file manifest.yml</p>
+
+<p>Creating ms-spr-demo-green... OK</p>
+
+<p>1: ms-spr-demo-green
+2: none
+Subdomain> ms-spr-demo-green</p>
+
+<p>1: cfapps.io
+2: mattstine.com
+3: none
+Domain> 1</p>
+
+<p>Creating route ms-spr-demo-green.cfapps.io... OK
+Binding ms-spr-demo-green.cfapps.io to ms-spr-demo-green... OK
+Uploading ms-spr-demo-green... OK
+Starting ms-spr-demo-green... OK
+-----> Downloaded app package (9.5M)
+Installing java.
+Downloading JDK...
+Copying openjdk-1.7.0_25.tar.gz from the buildpack cache ...
+Unpacking JDK to .jdk
+Downloading Tomcat: apache-tomcat-7.0.41.tar.gz
+Copying apache-tomcat-7.0.41.tar.gz from the buildpack cache ...
+Unpacking Tomcat to .tomcat
+Copying mysql-connector-java-5.1.12.jar from the buildpack cache ...
+Copying postgresql-9.0-801.jdbc4.jar from the buildpack cache ...
+Copying auto-reconfiguration-0.6.8.jar from the buildpack cache ...
+-----> Uploading droplet (48M)
+-----> Uploaded droplet
+Checking ms-spr-demo-green...
+Staging in progress...
+Staging in progress...
+Staging in progress...
+Staging in progress...
+Staging in progress...
+Staging in progress...
+Staging in progress...
+Staging in progress...
+Staging in progress...
+Staging in progress...
+Staging in progress...
+Staging in progress...
+Staging in progress...
+Staging in progress...
+Staging in progress...
+Staging in progress...
+Staging in progress...
+Staging in progress...
+Staging in progress...
+Staging in progress...
+Staging in progress...
+Staging in progress...
+Staging in progress...
+Staging in progress...
+Staging in progress...
+Staging in progress...
+Staging in progress...
+Staging in progress...
+Staging in progress...
+  0/1 instances: 1 starting
+  0/1 instances: 1 starting
+  0/1 instances: 1 starting
+  0/1 instances: 1 starting
+  0/1 instances: 1 starting
+  0/1 instances: 1 starting
+  0/1 instances: 1 starting
+  1/1 instances: 1 running
+OK
+```</p>
+
+<p>We now have two instances of the application running, each of them using distinct routes:</p>
+
+<p><img class="center" src="/images/blue-green/BlueGreen2.png"></p>
+
+<p>Now it's time for the magic to happen. We'll map our original URL route (<code>ms-spr-demo.cfapps.io</code>) to our "green" instance. This is accomplished very simply by using <code>cf</code>:</p>
+
+<p><code>bash
+cf map --app ms-spr-demo-green --host ms-spr-demo --domain cfapps.io
+Binding ms-spr-demo.cfapps.io to ms-spr-demo-green... OK
+</code></p>
+
+<p>The CF router immediately begins to load balance requests between each instance of the application, as shown here:</p>
+
+<p><img class="center" src="/images/blue-green/BlueGreen3.png"></p>
+
+<p>Now our router will send requests to <code>ms-spr-demo.cfapps.io</code> to both instances of the application, while <code>ms-spr-demo-green.cfapps.io</code> only services the "green" instance. Once we determine that all is well, it's time to stop routing requests to the "blue" instance. This is just as simple using <code>cf</code>:</p>
+
+<p><code>bash
+cf unmap --url ms-spr-demo.cfapps.io --app ms-spr-demo
+Unbinding ms-spr-demo.cfapps.io from ms-spr-demo... OK
+</code></p>
+
+<p>Our "blue" instance is now no longer receiving any web traffic:</p>
+
+<p><img class="center" src="/images/blue-green/BlueGreen4.png"></p>
+
+<p>We can now decomission our "blue" instance, or we can leave it around for a period of time in case we decide we need to roll back our changes. The important thing is that our customers suffered absolutely no downtime!</p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[Clojure on Cloud Foundry]]></title>
     <link href="http://mattstine.com/2013/05/29/clojure-on-cloud-foundry/"/>
-    <updated>2013-05-29T22:10:00-05:00</updated>
+    <updated>2013-05-29T22:10:00-07:00</updated>
     <id>http://mattstine.com/2013/05/29/clojure-on-cloud-foundry</id>
     <content type="html"><![CDATA[<p>I was inspired by Brian McClain's <a href="http://catdevrandom.me/blog/2013/05/16/buildpacks-in-cloud-foundry-v2/">post on bringing Haskell to Cloud Foundry</a> using Cloud Foundry v2 buildpacks, so I decided to go on a buildpack journey of my own. Since Clojure is the language I most enjoying "toying around with," I thought I'd try to deploy a simple Clojure web application using the <a href="https://github.com/mstine/heroku-buildpack-clojure">Heroku Clojure Buildpack</a>.</p>
 
@@ -230,7 +436,7 @@ OK
   <entry>
     <title type="html"><![CDATA[Into the Crucible]]></title>
     <link href="http://mattstine.com/2013/05/29/into-the-crucible/"/>
-    <updated>2013-05-29T09:00:00-05:00</updated>
+    <updated>2013-05-29T09:00:00-07:00</updated>
     <id>http://mattstine.com/2013/05/29/into-the-crucible</id>
     <content type="html"><![CDATA[<p>Wow...it seems I only post to this blog toward the end of May. Well, that all changes now. You see, as of June 3, 2013, this blog is going to become one of many aspects of my new "day job." On Monday, I start my life as a Community Engineer with <a href="http://cloudfoundry.com">Cloud Foundry</a> by <a href="http://goPivotal.com">Pivotal</a>. What's a Community Engineer? Quite honestly, I'm not completely sure of the answer to that question yet. But given the many conversations I've had over the past few weeks, it seemingly fits right in with the bridge-building roles I've played many times over the course of my career. In this case, I have one foot squarely planted in the world of Cloud Foundry engineering, and one foot squarely planted out in the world with you guys and gals - the community. My job is to help you understand how we are quite literally seeking to "build a new platform for a new era."</p>
 

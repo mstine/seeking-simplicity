@@ -4,7 +4,7 @@
   <title><![CDATA[Category: java | Seeking Simplicity]]></title>
   <link href="http://mattstine.com/blog/categories/java/atom.xml" rel="self"/>
   <link href="http://mattstine.com/"/>
-  <updated>2013-06-28T23:21:40-05:00</updated>
+  <updated>2013-07-10T21:05:06-07:00</updated>
   <id>http://mattstine.com/</id>
   <author>
     <name><![CDATA[Matt Stine]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[OSGi on Rails?]]></title>
     <link href="http://mattstine.com/2010/04/29/osgi-on-rails/"/>
-    <updated>2010-04-29T12:33:40-05:00</updated>
+    <updated>2010-04-29T12:33:40-07:00</updated>
     <id>http://mattstine.com/2010/04/29/osgi-on-rails</id>
     <content type="html"><![CDATA[<p>I've seen quite a few blogs/articles/etc. lately related to the adoption (or lack thereof) of OSGi in the mainstream web application/enterprise application space. A nice summation of these is encapsulated in this excerpt from a comment by Peter Kriens on DZone (you'll find it in the comments section for <a href="http://java.dzone.com/articles/osgi-perspectives">http://java.dzone.com/articles/osgi-perspectives</a>:</p>
 
@@ -41,7 +41,7 @@
   <entry>
     <title type="html"><![CDATA[JUG Leadership Lessons Learned on SlideShare]]></title>
     <link href="http://mattstine.com/2010/04/02/jug-leadership-lessons-learned-on-slideshare/"/>
-    <updated>2010-04-02T14:48:39-05:00</updated>
+    <updated>2010-04-02T14:48:39-07:00</updated>
     <id>http://mattstine.com/2010/04/02/jug-leadership-lessons-learned-on-slideshare</id>
     <content type="html"><![CDATA[<p>I've been playing a bit with <a href="http://www.slideshare.net">SlideShare</a> today and I took the opportunity to upload the slides from my <a href="http://weblogs.java.net/blog/2009/07/02/how-start-and-grow-jug-community-corner-2009-podcast">Java.net Community Corner interview with Kevin Farnham at JavaOne 2009</a>. SlideShare has a nice feature that allows you to sync up the audio from an MP3 file with your slides, and since both were available, I thought I'd give it a try. The interface is extremely easy to use and I'm very happy with the outcome.</p>
 
@@ -54,7 +54,7 @@
   <entry>
     <title type="html"><![CDATA[Making Java "Groovier" with LambdaJ]]></title>
     <link href="http://mattstine.com/2009/10/09/making-java-groovier-with-lambdaj/"/>
-    <updated>2009-10-09T09:37:06-05:00</updated>
+    <updated>2009-10-09T09:37:06-07:00</updated>
     <id>http://mattstine.com/2009/10/09/making-java-groovier-with-lambdaj</id>
     <content type="html"><![CDATA[<p>I spent the better part of yesterday tracing my way through the codebase for a large-scale enterprise application that my team is building right now, and I happened upon the following piece of code:</p>
 
@@ -194,7 +194,7 @@ import static org.hamcrest.Matchers.</em></p>
   <entry>
     <title type="html"><![CDATA[I'm speaking at the March Memphis JUG meeting]]></title>
     <link href="http://mattstine.com/2009/03/13/im-speaking-at-the-march-memphis-jug-meeting/"/>
-    <updated>2009-03-13T12:24:00-05:00</updated>
+    <updated>2009-03-13T12:24:00-07:00</updated>
     <id>http://mattstine.com/2009/03/13/im-speaking-at-the-march-memphis-jug-meeting</id>
     <content type="html"><![CDATA[<p>I learned a great deal about JMS from Mark Richards at last weekend's NFJS Gateway Software Symposium, and I thought I'd share it with the Memphis Java community. Take a look at <a href="http://www.memphisjug.org">http://www.memphisjug.org</a> for details!</p>
 ]]></content>
@@ -203,7 +203,7 @@ import static org.hamcrest.Matchers.</em></p>
   <entry>
     <title type="html"><![CDATA[On our way to the Gateway Software Symposium]]></title>
     <link href="http://mattstine.com/2008/02/08/on-our-way-to-the-gateway-software-symposium/"/>
-    <updated>2008-02-08T15:49:00-06:00</updated>
+    <updated>2008-02-08T15:49:00-08:00</updated>
     <id>http://mattstine.com/2008/02/08/on-our-way-to-the-gateway-software-symposium</id>
     <content type="html"><![CDATA[<p>We're taking most of our team to the St. Louis, Missouri, edition of the <a href="http://www.nofluffjuststuff.com">No Fluff Just Stuff</a> 2008 tour. This will be my first actual NFJS event. I attended the <a href="http://www.thespringexperience.com">Spring Experience</a> in 2007, which was put on by the NFJS guys, so I expect this event in St. Louis to be great. Since we're based in Memphis, St. Louis is only about a 4 1/2 hour drive. We're all going to pile in a van and road trip. It should be a great time.</p>
 

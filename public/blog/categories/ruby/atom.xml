@@ -4,7 +4,7 @@
   <title><![CDATA[Category: ruby | Seeking Simplicity]]></title>
   <link href="http://mattstine.com/blog/categories/ruby/atom.xml" rel="self"/>
   <link href="http://mattstine.com/"/>
-  <updated>2013-06-28T23:21:40-05:00</updated>
+  <updated>2013-07-10T21:05:06-07:00</updated>
   <id>http://mattstine.com/</id>
   <author>
     <name><![CDATA[Matt Stine]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Practical JRuby on Rails Web 2.0 Projects]]></title>
     <link href="http://mattstine.com/2008/01/25/practical-jruby-on-rails-web-20-projects/"/>
-    <updated>2008-01-25T14:29:00-06:00</updated>
+    <updated>2008-01-25T14:29:00-08:00</updated>
     <id>http://mattstine.com/2008/01/25/practical-jruby-on-rails-web-20-projects</id>
     <content type="html"><![CDATA[<p>Are Java's days numbered as a web development technology? With buzzwords like Ruby, Rails, and Web 2.0 zipping around the web development community, one may begin to wonder. Could Java's lifespan be extended by finding synergy between Java and Ruby? On the scene comes JRuby, the definitive implementation of Ruby for the JVM. In his new book from Apress, Ola Bini guides the reader through the development of four Web 2.0 projects using JRuby on Rails. I think that Bini does a masterful job of always using the right tool for the right job. <a href="http://java.dzone.com/reviews/practical-jruby-rails-web-20-p">Read my review for complete details.</a></p>
 ]]></content>
@@ -25,7 +25,7 @@
   <entry>
     <title type="html"><![CDATA[Thursday was slow...]]></title>
     <link href="http://mattstine.com/2007/05/11/thursday-was-slow/"/>
-    <updated>2007-05-11T22:17:00-05:00</updated>
+    <updated>2007-05-11T22:17:00-07:00</updated>
     <id>http://mattstine.com/2007/05/11/thursday-was-slow</id>
     <content type="html"><![CDATA[<p>for me, not for JavaOne. Of course I was a good little programmer and used the schedule builder to sign up for all of my sessions. I edited them a bit after the first two keynotes. Even then, I had one lone session scheduled for Thursday morning (that wasn't really directly applicable to my work, it just looked interesting), and then two sessions in the afternoon, the first starting at 4:10. I decided to skip out on the morning session and do a little shopping at Pier 39. The highlight was a "Bucket of Boat Trash" and clam chowder at the Bubba Gump Shrimp Company. And yes, we Ole Miss Rebels are represented as far out as the end of Pier 39:</p>
 
@@ -72,7 +72,7 @@ components and renderers for partial page updates</p>
   <entry>
     <title type="html"><![CDATA[It seems to be the year of the dynamic/scripting language]]></title>
     <link href="http://mattstine.com/2007/05/08/it-seems-to-be-the-year-of-the-dynamicscripting-language/"/>
-    <updated>2007-05-08T17:57:00-05:00</updated>
+    <updated>2007-05-08T17:57:00-07:00</updated>
     <id>http://mattstine.com/2007/05/08/it-seems-to-be-the-year-of-the-dynamicscripting-language</id>
     <content type="html"><![CDATA[<p><a href="http://picasaweb.google.com/matt.stine/SanFranciscoJavaOne2007/photo#5062324250889201762"><img src="http://lh6.google.com/image/matt.stine/RkD9FbgYqGI/AAAAAAAAALY/NEPT0IawaRY/s288/DSCN1113.JPG" alt="" /></a></p>
 
