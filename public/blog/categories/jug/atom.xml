@@ -4,7 +4,7 @@
   <title><![CDATA[Category: jug | Seeking Simplicity]]></title>
   <link href="http://mattstine.com/blog/categories/jug/atom.xml" rel="self"/>
   <link href="http://mattstine.com/"/>
-  <updated>2013-07-10T21:05:06-07:00</updated>
+  <updated>2013-08-02T16:11:34-05:00</updated>
   <id>http://mattstine.com/</id>
   <author>
     <name><![CDATA[Matt Stine]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Announcing NOSQL Summer Memphis]]></title>
     <link href="http://mattstine.com/2010/05/28/announcing-nosql-summer-memphis/"/>
-    <updated>2010-05-28T09:21:43-07:00</updated>
+    <updated>2010-05-28T09:21:43-05:00</updated>
     <id>http://mattstine.com/2010/05/28/announcing-nosql-summer-memphis</id>
     <content type="html"><![CDATA[<p>I recently stumbled across the <a href="http://nosqlsummer.org/">NOSQL Summer</a> website via my friend Alex Miller's <a href="http://tech.puredanger.com/2010/05/25/nosql-summer-st-louis/">blog</a>. The idea is to setup a summer reading club focused around databases and distributed systems. Groups will gather "worldwide" to discuss various papers and the hopefully submit the substance of their discussions back to the NOSQL Summer website in the form of annotated papers.</p>
 
@@ -31,7 +31,7 @@
   <entry>
     <title type="html"><![CDATA[I'm speaking at the March Memphis JUG meeting]]></title>
     <link href="http://mattstine.com/2009/03/13/im-speaking-at-the-march-memphis-jug-meeting/"/>
-    <updated>2009-03-13T12:24:00-07:00</updated>
+    <updated>2009-03-13T12:24:00-05:00</updated>
     <id>http://mattstine.com/2009/03/13/im-speaking-at-the-march-memphis-jug-meeting</id>
     <content type="html"><![CDATA[<p>I learned a great deal about JMS from Mark Richards at last weekend's NFJS Gateway Software Symposium, and I thought I'd share it with the Memphis Java community. Take a look at <a href="http://www.memphisjug.org">http://www.memphisjug.org</a> for details!</p>
 ]]></content>

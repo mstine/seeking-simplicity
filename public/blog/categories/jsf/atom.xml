@@ -4,7 +4,7 @@
   <title><![CDATA[Category: jsf | Seeking Simplicity]]></title>
   <link href="http://mattstine.com/blog/categories/jsf/atom.xml" rel="self"/>
   <link href="http://mattstine.com/"/>
-  <updated>2013-07-10T21:05:06-07:00</updated>
+  <updated>2013-08-02T16:11:34-05:00</updated>
   <id>http://mattstine.com/</id>
   <author>
     <name><![CDATA[Matt Stine]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[How to implement form-level validation in JSF]]></title>
     <link href="http://mattstine.com/2007/06/27/how-to-implement-form-level-validation-in-jsf/"/>
-    <updated>2007-06-27T12:54:00-07:00</updated>
+    <updated>2007-06-27T12:54:00-05:00</updated>
     <id>http://mattstine.com/2007/06/27/how-to-implement-form-level-validation-in-jsf</id>
     <content type="html"><![CDATA[<p>Recently I was faced with the challenge of implementing form-level (or page-level) validation in a JSF-based application. What I mean by form-level validation is the need to evaluate a subset of a form's fields as a unit, rather than simply validating each field in isolation. An example of this type of validation can be found on a user registration form where one has to select a password in one text field, and then retype the same password in another text field for confirmation. Validating that these two text fields contain the same password is an example of form level validation.</p>
 
@@ -77,7 +77,7 @@
   <entry>
     <title type="html"><![CDATA[Thursday was slow...]]></title>
     <link href="http://mattstine.com/2007/05/11/thursday-was-slow/"/>
-    <updated>2007-05-11T22:17:00-07:00</updated>
+    <updated>2007-05-11T22:17:00-05:00</updated>
     <id>http://mattstine.com/2007/05/11/thursday-was-slow</id>
     <content type="html"><![CDATA[<p>for me, not for JavaOne. Of course I was a good little programmer and used the schedule builder to sign up for all of my sessions. I edited them a bit after the first two keynotes. Even then, I had one lone session scheduled for Thursday morning (that wasn't really directly applicable to my work, it just looked interesting), and then two sessions in the afternoon, the first starting at 4:10. I decided to skip out on the morning session and do a little shopping at Pier 39. The highlight was a "Bucket of Boat Trash" and clam chowder at the Bubba Gump Shrimp Company. And yes, we Ole Miss Rebels are represented as far out as the end of Pier 39:</p>
 
@@ -124,7 +124,7 @@ components and renderers for partial page updates</p>
   <entry>
     <title type="html"><![CDATA[Wednesday was AJAX Day]]></title>
     <link href="http://mattstine.com/2007/05/10/wednesday-was-ajax-day/"/>
-    <updated>2007-05-10T18:49:00-07:00</updated>
+    <updated>2007-05-10T18:49:00-05:00</updated>
     <id>http://mattstine.com/2007/05/10/wednesday-was-ajax-day</id>
     <content type="html"><![CDATA[<p>Not officially, but nearly every session I attended had something to do with AJAX:</p>
 

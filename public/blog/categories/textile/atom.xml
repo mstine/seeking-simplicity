@@ -4,7 +4,7 @@
   <title><![CDATA[Category: textile | Seeking Simplicity]]></title>
   <link href="http://mattstine.com/blog/categories/textile/atom.xml" rel="self"/>
   <link href="http://mattstine.com/"/>
-  <updated>2013-07-10T21:05:06-07:00</updated>
+  <updated>2013-08-02T16:11:34-05:00</updated>
   <id>http://mattstine.com/</id>
   <author>
     <name><![CDATA[Matt Stine]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Need a Textile engine? Look no further than Plextile!]]></title>
     <link href="http://mattstine.com/2009/03/26/need-a-textile-engine-look-no-further-than-plextile/"/>
-    <updated>2009-03-26T16:23:46-07:00</updated>
+    <updated>2009-03-26T16:23:46-05:00</updated>
     <id>http://mattstine.com/2009/03/26/need-a-textile-engine-look-no-further-than-plextile</id>
     <content type="html"><![CDATA[<p>In finishing up the first release of JUG Nexus, the open source engine (<a href="http://github.com/mstine/jug-nexus/tree/master">http://github.com/mstine/jug-nexus/tree/master</a>) behind the new Memphis JUG website, I needed to put a good <a href="http://www.textism.com/tools/textile/">Textile</a> engine in place. I really don't care for writing actual HTML in a content management system, and JUG Nexus being a lightweight CMS, I wanted a lightweight markup syntax for entering the details of upcoming JUG meetings. Textile is exactly that, and is also used for entering content into the very useful <a href="http://jugevents.org">JUGEvents</a> system produced by <a href="http://www.jugpadova.it/">JUG Padova</a> for the Java User Group community at large. I tried out several different engines, and none of them seemed to be very robust when it came to edge cases in the markup. For example, if I want to produce a hyperlink to a website, the textile format is the following:</p>
 

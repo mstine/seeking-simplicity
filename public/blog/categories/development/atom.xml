@@ -4,7 +4,7 @@
   <title><![CDATA[Category: development | Seeking Simplicity]]></title>
   <link href="http://mattstine.com/blog/categories/development/atom.xml" rel="self"/>
   <link href="http://mattstine.com/"/>
-  <updated>2013-07-10T21:05:06-07:00</updated>
+  <updated>2013-08-02T16:11:34-05:00</updated>
   <id>http://mattstine.com/</id>
   <author>
     <name><![CDATA[Matt Stine]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Design Meeting Patterns/Antipatterns]]></title>
     <link href="http://mattstine.com/2011/05/16/design-meeting-patternsantipatterns/"/>
-    <updated>2011-05-16T16:57:50-07:00</updated>
+    <updated>2011-05-16T16:57:50-05:00</updated>
     <id>http://mattstine.com/2011/05/16/design-meeting-patternsantipatterns</id>
     <content type="html"><![CDATA[<p>For those of you that don't know, I recently returned to the technical ranks as a Software Architect after a three-year stint in management. To make a long story short, I now love my job again. Perhaps I'll write the long story in a future blog entry. On to the topic at hand. Today I led the first significant design discussion that I have led in quite a long time. A few minutes afterward, I was already reflecting on what had occurred and how. The very first thing that I noticed was my drastically different approach to the task. I felt that my facilitation skills were more mature and effective than I remember from previous similar engagements. I'm not sure if the time I spent in management (where I facilitated quite a few meetings, though much more business-focused ones) helped, but something certainly has.</p>
 
@@ -37,7 +37,7 @@
   <entry>
     <title type="html"><![CDATA[Don't build software that's TOO smart!]]></title>
     <link href="http://mattstine.com/2010/06/03/dont-build-software-thats-too-smart/"/>
-    <updated>2010-06-03T17:00:35-07:00</updated>
+    <updated>2010-06-03T17:00:35-05:00</updated>
     <id>http://mattstine.com/2010/06/03/dont-build-software-thats-too-smart</id>
     <content type="html"><![CDATA[<p>I had an extremely successful meeting with one of our clients yesterday. We were discussing how we wanted to go about migrating her laboratory from its current system (one that we built several years ago) to our new lab management platform. At some point during the discussion I made the statement, "We tried to make the previous system too smart! We're not repeating that mistake this time." Of course, she was in complete agreement with that principle. I've had similar interactions with our other clients that are making migrations (rather than encountering our system for the first time on this new version), and although I've never explicitly stated the principle that way, similar sentiments have abounded.</p>
 
@@ -52,7 +52,7 @@
   <entry>
     <title type="html"><![CDATA[Dead Programmers Society]]></title>
     <link href="http://mattstine.com/2010/02/16/dead-programmers-society/"/>
-    <updated>2010-02-16T22:42:40-08:00</updated>
+    <updated>2010-02-16T22:42:40-06:00</updated>
     <id>http://mattstine.com/2010/02/16/dead-programmers-society</id>
     <content type="html"><![CDATA[<p>A local Pastor once gave the <a href="http://holding2truth.blogspot.com/2009/01/strange-sounding-advice.html">advice of introducing ourselves</a> <a href="http://holding2truth.blogspot.com/2009/02/strange-advice-introducing-our-kids-to.html">and our kids to dead people</a>. It is his belief that if his kids grow up idolizing the likes of Eric Liddell, Jim Elliot, and Hudson Taylor, they would be far better off than by looking up to many of our so-called "heroes" of today. I happen to agree with his advice, but that's not the subject of tonight's blog entry.</p>
 
@@ -77,7 +77,7 @@
   <entry>
     <title type="html"><![CDATA[Mid-Year Review: My Professional Development Goals for 2007-2008]]></title>
     <link href="http://mattstine.com/2008/01/02/mid-year-review-my-professional-development-goals-for-2007-2008/"/>
-    <updated>2008-01-02T17:33:00-08:00</updated>
+    <updated>2008-01-02T17:33:00-06:00</updated>
     <id>http://mattstine.com/2008/01/02/mid-year-review-my-professional-development-goals-for-2007-2008</id>
     <content type="html"><![CDATA[<p>Back in July I posted my professional development goals for the year (My performance review is annually in July, so it's a good time to set goals.), and it seemed like a good idea to take a look at my progress while doing the "New Year's Resolution" thing.</p>
 
@@ -155,7 +155,7 @@
   <entry>
     <title type="html"><![CDATA[My Professional Development Goals for 2007-2008]]></title>
     <link href="http://mattstine.com/2007/07/10/my-professional-development-goals-for-2007-2008/"/>
-    <updated>2007-07-10T14:14:00-07:00</updated>
+    <updated>2007-07-10T14:14:00-05:00</updated>
     <id>http://mattstine.com/2007/07/10/my-professional-development-goals-for-2007-2008</id>
     <content type="html"><![CDATA[<p>I posted earlier on my desire to <a href="http://matt-stine.blogspot.com/2007/07/help-me-become-better-programmer.html">become a better programmer</a>. Well, I've since put together a plan of action for the next twelve months. I've based some of these goals on suggestions from The Pragmatic Programmer by Andy Hunt and Dave Thomas.</p>
 

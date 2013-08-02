@@ -4,7 +4,7 @@
   <title><![CDATA[Category: goals | Seeking Simplicity]]></title>
   <link href="http://mattstine.com/blog/categories/goals/atom.xml" rel="self"/>
   <link href="http://mattstine.com/"/>
-  <updated>2013-07-10T21:05:06-07:00</updated>
+  <updated>2013-08-02T16:11:34-05:00</updated>
   <id>http://mattstine.com/</id>
   <author>
     <name><![CDATA[Matt Stine]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Pomodoro: The First Iteration]]></title>
     <link href="http://mattstine.com/2009/11/04/pomodoro-the-first-iteration/"/>
-    <updated>2009-11-04T15:44:32-08:00</updated>
+    <updated>2009-11-04T15:44:32-06:00</updated>
     <id>http://mattstine.com/2009/11/04/pomodoro-the-first-iteration</id>
     <content type="html"><![CDATA[<p>I spent about an hour last night reading through Francesco Cirillo's e-book <em>The Pomodoro Technique</em>. Up until this point I knew the basics of the technique, but I really wanted to drill down and get the details. I won't explain those here - visit <a href="http://www.pomodorotechnique.com/">http://www.pomodorotechnique.com/</a> to get the lowdown. What I want to talk about is my experience applying the technique this morning.</p>
 
@@ -33,7 +33,7 @@
   <entry>
     <title type="html"><![CDATA[Career 2.0: Toastmasters]]></title>
     <link href="http://mattstine.com/2009/05/11/career-20-toastmasters/"/>
-    <updated>2009-05-11T15:59:31-07:00</updated>
+    <updated>2009-05-11T15:59:31-05:00</updated>
     <id>http://mattstine.com/2009/05/11/career-20-toastmasters</id>
     <content type="html"><![CDATA[<p>I'm currently making my second trip through <a href="http://agileartisans.com/main">Jared Richardson's</a> excellent book <a href="http://www.lulu.com/content/5925115">Career 2.0: Take Control of Your Life</a>. In the "Public Speaking" chapter, one of the recommended avenues for public speaking practice is <a href="http://www.toastmasters.org">Toastmasters</a>. I first heard of Toastmasters...you guessed it, on my first trip through the book. Shortly after returning home from <a href="http://www.nofluffjuststuff.com/conference/st_louis/2009/03/index.html">NFJS St. Louis</a>, I decided to see if I could find a local club. Lo and behold, a Toastmasters club already meets on the St. Jude Children's Research Hospital campus! I had no excuse but to check it out at this point.</p>
 
@@ -55,7 +55,7 @@
   <entry>
     <title type="html"><![CDATA[Functional programming blog aggregator in the works...]]></title>
     <link href="http://mattstine.com/2009/04/30/functional-programming-blog-aggregator-in-the-works/"/>
-    <updated>2009-04-30T13:31:58-07:00</updated>
+    <updated>2009-04-30T13:31:58-05:00</updated>
     <id>http://mattstine.com/2009/04/30/functional-programming-blog-aggregator-in-the-works</id>
     <content type="html"><![CDATA[<p>So I'm in the midst of planning my next toy project, specifically with an aim to build something for the cloud, be it <a href="http://code.google.com/appengine">Google App Engine</a>, <a href="http://mor.ph">Mor.ph</a>, <a href="http://aws.amazon.com/ec2/">EC2</a>, etc. (that part is still up for grabs). What I'd like to do is an opt-in blog aggregation site focused around functional programming. It would be very similar to what <a href="http://blogs.bytecode.com.au/glen/">Glen Smith</a> has done with <a href="http://groovyblogs.org">groovyblogs.org</a>. Groovyblogs is currently my number one referral site and is generating about 20% of the traffic for this blog. I think it is a great way to find out what blogs are out there in a given space, and there doesn't seem to be an equivalent for the functional space. Since my LOTY interest is focused in the functional space, particularly around Scala and Clojure, and my TOTY interest is the cloud technologies out there, it seems like the perfect marriage.</p>
 
@@ -66,7 +66,7 @@
   <entry>
     <title type="html"><![CDATA[LOTY...Part Deux]]></title>
     <link href="http://mattstine.com/2009/04/06/lotypart-deux/"/>
-    <updated>2009-04-06T22:31:58-07:00</updated>
+    <updated>2009-04-06T22:31:58-05:00</updated>
     <id>http://mattstine.com/2009/04/06/lotypart-deux</id>
     <content type="html"><![CDATA[<p><img src="http://mattstine.files.wordpress.com/2009/04/scala_vs_clojure.jpg" alt="scala_vs_clojure" /><a href="http://mattstine.files.wordpress.com/2009/04/scala_vs_clojure.jpg2009/04/02/loty-time-again-scala-or-clojure">A few days ago I pontificated</a> on my need to choose a new "Language of the Year." Right now I'm attempting to choose between <a href="http://www.scala-lang.org/">Scala</a> and <a href="http://clojure.org/">Clojure</a>. If nothing else, I've learned from this exercise that asking the community for feedback is a GOOD thing. Your comments have been very helpful.</p>
 
@@ -93,7 +93,7 @@
   <entry>
     <title type="html"><![CDATA[LOTY Time Again: Scala or Clojure?!?!]]></title>
     <link href="http://mattstine.com/2009/04/02/loty-time-again-scala-or-clojure/"/>
-    <updated>2009-04-02T15:21:21-07:00</updated>
+    <updated>2009-04-02T15:21:21-05:00</updated>
     <id>http://mattstine.com/2009/04/02/loty-time-again-scala-or-clojure</id>
     <content type="html"><![CDATA[<p>In 2007 <a href="http://www.mattstine.com/2007/07/10/my-professional-development-goals-for-2007-2008/">I established several professional development goals</a> (<a href="http://www.mattstine.com/2008/01/02/mid-year-review-my-professional-development-goals-for-2007-2008/">and later reported my progress on these</a>), one of which was to learn Groovy and Grails. This goal stemmed from the continually referenced idea from <em>The Pragmatic Programmer</em> to "learn a new language every year." This idea has become so ubiquitous that it even has it's own four-letter acronym, LOTY (Language of the Year).</p>
 

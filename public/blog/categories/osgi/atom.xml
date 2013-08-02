@@ -4,7 +4,7 @@
   <title><![CDATA[Category: osgi | Seeking Simplicity]]></title>
   <link href="http://mattstine.com/blog/categories/osgi/atom.xml" rel="self"/>
   <link href="http://mattstine.com/"/>
-  <updated>2013-07-10T21:05:06-07:00</updated>
+  <updated>2013-08-02T16:11:34-05:00</updated>
   <id>http://mattstine.com/</id>
   <author>
     <name><![CDATA[Matt Stine]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[OSGi on Rails?]]></title>
     <link href="http://mattstine.com/2010/04/29/osgi-on-rails/"/>
-    <updated>2010-04-29T12:33:40-07:00</updated>
+    <updated>2010-04-29T12:33:40-05:00</updated>
     <id>http://mattstine.com/2010/04/29/osgi-on-rails</id>
     <content type="html"><![CDATA[<p>I've seen quite a few blogs/articles/etc. lately related to the adoption (or lack thereof) of OSGi in the mainstream web application/enterprise application space. A nice summation of these is encapsulated in this excerpt from a comment by Peter Kriens on DZone (you'll find it in the comments section for <a href="http://java.dzone.com/articles/osgi-perspectives">http://java.dzone.com/articles/osgi-perspectives</a>:</p>
 

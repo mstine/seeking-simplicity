@@ -4,7 +4,7 @@
   <title><![CDATA[Category: functional-programming | Seeking Simplicity]]></title>
   <link href="http://mattstine.com/blog/categories/functional-programming/atom.xml" rel="self"/>
   <link href="http://mattstine.com/"/>
-  <updated>2013-07-10T21:05:06-07:00</updated>
+  <updated>2013-08-02T16:11:34-05:00</updated>
   <id>http://mattstine.com/</id>
   <author>
     <name><![CDATA[Matt Stine]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Making Java "Groovier" with LambdaJ]]></title>
     <link href="http://mattstine.com/2009/10/09/making-java-groovier-with-lambdaj/"/>
-    <updated>2009-10-09T09:37:06-07:00</updated>
+    <updated>2009-10-09T09:37:06-05:00</updated>
     <id>http://mattstine.com/2009/10/09/making-java-groovier-with-lambdaj</id>
     <content type="html"><![CDATA[<p>I spent the better part of yesterday tracing my way through the codebase for a large-scale enterprise application that my team is building right now, and I happened upon the following piece of code:</p>
 
@@ -156,7 +156,7 @@ import static org.hamcrest.Matchers.</em></p>
   <entry>
     <title type="html"><![CDATA[Functional programming blog aggregator in the works...]]></title>
     <link href="http://mattstine.com/2009/04/30/functional-programming-blog-aggregator-in-the-works/"/>
-    <updated>2009-04-30T13:31:58-07:00</updated>
+    <updated>2009-04-30T13:31:58-05:00</updated>
     <id>http://mattstine.com/2009/04/30/functional-programming-blog-aggregator-in-the-works</id>
     <content type="html"><![CDATA[<p>So I'm in the midst of planning my next toy project, specifically with an aim to build something for the cloud, be it <a href="http://code.google.com/appengine">Google App Engine</a>, <a href="http://mor.ph">Mor.ph</a>, <a href="http://aws.amazon.com/ec2/">EC2</a>, etc. (that part is still up for grabs). What I'd like to do is an opt-in blog aggregation site focused around functional programming. It would be very similar to what <a href="http://blogs.bytecode.com.au/glen/">Glen Smith</a> has done with <a href="http://groovyblogs.org">groovyblogs.org</a>. Groovyblogs is currently my number one referral site and is generating about 20% of the traffic for this blog. I think it is a great way to find out what blogs are out there in a given space, and there doesn't seem to be an equivalent for the functional space. Since my LOTY interest is focused in the functional space, particularly around Scala and Clojure, and my TOTY interest is the cloud technologies out there, it seems like the perfect marriage.</p>
 
@@ -167,7 +167,7 @@ import static org.hamcrest.Matchers.</em></p>
   <entry>
     <title type="html"><![CDATA[Joel's BuilderBuilder in Groovy]]></title>
     <link href="http://mattstine.com/2009/04/27/joels-builderbuilder-in-groovy/"/>
-    <updated>2009-04-27T21:54:07-07:00</updated>
+    <updated>2009-04-27T21:54:07-05:00</updated>
     <id>http://mattstine.com/2009/04/27/joels-builderbuilder-in-groovy</id>
     <content type="html"><![CDATA[<p><a href="http://joelneely.wordpress.com/">Joel Neely</a> started <a href="http://joelneely.wordpress.com/2009/04/25/builderbuilder-the-agenda/">a series</a> <a href="http://joelneely.wordpress.com/2009/04/27/builderbuilder-the-task/">of posts</a> over the weekend detailing a proposed exploration of what Functional Programming means "to me as a practicing OO software developer?" The task at hand is to look at the generation of Data Transfer Objects which include a static inner class that functions as a builder. Since I'm exploring both Clojure and Scala right now, Joel has asked me to play along.</p>
 

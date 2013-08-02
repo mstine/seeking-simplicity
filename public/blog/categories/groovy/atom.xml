@@ -4,7 +4,7 @@
   <title><![CDATA[Category: groovy | Seeking Simplicity]]></title>
   <link href="http://mattstine.com/blog/categories/groovy/atom.xml" rel="self"/>
   <link href="http://mattstine.com/"/>
-  <updated>2013-07-10T21:05:06-07:00</updated>
+  <updated>2013-08-02T16:11:34-05:00</updated>
   <id>http://mattstine.com/</id>
   <author>
     <name><![CDATA[Matt Stine]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Securing Grails Plugin Artifacts with Filters]]></title>
     <link href="http://mattstine.com/2009/11/10/securing-grails-plugin-artifacts-with-filters/"/>
-    <updated>2009-11-10T13:50:11-08:00</updated>
+    <updated>2009-11-10T13:50:11-06:00</updated>
     <id>http://mattstine.com/2009/11/10/securing-grails-plugin-artifacts-with-filters</id>
     <content type="html"><![CDATA[<p>So you've just installed the handy dandy Spring Security plugin (http://grails.org/plugin/acegi), which makes it incredibly easy to secure entire Grails controllers and/or controller actions with annotations, such as the following:</p>
 
@@ -35,7 +35,7 @@
   <entry>
     <title type="html"><![CDATA[Making Java "Groovier" with LambdaJ]]></title>
     <link href="http://mattstine.com/2009/10/09/making-java-groovier-with-lambdaj/"/>
-    <updated>2009-10-09T09:37:06-07:00</updated>
+    <updated>2009-10-09T09:37:06-05:00</updated>
     <id>http://mattstine.com/2009/10/09/making-java-groovier-with-lambdaj</id>
     <content type="html"><![CDATA[<p>I spent the better part of yesterday tracing my way through the codebase for a large-scale enterprise application that my team is building right now, and I happened upon the following piece of code:</p>
 
@@ -175,7 +175,7 @@ import static org.hamcrest.Matchers.</em></p>
   <entry>
     <title type="html"><![CDATA[I've "forked" the Grails PayPal Plugin...]]></title>
     <link href="http://mattstine.com/2009/05/02/ive-forked-the-grails-paypal-plugin/"/>
-    <updated>2009-05-02T00:59:46-07:00</updated>
+    <updated>2009-05-02T00:59:46-05:00</updated>
     <id>http://mattstine.com/2009/05/02/ive-forked-the-grails-paypal-plugin</id>
     <content type="html"><![CDATA[<p>I'm currently completing the finishing touches on a new e-commerce site for my wife's stationary business. We decided a long time ago to use <a href="http://www.paypal.com">PayPal</a> for all of the payment processing since we've had a great experience using it for our eBay selling. About a year ago Graeme Rocher polished off the last release of a <a href="http://grails.org/plugin/paypal">PayPal plugin</a> that is available in <a href="http://grails.org/plugin/home">the Grails Plugin repository</a>. It really is a very nice plugin, yet I had a couple of problems with it:</p>
 
@@ -197,7 +197,7 @@ import static org.hamcrest.Matchers.</em></p>
   <entry>
     <title type="html"><![CDATA[Joel's BuilderBuilder in Groovy]]></title>
     <link href="http://mattstine.com/2009/04/27/joels-builderbuilder-in-groovy/"/>
-    <updated>2009-04-27T21:54:07-07:00</updated>
+    <updated>2009-04-27T21:54:07-05:00</updated>
     <id>http://mattstine.com/2009/04/27/joels-builderbuilder-in-groovy</id>
     <content type="html"><![CDATA[<p><a href="http://joelneely.wordpress.com/">Joel Neely</a> started <a href="http://joelneely.wordpress.com/2009/04/25/builderbuilder-the-agenda/">a series</a> <a href="http://joelneely.wordpress.com/2009/04/27/builderbuilder-the-task/">of posts</a> over the weekend detailing a proposed exploration of what Functional Programming means "to me as a practicing OO software developer?" The task at hand is to look at the generation of Data Transfer Objects which include a static inner class that functions as a builder. Since I'm exploring both Clojure and Scala right now, Joel has asked me to play along.</p>
 
@@ -231,7 +231,7 @@ field(name:'gpa', type:'float')
   <entry>
     <title type="html"><![CDATA[Groovy: Post to a URL]]></title>
     <link href="http://mattstine.com/2009/04/25/groovy-post-to-a-url/"/>
-    <updated>2009-04-25T23:09:11-07:00</updated>
+    <updated>2009-04-25T23:09:11-05:00</updated>
     <id>http://mattstine.com/2009/04/25/groovy-post-to-a-url</id>
     <content type="html"><![CDATA[<p>If you've ever worked with the brilliant <a href="http://recaptcha.net/">Recaptcha</a> service, you'll know that their REST API requires an HTTP POST rather than a GET. As I had only used GET requests thus far, I googled around and found a pretty easy solution:</p>
 

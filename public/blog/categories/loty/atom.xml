@@ -4,7 +4,7 @@
   <title><![CDATA[Category: loty | Seeking Simplicity]]></title>
   <link href="http://mattstine.com/blog/categories/loty/atom.xml" rel="self"/>
   <link href="http://mattstine.com/"/>
-  <updated>2013-07-10T21:05:06-07:00</updated>
+  <updated>2013-08-02T16:11:34-05:00</updated>
   <id>http://mattstine.com/</id>
   <author>
     <name><![CDATA[Matt Stine]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[LOTY/TOTY for 2010]]></title>
     <link href="http://mattstine.com/2010/01/06/lotytoty-for-2010/"/>
-    <updated>2010-01-06T14:25:09-08:00</updated>
+    <updated>2010-01-06T14:25:09-06:00</updated>
     <id>http://mattstine.com/2010/01/06/lotytoty-for-2010</id>
     <content type="html"><![CDATA[<p>If anyone's interested, here's a clue as to what I'm working on in 2010:</p>
 
@@ -27,7 +27,7 @@
   <entry>
     <title type="html"><![CDATA[Making Java "Groovier" with LambdaJ]]></title>
     <link href="http://mattstine.com/2009/10/09/making-java-groovier-with-lambdaj/"/>
-    <updated>2009-10-09T09:37:06-07:00</updated>
+    <updated>2009-10-09T09:37:06-05:00</updated>
     <id>http://mattstine.com/2009/10/09/making-java-groovier-with-lambdaj</id>
     <content type="html"><![CDATA[<p>I spent the better part of yesterday tracing my way through the codebase for a large-scale enterprise application that my team is building right now, and I happened upon the following piece of code:</p>
 
@@ -167,7 +167,7 @@ import static org.hamcrest.Matchers.</em></p>
   <entry>
     <title type="html"><![CDATA[Functional programming blog aggregator in the works...]]></title>
     <link href="http://mattstine.com/2009/04/30/functional-programming-blog-aggregator-in-the-works/"/>
-    <updated>2009-04-30T13:31:58-07:00</updated>
+    <updated>2009-04-30T13:31:58-05:00</updated>
     <id>http://mattstine.com/2009/04/30/functional-programming-blog-aggregator-in-the-works</id>
     <content type="html"><![CDATA[<p>So I'm in the midst of planning my next toy project, specifically with an aim to build something for the cloud, be it <a href="http://code.google.com/appengine">Google App Engine</a>, <a href="http://mor.ph">Mor.ph</a>, <a href="http://aws.amazon.com/ec2/">EC2</a>, etc. (that part is still up for grabs). What I'd like to do is an opt-in blog aggregation site focused around functional programming. It would be very similar to what <a href="http://blogs.bytecode.com.au/glen/">Glen Smith</a> has done with <a href="http://groovyblogs.org">groovyblogs.org</a>. Groovyblogs is currently my number one referral site and is generating about 20% of the traffic for this blog. I think it is a great way to find out what blogs are out there in a given space, and there doesn't seem to be an equivalent for the functional space. Since my LOTY interest is focused in the functional space, particularly around Scala and Clojure, and my TOTY interest is the cloud technologies out there, it seems like the perfect marriage.</p>
 
@@ -178,7 +178,7 @@ import static org.hamcrest.Matchers.</em></p>
   <entry>
     <title type="html"><![CDATA[Hello, Clojure!]]></title>
     <link href="http://mattstine.com/2009/04/24/hello-clojure/"/>
-    <updated>2009-04-24T17:12:23-07:00</updated>
+    <updated>2009-04-24T17:12:23-05:00</updated>
     <id>http://mattstine.com/2009/04/24/hello-clojure</id>
     <content type="html"><![CDATA[<pre><code>; Hello World!
 (defn hello [name]
@@ -192,7 +192,7 @@ import static org.hamcrest.Matchers.</em></p>
   <entry>
     <title type="html"><![CDATA[LOTY...Part Deux]]></title>
     <link href="http://mattstine.com/2009/04/06/lotypart-deux/"/>
-    <updated>2009-04-06T22:31:58-07:00</updated>
+    <updated>2009-04-06T22:31:58-05:00</updated>
     <id>http://mattstine.com/2009/04/06/lotypart-deux</id>
     <content type="html"><![CDATA[<p><img src="http://mattstine.files.wordpress.com/2009/04/scala_vs_clojure.jpg" alt="scala_vs_clojure" /><a href="http://mattstine.files.wordpress.com/2009/04/scala_vs_clojure.jpg2009/04/02/loty-time-again-scala-or-clojure">A few days ago I pontificated</a> on my need to choose a new "Language of the Year." Right now I'm attempting to choose between <a href="http://www.scala-lang.org/">Scala</a> and <a href="http://clojure.org/">Clojure</a>. If nothing else, I've learned from this exercise that asking the community for feedback is a GOOD thing. Your comments have been very helpful.</p>
 
