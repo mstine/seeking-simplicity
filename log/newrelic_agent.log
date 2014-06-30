@@ -32,3 +32,80 @@
 [08/02/13 15:50:06 -0500 turkey (20525)] INFO : Installing Net instrumentation
 [08/02/13 15:50:06 -0500 turkey (20525)] INFO : Installing Sinatra instrumentation
 [08/02/13 15:50:06 -0500 turkey (20525)] INFO : Finished instrumentation
+[06/30/14 14:18:11 -0500 turkey (28029)] INFO : Starting the New Relic agent in "development" environment.
+[06/30/14 14:18:11 -0500 turkey (28029)] INFO : To prevent agent startup add a NEWRELIC_ENABLE=false environment variable or modify the "development" section of your newrelic.yml.
+[06/30/14 14:18:11 -0500 turkey (28029)] INFO : Reading configuration from config/newrelic.yml
+[06/30/14 14:18:11 -0500 turkey (28029)] INFO : Enabling the Request Sampler.
+[06/30/14 14:18:11 -0500 turkey (28029)] INFO : Environment: development
+[06/30/14 14:18:11 -0500 turkey (28029)] INFO : No known dispatcher detected.
+[06/30/14 14:18:11 -0500 turkey (28029)] INFO : Application: My Application
+[06/30/14 14:18:11 -0500 turkey (28029)] WARN : Agent configured not to send data in this environment.
+[06/30/14 14:18:11 -0500 turkey (28029)] INFO : Installing Net instrumentation
+[06/30/14 14:18:11 -0500 turkey (28029)] INFO : Installing Sinatra instrumentation
+[06/30/14 14:18:11 -0500 turkey (28029)] INFO : Finished instrumentation
+[06/30/14 14:19:26 -0500 turkey (28083)] INFO : Starting the New Relic agent in "development" environment.
+[06/30/14 14:19:26 -0500 turkey (28083)] INFO : To prevent agent startup add a NEWRELIC_ENABLE=false environment variable or modify the "development" section of your newrelic.yml.
+[06/30/14 14:19:26 -0500 turkey (28083)] INFO : Reading configuration from config/newrelic.yml
+[06/30/14 14:19:26 -0500 turkey (28083)] INFO : Enabling the Request Sampler.
+[06/30/14 14:19:26 -0500 turkey (28083)] INFO : Environment: development
+[06/30/14 14:19:26 -0500 turkey (28083)] INFO : No known dispatcher detected.
+[06/30/14 14:19:26 -0500 turkey (28083)] INFO : Application: My Application
+[06/30/14 14:19:26 -0500 turkey (28083)] WARN : Agent configured not to send data in this environment.
+[06/30/14 14:19:26 -0500 turkey (28083)] INFO : Installing Net instrumentation
+[06/30/14 14:19:26 -0500 turkey (28083)] INFO : Installing Sinatra instrumentation
+[06/30/14 14:19:26 -0500 turkey (28083)] INFO : Finished instrumentation
+[06/30/14 14:19:52 -0500 turkey (28125)] INFO : Starting the New Relic agent in "development" environment.
+[06/30/14 14:19:52 -0500 turkey (28125)] INFO : To prevent agent startup add a NEWRELIC_ENABLE=false environment variable or modify the "development" section of your newrelic.yml.
+[06/30/14 14:19:52 -0500 turkey (28125)] INFO : Reading configuration from config/newrelic.yml
+[06/30/14 14:19:52 -0500 turkey (28125)] INFO : Enabling the Request Sampler.
+[06/30/14 14:19:52 -0500 turkey (28125)] INFO : Environment: development
+[06/30/14 14:19:52 -0500 turkey (28125)] INFO : No known dispatcher detected.
+[06/30/14 14:19:52 -0500 turkey (28125)] INFO : Application: My Application
+[06/30/14 14:19:52 -0500 turkey (28125)] WARN : Agent configured not to send data in this environment.
+[06/30/14 14:19:52 -0500 turkey (28125)] INFO : Installing Net instrumentation
+[06/30/14 14:19:52 -0500 turkey (28125)] INFO : Installing Sinatra instrumentation
+[06/30/14 14:19:52 -0500 turkey (28125)] INFO : Finished instrumentation
+[06/30/14 15:15:07 -0500 turkey (30723)] INFO : Starting the New Relic agent in "development" environment.
+[06/30/14 15:15:07 -0500 turkey (30723)] INFO : To prevent agent startup add a NEWRELIC_ENABLE=false environment variable or modify the "development" section of your newrelic.yml.
+[06/30/14 15:15:07 -0500 turkey (30723)] INFO : Reading configuration from config/newrelic.yml
+[06/30/14 15:15:07 -0500 turkey (30723)] INFO : Enabling the Request Sampler.
+[06/30/14 15:15:07 -0500 turkey (30723)] INFO : Environment: development
+[06/30/14 15:15:07 -0500 turkey (30723)] INFO : No known dispatcher detected.
+[06/30/14 15:15:07 -0500 turkey (30723)] INFO : Application: My Application
+[06/30/14 15:15:07 -0500 turkey (30723)] WARN : Agent configured not to send data in this environment.
+[06/30/14 15:15:07 -0500 turkey (30723)] INFO : Installing Net instrumentation
+[06/30/14 15:15:07 -0500 turkey (30723)] INFO : Installing Sinatra instrumentation
+[06/30/14 15:15:07 -0500 turkey (30723)] INFO : Finished instrumentation
+[06/30/14 15:16:12 -0500 turkey (30784)] INFO : Starting the New Relic agent in "development" environment.
+[06/30/14 15:16:12 -0500 turkey (30784)] INFO : To prevent agent startup add a NEWRELIC_ENABLE=false environment variable or modify the "development" section of your newrelic.yml.
+[06/30/14 15:16:12 -0500 turkey (30784)] INFO : Reading configuration from config/newrelic.yml
+[06/30/14 15:16:12 -0500 turkey (30784)] INFO : Enabling the Request Sampler.
+[06/30/14 15:16:12 -0500 turkey (30784)] INFO : Environment: development
+[06/30/14 15:16:12 -0500 turkey (30784)] INFO : No known dispatcher detected.
+[06/30/14 15:16:12 -0500 turkey (30784)] INFO : Application: My Application
+[06/30/14 15:16:12 -0500 turkey (30784)] WARN : Agent configured not to send data in this environment.
+[06/30/14 15:16:12 -0500 turkey (30784)] INFO : Installing Net instrumentation
+[06/30/14 15:16:12 -0500 turkey (30784)] INFO : Installing Sinatra instrumentation
+[06/30/14 15:16:12 -0500 turkey (30784)] INFO : Finished instrumentation
+[06/30/14 15:25:52 -0500 turkey (31111)] INFO : Starting the New Relic agent in "development" environment.
+[06/30/14 15:25:52 -0500 turkey (31111)] INFO : To prevent agent startup add a NEWRELIC_ENABLE=false environment variable or modify the "development" section of your newrelic.yml.
+[06/30/14 15:25:52 -0500 turkey (31111)] INFO : Reading configuration from config/newrelic.yml
+[06/30/14 15:25:52 -0500 turkey (31111)] INFO : Enabling the Request Sampler.
+[06/30/14 15:25:52 -0500 turkey (31111)] INFO : Environment: development
+[06/30/14 15:25:52 -0500 turkey (31111)] INFO : No known dispatcher detected.
+[06/30/14 15:25:52 -0500 turkey (31111)] INFO : Application: My Application
+[06/30/14 15:25:52 -0500 turkey (31111)] WARN : Agent configured not to send data in this environment.
+[06/30/14 15:25:52 -0500 turkey (31111)] INFO : Installing Net instrumentation
+[06/30/14 15:25:52 -0500 turkey (31111)] INFO : Installing Sinatra instrumentation
+[06/30/14 15:25:52 -0500 turkey (31111)] INFO : Finished instrumentation
+[06/30/14 17:40:54 -0500 turkey (34521)] INFO : Starting the New Relic agent in "development" environment.
+[06/30/14 17:40:54 -0500 turkey (34521)] INFO : To prevent agent startup add a NEWRELIC_ENABLE=false environment variable or modify the "development" section of your newrelic.yml.
+[06/30/14 17:40:54 -0500 turkey (34521)] INFO : Reading configuration from config/newrelic.yml
+[06/30/14 17:40:54 -0500 turkey (34521)] INFO : Enabling the Request Sampler.
+[06/30/14 17:40:54 -0500 turkey (34521)] INFO : Environment: development
+[06/30/14 17:40:54 -0500 turkey (34521)] INFO : No known dispatcher detected.
+[06/30/14 17:40:54 -0500 turkey (34521)] INFO : Application: My Application
+[06/30/14 17:40:54 -0500 turkey (34521)] WARN : Agent configured not to send data in this environment.
+[06/30/14 17:40:54 -0500 turkey (34521)] INFO : Installing Net instrumentation
+[06/30/14 17:40:54 -0500 turkey (34521)] INFO : Installing Sinatra instrumentation
+[06/30/14 17:40:54 -0500 turkey (34521)] INFO : Finished instrumentation

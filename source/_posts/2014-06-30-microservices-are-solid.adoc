@@ -1,0 +1,201 @@
+---
+layout: post
+title: "Microservices are SOLID"
+date: 2014-06-30 17:00
+comments: true
+categories:
+- microservices
+- architecture
+- SOLID
+---
+
+[abstract]
+--
+http://martinfowler.com/articles/microservices.html[Microservices] are often described as small, loosely coupled applications that follow the UNIX philosophy of ``doing one thing well.'' They have also http://www.infoq.com/articles/microservices-intro[been related] to the http://en.wikipedia.org/wiki/Single_responsibility_principle[Single Responsibility Principle], the first of the five principles making up http://en.wikipedia.org/wiki/SOLID_(object-oriented_design)[SOLID]. A microservices-based architecture is typically constructed around a set of common patterns. This set of patterns is actually consistent with all of the SOLID principles when thought of at the architectural rather than the class/module level. In this article, we'll gain an understanding of each of the SOLID principles and how they relate to microservices.
+--
+
+== A SOLID Architecture?
+
+I have spent a significant portion of the last three years speaking and writing about the SOLID principles of object-oriented design.
+I spent the first year teaching SOLID much as expressed by Robert C. ``Uncle Bob'' Martin in his foundational book, _http://www.amazon.com/Software-Development-Principles-Patterns-Practices/dp/0135974445[Agile Software Development: Principles, Patterns, and Practices]_.
+About the same time I was embarking on a reintroduction to and exploration of functional programming, spending a significant amount of time with http://clojure.org[Clojure].
+Retraining my mind for functional thinking while simultaneously teaching the SOLID principles resulted in a perfect thought storm in my mind, resulting in the following question:
+
+____
+Is there an overlap between functional programming and the SOLID principles?
+____
+
+The thought journey that followed led me to start giving the talk entitled ``Functional SOLID'' on August 25, 2012.
+That same month I began publishing a https://nofluffjuststuff.com/m/article/functional_solid_part_1[four-part] https://nofluffjuststuff.com/m/article/functional_solid_part_2[series] https://nofluffjuststuff.com/m/article/functional_solid_part_3[of] https://nofluffjuststuff.com/m/article/functional_solid_part_2[articles] by the same name.
+In both of these presentations of my ideas, I related a couple of foundational memes:
+
+* Functional programming, especially within the Clojure programming language, provides wonderful constructs for building programs consistent with the SOLID principles.
+* The SOLID principles actually transcend all of programming, regardless of the particular programming paradigm (structured, object-oriented, functional) employed.
+
+It is this second meme that provides the impetus for this particular article.
+At the conclusion of both presentations, I refer to Rich Hickey's seminal Strange Loop keynote, http://www.infoq.com/presentations/Simple-Made-Easy[``Simple Made Easy''].
+In his presentation, Hickey decries our continual conflation of the ideas of simplicity and ease by tracing the origins of both words:
+
+* Simple, from the Latin _simplex_, meaning ``one fold or braid'' (opposed to _complex_, meaning ``many folds or braids,'') is an objective concept.
+In software we can relate it to the degree of interleaving of concerns in software components.
+* Easy, from the Latin _adjacens_, means ``to lie near.'' While ``hard'' does not trace to a root meaning ``to lie far,'' we can still understand that ``easy'' is a relative concept.
+What lies near, or is easy to me, is not necessarily easy or near to you.
+In software we can relate it to the programming languages, paradigms, framweworks, technologies, etc. with which we are intimately familiar.
+
+This analysis led me to restate the SOLID principles in terms of another Rich Hickey word, _complectedness_, or the degree to which software concerns are interleaved:
+
+Single Responsibility Principle:: Complecting responsibilities leads to rigid and/or fragile design.
+Open-Closed Principle:: Complecting concretions of an abstraction in such a way that new concretions adversely affect existing, working concretions is problemmatic.
+Liskov Substitution Principle:: Reuse via inheritance is dangerous.
+It often complects entities not in a true “is-a” relationship, which leads to non-substitutability.
+Interface Segregation Principle:: Don’t complect clients with uninteresting operations by complecting unrelated groups of operations in a single entity!
+Dependency Inversion Principle:: Transitive dependency leads to transitive complectedness!
+
+As you can see, we've now stated the principles independently of any programming-paradigm specific language.
+It is this restatement that cemented in my mind the idea that SOLID actually transcends all of software engineering -- software engineering principles that are _universally true_, regardless of the context in which they are applied.
+So, we can easily walk these principles up the abstraction ladder into the world of architecture.
+
+== Microservices Introduced
+
+With businesses built around software now disrupting multiple industries that appeared to have stable leaders, the need has emerged for enterprises to create ``software factories'' built around the following principles:
+
+* Streaming customer feedback directly into rapid, iterative cycles of application development;
+* Horizontally scaling applications to meet user demand;
+* Compatibility with an enormous diversity of clients, with mobility (smartphones, tablets, etc.) taking the lead;
+* Continuous delivery of value, shrinking the cycle time from concept to cash.
+
+Infrastructure has taken the lead in adapting to meet these needs with the move to the cloud, and Platform as a Service (PaaS) has raised the level of abstraction to a focus on an ecosystem of applications and services.
+However, most applications are still developed as if we're living in the previous generation of both business and infrastructure: the monolithic application.
+Microservices -- small, loosely coupled applications that follow the Unix philosophy of "doing one thing well" -- represent the application development side of enabling rapid, iterative development, horizontal scale, polyglot clients, and continuous delivery.
+They also enable us to scale application development and eliminate long term commitments to a single technology stack.
+
+I won't belabor the introduction to microservices anymore, as a wealth of reading is already available all over the web.
+As a jumping off point, I invite the reader to dive into James Lewis' and Martin Fowler's http://martinfowler.com/articles/microservices.html[excellent coverage of the topic].
+
+== SOLID Microservices
+
+Let's now get to the heart of the matter: how do the patterns associated with a microservices architecture overlap with the SOLID principles?
+Let's walk through each, briefly relating them in their natural context, and then swinging them into our microservices discussion.
+
+=== Single Responsibility Principle
+
+The Single Responsibility Principle (SRP) is stated by Martin as ``each software module should have one and only one reason to change'' <<SRP>>.
+Of all of the SOLID principles, the SRP is the one I've http://byterot.blogspot.com/2014/04/reactive-cloud-actors-no-nonsense-microservice-beehive-restful-evolvable-web-events-orleans-framework.html[most] http://www.slideshare.net/joshlong/microservices-with-spring-boot[often] http://www.tigerteam.dk/2014/microservices-its-not-only-the-size-that-matters-its-also-how-you-use-them-part-4/[seen] cited in the context of microservices.
+
+One common thread between how Martin relates SOLID and microservices is _change_.
+Change in software is inevitable and constant. Requirements are realized as responsibilities doled out to various software modules.
+Requirements change leads to changes in responsibilities.
+If we couple responsibilities in a single module, then change to one responsibility can affect another unrelated responsibility simply due to its location.
+In other words, change one thing, sometimes another unrelated thing breaks.
+Risk goes up; change velocity goes down.
+
+A monolithic architecture, no matter how modular on the inside, couples responsibilities together.
+Change cycles are coupled, increasing the risk associated with frequent deployments.
+Effective continuous delivery is far more difficult, as the release management process reimposes the waterfall process on the agile development team.
+If we instead separate architectural responsibilities into different microservices, we can decouple those change cycles, thus decreasing the risks associated with frequent deployments. Continuous delivery becomes more easily attainable.
+
+The most common technique I've seen applied to decomposing a monolith into microservices is the http://martinfowler.com/bliki/BoundedContext.html[bounded context] from http://en.wikipedia.org/wiki/Domain-driven_design[Domain-Driven Design].
+We identify discrete business capabilities, each of which owns and governs its own discrete segment of the overall data model for an organization.
+A microservice implements each business capability, encapsulating its data segment behind an often RESTful API.
+Overlaps between the capabilities (e.g. a shipping service and ordering service will both likely have the notion of customer, likely governed by a customer service) are realized by mappings in higher-order microservices or by utilizing hypermedia.
+
+=== Open-Closed Principle
+
+The Open-Closed Principle (OCP), first coined by Bertrand Meyer <<OOSC>>, states that ``software entities should be open for extension, but closed for modification.''
+Again we relate this principle to change.
+We should be able to change what a module does as software requirements change, but we should be able to do so without modifying any existing, working code.
+
+At face value this looks impossible.
+How can we change the behavior of a module without changing its code?
+The key is in how we define the facade of the module, thinking at the appropriate level of abstraction.
+
+Let's draw an example from Java's standard library.
+What if my client code is provided an instance of +java.util.HashMap+, and I instead want sorted keys?
+I would need to not only provide an instance of +java.util.TreeMap+ to my client, but I would also need to change all of the existing references.
+If I instead refer to the map abstraction as +java.util.Map+ (a Java interface), then I can provide my client with the new +Map+ type without changing any code.
+By utilizing the appropriate module facade, we can decouple an abstraction from the its larger set of derivative behaviors.
+
+What is our microservice facade?
+The API of course! As long as a given microservice continues to fulfill the contract expressed by its API, it should be possible to swap in new behaviors without changing any existing client code.
+This becomes supremely important when we consider the term of our commitment to a particular technology stack. Monolithic architectures are not closed to this particular type of modification, and the risk of incorporating new technology into an existing monolith can be very high.
+Microservices drastically reduce the risk associated with experimenting, even in production, with new technology stacks, and increase our ability to use the right tool for the job.
+
+Another important technique enabled by the open-closed nature of microservices is http://martinfowler.com/bliki/PolyglotPersistence.html[polyglot persistence].
+By encapsulating the data store technology used for a particular business capability behind its facade (e.g. a recommendations service is very amenable to graph databases), we can hide the presence of that data store behind a microservice API.
+This enables us to both experiment with and utilize various data stores in advantageous contexts without polluting the overall service ecosystem with the semantics of each store.
+
+=== Liskov Substitution Principle
+
+The Liskov Substitution Principle (LSP) was born the same year as Meyer's OCP, written down by Barbara Liskov.
+The LSP is concerned with types and subtypes, focused on the idea that ``subtypes must be substitutable for their base types.''
+In object-oriented terms, drawing again from the Java language, if a class +extends+ from a parent class or +implements+ a parent interface, we should be able to use that class in the context of any code expecting an instance of the parent.
+If at any time that code context exhibits aberrant behavior, we have violated the LSP with our class.
+
+Extending the idea of object-oriented inheritance to logical architecture is a bit of a stretch, but let's give it a try.
+We'll start by again considering the microservice's facade, or its API.
+From the client's perspective, the API represents the ``base type'' for our microservice.
+So long as any microservice we swap in properly fulfills this API, we can say it's consistent with the LSP.
+
+It's unlikely that we'll often substitute different implementations of the same API at runtime, and it's unclear to me what a child microservice might look like.
+However, consider the case of services that implement the same API, but that must implement different business rules or policies given the legal jurisdiction governing the data.
+Further, consider that regulatory compliance dicates that those services actually are deployed and run in the same geographic location governed by that legal jurisdiction.
+We could implement each instance of this API as a separate microservice and deploy each of them in the appropriate geography.
+From the client's perspective, the substitution would be transparent (thus abiding by the LSP), and the ``polymorphic'' substitution could be performed by another higher-order microservice or global site-selection mechanism.
+
+=== Interface Segregation Principle
+
+The Interface Segregation Principle (ISP) is stated in Martin's book as ``clients should not be forced to depend on methods they do not use.''
+Martin introduces the concept of so-called ``fat interfaces,'' or interfaces whose method set is not cohesive.
+One can divide their method sets into multiple groups, each group serving a different set of interested clients.
+The primary reason for seeking to separate these groups into different modules is to prevent change driven by one set of clients from affecting other distinct groups of clients.
+
+API's implemented via monolithic architectures cannot abide by the ISP.
+Adding or improving capabilities to serve one group of clients must involve minimally a redeployment of all of the capabilities affecting all clients.
+More likely, a lengthy regression test phase will also be required, as we must ensure that these additional or improved capabilities have not damaged the system's other capabilities.
+
+Microservices, when designed well around bounded contexts, also abide by the ISP, as we enforce a hard boundary between interfaces by separating them into discrete, independently deployable units.
+
+=== Dependency Inversion Principle
+
+The Dependency Inversion Principle (DIP) tells us that ``abstractions should not depend upon details. Details should depend upon abstractions.''
+Stated another way, ``high-level modules should not depend on low-level modules.''
+Our abstractions, or higher-level modules, are what codify the important business knowledge inherent in a body of software, whereas our details, or lower-level modules, represent the mechanical recipes for carrying them out.
+One of the promises of the other principles is the ability to ``swap out'' the details beneath the abstractions when it becomes advantageous.
+However, when our higher-level modules have direct dependency on our lower-level modules, swapping out details often causes the abstraction itself to have to change.
+``Absurd'' is Uncle Bob's description of this situation.
+
+The DIP typically deals with this scenario by defining _service interfaces_ for each module.
+If a module requires services that are not relevant to its bounded context, rather than implementing them itself or directly delegating to a dependency, it instead declares a _signature_ for that service within its service interface.
+This interface then becomes a secondary abstraction expressing all of the collaboration a module intends to do.
+Possible collaborators then cooperate with the module by implementing its service interface.
+In this way, they become _dependent_ on the module, rather than the module becoming dependent on the collaborator!
+
+In a microservices architecture, the DIP finds its realization in the _API Gateway_ pattern.
+An API Gateway acts as a single point of entry into a microservices architecture for a given client.
+It plays a multi-faceted role in serving the diverse clients (i.e. disparate mobile device platforms) of the architecture by:
+
+* reducing the chattiness of the network by reducing the number of services consulted;
+* performing protocol translation (e.g. AMQP to HTTP) when a particular protocol is not well supported by the client;
+* aggregating service responses concurrently to reduce response latency;
+* transforming service responses to service the needs of specific devices, screen sizes, and use cases.
+
+The important thing to note is that the ``API'' defined by the API Gateway is owned by the client in much the same way as the _service interface_ is owned by a higher-level module. In this way, we invert the dependency between clients and the microservices themselves.
+Consult http://techblog.netflix.com/2013/01/optimizing-netflix-api.html[``Optimizing the Netflix API''] for a fantastic example of this architectural pattern.
+
+
+== Conclusion
+
+Experience has taught me that ease is often cheap but illusory, but that simplicity is a pearl of great price.
+Microservices http://highscalability.com/blog/2014/4/8/microservices-not-a-free-lunch.html[are not easy], but they are simple.
+One of the reasons for their simplicity is what I see as their strong compatibility with the SOLID principles, not only of object-oriented design, but of all of software engineering.
+By resisting the temptation to interleave distinct business capabilities, we retain the ability to develop and deploy them in an agile manner.
+I hope you've found some value in this article, and I even hope you've found some things with which you disagree.
+Please sound off in the blogosphere, the Twitterverse, or wherever suits your fancy.
+
+Cheers!
+
+== References
+
+[bibliography]
+- [[[OOSC]]] Meyer, Bertrand (1988). _Object-Oriented Software Construction_.
+- [[[SRP]]] Martin, Robert C. ``The Single Responsibility Principle.'' http://blog.8thlight.com/uncle-bob/2014/05/08/SingleReponsibilityPrinciple.html

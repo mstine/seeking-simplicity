@@ -9,7 +9,7 @@
   <meta name="author" content="Matt Stine">
 
   
-  <meta name="description" content="It&#8217;s Friday night, and what am I doing but coding. My wife&#8217;s night out is spent at the scrapbook store working on her latest layouts - &hellip;">
+  <meta name="description" content="Recently I was faced with the challenge of implementing form-level (or page-level) validation in a JSF-based application. What I mean by form-level &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -76,6 +76,94 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2007/06/27/how-to-implement-form-level-validation-in-jsf/">How to Implement Form-level Validation in JSF</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2007-06-27T12:54:00-05:00" pubdate data-updated="true">Jun 27<span>th</span>, 2007</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Recently I was faced with the challenge of implementing form-level (or page-level) validation in a JSF-based application. What I mean by form-level validation is the need to evaluate a subset of a form&#8217;s fields as a unit, rather than simply validating each field in isolation. An example of this type of validation can be found on a user registration form where one has to select a password in one text field, and then retype the same password in another text field for confirmation. Validating that these two text fields contain the same password is an example of form level validation.</p>
+
+<p>In my case, I had two date selector components on my form, one for a start date/time and one for an end date/time for an event that was being scheduled. The rule I needed to validate was that the end date/time was later than the start date/time.</p>
+
+<p>There are a few ways to implement validation like this, including but not limited to:</p>
+
+<ol>
+<li><p>Build a custom component that renders selectors for both the start and end date/time, then validate as a unit. This actually is field-level validation and doesn&#8217;t truly address the form-level problem.</p></li>
+<li><p>Implement a validator method on a managed bean that will evaluate the data submitted for multiple components.</p></li>
+</ol>
+
+
+<p>I&#8217;ll address the second method in this HOWTO.</p>
+
+<p>First, you&#8217;ll need to bind at least <em>n-1</em> of the components that you want to validate to properties on your managed bean. The simplest way is to declare properties of type <strong>UIInput</strong>:</p>
+
+<blockquote><pre><code>&lt;br&gt;&lt;/br&gt;private UIInput startDateComponent;&lt;br&gt;&lt;/br&gt;&lt;br&gt;&lt;/br&gt;public UIInput getStartDateComponent() {&lt;br&gt;&lt;/br&gt;    return startDateComponent;&lt;br&gt;&lt;/br&gt;}&lt;br&gt;&lt;/br&gt;&lt;br&gt;&lt;/br&gt;public void setStartDateComponent(UIInput startDateComponent) {  &lt;br&gt;&lt;/br&gt;    this.startDateComponent = startDateComponent;&lt;br&gt;&lt;/br&gt;}&lt;br&gt;&lt;/br&gt;
+</code></pre></blockquote>
+
+<p>and do the actual binding in the JSP:</p>
+
+<blockquote><p><br></br>&lt;t:inputDate id=&#8221;eventStart&#8221; value=&#8221;#{orderForm.sampleInfo.requestedStartTime}&#8221;<br></br>    type=&#8221;both&#8221;<br></br>    popupCalendar=&#8221;true&#8221;<br></br>    ampm=&#8221;true&#8221; binding=&#8221;#{dateValidationForm.startDateComponent}&#8221;/><br></br></p></blockquote>
+
+<p>Next, you&#8217;ll implement the validation method, which can have any name you like, but must share the same signature as this example:</p>
+
+<blockquote><p><br></br>public void validateEndDate(FacesContext context, UIComponent toValidate, Object value) {<br></br>    Date endDate = (Date) value;<br></br>    Date startDate = (Date) getStartDateComponent().getLocalValue();<br></br><br></br>    if (startDate == null) {<br></br>        context.addMessage(getStartDateComponent().getClientId(context),new FacesMessage(&#8220;Please specify a valid date and time.&#8221;));<br></br>        throw new ValidatorException(new FacesMessage());<br></br>    }<br></br><br></br>    long endTime = endDate.getTime();<br></br>    long startTime = startDate.getTime();<br></br><br></br>    if (startTime >= endTime) {<br></br>        addError(&#8220;errors.batchOrder.invalidEndDate&#8221;);<br></br>        throw new ValidatorException(new FacesMessage(&#8220;Event end must be later than event start.&#8221;));<br></br>    }<br></br>}<br></br></p></blockquote>
+
+<p>And finally, you&#8217;ll bind the validation method to the last component in your subset of components that need to be validated together:</p>
+
+<blockquote><p><br></br>&lt;t:inputDate id=&#8221;eventEnd&#8221; value=&#8221;#{orderForm.sampleInfo.requestedEndTime}&#8221; type=&#8221;both&#8221; popupCalendar=&#8221;true&#8221; ampm=&#8221;true&#8221; validator=&#8221;#{dateValidationForm.validateEndDate}&#8221;/><br></br></blockquote></p>
+
+<p>To understand why I say <em>n-1</em> components, think of the way the validation phase occurs in JSF. Data is bound to the components in the order that they occur in the JSF component tree, which just so happens to be the order in which they appear in the JSP source. Looking at the <strong>validateEndDate</strong> method, you&#8217;ll see that I only reference the <strong>startDateComponent</strong> from the binding, but I reference the <strong>endDate</strong> as the <strong>Object value</strong> reference that was passed into the method. This is why you only need to bind <em>n-1</em> components, because you get the <em>nth</em> component from the method signature.</p></blockquote>
+
+<p>If you want to be more uniform and bind all of the components, you could create an extra dummy hidden value component and bind the validator method to it. You could then bind all of the components to your managed bean and access them all from the bindings rather than accessing one from the method signature.</p>
+
+<p>The <strong>validateEndDate</strong> method itself is rather simple. First you access the data by getting the local value of each component (again, the <strong>endDate</strong> value is not accessed in this way - in fact, it hasn&#8217;t been bound yet because it must be validated first, and that&#8217;s what&#8217;s happening in this method!). You then apply the business rule. You&#8217;ll see that first I look to see if the <strong>startDate</strong> is null. I&#8217;m not sure why this is possible, but if the <strong>startDate</strong> was not submitting a good value on the FIRST submit, the local value was null. So, I catch that here. I add an error message to the <strong>startDateComponent</strong> and throw a <strong>ValidatorException</strong>. If the business rule is violated, throw a <strong>ValidatorException</strong>. (I&#8217;m also using the <strong>addError</strong> method provided by AppFuse to work w/ its message framework as well, but that is not necessary w/ all JSF apps).</p>
+
+<p>Now, for the final problem I encountered. In Weblogic server, which we&#8217;re still using for the time being, if your session cannot be serialized then it deletes your entire session. Obviously this can cause major problems in any web app. To deal with this, ANY SESSION SCOPED MANAGED BEAN must be fully serializable, meaning it and any objects referenced in its state. Herein lies the problem for JSF. Instances of <strong>UIComponent</strong> (an ancestor of <strong>UIInput</strong>) are not serializable, so if we bind our components to <strong>UIInput</strong> fields on a session-scoped managed bean (the bean backing this form is an Order Form/Shopping Cart style bean), it will not be serializable and Weblogic will kick out your session.</p>
+
+<p>To deal with this problem, realize that there is no reason that you can only have one managed bean backing a form. In fact, you can reference as many managed beans as you need. Since validation is done for each request, there is no need to manage any state there across multiple requests like we need to do with a shopping cart. So, why not declare an additional managed bean that is REQUEST SCOPED, and then put the bindings and validation method there. That is exactly what I did. Here is the entire bean:</p>
+
+<blockquote><blockquote><p><br></br>public class DateValidationForm extends BasePage {<br></br><br></br>    private UIInput startDateComponent;<br></br><br></br>    public UIInput getStartDateComponent() {<br></br>        return startDateComponent;<br></br>    }<br></br> <br></br>    public void setStartDateComponent(UIInput startDateComponent) {<br></br>        this.startDateComponent = startDateComponent;<br></br>    }<br></br><br></br>    public void validateEndDate(FacesContext context, UIComponent toValidate, Object value) {<br></br>        Date endDate = (Date) value;<br></br>        Date startDate = (Date) getStartDateComponent().getLocalValue();<br></br><br></br>        if (startDate == null) {<br></br>            context.addMessage(getStartDateComponent().getClientId(context),new FacesMessage(&#8220;Please specify a valid date and time.&#8221;));<br></br>            throw new ValidatorException(new FacesMessage());<br></br>        }<br></br><br></br>        long endTime = endDate.getTime();<br></br>        long startTime = startDate.getTime();<br></br><br></br>        if (startTime >= endTime) {<br></br>            addError(&#8220;errors.batchOrder.invalidEndDate&#8221;);<br></br>            throw new ValidatorException(new FacesMessage(&#8220;Event end must be later than event start.&#8221;));<br></br>        }<br></br>    }<br></br>}<br></br></p></blockquote>
+
+<p>and the declaration in faces-config.xml:</p>
+
+<blockquote><p><br></br><managed-bean><br></br>    <managed-bean-name>dateValidationForm</managed-bean-name><br></br>    <managed-bean-class>org.stjude.hc.srmcti.webapp.action.ordering.</p>
+
+<pre><code>DateValidationForm&lt;/managed-bean-class&gt;&lt;br&gt;&lt;/br&gt;    &lt;managed-bean-scope&gt;request&lt;/managed-bean-scope&gt;&lt;br&gt;&lt;/br&gt;&lt;/managed-bean&gt;&lt;br&gt;&lt;/br&gt;
+</code></pre></blockquote>
+
+<p>The added bonus is that you can reuse this bean across all forms where you need this behavior. My application happens to have 2 additional forms where I would have repeated this logic, so I just reference this bean there.</p></blockquote>
+
+<p>Enjoy!</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -505,54 +593,6 @@ any modern browser</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2007/05/05/greetings-from-san-francisco/">Greetings From San Francisco!</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2007-05-05T16:18:00-05:00" pubdate data-updated="true">May 5<span>th</span>, 2007</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><a href="http://picasaweb.google.com/matt.stine/SanFranciscoJavaOne2007/photo#5061188923529143090"><img src="http://lh3.google.com/image/matt.stine/Rjz0grgYozI/AAAAAAAAAAs/tgIAHcd27AE/s288/DSCN0998.JPG" alt="" /></a></p>
-
-<p>This is the view from my quaint little hotel room at the Hotel Nikko in downtown San Francisco, California. I arrived here after a long morning of travel. First ~4 hours of flight from Memphis, TN to San Francisco International, followed by traversing the airport maze to find the BART (Bay Area Rapid Transit) train station. Once I found the right station, it was another 15 minutes of waiting on a train followed by a 40 minute train ride. Almost home? Not quite. As I ride the escalator out of the subway, I realize just what a country boy I am. There are literally hundreds of people crawling around on the streets, and here I am, toting a large rolling suitcase, a laptop, and a backpack, and looking totally clueless! Where is my hotel? I was definitely a prime target for predators just looking to make a quick buck. Within seconds I heard, &#8220;Where you looking to go? I&#8217;ve got a map.&#8221; I quickly responds with &#8220;I&#8217;ve got it, thanks.&#8221; Of course, I didn&#8217;t have it. But I didn&#8217;t have 20 bucks for the guy either! Not a few more steps up the sidewalk I&#8217;m confronted by Indian monks wanting to share their religion with me. I did have a nice conversation with this guy and got him to take one of my pocket Gospels of John (thank you Pocket Testament League!). Finally a nice family pointed me in the right direction. I figured out that if you look like you&#8217;re on a mission and you know what you&#8217;re doing, people don&#8217;t come up to you, so I put on my best serious face and headed for the Hotel Nikko. Now here I am, and from my window I&#8217;ve got a nice view of the pool area which is surrounded by an interesting looking rock garden:</p>
-
-<p><a href="http://picasaweb.google.com/matt.stine/SanFranciscoJavaOne2007/photo#5061188992248619858"><img src="http://lh3.google.com/image/matt.stine/Rjz0krgYo1I/AAAAAAAAAA8/G7sMo_WekFc/s288/DSCN1000.JPG" alt="" /></a></p>
-
-<p>I also can see what looks like a potentially good Thai restaurant on the corner:</p>
-
-<p><a href="http://picasaweb.google.com/matt.stine/SanFranciscoJavaOne2007/photo#5061188940709012290"><img src="http://lh3.google.com/image/matt.stine/Rjz0hrgYo0I/AAAAAAAAAA0/poC9lBKXNDw/s288/DSCN0999.JPG" alt="" /></a></p>
-
-<p>The reviews on Google Maps look promising!</p>
-
-<p>On a final note for this entry, I desperately miss my family. Our goodbye at Memphis International was tear-filled, especially by Wendy. I haven&#8217;t been this far away from them in a LOOOOONG time. In fact, Abby was only about 10 months old the last time I went on a business trip without them. Isabella and Ali Kate weren&#8217;t even conceived yet! I managed to get a web camera for the trip, so I&#8217;m going to send them a video message every day. Check your email sweetheart! I love you all SO MUCH!</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/11/">&larr; Older</a>
@@ -578,6 +618,10 @@ any modern browser</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2014/06/30/microservices-are-solid/">Microservices are SOLID</a>
+      </li>
+    
+      <li class="post">
         <a href="/2013/08/02/bosh-and-cloud-api-compatibility/">BOSH and Cloud API Compatibility</a>
       </li>
     
@@ -591,10 +635,6 @@ any modern browser</p>
     
       <li class="post">
         <a href="/2013/05/29/into-the-crucible/">Into the Crucible</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2012/05/24/the-relaunch/">The Relaunch</a>
       </li>
     
   </ul>
@@ -627,7 +667,7 @@ any modern browser</p>
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2013 - Matt Stine -
+  Copyright &copy; 2014 - Matt Stine -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 

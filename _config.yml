@@ -97,3 +97,11 @@ google_analytics_tracking_id: UA-8534802-1
 
 # Facebook Like
 facebook_like: false
+
+asciidoc: asciidoctor
+asciidoc_ext: asciidoc,adoc,ad
+asciidoctor:
+  attributes:
+    - hardbreaks!
+    - source-highlighter=coderay
+    - coderay-css=style

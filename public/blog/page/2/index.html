@@ -9,7 +9,7 @@
   <meta name="author" content="Matt Stine">
 
   
-  <meta name="description" content="In late September I completed an eight-part article series for Agile Zone entitled &#8220;The Seven Wastes of Software Development.&#8221; This &hellip;">
+  <meta name="description" content="I&#8217;ve been really quiet on this blog lately. There have been multiple reasons for that. I&#8217;ve been extremely busy preparing for conferences &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -76,6 +76,54 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2010/11/10/agile-zone-roundup/">Agile Zone Roundup</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-11-10T08:53:15-06:00" pubdate data-updated="true">Nov 10<span>th</span>, 2010</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I&#8217;ve been really quiet on this blog lately. There have been multiple reasons for that. I&#8217;ve been extremely busy preparing for conferences this Fall including SpringOne/2GX and The Rich Web Experience. I&#8217;ve also stayed busy writing for DZone. I have my first DZone Refcard coming out soon, which is focused on Web Driver/Selenium 2. I&#8217;ve also been writing my regular articles for Agile Zone. Here&#8217;s a roundup:</p>
+
+<ul>
+<li><p><a href="http://agile.dzone.com/articles/modular-agile-loosely-coupled">Modular Agile: Loosely coupled, highly cohesive ceremonies</a></p></li>
+<li><p><a href="http://agile.dzone.com/articles/think-youre-doing-kanban-think">   Think You&#8217;re &#8220;Doing Kanban?&#8221; Think Again.</a></p></li>
+<li><p><a href="http://agile.dzone.com/articles/gaelyks-and-golden-hammers">On Gaelyks and Golden Hammers</a></p></li>
+<li><p><a href="http://agile.dzone.com/articles/automation-people-because">Automation for the People (because Everybody Doing It Manually Hurts)  </a></p></li>
+<li><p><a href="http://agile.dzone.com/articles/build-scripts-we-dont-need-no">Build Scripts? We Don&#8217;t Need No Stinkin&#8217; Build Scripts!</a></p></li>
+<li><p><a href="http://agile.dzone.com/polls/automated-browser-testing">Automated Browser Testing: What&#8217;s in Your Toolkit?</a></p></li>
+<li><p><a href="http://agile.dzone.com/articles/selenese-or-not-test-seems-be">To Selenese or not to Test? That Seems to be the Question.</a></p></li>
+<li><p><a href="http://agile.dzone.com/articles/apple-jvm-extra-feature">Is the Apple JVM an &#8220;Extra Feature?&#8221;</a></p></li>
+</ul>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -533,58 +581,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2010/04/29/osgi-on-rails/">OSGi on Rails?</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2010-04-29T12:33:40-05:00" pubdate data-updated="true">Apr 29<span>th</span>, 2010</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>I&#8217;ve seen quite a few blogs/articles/etc. lately related to the adoption (or lack thereof) of OSGi in the mainstream web application/enterprise application space. A nice summation of these is encapsulated in this excerpt from a comment by Peter Kriens on DZone (you&#8217;ll find it in the comments section for <a href="http://java.dzone.com/articles/osgi-perspectives">http://java.dzone.com/articles/osgi-perspectives</a>:</p>
-
-<blockquote><p>Yes, one of the next frontiers is to make OSGi easier to use for the web app developers. The solid foundation is there, so stop whining and help us create the tools, books, and tutorials that will make OSGi palatable in those markets.</p></blockquote>
-
-<p>There&#8217;s nothing like a call to action to get me stirred up. It&#8217;s no secret that I think OSGi is an excellent tool for tackling the complexity of enterprise applications (see my talks on the NFJS tour this year: <a href="http://www.nofluffjuststuff.com/conference/speaker/matt_stine">http://www.nofluffjuststuff.com/conference/speaker/matt_stine</a>). However, I will readily admit that the learning curve for tackling any non-trivial application in OSGi is rather steep. My bar for non-trivial is quite low - try learning OSGi while simultaneously attempting to get a mainstream framework like Hibernate working properly.</p>
-
-<p>I think that what we need is a tool that will enable a developer new to OSGi to get an OSGi-enabled web application up and running fairly readily. In fact, I think it would be good to absolutely minimize the amount of OSGi know-how required to get a basic web application into production, while at the same time leaving all of OSGi available just under the covers so that it can be easily accessed when I know what I need and how to use it. So here&#8217;s my proposal:</p>
-
-<p>1) Follow in the footsteps of AppFuse, Grails, Rails, Roo, etc. and put together a web application toolkit that will allow one to instantly spin-up a deployable OSGI-enabled web application.
-2) Since we&#8217;re talking about catering to mainstream here, Java the language ought to be the primary language used for development. With that said, we should not put up any barriers to using other languages available on the JVM.
-3) Bootstrap a DB-agnostic persistence layer leveraging JPA and make it easily accessible across the application bundles.
-4) Bootstrap a dependency injection framework for OSGi services based on the Blueprint standard.
-5) Bootstrap a security layer and provide a basic user/role security module with provided login, logout, etc. facilities.
-6) Pick a set of modern Java web application frameworks (e.g. Spring MVC, Struts 2, etc.) and make them easily pluggable.
-7) Wrap a nice build system around all of this that leverages a modern build tool (e.g. Gradle or Maven 3), the best of the PAX Tools features (especially Pax Construct, Exam, and Runner), and good facilities for automated testing.</p>
-
-<p>So, who&#8217;s with me? I&#8217;m open to any suggestions/comments/rants, etc.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/3/">&larr; Older</a>
@@ -610,6 +606,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2014/06/30/microservices-are-solid/">Microservices are SOLID</a>
+      </li>
+    
+      <li class="post">
         <a href="/2013/08/02/bosh-and-cloud-api-compatibility/">BOSH and Cloud API Compatibility</a>
       </li>
     
@@ -623,10 +623,6 @@
     
       <li class="post">
         <a href="/2013/05/29/into-the-crucible/">Into the Crucible</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2012/05/24/the-relaunch/">The Relaunch</a>
       </li>
     
   </ul>
@@ -659,7 +655,7 @@
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2013 - Matt Stine -
+  Copyright &copy; 2014 - Matt Stine -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 
