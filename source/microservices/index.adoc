@@ -1,0 +1,60 @@
+---
+layout: page
+title: "Microservices Reading List"
+date: 2014-07-02 13:05
+comments: true
+sharing: true
+footer: true
+---
+
+Given the huge amount of buzz around Microservices right now, as well as the huge amount of content being generated, I thought I'd begin curating a ``Microservices Reading List.''
+With that said, the main reason for the creation of this page is the continual question: ``Great talk/article/etc. Where can I learn more?''
+
+Below you'll find articles, blogs, videos, slide decks, etc.
+I'm going to try to categorize them a bit as well.
+This is by no means a complete catalog. Continue to check back for updates!
+
+== Start Here
+
+* http://martinfowler.com/articles/microservices.html[Microservices]: overview by James Shore and Martin Fowler
+
+== It's Not All Roses...
+
+Here you'll find posts acknowledging the challenges associated with Microservices:
+
+* http://highscalability.com/blog/2014/4/8/microservices-not-a-free-lunch.html[Microservices - Not A Free Lunch!]
+* https://michaelfeathers.silvrback.com/microservices-and-the-failure-of-encapsulaton[Microservices and the Failure of Encapsulation] - interesting opinion piece
+
+== Field Reports
+
+Enough with the theory.
+Who's doing this?
+
+* http://developers.soundcloud.com/blog/building-products-at-soundcloud-part-1-dealing-with-the-monolith[Building Products at SoundCloud —Part I: Dealing with the Monolith]
+* http://developers.soundcloud.com/blog/building-products-at-soundcloud-part-2-breaking-the-monolith[Building Products at SoundCloud—Part II: Breaking the Monolith]
+* http://developers.soundcloud.com/blog/building-products-at-soundcloud-part-3-microservices-in-scala-and-finagle[Building Products at SoundCloud—Part III: Microservices in Scala and Finagle]
+* https://blog.yourkarma.com/building-microservices-at-karma[How we build microservices at Karma]: ``Forget the hype, we're using microservices in production.''
+* http://lonelycode.com/2014/04/08/microservices-the-blind-leading-the-blind/[Microservices – the blind leading the blind] - Field Report from http://www.loadzen.com/[Loadzen]
+
+== Organization/Process/Governance
+
+Microservices is far from being only a technical architecture pattern. There are huge issues associated with culture, team organization, process, data ownership, governance, etc.
+Here are some relevant pieces:
+
+* http://genehughson.wordpress.com/2014/05/23/carving-it-up-microservices-monoliths-conways-law/[Carving it up – Microservices, Monoliths, & Conway’s Law]
+* http://genehughson.wordpress.com/2014/06/04/more-on-microservices-boundaries-governance-reuse-complexity/[More on Microservices – Boundaries, Governance, Reuse & Complexity]
+* http://genehughson.wordpress.com/2014/06/16/coordinating-microservices-playing-well-with-others/[Coordinating Microservices – Playing Well with Others]
+* http://genehughson.wordpress.com/2014/06/20/microservices-and-data-architecture-who-owns-what-data/[Microservices and Data Architecture – Who Owns What Data?]
+
+== Antifragile
+
+My new friend Russ Miles is deep into Microservices. He's primarily focused on the meme of _antifragility_ in software. Here's some of his stuff:
+
+* https://leanpub.com/antifragilesoftware[Antifragile Software:
+Building Adaptable Software with Microservices] - eBook in progress
+* http://www.infoq.com/articles/russ-miles-antifragility-microservices[Russ Miles on Antifragility and Microservices] - InfoQ Interview
+
+== Conference Presentations
+
+* http://www.infoq.com/presentations/Micro-Services[Micro Services: Java, the Unix Way] - James Lewis
+* http://www.slideshare.net/mstine/microservices-cf-summit[Cloud Foundry and Microservices: A Mutualistic Symbiotic Relationship] - Matt Stine (slides only, video coming soon)

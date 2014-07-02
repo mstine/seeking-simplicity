@@ -9,7 +9,7 @@
   <meta name="author" content="Matt Stine">
 
   
-  <meta name="description" content="I&#8217;ve seen quite a few blogs/articles/etc. lately related to the adoption (or lack thereof) of OSGi in the mainstream web application/enterprise &hellip;">
+  <meta name="description" content="I recently started reading the beta copy of Bruce Tate&#8217;s Seven Languages in Seven Weeks from the Pragmatic Bookshelf. While I&#8217;m certainly &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -69,6 +69,7 @@
 <ul class="main-navigation">
   <li><a href="/">Blog</a></li>
   <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/microservices">Microservices</a></li>
 </ul>
 
 </nav>
@@ -76,6 +77,53 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2010/05/06/first-thoughts-on-seven-languages-in-seven-weeks/">First Thoughts on &#8220;Seven Languages in Seven Weeks&#8230;&#8221;</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-05-06T13:35:28-05:00" pubdate data-updated="true">May 6<span>th</span>, 2010</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I recently started reading the beta copy of Bruce Tate&#8217;s <a href="http://pragprog.com/titles/btlang/seven-languages-in-seven-weeks"><em>Seven Languages in Seven Weeks</em></a> from the Pragmatic Bookshelf. While I&#8217;m certainly NOT on pace to actually complete the book in seven weeks, I have been steadily plodding along. Reading this book takes me back to my days as an undergraduate computer science student at the University of Mississippi. As with most CS programs, we were all required to take a &#8220;Survey of Programming Languages&#8221; course toward the end of the curriculum. Tate&#8217;s book is very similiar to walking through this course, except:</p>
+
+<ol>
+<li><p>Tate&#8217;s text and suggested exercises are intensely practical, targeted at actually getting something useful done in the language.</p></li>
+<li><p>The language selection is entirely relevant to today&#8217;s practitioner. Chances are good that you&#8217;ll use a language from this set in your day job sometime in the next decade. Ignoring that, chances are good that you&#8217;ll use some language that is a &#8220;close cousin&#8221; of a language from this set.</p></li>
+<li><p>Your thinking about programming in general will be challenged by each chapter. This is not a leisurely read. You cannot &#8220;coast&#8221; through this course.</p></li>
+</ol>
+
+
+<p>At present I&#8217;m slowly working through the chapter devoted to Io. Io is a prototype-based language, close-cousins with Lua (of recent iPhone game development controversy) and JavaScript (can&#8217;t think of a practical use for this guy&#8230;umm&#8230;oh wait!). I&#8217;ve very much enjoyed Bruce&#8217;s treatment of the language, with his descriptions of the feature being as &#8220;visual&#8221; as words can effectively be - who else could liken languages to popular movie characters and get away with it? Before working through Io, Bruce and I tackled Ruby together. Ruby is an old and unfortunately neglected friend of mine. We&#8217;ve had our fun together doing a couple of small Rails applications, JUG talks and a (so far) unsuccessful trek into the world of OSGi, but unfortunately we haven&#8217;t hit the big time in my day job. Working through this chapter really served to reignite my enthusiasm for the language, especially as it relates to the rich ecosystem of testing tools available in the Ruby and Rails communities.</p>
+
+<p>In short, only two chapters in I&#8217;d thoroughly recommend that you purchase this book. Like <a href="http://oreilly.com/catalog/9780596100940"><em>Beyond Java</em></a> before it, Bruce has again challenged us to step outside of our comfort zone. If nothing else, you&#8217;ve got seven kickstarts into learning your &#8220;Language of the Year.&#8221;</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -654,68 +702,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2009/10/03/test-driven-development-worked-for-me/">Test Driven Development Worked for Me!</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-10-03T17:02:36-05:00" pubdate data-updated="true">Oct 3<span>rd</span>, 2009</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Our team got to spend a few days with Jared Richardson this week, talking tech leadership, agile, and automated testing. At some point during the opening day&#8217;s discussion, I related the story of how I initially got into Test Driven Development (TDD) and how it seriously ramped up my productivity and decreased my defect count.</p>
-
-<p>In early 2003, we were slowly dragging through development of the first version of our Shared Resource Management system. At the time our development model looked a little something like this:</p>
-
-<p>1) Code until you run into an unimplemented dependency;
-2) Repeat until one of the dependencies is checked in;
-3) Big Bang Integration!
-4) Debug, debug, debug&#8230;
-5) Repeat until something pseudo-demoable is ready.</p>
-
-<p>As you might imagine, this wasn&#8217;t a very productive way to work, but unfortunately it was all most of us knew. At the time I thought we really needed to improve on our testing so that we could eliminate a lot of the defects that at the time I didn&#8217;t realize were being caused by our development model. I asked my boss if I could start a QA effort and not too much later found the XP/Agile Universe conference that was held in August 2003. It was my hope that we could learn about how to properly test/QA our software there as there seemed to be a lot of talks about this &#8220;TDD&#8221; thing. I got approval to attend, and while down there I was immersed in this new culture of Extreme Programming (XP) and Agile.</p>
-
-<p>At one point I ventured into a room that was setup like what many of us would call a SCRUM/Team room today, where a group of folks were all coding away on a system and making its &#8220;Fit&#8221; tests pass. I quickly paired up with a gentleman and we went to work. At some point Brian Marick came over and asked what we were working on. I fumbled through a description of the requirement and he then asked, &#8220;Well, where&#8217;s your test?&#8221; I said that we didn&#8217;t have one, and he then said something that at the time was very profound to me, &#8220;Well, you can&#8217;t write any code until you have a failing test!&#8221;</p>
-
-<p>I spent most of my time waiting in the airport to return to Memphis reading Uncle Bob&#8217;s &#8220;Agile Software Development: Principles, Patterns, and Practices.&#8221; Needless to say, I was fired up.</p>
-
-<p>When I returned to work in the following weeks, I essentially tried two different tactics in parallel to share what I learned with my team.</p>
-
-<p>First, I practiced what Jared calls &#8220;2x4 Development,&#8221; or, beating your team in the shins with a 2x4 until they start doing TDD, pair programming, continuous integration, etc. I even delivered my own version of the agile manifesto to the entire department, and the most profound comments I got out of that were &#8220;I can&#8217;t ever imagine us paying two developers to sit at the same computer and work on the same code,&#8221; and &#8220;Well, who&#8217;s going to test the test code?!?!&#8221;</p>
-
-<p>Needless to say, this didn&#8217;t work very well. My second tactic was much more guerrilla in nature. I told the guy that I was working with that I didn&#8217;t care what he did with the rest of his time, as long as he checked in his interfaces before he started to code. Now I had something to mock! I then proceeded to TDD all of my code. I advertised my productivity in terms of test cases passing with a little counter on my whiteboard. Development was fun again, as I could get instant feedback on how my code was working and I knew that it was interacting properly with its dependencies. Sure enough, when those big bang integrations happened, my code rarely seemed to be the source of the defects, and I quickly found myself getting pulled into other parts of the code to help develop since I had already gotten my typical assignment finished!</p>
-
-<p>We delivered the section of the system that I developed using TDD much faster than any part that I had worked on up to that point (no hard numbers, but I have a pretty good memory of that time), and in addition, I wrote the CLEANEST code I had ever written up to that point.</p>
-
-<p>So, while Jared wouldn&#8217;t recommend you try TDD if the rest of your team isn&#8217;t on board - you&#8217;re never going to get someone who doesn&#8217;t care about tests to fix one that they broke - this guerrilla tactic worked well for me and got me some recognition as a guy who could write good clean code fast! If I could go back to that point, I think I would have tried <a href="http://www.jaredrichardson.net/blog/2005/11/03/">Defect Driven Testing</a> first or in addition to my GTDD.</p>
-
-<p>So, how are you getting your team test infected?</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/4/">&larr; Older</a>
@@ -741,6 +727,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2014/07/02/wip-microservices-reading-list/">WIP Microservices Reading List</a>
+      </li>
+    
+      <li class="post">
         <a href="/2014/06/30/microservices-are-solid/">Microservices are SOLID</a>
       </li>
     
@@ -754,10 +744,6 @@
     
       <li class="post">
         <a href="/2013/05/29/clojure-on-cloud-foundry/">Clojure on Cloud Foundry</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2013/05/29/into-the-crucible/">Into the Crucible</a>
       </li>
     
   </ul>

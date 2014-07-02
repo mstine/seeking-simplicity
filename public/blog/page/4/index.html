@@ -9,7 +9,7 @@
   <meta name="author" content="Matt Stine">
 
   
-  <meta name="description" content="Isabella, my second oldest daughter, just made the cutoff to be featured on one of the very popular &#8220;Mommy Blogs&#8221; out there, Totally &hellip;">
+  <meta name="description" content="Our team got to spend a few days with Jared Richardson this week, talking tech leadership, agile, and automated testing. At some point during the &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -69,6 +69,7 @@
 <ul class="main-navigation">
   <li><a href="/">Blog</a></li>
   <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/microservices">Microservices</a></li>
 </ul>
 
 </nav>
@@ -76,6 +77,68 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/10/03/test-driven-development-worked-for-me/">Test Driven Development Worked for Me!</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-10-03T17:02:36-05:00" pubdate data-updated="true">Oct 3<span>rd</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Our team got to spend a few days with Jared Richardson this week, talking tech leadership, agile, and automated testing. At some point during the opening day&#8217;s discussion, I related the story of how I initially got into Test Driven Development (TDD) and how it seriously ramped up my productivity and decreased my defect count.</p>
+
+<p>In early 2003, we were slowly dragging through development of the first version of our Shared Resource Management system. At the time our development model looked a little something like this:</p>
+
+<p>1) Code until you run into an unimplemented dependency;
+2) Repeat until one of the dependencies is checked in;
+3) Big Bang Integration!
+4) Debug, debug, debug&#8230;
+5) Repeat until something pseudo-demoable is ready.</p>
+
+<p>As you might imagine, this wasn&#8217;t a very productive way to work, but unfortunately it was all most of us knew. At the time I thought we really needed to improve on our testing so that we could eliminate a lot of the defects that at the time I didn&#8217;t realize were being caused by our development model. I asked my boss if I could start a QA effort and not too much later found the XP/Agile Universe conference that was held in August 2003. It was my hope that we could learn about how to properly test/QA our software there as there seemed to be a lot of talks about this &#8220;TDD&#8221; thing. I got approval to attend, and while down there I was immersed in this new culture of Extreme Programming (XP) and Agile.</p>
+
+<p>At one point I ventured into a room that was setup like what many of us would call a SCRUM/Team room today, where a group of folks were all coding away on a system and making its &#8220;Fit&#8221; tests pass. I quickly paired up with a gentleman and we went to work. At some point Brian Marick came over and asked what we were working on. I fumbled through a description of the requirement and he then asked, &#8220;Well, where&#8217;s your test?&#8221; I said that we didn&#8217;t have one, and he then said something that at the time was very profound to me, &#8220;Well, you can&#8217;t write any code until you have a failing test!&#8221;</p>
+
+<p>I spent most of my time waiting in the airport to return to Memphis reading Uncle Bob&#8217;s &#8220;Agile Software Development: Principles, Patterns, and Practices.&#8221; Needless to say, I was fired up.</p>
+
+<p>When I returned to work in the following weeks, I essentially tried two different tactics in parallel to share what I learned with my team.</p>
+
+<p>First, I practiced what Jared calls &#8220;2x4 Development,&#8221; or, beating your team in the shins with a 2x4 until they start doing TDD, pair programming, continuous integration, etc. I even delivered my own version of the agile manifesto to the entire department, and the most profound comments I got out of that were &#8220;I can&#8217;t ever imagine us paying two developers to sit at the same computer and work on the same code,&#8221; and &#8220;Well, who&#8217;s going to test the test code?!?!&#8221;</p>
+
+<p>Needless to say, this didn&#8217;t work very well. My second tactic was much more guerrilla in nature. I told the guy that I was working with that I didn&#8217;t care what he did with the rest of his time, as long as he checked in his interfaces before he started to code. Now I had something to mock! I then proceeded to TDD all of my code. I advertised my productivity in terms of test cases passing with a little counter on my whiteboard. Development was fun again, as I could get instant feedback on how my code was working and I knew that it was interacting properly with its dependencies. Sure enough, when those big bang integrations happened, my code rarely seemed to be the source of the defects, and I quickly found myself getting pulled into other parts of the code to help develop since I had already gotten my typical assignment finished!</p>
+
+<p>We delivered the section of the system that I developed using TDD much faster than any part that I had worked on up to that point (no hard numbers, but I have a pretty good memory of that time), and in addition, I wrote the CLEANEST code I had ever written up to that point.</p>
+
+<p>So, while Jared wouldn&#8217;t recommend you try TDD if the rest of your team isn&#8217;t on board - you&#8217;re never going to get someone who doesn&#8217;t care about tests to fix one that they broke - this guerrilla tactic worked well for me and got me some recognition as a guy who could write good clean code fast! If I could go back to that point, I think I would have tried <a href="http://www.jaredrichardson.net/blog/2005/11/03/">Defect Driven Testing</a> first or in addition to my GTDD.</p>
+
+<p>So, how are you getting your team test infected?</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -602,96 +665,6 @@ JUGS Community: <a href="http://community.java.net/jugs/">http://community.java.
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2009/06/02/java-technology-on-google-app-engine-communityone-2009-lightning-talk/">Java™ Technology on Google App Engine: #CommunityOne 2009 Lightning Talk</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-06-02T15:56:01-05:00" pubdate data-updated="true">Jun 2<span>nd</span>, 2009</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>My second lightning talk at Community One West 2009 revolved around the still relatively recent announcement <a href="http://code.google.com/appengine/docs/java/overview.html">that Java is now supported on Google&#8217;s App Engine</a>.</p>
-
-<p>What exactly is <a href="http://code.google.com/appengine">Google App Engine</a>? It&#8217;s none other than a way that you can run your Java technology-based applications on Google&#8217;s massive infrastructure.</p>
-
-<p>As far as the &#8220;Geekxecutive Summary,&#8221; Google has provided:</p>
-
-<ul>
-<li><p><a href="http://code.google.com/appengine/docs/java/runtime.html">A Java 6 Virtual Machine</a> with a <a href="http://code.google.com/appengine/docs/java/jrewhitelist.html">Class Whitelist</a>. Not all classes in the standard JDK library are available. A notable missing member is the java.awt.* library, so if you&#8217;re using that for image processing, find an alternative (see one later) before porting to the App Engine.</p></li>
-<li><p>The Java Servlet Standard by way of the <a href="http://www.mortbay.org/jetty/">Jetty container</a>.</p></li>
-<li><p><a href="http://code.google.com/appengine/docs/java/runtime.html#The_Sandbox">A secured sandbox environment</a>, meaning 1) no spawned threads; 2) no arbitrary socket connections (you can use HTTP/HTTPS, see below); 3) No writing to the local filesystem - makes sense because you don&#8217;t know where you are on any given request.</p></li>
-</ul>
-
-
-<p>Several services are provided to you by Google as a Java developer:</p>
-
-<ul>
-<li><p><a href="http://code.google.com/appengine/docs/java/datastore/">The Datastore</a> - a schemaless object datastore, with a query engine and atomic transactions. This is accessible via Java Data Objects (JDO) 2.3, Java Persistence API (JPA) 1.0, or Google&#8217;s own low-level API&#8217;s.</p></li>
-<li><p>A <a href="http://code.google.com/appengine/docs/java/memcache/">Memcache</a> service for caching whatever objects you like, accessible via JCache JSR 107.</p></li>
-<li><p><a href="http://code.google.com/appengine/docs/java/urlfetch/">A URL fetch service</a> for accessing data on other systems, accessible via java.net.URLConnection.</p></li>
-<li><p><a href="http://code.google.com/appengine/docs/java/mail/">A Mail (JavaMail) service</a>.</p></li>
-<li><p><a href="http://code.google.com/appengine/docs/java/images/">An Image processing service</a>, a likely candidate for replacing AWT for image processing. Be careful, it binds you to Google&#8217;s services. You may want to write a wrapper for it.</p></li>
-<li><p><a href="http://code.google.com/appengine/docs/java/users/">Google Accounts for authentication</a>. Should you leverage this, anyone with a Google account can authenticate into your app.</p></li>
-</ul>
-
-
-<p>The nice thing about Google&#8217;s services is that where possible they always provided a way in through standards-based Java API&#8217;s.</p>
-
-<p>Now, on to tools:</p>
-
-<ul>
-<li><p><a href="http://code.google.com/appengine/docs/java/tools/ant.html">An Apache Ant component</a> for your automated build process.</p></li>
-<li><p><a href="http://code.google.com/appengine/docs/java/tools/eclipse.html">A very nice plugin</a> for the Eclipse IDE.</p></li>
-<li><p><a href="http://code.google.com/appengine/docs/java/gettingstarted/installing.html">The App Engine SDK</a> - Java API&#8217;s into all of Google&#8217;s services.</p></li>
-<li><p><a href="http://code.google.com/appengine/docs/java/tools/devserver.html">A Development Server</a> so that you can run a simulated Google environment on your local machine.</p></li>
-<li><p><a href="http://code.google.com/appengine/docs/java/tools/uploadinganapp.html">AppCfg</a> for command-line interaction with the App Engine platform.</p></li>
-</ul>
-
-
-<p>Probably the most significant piece to this puzzle is the fact that Google is not simply supporting Java the language, but Java the platform. It&#8217;s a standard JVM, so other languages running on the JVM will happily run on Google App Engine as well. At this writing, I knew of the following languages that are known to run:</p>
-
-<ul>
-<li><p>Java</p></li>
-<li><p>Groovy (and Grails as of 1.1.1)</p></li>
-<li><p>JRuby</p></li>
-<li><p>Scala</p></li>
-<li><p>Clojure</p></li>
-<li><p>Beanshell</p></li>
-<li><p>JavaScript (Rhino)</p></li>
-<li><p>Jython</p></li>
-</ul>
-
-
-<p>Here&#8217;s the screencast from my talk. Enjoy!</p>
-
-<p>[youtube=http://www.youtube.com/watch?v=hotbwYStwH8&hl;=en&fs;=1]</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/5/">&larr; Older</a>
@@ -717,6 +690,10 @@ JUGS Community: <a href="http://community.java.net/jugs/">http://community.java.
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2014/07/02/wip-microservices-reading-list/">WIP Microservices Reading List</a>
+      </li>
+    
+      <li class="post">
         <a href="/2014/06/30/microservices-are-solid/">Microservices are SOLID</a>
       </li>
     
@@ -730,10 +707,6 @@ JUGS Community: <a href="http://community.java.net/jugs/">http://community.java.
     
       <li class="post">
         <a href="/2013/05/29/clojure-on-cloud-foundry/">Clojure on Cloud Foundry</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2013/05/29/into-the-crucible/">Into the Crucible</a>
       </li>
     
   </ul>

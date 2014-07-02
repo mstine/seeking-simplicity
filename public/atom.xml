@@ -4,7 +4,7 @@
   <title><![CDATA[Seeking Simplicity]]></title>
   <link href="http://mattstine.com/atom.xml" rel="self"/>
   <link href="http://mattstine.com/"/>
-  <updated>2014-06-30T17:40:54-05:00</updated>
+  <updated>2014-07-02T15:10:40-05:00</updated>
   <id>http://mattstine.com/</id>
   <author>
     <name><![CDATA[Matt Stine]]></name>
@@ -12,6 +12,16 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[WIP Microservices Reading List]]></title>
+    <link href="http://mattstine.com/2014/07/02/wip-microservices-reading-list/"/>
+    <updated>2014-07-02T13:22:00-05:00</updated>
+    <id>http://mattstine.com/2014/07/02/wip-microservices-reading-list</id>
+    <content type="html"><![CDATA[<div class="paragraph">
+<p>I&#8217;ve started curating a <a href="http://mattstine.com/microservices">Microservices Reading List</a>. It&#8217;s still work in progress, but there&#8217;s some good stuff there. Watch for more!</p>
+</div>]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Microservices are SOLID]]></title>
@@ -1557,26 +1567,6 @@ Please sound off in the blogosphere, the Twitterverse, or wherever suits your fa
 <p>Our first paper will be <a href="http://nosqlsummer.org/paper/end-of-architectural-era">The End of an Architectural Era (It&#8217;s Time for a Complete Rewrite)</a>. Please read it before the meeting and come prepared to mindshare.</p>
 
 <p>If there&#8217;s enough interest in these discussions, we could start having a lunch time discussion at a centrally located restaurant halfway between each JUG meeting. We can discuss this at our first meeting in June. I hope to see you there!</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[First thoughts on "Seven Languages in Seven Weeks..."]]></title>
-    <link href="http://mattstine.com/2010/05/06/first-thoughts-on-seven-languages-in-seven-weeks/"/>
-    <updated>2010-05-06T13:35:28-05:00</updated>
-    <id>http://mattstine.com/2010/05/06/first-thoughts-on-seven-languages-in-seven-weeks</id>
-    <content type="html"><![CDATA[<p>I recently started reading the beta copy of Bruce Tate&#8217;s <a href="http://pragprog.com/titles/btlang/seven-languages-in-seven-weeks"><em>Seven Languages in Seven Weeks</em></a> from the Pragmatic Bookshelf. While I&#8217;m certainly NOT on pace to actually complete the book in seven weeks, I have been steadily plodding along. Reading this book takes me back to my days as an undergraduate computer science student at the University of Mississippi. As with most CS programs, we were all required to take a &#8220;Survey of Programming Languages&#8221; course toward the end of the curriculum. Tate&#8217;s book is very similiar to walking through this course, except:</p>
-
-<ol>
-<li><p>Tate&#8217;s text and suggested exercises are intensely practical, targeted at actually getting something useful done in the language.</p></li>
-<li><p>The language selection is entirely relevant to today&#8217;s practitioner. Chances are good that you&#8217;ll use a language from this set in your day job sometime in the next decade. Ignoring that, chances are good that you&#8217;ll use some language that is a &#8220;close cousin&#8221; of a language from this set.</p></li>
-<li><p>Your thinking about programming in general will be challenged by each chapter. This is not a leisurely read. You cannot &#8220;coast&#8221; through this course.</p></li>
-</ol>
-
-
-<p>At present I&#8217;m slowly working through the chapter devoted to Io. Io is a prototype-based language, close-cousins with Lua (of recent iPhone game development controversy) and JavaScript (can&#8217;t think of a practical use for this guy&#8230;umm&#8230;oh wait!). I&#8217;ve very much enjoyed Bruce&#8217;s treatment of the language, with his descriptions of the feature being as &#8220;visual&#8221; as words can effectively be - who else could liken languages to popular movie characters and get away with it? Before working through Io, Bruce and I tackled Ruby together. Ruby is an old and unfortunately neglected friend of mine. We&#8217;ve had our fun together doing a couple of small Rails applications, JUG talks and a (so far) unsuccessful trek into the world of OSGi, but unfortunately we haven&#8217;t hit the big time in my day job. Working through this chapter really served to reignite my enthusiasm for the language, especially as it relates to the rich ecosystem of testing tools available in the Ruby and Rails communities.</p>
-
-<p>In short, only two chapters in I&#8217;d thoroughly recommend that you purchase this book. Like <a href="http://oreilly.com/catalog/9780596100940"><em>Beyond Java</em></a> before it, Bruce has again challenged us to step outside of our comfort zone. If nothing else, you&#8217;ve got seven kickstarts into learning your &#8220;Language of the Year.&#8221;</p>
 ]]></content>
   </entry>
   

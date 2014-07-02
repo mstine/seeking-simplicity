@@ -4,7 +4,7 @@
   <title><![CDATA[Category: microservices | Seeking Simplicity]]></title>
   <link href="http://mattstine.com/blog/categories/microservices/atom.xml" rel="self"/>
   <link href="http://mattstine.com/"/>
-  <updated>2014-06-30T17:40:54-05:00</updated>
+  <updated>2014-07-02T15:10:40-05:00</updated>
   <id>http://mattstine.com/</id>
   <author>
     <name><![CDATA[Matt Stine]]></name>
@@ -12,6 +12,15 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[WIP Microservices Reading List]]></title>
+    <link href="http://mattstine.com/2014/07/02/wip-microservices-reading-list/"/>
+    <updated>2014-07-02T13:22:00-05:00</updated>
+    <id>http://mattstine.com/2014/07/02/wip-microservices-reading-list</id>
+    <content type="html"><![CDATA[<p>I've started curating a link:/microservices[Microservices Reading List]. It's still work in progress, but there's some good stuff there. Watch for more!</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Microservices are SOLID]]></title>

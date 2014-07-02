@@ -9,7 +9,7 @@
   <meta name="author" content="Matt Stine">
 
   
-  <meta name="description" content="I gave two lightning talks at CommunityOne today, the first of which described deploying Grails applications to Morph AppSpace. For the uninitiated, &hellip;">
+  <meta name="description" content="My second lightning talk at Community One West 2009 revolved around the still relatively recent announcement that Java is now supported on Google&# &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -69,6 +69,7 @@
 <ul class="main-navigation">
   <li><a href="/">Blog</a></li>
   <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/microservices">Microservices</a></li>
 </ul>
 
 </nav>
@@ -76,6 +77,96 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/06/02/java-technology-on-google-app-engine-communityone-2009-lightning-talk/">Java™ Technology on Google App Engine: #CommunityOne 2009 Lightning Talk</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-06-02T15:56:01-05:00" pubdate data-updated="true">Jun 2<span>nd</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>My second lightning talk at Community One West 2009 revolved around the still relatively recent announcement <a href="http://code.google.com/appengine/docs/java/overview.html">that Java is now supported on Google&#8217;s App Engine</a>.</p>
+
+<p>What exactly is <a href="http://code.google.com/appengine">Google App Engine</a>? It&#8217;s none other than a way that you can run your Java technology-based applications on Google&#8217;s massive infrastructure.</p>
+
+<p>As far as the &#8220;Geekxecutive Summary,&#8221; Google has provided:</p>
+
+<ul>
+<li><p><a href="http://code.google.com/appengine/docs/java/runtime.html">A Java 6 Virtual Machine</a> with a <a href="http://code.google.com/appengine/docs/java/jrewhitelist.html">Class Whitelist</a>. Not all classes in the standard JDK library are available. A notable missing member is the java.awt.* library, so if you&#8217;re using that for image processing, find an alternative (see one later) before porting to the App Engine.</p></li>
+<li><p>The Java Servlet Standard by way of the <a href="http://www.mortbay.org/jetty/">Jetty container</a>.</p></li>
+<li><p><a href="http://code.google.com/appengine/docs/java/runtime.html#The_Sandbox">A secured sandbox environment</a>, meaning 1) no spawned threads; 2) no arbitrary socket connections (you can use HTTP/HTTPS, see below); 3) No writing to the local filesystem - makes sense because you don&#8217;t know where you are on any given request.</p></li>
+</ul>
+
+
+<p>Several services are provided to you by Google as a Java developer:</p>
+
+<ul>
+<li><p><a href="http://code.google.com/appengine/docs/java/datastore/">The Datastore</a> - a schemaless object datastore, with a query engine and atomic transactions. This is accessible via Java Data Objects (JDO) 2.3, Java Persistence API (JPA) 1.0, or Google&#8217;s own low-level API&#8217;s.</p></li>
+<li><p>A <a href="http://code.google.com/appengine/docs/java/memcache/">Memcache</a> service for caching whatever objects you like, accessible via JCache JSR 107.</p></li>
+<li><p><a href="http://code.google.com/appengine/docs/java/urlfetch/">A URL fetch service</a> for accessing data on other systems, accessible via java.net.URLConnection.</p></li>
+<li><p><a href="http://code.google.com/appengine/docs/java/mail/">A Mail (JavaMail) service</a>.</p></li>
+<li><p><a href="http://code.google.com/appengine/docs/java/images/">An Image processing service</a>, a likely candidate for replacing AWT for image processing. Be careful, it binds you to Google&#8217;s services. You may want to write a wrapper for it.</p></li>
+<li><p><a href="http://code.google.com/appengine/docs/java/users/">Google Accounts for authentication</a>. Should you leverage this, anyone with a Google account can authenticate into your app.</p></li>
+</ul>
+
+
+<p>The nice thing about Google&#8217;s services is that where possible they always provided a way in through standards-based Java API&#8217;s.</p>
+
+<p>Now, on to tools:</p>
+
+<ul>
+<li><p><a href="http://code.google.com/appengine/docs/java/tools/ant.html">An Apache Ant component</a> for your automated build process.</p></li>
+<li><p><a href="http://code.google.com/appengine/docs/java/tools/eclipse.html">A very nice plugin</a> for the Eclipse IDE.</p></li>
+<li><p><a href="http://code.google.com/appengine/docs/java/gettingstarted/installing.html">The App Engine SDK</a> - Java API&#8217;s into all of Google&#8217;s services.</p></li>
+<li><p><a href="http://code.google.com/appengine/docs/java/tools/devserver.html">A Development Server</a> so that you can run a simulated Google environment on your local machine.</p></li>
+<li><p><a href="http://code.google.com/appengine/docs/java/tools/uploadinganapp.html">AppCfg</a> for command-line interaction with the App Engine platform.</p></li>
+</ul>
+
+
+<p>Probably the most significant piece to this puzzle is the fact that Google is not simply supporting Java the language, but Java the platform. It&#8217;s a standard JVM, so other languages running on the JVM will happily run on Google App Engine as well. At this writing, I knew of the following languages that are known to run:</p>
+
+<ul>
+<li><p>Java</p></li>
+<li><p>Groovy (and Grails as of 1.1.1)</p></li>
+<li><p>JRuby</p></li>
+<li><p>Scala</p></li>
+<li><p>Clojure</p></li>
+<li><p>Beanshell</p></li>
+<li><p>JavaScript (Rhino)</p></li>
+<li><p>Jython</p></li>
+</ul>
+
+
+<p>Here&#8217;s the screencast from my talk. Enjoy!</p>
+
+<p>[youtube=http://www.youtube.com/watch?v=hotbwYStwH8&hl;=en&fs;=1]</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -533,210 +624,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2009/04/25/grails-prototype-scriptaculous-persistent-grid-sorting-goodness/">Grails, Prototype, Script.aculo.us - Persistent Grid Sorting Goodness</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-04-25T00:14:40-05:00" pubdate data-updated="true">Apr 25<span>th</span>, 2009</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Ever wanted to do drag-n-drop sorting of a grid of images on a page and persist it? Here&#8217;s my solution using Grails, Prototype, and Script.aculo.us.</p>
-
-<p>Basically what prompted this was the need for my wife to be able to sort the various product images that she had on a screen at any given time in any way that she pleased, and it had to be easy to work with. What follows is by no means a complete solution to this problem, but it represents where I am in the development process and may be useful to you, my hapless reader.</p>
-
-<p>Here&#8217;s some GSP code which basically lays out a grid of product images, 3 wide by <em>n</em> deep:</p>
-
-<pre><code>&lt;div id="productThumbContainer"&gt;
-  &lt;g:set var="rowIndex" value="${0}"/&gt;
-&lt;g:each in="${products}" var="product" status="index"&gt;
-  &lt;g:if test="${index % 3 == 0}"&gt;
-    &lt;div id="productRow${rowIndex}" class="span-20 last product-row"&gt;
-  &lt;/g:if&gt;
-  &lt;div id="product_${product.id}" class="span-6 product &lt;g:if test="${(index % 3 == 2) || ((products.size() - index) == 1)}"&gt;last&lt;/g:if&gt;&lt;g:else&gt;append-1&lt;/g:else&gt;"&gt;
-    &lt;img src="${resource(dir: grailsApplication.config.store.productImages.webPath, file: product?.thumbnailImage?.name)}" width="230" class="productImage"&gt;
-    &lt;h3&gt;&lt;g:link controller="product" action="show" id="${product.id}"&gt;${product.name}&lt;/g:link&gt;&lt;/h3&gt;
-  &lt;/div&gt;
-  &lt;g:if test="${(index % 3 == 2) || ((products.size() - index) == 1)}"&gt;
-    &lt;/div&gt;
-    &lt;g:set var="rowIndex" value="${rowIndex + 1}"/&gt;
-  &lt;/g:if&gt;
-&lt;/g:each&gt;
-&lt;/div&gt;
-</code></pre>
-
-<p>Now here&#8217;s where the magic happens:</p>
-
-<pre><code>document.observe('dom:loaded', function() {
-      var productRows = $$('.product-row');
-
-      var options = {
-        constraint: false,
-        overlap: 'horizontal',
-        containment: productRows,
-        dropOnEmpty: true,
-        tag: 'div',
-        onUpdate: updateRows
-      };
-
-      productRows.each(function(item) {
-        Sortable.create(item, options);
-      });
-
-      $('persistOrderingButton').observe('click', function(event) {
-          var sortString = '';
-          productRows.each(function(row) {
-              sortString += '&amp;';
-              sortString += Sortable.serialize(row);
-          });
-          &lt;g:remoteFunction action="sortProducts" params="sortString" update="ajaxMessage" onSuccess="\$('ajaxMessage').show()"/&gt;
-      });
-});
-</code></pre>
-
-<p>What we&#8217;ve got here is, failure to communicate&#8230;oops, wrong synapse there&#8230;what we&#8217;ve got here is a Prototype selector that grabs everything with the class &#8220;.product-row.&#8221; It then takes these and creates a Scriptaculous Sortable for each of them, providing the object-literal &#8220;options.&#8221; Notice the &#8220;containment&#8221; option which allows you to drag products back and forth between the various rows.</p>
-
-<p>Delving deeper into the magic is the callback function &#8220;updateRows.&#8221; This guy is my favorite Javascript creation in quite some time:</p>
-
-<pre><code>function updateRows(list) {
-      var children = list.childElements();
-
-      if (children.size() &lt; 3) {
-
-        //If I'm the last row, who cares!
-        if (list.next() != null) {
-          var prevRow = list.previous();
-
-          if (prevRow != null) {
-            var lastChild = prevRow.childElements()[prevRow.childElements().size() - 1].remove();
-            list.insert({top:lastChild});
-            updateRows(prevRow);
-          } else {
-            var lastRow = list.up().childElements()[list.up().childElements().size() - 1];
-            var lastChild = lastRow.childElements()[lastRow.childElements().size() - 1].remove();
-            list.insert({top:lastChild});
-            updateRows(lastRow);
-          }
-        }
-      } else if (children.size() == 3) {
-        //Do nothing...gets me out of the recursion I hope!
-      } else {
-        var nextRow = list.next();
-        var lastChild = children[children.size() - 1].remove();
-
-        if (nextRow != null) {
-          nextRow.insert({top:lastChild});
-          updateRows(nextRow);
-        } else {
-          var topRow = list.up().childElements()[0];
-          topRow.insert({top:lastChild});
-          updateRows(topRow);
-        }
-      }
-
-      var i = 0;
-      Sortable.sequence(list).each(function(item) {
-        var productId = 'product_' + item;
-        if (i &lt; 2) {
-          $(productId).removeClassName('last');
-          $(productId).removeClassName('append-1');
-          $(productId).addClassName('append-1');
-        } else {
-          $(productId).removeClassName('last');
-          $(productId).removeClassName('append-1');
-          $(productId).addClassName('last');
-        }
-        i++;
-      });
-}
-</code></pre>
-
-<p>This function is organized around the fact that the only valid state for a grid of n-rows will be n-1 rows of 3 products, followed by one row of 1 &lt;= numProducts &lt;= 3. In most cases, if you drag a product from one row to another, you are violating that rule by creating a row with 2 products and a row with 4 products. This function solves the problem by recursively shifting the products down until reaching a stable state again.</p>
-
-<p>There&#8217;s a bit of noise there at the bottom of the function. I&#8217;m using Blueprint CSS to do the layout for this application and I need to shift the various Blueprint classes around once everything is settled.</p>
-
-<p>Finally, here&#8217;s the persistence of the data when we click save:</p>
-
-<pre><code>def sortProducts = {
-    TreeMap rowMap = new TreeMap()
-
-    params.each {key, value -&gt;
-      def matcher = key =~ /productRow(.*)\[\]/
-      if (matcher.matches()) {
-        def rowId = matcher[0][1]
-        rowMap[rowId] = value
-      }
-    }
-
-    def productIds = []
-    rowMap.values().each { row -&gt;
-      row.each {
-        productIds &lt;&lt; it.toLong()
-      }
-    }
-
-    shoppingService.saveSortOrder(productIds)
-
-    render("Product sort order saved!")
-}
-</code></pre>
-
-<p>and the logic from shoppingService.saveSortOrder():</p>
-
-<pre><code>def saveSortOrder(def productIds) {
-    def productsToSort = Product.findAllByIdInList(productIds)
-
-    def productMap = [:]
-    def sortIndexList = []
-
-    productsToSort.each {
-      productMap[it.id] = it
-      sortIndexList &lt;&lt; it.sortIndex
-    }
-
-    sortIndexList.sort()
-    sortIndexList = sortIndexList.reverse()
-
-    productIds.each {
-      productMap[it].sortIndex = sortIndexList.pop()
-    }
-
-    productsToSort.each {
-      it.save()
-    }
-}
-</code></pre>
-
-<p>You might wonder why this is so complex. What I haven&#8217;t fully described is the way products are organized into a hierarchy of various categories. When you&#8217;re sorting a screen, you&#8217;re only sorting a subset of the products that are in that particular category. However, the sort order is maintained across the entire product set in the database. So, this logic basically just shifts around the existing sort indicies, placing them in their new relative order.</p>
-
-<p>Anyway, I don&#8217;t know how generally applicable this code is, but I had fun writing it and I hope you can get some use out of it. Cheers!</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/6/">&larr; Older</a>
@@ -762,6 +649,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2014/07/02/wip-microservices-reading-list/">WIP Microservices Reading List</a>
+      </li>
+    
+      <li class="post">
         <a href="/2014/06/30/microservices-are-solid/">Microservices are SOLID</a>
       </li>
     
@@ -775,10 +666,6 @@
     
       <li class="post">
         <a href="/2013/05/29/clojure-on-cloud-foundry/">Clojure on Cloud Foundry</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2013/05/29/into-the-crucible/">Into the Crucible</a>
       </li>
     
   </ul>

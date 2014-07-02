@@ -9,7 +9,7 @@
   <meta name="author" content="Matt Stine">
 
   
-  <meta name="description" content="I learned a great deal about JMS from Mark Richards at last weekend&#8217;s NFJS Gateway Software Symposium, and I thought I&#8217;d share it with &hellip;">
+  <meta name="description" content="I&#8217;m currently working on a Grails application with a requirement for uploading product images, which are subsequently resized into thumbnails &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -69,6 +69,7 @@
 <ul class="main-navigation">
   <li><a href="/">Blog</a></li>
   <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/microservices">Microservices</a></li>
 </ul>
 
 </nav>
@@ -76,6 +77,123 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/03/13/grailsdojo-ajax-file-upload/">Grails+Dojo Ajax File Upload</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-03-13T22:08:00-05:00" pubdate data-updated="true">Mar 13<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I&#8217;m currently working on a <a href="http://grails.org/">Grails</a> application with a requirement for uploading product images, which are subsequently resized into thumbnails of various sizes for different shopping screens. Since it took a bit of doing to get this done, I thought I&#8217;d post my solution here in case anyone could benefit from it.</p>
+
+<p>First, to set the stage, I&#8217;ve upgraded the application all the way to the newly released <a href="http://www.springsource.org/node/1107">Grails 1.1</a>.</p>
+
+<p>To start off, I naively attempted to use the built-in Prototype library to do the upload with a simple <code>&lt;g:submitRemote/&gt;</code> tag. You might have guessed that this didn&#8217;t work at all. Continuing to learn the hard way (without reading the manual I might add), I submitted this as a bug to the Grails project. Graeme ever so politely informed me that this was known and expected behavior, as Prototype doesn&#8217;t support such a thing. However, it was Graeme that also tipped me off to try Dojo.</p>
+
+<p>So, continuing down this path, I proceeded to install the Grails Dojo plugin. Once this is done, a <code>&lt;g:javascript library="dojo"/&amp;gt</code> is supposedly all that is required to convert your Ajax calls from Prototype to Dojo. This turned out to not be the case for me, with Javascript errors popping up all over the place, not the least of which was that dojo.js seemed to be installed in an unexpected location via the plugin. The hacker in me simply copied this to the expected location and moved along. However, as I attempted to work with Dojo&#8217;s file upload support, I discovered that the version of Dojo shipped with the plugin seemed at first glance to be way behind. Frustrated by this, I went ahead and stripped the Dojo plugin out and installed <a href="http://download.dojotoolkit.org/release-1.2.3/dojo.js">the latest version available (at this writing 1.2.3)</a>, and set about to develop my solution.</p>
+
+<p>Here goes:</p>
+
+<p><strong>1. Add the necessary Dojo dependencies to your GSP:</strong></p>
+
+<pre><code>&lt;script type="text/javascript" src="${createLinkTo(dir: 'js/dojo', file: 'dojo.js')}"
+   djConfig="parseOnLoad:true, isDebug:true"&gt;&lt;/script&gt;
+&lt;g:javascript&gt;
+   dojo.require("dojo.io.iframe");
+&lt;/g:javascript&gt;
+</code></pre>
+
+<p><strong>2. Write a function using dojo.io.iframe to send the form:</strong></p>
+
+<pre><code>function submitForm() {
+   dojo.io.iframe.send({
+      form: 'uploadProductImageForm',
+      load: function (data) {
+         dojo.byId('productImage').innerHTML = data;
+      }
+   });
+}
+</code></pre>
+
+<p><strong>3. Create the file upload form:</strong></p>
+
+<pre><code>&lt;g:form name="uploadProductImageForm" method="post" action="uploadProductImage" enctype="multipart/form-data"&gt;
+   &lt;input type="hidden" name="id" value="${productInstance?.id}"/&gt;
+   &lt;input type="file" name="newProductImage"/&gt;
+   &lt;span class="button"&gt;&lt;input class="add" type="button" name="uploadImage" value="Upload Image" onclick="submitForm()"/&gt;&lt;/span&gt;
+&lt;/g:form&gt;
+</code></pre>
+
+<p><strong>4. Create the controller method:</strong></p>
+
+<pre><code>def uploadProductImage = {
+   def f = request.getFile('newProductImage')
+   if (!f.empty) {
+
+   def imagePath = grailsApplication.config.store.productImages.location
+
+   //Create unique name for this image set based on current timestamp
+   def name = "image" + new Date().getTime()
+
+   //Store the file
+   def file = new File("${imagePath}/${originalFilename}")
+   f.transferTo(file)
+
+   //Do some image processing (resizing, etc.)
+   ...
+
+   //Dojo requires returning the result nested in an HTML document containing a body and textarea tag. Do this with
+   //Groovy's built-in MarkupBuilder
+
+   def writer = new StringWriter()
+   def xml = new MarkupBuilder(writer)
+
+   xml.html {
+     body {
+       textarea {
+         img(src: resource(dir: grailsApplication.config.store.productImages.webPath, file: product.mediumImage.name), width: '250')
+       }
+     }
+   }
+
+   render writer.toString()
+   }
+   else {
+      flash.message = 'file cannot be empty'
+      redirect(action: show)
+   }
+}
+</code></pre>
+
+<p>And there you have it. Let me know what you think of this solution. It definitely works for me. You will notice that I didn&#8217;t include an upload progress bar - I&#8217;ll be doing this in a future iteration of the project. Cheers!</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -476,55 +594,6 @@ and it will automatically be pretty printed.</p></li>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2008/02/04/the-spring-experience-2007-videos-on-the-way/">The Spring Experience 2007 - Videos on the Way!</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2008-02-04T15:28:00-06:00" pubdate data-updated="true">Feb 4<span>th</span>, 2008</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>I got an awesome email today&#8230;</p>
-
-<blockquote><p>We are happy to announce that the video/audio streaming from TSE 2007 will be available online the week of February 11th for you.  You will have the opportunity to see/hear the TSE 2007 presentations you were not able to make at TSE 2007 due to all of the great sessions available per time period.  We have captured the entire session length including any demos/live coding.  Please look for the email from us next Monday, February 11th with the details about viewing the session content online.</p></blockquote>
-
-<p>I&#8217;m extremely excited about this. For two reasons:</p>
-
-<ol>
-<li>I didn&#8217;t get to finish my reviews of the sessions that I attended. Now that it has been several weeks since the conference, I don&#8217;t feel like my memory of them is good enough to do a fair review. Now I can do a refresh and write!</li>
-<li>There were several sessions that I wanted to attend that I couldn&#8217;t - now I get to attend&#8230;and write!
-Look forward to some more reviews from The Spring Experience 2007 in the coming weeks!</li>
-</ol>
-
-
-<blockquote></blockquote>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/8/">&larr; Older</a>
@@ -550,6 +619,10 @@ Look forward to some more reviews from The Spring Experience 2007 in the coming 
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2014/07/02/wip-microservices-reading-list/">WIP Microservices Reading List</a>
+      </li>
+    
+      <li class="post">
         <a href="/2014/06/30/microservices-are-solid/">Microservices are SOLID</a>
       </li>
     
@@ -563,10 +636,6 @@ Look forward to some more reviews from The Spring Experience 2007 in the coming 
     
       <li class="post">
         <a href="/2013/05/29/clojure-on-cloud-foundry/">Clojure on Cloud Foundry</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2013/05/29/into-the-crucible/">Into the Crucible</a>
       </li>
     
   </ul>
