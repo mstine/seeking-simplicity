@@ -36,6 +36,15 @@ Who's doing this?
 * https://blog.yourkarma.com/building-microservices-at-karma[How we build microservices at Karma]: ``Forget the hype, we're using microservices in production.''
 * http://lonelycode.com/2014/04/08/microservices-the-blind-leading-the-blind/[Microservices – the blind leading the blind] - Field Report from http://www.loadzen.com/[Loadzen]
 
+== It's Not About Size
+
+Don't get caught up in the *micro* of Microservices:
+
+* http://www.tigerteam.dk/2014/micro-services-its-not-only-the-size-that-matters-its-also-how-you-use-them-part-1/[Micro services: It’s not (only) the size that matters, it’s (also) how you use them – part 1]
+* http://www.tigerteam.dk/2014/micro-services-its-not-only-the-size-that-matters-its-also-how-you-use-them-part-2/[Micro services: It’s not (only) the size that matters, it’s (also) how you use them – part 2]
+* http://www.tigerteam.dk/2014/microservices-its-not-only-the-size-that-matters-its-also-how-you-use-them-part-3/[Microservices: It’s not (only) the size that matters, it’s (also) how you use them – part 3]
+* http://www.tigerteam.dk/2014/microservices-its-not-only-the-size-that-matters-its-also-how-you-use-them-part-4/[Microservices: It’s not (only) the size that matters, it’s (also) how you use them – part 4]
+
 == Organization/Process/Governance
 
 Microservices is far from being only a technical architecture pattern. There are huge issues associated with culture, team organization, process, data ownership, governance, etc.
@@ -45,6 +54,7 @@ Here are some relevant pieces:
 * http://genehughson.wordpress.com/2014/06/04/more-on-microservices-boundaries-governance-reuse-complexity/[More on Microservices – Boundaries, Governance, Reuse & Complexity]
 * http://genehughson.wordpress.com/2014/06/16/coordinating-microservices-playing-well-with-others/[Coordinating Microservices – Playing Well with Others]
 * http://genehughson.wordpress.com/2014/06/20/microservices-and-data-architecture-who-owns-what-data/[Microservices and Data Architecture – Who Owns What Data?]
+* https://blog.apigee.com/detail/api_centric_architecture_services_governance_does_not_scale[API-Centric Architecture: Services Governance Does Not Scale]
 
 == Antifragile
 
@@ -54,7 +64,51 @@ My new friend Russ Miles is deep into Microservices. He's primarily focused on t
 Building Adaptable Software with Microservices] - eBook in progress
 * http://www.infoq.com/articles/russ-miles-antifragility-microservices[Russ Miles on Antifragility and Microservices] - InfoQ Interview
 
+== Useful Architectural Patterns
+
+A lot of patterns are cropping up in the microservices space, many of which are described very well on Martin Fowler's site:
+
+* http://martinfowler.com/bliki/BoundedContext.html[Bounded Context]
+* http://martinfowler.com/eaaDev/EventCollaboration.html[Event Collaboration]
+* http://martinfowler.com/bliki/CircuitBreaker.html[Circuit Breaker]
+* http://martinfowler.com/bliki/PolyglotPersistence.html[Polyglot Persistence]
+* http://martinfowler.com/bliki/TolerantReader.html[Tolerant Reader]
+* http://martinfowler.com/articles/consumerDrivenContracts.html[Consumer-Driven Contracts]
+* http://martinfowler.com/bliki/PublishedInterface.html[Published Interface]
+* http://martinfowler.com/eaaDev/EventSourcing.html[Event Sourcing]
+
+== Netflix!
+
+Netflix is well known for employing microservices and talking about it. Here are several technical blogs that touch the subject in various ways:
+
+* http://techblog.netflix.com/2012/02/fault-tolerance-in-high-volume.html[Fault Tolerance in a High Volume, Distributed System]
+* http://techblog.netflix.com/2012/07/embracing-differences-inside-netflix.html[Embracing the Differences : Inside the Netflix API Redesign]
+* http://techblog.netflix.com/2012/11/hystrix.html[Introducing Hystrix for Resilience Engineering]
+* http://techblog.netflix.com/2013/01/optimizing-netflix-api.html[Optimizing the Netflix API]
+* http://techblog.netflix.com/2013/08/deploying-netflix-api.html[Deploying the Netflix API]
+* http://techblog.netflix.com/2013/11/preparing-netflix-api-for-deployment.html[Preparing the Netflix API for Deployment]
+* http://techblog.netflix.com/2014/03/the-netflix-dynamic-scripting-platform.html[The Netflix Dynamic Scripting Platform]
+
+== General Good Reads
+
+Things that didn't really fit into a category of their own, but still tasty:
+
+* https://blog.apigee.com/detail/api_centric_architecture_all_development_is_api_development[API-Centric Architecture: All Development is API Development]
+* https://blog.apigee.com/detail/api_centric_architecture_soa_gives_way_to_micro_services[API-Centric Architecture: SOA Gives Way to Micro Services]
+* http://dejanglozic.com/2014/06/16/soundcloud-is-reading-my-mind/[SoundCloud is Reading My Mind]
+* http://dejanglozic.com/2014/06/25/micro-service-apis-with-some-swag-part-1/[Micro-service APIs With Some Swag (part 1)]
+* http://dejanglozic.com/2014/07/01/micro-service-apis-with-some-swag-part-2/[Micro-service APIs With Some Swag (part 2)]
+
 == Conference Presentations
 
-* http://www.infoq.com/presentations/Micro-Services[Micro Services: Java, the Unix Way] - James Lewis
+* http://www.infoq.com/presentations/Micro-Services[Micro Services - Java: the Unix Way] - James Lewis
 * http://www.slideshare.net/mstine/microservices-cf-summit[Cloud Foundry and Microservices: A Mutualistic Symbiotic Relationship] - Matt Stine (slides only, video coming soon)
+* http://qconlondon.com/dl/qcon-london-2014/slides/AdrianCockcroft_MigratingToMicroservices.pdf[Migrating to Microservices] - Adrian Cockcroft (slides only)
+* http://thoughtworks.wistia.com/medias/gvb1mgw4r3[Microservices: Adaptive Systems for Innovative Organizations] - James Lewis
+* http://yow.eventer.com/yow-2012-1012/micro-services-architecture-by-fred-george-1286[Microservices Architecture] - Fred George
+* http://www.slideshare.net/adrianco/flowcon-added-to-for-cmg-keynote-talk-on-how-speed-wins-and-how-netflix-is-doing-continuous-delivery[Now Playing on Netflix: Adeventurs in a Cloudy Future] - Adrian Cockcroft (slides only)
+
+
+== Other Microservices Landing Sites
+
+* http://microservices.io/[Microservice Architecture] site by Chris Richardson
