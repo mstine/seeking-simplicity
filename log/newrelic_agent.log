@@ -131,3 +131,25 @@
 [07/02/14 15:58:49 -0500 turkey (61200)] INFO : Installing Net instrumentation
 [07/02/14 15:58:49 -0500 turkey (61200)] INFO : Installing Sinatra instrumentation
 [07/02/14 15:58:49 -0500 turkey (61200)] INFO : Finished instrumentation
+[07/02/14 16:02:53 -0500 turkey (61410)] INFO : Starting the New Relic agent in "development" environment.
+[07/02/14 16:02:53 -0500 turkey (61410)] INFO : To prevent agent startup add a NEWRELIC_ENABLE=false environment variable or modify the "development" section of your newrelic.yml.
+[07/02/14 16:02:53 -0500 turkey (61410)] INFO : Reading configuration from config/newrelic.yml
+[07/02/14 16:02:53 -0500 turkey (61410)] INFO : Enabling the Request Sampler.
+[07/02/14 16:02:53 -0500 turkey (61410)] INFO : Environment: development
+[07/02/14 16:02:53 -0500 turkey (61410)] INFO : No known dispatcher detected.
+[07/02/14 16:02:53 -0500 turkey (61410)] INFO : Application: My Application
+[07/02/14 16:02:53 -0500 turkey (61410)] WARN : Agent configured not to send data in this environment.
+[07/02/14 16:02:53 -0500 turkey (61410)] INFO : Installing Net instrumentation
+[07/02/14 16:02:53 -0500 turkey (61410)] INFO : Installing Sinatra instrumentation
+[07/02/14 16:02:53 -0500 turkey (61410)] INFO : Finished instrumentation
+[07/02/14 16:08:09 -0500 turkey (61681)] INFO : Starting the New Relic agent in "development" environment.
+[07/02/14 16:08:09 -0500 turkey (61681)] INFO : To prevent agent startup add a NEWRELIC_ENABLE=false environment variable or modify the "development" section of your newrelic.yml.
+[07/02/14 16:08:09 -0500 turkey (61681)] INFO : Reading configuration from config/newrelic.yml
+[07/02/14 16:08:09 -0500 turkey (61681)] INFO : Enabling the Request Sampler.
+[07/02/14 16:08:09 -0500 turkey (61681)] INFO : Environment: development
+[07/02/14 16:08:09 -0500 turkey (61681)] INFO : No known dispatcher detected.
+[07/02/14 16:08:09 -0500 turkey (61681)] INFO : Application: My Application
+[07/02/14 16:08:09 -0500 turkey (61681)] WARN : Agent configured not to send data in this environment.
+[07/02/14 16:08:09 -0500 turkey (61681)] INFO : Installing Net instrumentation
+[07/02/14 16:08:09 -0500 turkey (61681)] INFO : Installing Sinatra instrumentation
+[07/02/14 16:08:09 -0500 turkey (61681)] INFO : Finished instrumentation

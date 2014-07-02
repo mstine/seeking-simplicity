@@ -40,18 +40,18 @@ Who's doing this?
 
 Don't get caught up in the *micro* of Microservices:
 
-* http://www.tigerteam.dk/2014/micro-services-its-not-only-the-size-that-matters-its-also-how-you-use-them-part-1/[Micro services: It’s not (only) the size that matters, it’s (also) how you use them – part 1]
-* http://www.tigerteam.dk/2014/micro-services-its-not-only-the-size-that-matters-its-also-how-you-use-them-part-2/[Micro services: It’s not (only) the size that matters, it’s (also) how you use them – part 2]
-* http://www.tigerteam.dk/2014/microservices-its-not-only-the-size-that-matters-its-also-how-you-use-them-part-3/[Microservices: It’s not (only) the size that matters, it’s (also) how you use them – part 3]
-* http://www.tigerteam.dk/2014/microservices-its-not-only-the-size-that-matters-its-also-how-you-use-them-part-4/[Microservices: It’s not (only) the size that matters, it’s (also) how you use them – part 4]
+* http://www.tigerteam.dk/2014/micro-services-its-not-only-the-size-that-matters-its-also-how-you-use-them-part-1/[Micro services: It’s not (only) the size that matters; it’s (also) how you use them – part 1]
+* http://www.tigerteam.dk/2014/micro-services-its-not-only-the-size-that-matters-its-also-how-you-use-them-part-2/[Micro services: It’s not (only) the size that matters; it’s (also) how you use them – part 2]
+* http://www.tigerteam.dk/2014/microservices-its-not-only-the-size-that-matters-its-also-how-you-use-them-part-3/[Microservices: It’s not (only) the size that matters; it’s (also) how you use them – part 3]
+* http://www.tigerteam.dk/2014/microservices-its-not-only-the-size-that-matters-its-also-how-you-use-them-part-4/[Microservices: It’s not (only) the size that matters; it’s (also) how you use them – part 4]
 
 == Organization/Process/Governance
 
 Microservices is far from being only a technical architecture pattern. There are huge issues associated with culture, team organization, process, data ownership, governance, etc.
 Here are some relevant pieces:
 
-* http://genehughson.wordpress.com/2014/05/23/carving-it-up-microservices-monoliths-conways-law/[Carving it up – Microservices, Monoliths, & Conway’s Law]
-* http://genehughson.wordpress.com/2014/06/04/more-on-microservices-boundaries-governance-reuse-complexity/[More on Microservices – Boundaries, Governance, Reuse & Complexity]
+* http://genehughson.wordpress.com/2014/05/23/carving-it-up-microservices-monoliths-conways-law/[Carving it up: Microservices Monoliths & Conway’s Law]
+* http://genehughson.wordpress.com/2014/06/04/more-on-microservices-boundaries-governance-reuse-complexity/[More on Microservices: Boundaries Governance Reuse & Complexity]
 * http://genehughson.wordpress.com/2014/06/16/coordinating-microservices-playing-well-with-others/[Coordinating Microservices – Playing Well with Others]
 * http://genehughson.wordpress.com/2014/06/20/microservices-and-data-architecture-who-owns-what-data/[Microservices and Data Architecture – Who Owns What Data?]
 * https://blog.apigee.com/detail/api_centric_architecture_services_governance_does_not_scale[API-Centric Architecture: Services Governance Does Not Scale]
@@ -81,7 +81,7 @@ A lot of patterns are cropping up in the microservices space, many of which are 
 
 Netflix is well known for employing microservices and talking about it. Here are several technical blogs that touch the subject in various ways:
 
-* http://techblog.netflix.com/2012/02/fault-tolerance-in-high-volume.html[Fault Tolerance in a High Volume, Distributed System]
+* http://techblog.netflix.com/2012/02/fault-tolerance-in-high-volume.html[Fault Tolerance in a High Volume Distributed System]
 * http://techblog.netflix.com/2012/07/embracing-differences-inside-netflix.html[Embracing the Differences : Inside the Netflix API Redesign]
 * http://techblog.netflix.com/2012/11/hystrix.html[Introducing Hystrix for Resilience Engineering]
 * http://techblog.netflix.com/2013/01/optimizing-netflix-api.html[Optimizing the Netflix API]
@@ -101,7 +101,7 @@ Things that didn't really fit into a category of their own, but still tasty:
 
 == Conference Presentations
 
-* http://www.infoq.com/presentations/Micro-Services[Micro Services - Java: the Unix Way] - James Lewis
+* http://www.infoq.com/presentations/Micro-Services[Micro Services: Java the Unix Way] - James Lewis
 * http://www.slideshare.net/mstine/microservices-cf-summit[Cloud Foundry and Microservices: A Mutualistic Symbiotic Relationship] - Matt Stine (slides only, video coming soon)
 * http://qconlondon.com/dl/qcon-london-2014/slides/AdrianCockcroft_MigratingToMicroservices.pdf[Migrating to Microservices] - Adrian Cockcroft (slides only)
 * http://thoughtworks.wistia.com/medias/gvb1mgw4r3[Microservices: Adaptive Systems for Innovative Organizations] - James Lewis
