@@ -9,7 +9,7 @@
   <meta name="author" content="Matt Stine">
 
   
-  <meta name="description" content="Our team got to spend a few days with Jared Richardson this week, talking tech leadership, agile, and automated testing. At some point during the &hellip;">
+  <meta name="description" content="I spent the better part of yesterday tracing my way through the codebase for a large-scale enterprise application that my team is building right now &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,6 +77,207 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/10/09/making-java-groovier-with-lambdaj/">Making Java &#8220;Groovier&#8221; With LambdaJ</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-10-09T09:37:06-05:00" pubdate data-updated="true">Oct 9<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I spent the better part of yesterday tracing my way through the codebase for a large-scale enterprise application that my team is building right now, and I happened upon the following piece of code:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="c1">//...imports excluded for clarity</span>
+</span><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">BusinessActivityBinMetaClassHelper</span> <span class="o">{</span>
+</span><span class='line'><span class="c1">//...</span>
+</span><span class='line'>   <span class="kd">public</span> <span class="kd">static</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Long</span><span class="o">&gt;</span> <span class="n">getSrmMetaClassIdListJava</span><span class="o">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">BusinessActivityBinMetaClass</span><span class="o">&gt;</span> <span class="n">businessActivityBinMetaClassList</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>      <span class="n">List</span><span class="o">&lt;</span><span class="n">Long</span><span class="o">&gt;</span> <span class="n">srmMetaClassIdList</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Long</span><span class="o">?();</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="k">if</span><span class="o">(</span><span class="n">businessActivityBinMetaClassList</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>         <span class="k">for</span><span class="o">(</span><span class="n">BusinessActivityBinMetaClass</span> <span class="n">businessActivityBinMetaClass</span> <span class="o">:</span> <span class="n">businessActivityBinMetaClassList</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>             <span class="k">if</span><span class="o">(</span><span class="n">businessActivityBinMetaClass</span><span class="o">.</span><span class="na">getSrmMetaClass</span><span class="o">()</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="n">businessActivityBinMetaClass</span><span class="o">.</span><span class="na">getSrmMetaClass</span><span class="o">().</span><span class="na">getSrmMetaClassId</span><span class="o">()</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>               <span class="n">srmMetaClassIdList</span><span class="o">.</span><span class="na">add</span>
+</span><span class='line'>                  <span class="o">(</span><span class="n">businessActivityBinMetaClass</span><span class="o">.</span><span class="na">getSrmMetaClass</span><span class="o">().</span><span class="na">getSrmMetaClassId</span><span class="o">());</span>
+</span><span class='line'>            <span class="o">}</span>
+</span><span class='line'>         <span class="o">}</span>
+</span><span class='line'>      <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="k">return</span> <span class="n">srmMetaClassIdList</span><span class="o">;</span>
+</span><span class='line'>   <span class="o">}</span>
+</span><span class='line'><span class="c1">//...</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>As I read this code, I thought &#8220;This just SCREAMS a need for Groovy&#8217;s closure iterators.&#8221; So, last night I quickly hacked out fully-equivalent Groovy version of the code:</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">class</span> <span class="nc">GroovyExample</span> <span class="o">{</span>
+</span><span class='line'>
+</span><span class='line'>   <span class="kd">static</span> <span class="n">def</span> <span class="nf">getSrmMetaClassIdListGroovy</span><span class="o">(</span><span class="n">def</span> <span class="n">businessActivityBinMetaClassList</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>      <span class="n">businessActivityBinMetaClassList</span><span class="o">?.</span><span class="na">collect</span> <span class="o">{</span> <span class="n">it</span><span class="o">?.</span><span class="na">srmMetaClass</span><span class="o">?.</span><span class="na">srmMetaClassId</span> <span class="o">}.</span><span class="na">findAll</span> <span class="o">{</span> <span class="n">it</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">}</span> <span class="o">?:</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Long</span><span class="o">&gt;();</span>
+</span><span class='line'>   <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Whew! Much nicer. What did we get out of this? Well&#8230;</p>
+
+<ul>
+<li><p>Groovy&#8217;s dynamic typing cleaned up all of the unnecessary type declarations - the only static typing is where we return an empty ArrayList of Longs if the argument to our method is null (a bit of odd behavior, but required to make this code equivalent to the parent Java code.</p></li>
+<li><p>We were saved 4 painful null checks by the use of Groovy&#8217;s null safe dereferencing operator (?.) and the simplified ternary operator otherwise affectionately known as the &#8220;Elvis Operator&#8221; (?:).</p></li>
+<li><p>Using Groovy&#8217;s collect method, we were able to transform the original list into a list containing Long values by passing in a closure that pulls out the property value of interest.</p></li>
+<li><p>Because we&#8217;re using null safe dereferencing, we are actually inserting nulls into our list if any of the dereferencing fails. Therefore, Groovy&#8217;s findAll Collection filtering method comes to the rescue. We simply provide it with a closure that returns true for all of the values we want to keep - in this case, &#8220;it != null.&#8221;</p></li>
+<li><p>Perhaps most importantly, we&#8217;ve shorted our code from 11 lines (including whitespace lines for clarity) to ONE LINE that much more clearly expresses the intent of the code.</p></li>
+</ul>
+
+
+<p>Great - why don&#8217;t we just rewrite the entire application is Groovy? Well, hold on just a minute. At the time we started this application, as much as some of us loved Groovy, we just didn&#8217;t have enough Groovy mindshare to go there yet. On top of that, we were already experimenting with several new architectural ideas and technologies, and Groovy would have added yet one more risk to the puzzle. I say all this to acknowledge that sometimes you just can&#8217;t move to another language for one reason or another, regardless of how attractive its features may be.</p>
+
+<p>But let&#8217;s take a queue from the <em>Pragmatic Programmer</em> and explore the LOTY (Language of the Year) concept one more time. One of the reasons that you&#8217;re encouraged to learn new languages is to change the way you program in your main language. You may learn Groovy, Scala, Clojure, Ruby, etc., etc., etc. and never use them in your day job - and yet the experience of coding in a new language with new constructs and idioms will necessarily change the way you THINK about programming in every other language.</p>
+
+<p>So, let&#8217;s think about the possibility of coding something that is much more similar to the Groovy version and yet stick with regular Java code. Fortunately, there are several libraries out there that bring much of the flavor and power of Groovy&#8217;s closure iterators to Java. I&#8217;d like to focus in on one of them, LambdaJ (<a href="http://code.google.com/p/lambdaj/">http://code.google.com/p/lambdaj/</a>).</p>
+
+<p>LambdaJ provides constructs that allow us to &#8220;&#8230;manipulate collections in a pseudo-functional and statically typed way.&#8221; Let&#8217;s take a look at this example implementing using LambdaJ:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="c1">//...some imports excluded for clarity</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">ch.lambdaj.function.convert.Converter</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">static</span> <span class="n">ch</span><span class="o">.</span><span class="na">lambdaj</span><span class="o">.</span><span class="na">Lambda</span><span class="o">.*</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">static</span> <span class="n">org</span><span class="o">.</span><span class="na">hamcrest</span><span class="o">.</span><span class="na">Matchers</span><span class="o">.*</span>
+</span><span class='line'>
+</span><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">BusinessActivityBinMetaClassHelper</span> <span class="o">{</span>
+</span><span class='line'><span class="c1">//...</span>
+</span><span class='line'>   <span class="kd">public</span> <span class="kd">static</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Long</span><span class="o">&gt;</span> <span class="n">getSrmMetaClassIdListJava</span><span class="o">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">BusinessActivityBinMetaClass</span><span class="o">&gt;</span> <span class="n">businessActivityBinMetaClassList</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>      <span class="k">return</span> <span class="o">(</span><span class="n">businessActivityBinMetaClassList</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">?</span> <span class="n">filter</span><span class="o">(</span><span class="n">notNullValue</span><span class="o">(),</span><span class="n">convert</span><span class="o">(</span><span class="n">businessActivityBinMetaClassList</span><span class="o">,</span> <span class="k">new</span> <span class="n">IdExtractor</span><span class="o">()))</span> <span class="o">:</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Long</span><span class="o">&gt;();</span>
+</span><span class='line'>   <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>   <span class="kd">class</span> <span class="nc">IdExtractor</span> <span class="kd">implements</span> <span class="n">Converter</span><span class="o">&lt;</span><span class="n">BusinessActivityBinMetaClass</span><span class="o">,</span><span class="n">Long</span><span class="o">&gt;</span> <span class="o">{</span>
+</span><span class='line'>  <span class="n">Long</span> <span class="nf">convert</span><span class="o">(</span><span class="n">BusinessActivityBinMetaClass</span> <span class="n">from</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>     <span class="k">if</span> <span class="o">(</span><span class="n">from</span><span class="o">.</span><span class="na">getSrmMetaClass</span><span class="o">()</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="n">from</span><span class="o">.</span><span class="na">getSrmMetaClass</span><span class="o">().</span><span class="na">getSrmMetaClassId</span><span class="o">()</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>        <span class="k">return</span> <span class="n">from</span><span class="o">.</span><span class="na">getSrmMetaClass</span><span class="o">().</span><span class="na">getSrmMetaClassId</span><span class="o">();</span>
+</span><span class='line'>     <span class="o">}</span>
+</span><span class='line'>   <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Not quite as nice as the Groovy code - we got A LOT out of the null-safe dereference and Elvis operators. However, our overall intent is still a bit clearer. Let&#8217;s analyze:</p>
+
+<ul>
+<li><p>First we need to implement one of LambdaJ&#8217;s Converters. A Converter is nothing more than a generic Interface that defines one method: T convert(F from), where F is the type we&#8217;re converting from and T is the type we&#8217;re converting to. In this case, we want to convert an object of type BusinessActivityBinMetaClass to an object of type Long. Our implementation determines how this conversion takes place, in this case by extracting the id property from its child.</p></li>
+<li><p>Next, after statically importing the methods of ch.lambdaj.Lambda, we call the convert method, passing it our List and our newly implemented Converter. This gives us the equivalent of Groovy&#8217;s collect method, with the Converter taking the place of the closure.</p></li>
+<li><p>We&#8217;re still shoving nulls into our List with this implementation, so we further filter our list using LambdaJ&#8217;s &#8220;filter&#8221; method, passing it the list returned by &#8220;filter,&#8221; and a <a href="http://code.google.com/p/hamcrest/">Hamcrest</a> matcher that returns only notNullValue()&#8217;s.</p></li>
+<li><p>Finally, we use our old friend the ternary operator to return the empty ArrayList of Long values if our method argument is null.</p></li>
+</ul>
+
+
+<p>If you don&#8217;t count the Converter implementation, we&#8217;ve gotten ourselves down to 2 lines of code (1 if you don&#8217;t mind long lines). In this case I implemented IdExtractor as a named inner class - you could do this with an anonymous inner class and it would look a lot more like a closure, but the added noise of all of the null checking made the undesirable for me. Perhaps if your code has less noise (or guarantees that values aren&#8217;t null), that would be a better approach.</p>
+
+<p>Another alternative is to make IdExtractor a top-level class that, if general enough, could be reused throughout the codebase. The benefit of this is that you now have a nice code unit rather than a battery of static methods in a utility class, and unit testing becomes much more clean and elegant.</p>
+
+<p>So, we&#8217;ve still made some progress and made our code a bit more Groovy. I encourage you to explore LambdaJ&#8217;s feature set and see how it might make your code a bit more concise with clearer intent. And just to stir up a little controversy, look what would have happened in Java 7 had the null safe dereference and Elvis operator&#8217;s made <a href="http://blogs.sun.com/darcy/entry/project_coin_final_five">the Project Coin cut</a>:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="c1">//...some imports excluded for clarity</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">ch.lambdaj.function.convert.Converter</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">static</span> <span class="n">ch</span><span class="o">.</span><span class="na">lambdaj</span><span class="o">.</span><span class="na">Lambda</span><span class="o">.*</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">static</span> <span class="n">org</span><span class="o">.</span><span class="na">hamcrest</span><span class="o">.</span><span class="na">Matchers</span><span class="o">.*</span>
+</span><span class='line'>
+</span><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">BusinessActivityBinMetaClassHelper</span> <span class="o">{</span>
+</span><span class='line'><span class="c1">//...</span>
+</span><span class='line'>   <span class="kd">public</span> <span class="kd">static</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Long</span><span class="o">&gt;</span> <span class="n">getSrmMetaClassIdListLambdaJ</span><span class="o">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">BusinessActivityBinMetaClass</span><span class="o">&gt;</span> <span class="n">businessActivityBinMetaClassList</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>      <span class="k">return</span> <span class="nf">filter</span><span class="o">(</span><span class="n">notNullValue</span><span class="o">(),</span><span class="n">convert</span><span class="o">(</span><span class="n">businessActivityBinMetaClassList</span><span class="o">,</span>
+</span><span class='line'>         <span class="k">new</span> <span class="n">Converter</span><span class="o">&lt;</span><span class="n">BusinessActivityBinMetaClass</span><span class="o">,</span><span class="n">Long</span><span class="o">&gt;</span> <span class="o">{</span>
+</span><span class='line'>            <span class="n">Long</span> <span class="nf">apply</span><span class="o">(</span><span class="n">BusinessActivityBinMetaClass</span> <span class="n">from</span><span class="o">)</span> <span class="o">{</span> <span class="k">return</span> <span class="n">from</span><span class="o">?.</span><span class="na">getSrmMetaClass</span><span class="o">()?.</span><span class="na">getSrmMetaClassId</span><span class="o">()}</span>
+</span><span class='line'>         <span class="o">}))</span> <span class="o">?:</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Long</span><span class="o">&gt;();</span>
+</span><span class='line'>   <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Nice, huh? ;-)</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -615,56 +816,6 @@ JUGS Community: <a href="http://community.java.net/jugs/">http://community.java.
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2009/06/02/reactions-from-javaone-2009-opening-keynote/">Reactions From #JavaOne 2009 Opening Keynote</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-06-02T16:22:21-05:00" pubdate data-updated="true">Jun 2<span>nd</span>, 2009</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><a href="http://picasaweb.google.com/sunahouston2/JavaOne2009#5344645971163695266"><img src="http://mattstine.files.wordpress.com/2009/06/j1-2009-keynote-ellison-mcnealy-stage880.jpg?w=223" alt="Photo by Aaron Houston" /></a>The morning session opened with a HUGE elephant under the rug - &#8220;Where is Oracle?&#8221; There&#8217;s no booth in the Pavilion - super strange.</p>
-
-<p>Things kicked off very slowly. Jonathan Schwartz, Sun CEO, for all of his ponytail excellence, wasn&#8217;t exactly inspiring a great deal of excitement in the crowd. In fact, the loudest applause from the audience was initially for the tech support guy who fixed the projection for one of the demos.</p>
-
-<p>Thankfully things eventually got moving. Verizon and Sun announced a very exciting partnership whereby Verizon will expose their network elements to Java developers. Things like presence, location, friends and family lists, mobile-to-mobile lists - all of these will now be accessible to the developer. These specs will come out on July 27. This announcement is very exciting as it means that Verizon phones will now be a very powerful platform for Java mobile development.</p>
-
-<p>The JavaFX demos were really cool. They demoed one of the new LG XCanvas series of TV&#8217;s, which actually run JavaFX on the TV itself. Processors and video codecs actually live within the TV, and the TV is connected to the network. Live, on-demand, interactive content is now available directly on the set, and it&#8217;s very smooth. It seems that JavaFX continues to be the center of innovation within Sun. This continued with a demo of the new JavaFX visual authoring tool. This was very impressive. JavaFX apps are now possible with absolutely no coding, which makes them extremely accessible to content designers. Visual assets can be dragged and dropped onto the stage, animation can be built by recording drag motions, no compile-build-deploy cycle. Another great features was visual wiring of component properties to UI controls. Very smooth. And apps can be deployed directly to the Java App Store via the tool.</p>
-
-<p>Funny, this was the big oops of the keynote. Nandini Ramani leaked the &#8220;liveness&#8221; of the app store before the official announcement. Nandini - &#8220;And you can deploy directly to the App Store.&#8221; Jonathan - &#8220;We haven&#8217;t launched the App Store yet.&#8221; OOPS.</p>
-
-<p>But the App Store was immediately announced next. http://store.java.com is now in private beta, and I quickly registered and got an invite. I was playing with the App Store in the following session and downloaded two applications. Extremely like the iPhone App Store for Java. You can now distribute your Java applications directly to billions of consumers with Java-enabled devices. At this point it only supports free applications, as they have left it up to the community to provide feedback on how money should be collected. Nice move. Very impressive. This could be a game changer for the Java platform if it&#8217;s used correctly.</p>
-
-<p>FINALLY the elephant came out, but it took Scott McNealy coming on stage to get it done. It was very interesting how Jonathan Schwartz unceremoniously left the stage. Scott thanked him twice for his stewardship of the company - it was a very obvious yet implicit changing of the guard. Funny that they should decide to introduce Larry Ellison, CEO Oracle, via a great amount of cheesy images (Java flying on the sail to Larry&#8217;s yacht, etc.) At the end, while no promises were made, Larry said that we should look to the past to see what the future will hold and expect more of the same. &#8220;I don&#8217;t expect any significant changes.&#8221; I hope that holds true. The audience very properly gave Scott a standing ovation as he left the stage, a nice gesture to a guy that has continually kept Sun on the cutting edge of technology.</p>
-
-<p>All in all, it was a bittersweet keynote, but I&#8217;m cautiously optimistic about the future of the platform. Our landscape is continually changing, and the future is uncertain. If everyone&#8217;s being transparent, however, good things are still to come.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/5/">&larr; Older</a>
@@ -690,6 +841,10 @@ JUGS Community: <a href="http://community.java.net/jugs/">http://community.java.
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2014/07/08/learning-to-go-part-i-interfaces/">Learning to Go, Part I: Interfaces</a>
+      </li>
+    
+      <li class="post">
         <a href="/2014/07/02/wip-microservices-reading-list/">WIP Microservices Reading List</a>
       </li>
     
@@ -703,10 +858,6 @@ JUGS Community: <a href="http://community.java.net/jugs/">http://community.java.
     
       <li class="post">
         <a href="/2013/07/10/blue-green-deployments-on-cloudfoundry/">Blue-Green Deployments on Cloud Foundry</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2013/05/29/clojure-on-cloud-foundry/">Clojure on Cloud Foundry</a>
       </li>
     
   </ul>

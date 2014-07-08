@@ -1,0 +1,27 @@
+//tag::RunTranslatingPoints[]
+$ go run point.go
+Translated {1 2} to {6 7}
+//end::RunTranslatingPoints[]
+
+//tag::RunPrintingPointAndColorPoint[]
+$ go run point.go
+Point: {1 2}
+Color Point: {{1 4} 0}
+//end::RunPrintingPointAndColorPoint[]
+
+//tag::RunCalculatingDistance[]
+$ go run point.go
+Dist b/w p and q = 2
+Dist b/w q and p = 2
+//end::RunCalculatingDistance[]
+
+//tag::RunTranslatingPointers[]
+$ go run point.go
+Translated using pointer to &{6 7}
+//end::RunTranslatingPointers[]
+
+//tag::RunCalculatingDistanceWithAnimals[]
+$ go run point.go
+Dist b/w penguin and seal = 3
+Dist b/w penguin and point = 1
+//end::RunCalculatingDistanceWithAnimals[]

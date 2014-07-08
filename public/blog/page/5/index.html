@@ -9,7 +9,7 @@
   <meta name="author" content="Matt Stine">
 
   
-  <meta name="description" content="My second lightning talk at Community One West 2009 revolved around the still relatively recent announcement that Java is now supported on Google&# &hellip;">
+  <meta name="description" content="The morning session opened with a HUGE elephant under the rug - &#8220;Where is Oracle?&#8221; There&#8217;s no booth in the Pavilion - super strange &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,6 +77,56 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/06/02/reactions-from-javaone-2009-opening-keynote/">Reactions From #JavaOne 2009 Opening Keynote</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-06-02T16:22:21-05:00" pubdate data-updated="true">Jun 2<span>nd</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="http://picasaweb.google.com/sunahouston2/JavaOne2009#5344645971163695266"><img src="http://mattstine.files.wordpress.com/2009/06/j1-2009-keynote-ellison-mcnealy-stage880.jpg?w=223" alt="Photo by Aaron Houston" /></a>The morning session opened with a HUGE elephant under the rug - &#8220;Where is Oracle?&#8221; There&#8217;s no booth in the Pavilion - super strange.</p>
+
+<p>Things kicked off very slowly. Jonathan Schwartz, Sun CEO, for all of his ponytail excellence, wasn&#8217;t exactly inspiring a great deal of excitement in the crowd. In fact, the loudest applause from the audience was initially for the tech support guy who fixed the projection for one of the demos.</p>
+
+<p>Thankfully things eventually got moving. Verizon and Sun announced a very exciting partnership whereby Verizon will expose their network elements to Java developers. Things like presence, location, friends and family lists, mobile-to-mobile lists - all of these will now be accessible to the developer. These specs will come out on July 27. This announcement is very exciting as it means that Verizon phones will now be a very powerful platform for Java mobile development.</p>
+
+<p>The JavaFX demos were really cool. They demoed one of the new LG XCanvas series of TV&#8217;s, which actually run JavaFX on the TV itself. Processors and video codecs actually live within the TV, and the TV is connected to the network. Live, on-demand, interactive content is now available directly on the set, and it&#8217;s very smooth. It seems that JavaFX continues to be the center of innovation within Sun. This continued with a demo of the new JavaFX visual authoring tool. This was very impressive. JavaFX apps are now possible with absolutely no coding, which makes them extremely accessible to content designers. Visual assets can be dragged and dropped onto the stage, animation can be built by recording drag motions, no compile-build-deploy cycle. Another great features was visual wiring of component properties to UI controls. Very smooth. And apps can be deployed directly to the Java App Store via the tool.</p>
+
+<p>Funny, this was the big oops of the keynote. Nandini Ramani leaked the &#8220;liveness&#8221; of the app store before the official announcement. Nandini - &#8220;And you can deploy directly to the App Store.&#8221; Jonathan - &#8220;We haven&#8217;t launched the App Store yet.&#8221; OOPS.</p>
+
+<p>But the App Store was immediately announced next. http://store.java.com is now in private beta, and I quickly registered and got an invite. I was playing with the App Store in the following session and downloaded two applications. Extremely like the iPhone App Store for Java. You can now distribute your Java applications directly to billions of consumers with Java-enabled devices. At this point it only supports free applications, as they have left it up to the community to provide feedback on how money should be collected. Nice move. Very impressive. This could be a game changer for the Java platform if it&#8217;s used correctly.</p>
+
+<p>FINALLY the elephant came out, but it took Scott McNealy coming on stage to get it done. It was very interesting how Jonathan Schwartz unceremoniously left the stage. Scott thanked him twice for his stewardship of the company - it was a very obvious yet implicit changing of the guard. Funny that they should decide to introduce Larry Ellison, CEO Oracle, via a great amount of cheesy images (Java flying on the sail to Larry&#8217;s yacht, etc.) At the end, while no promises were made, Larry said that we should look to the past to see what the future will hold and expect more of the same. &#8220;I don&#8217;t expect any significant changes.&#8221; I hope that holds true. The audience very properly gave Scott a standing ovation as he left the stage, a nice gesture to a guy that has continually kept Sun on the cutting edge of technology.</p>
+
+<p>All in all, it was a bittersweet keynote, but I&#8217;m cautiously optimistic about the future of the platform. Our landscape is continually changing, and the future is uncertain. If everyone&#8217;s being transparent, however, good things are still to come.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -562,68 +612,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2009/04/25/groovy-post-to-a-url/">Groovy: Post to a URL</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-04-25T23:09:11-05:00" pubdate data-updated="true">Apr 25<span>th</span>, 2009</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>If you&#8217;ve ever worked with the brilliant <a href="http://recaptcha.net/">Recaptcha</a> service, you&#8217;ll know that their REST API requires an HTTP POST rather than a GET. As I had only used GET requests thus far, I googled around and found a pretty easy solution:</p>
-
-<pre><code>private def evaluateCaptcha(def remoteIp, def challenge, def response) {
-    def config = recaptchaService.getRecaptchaConfig()
-
-    def urlString = "http://api-verify.recaptcha.net/verify"
-    def queryString = "privatekey=${config.recaptcha.privateKey}&amp;remoteip=${remoteIp}&amp;challenge=${challenge}&amp;response=${URLEncoder.encode(response)}"
-
-    def url = new URL(urlString)
-    def connection = url.openConnection()
-    connection.setRequestMethod("POST")
-    connection.doOutput = true
-
-    def writer = new OutputStreamWriter(connection.outputStream)
-    writer.write(queryString)
-    writer.flush()
-    writer.close()
-    connection.connect()
-
-    def recaptchaResponse = connection.content.text
-    log.debug(recaptchaResponse)
-
-    recaptchaResponse.startsWith("true")
-}
-</code></pre>
-
-<p>I have to credit <a href="http://www.fiascode.com/programming/putting-google-finance-to-rest-with-groovy/">Justin Spradlin</a> for the code that ultimately got me here. Consider this a +1.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/6/">&larr; Older</a>
@@ -649,6 +637,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2014/07/08/learning-to-go-part-i-interfaces/">Learning to Go, Part I: Interfaces</a>
+      </li>
+    
+      <li class="post">
         <a href="/2014/07/02/wip-microservices-reading-list/">WIP Microservices Reading List</a>
       </li>
     
@@ -662,10 +654,6 @@
     
       <li class="post">
         <a href="/2013/07/10/blue-green-deployments-on-cloudfoundry/">Blue-Green Deployments on Cloud Foundry</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2013/05/29/clojure-on-cloud-foundry/">Clojure on Cloud Foundry</a>
       </li>
     
   </ul>

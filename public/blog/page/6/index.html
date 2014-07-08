@@ -9,7 +9,7 @@
   <meta name="author" content="Matt Stine">
 
   
-  <meta name="description" content="Ever wanted to do drag-n-drop sorting of a grid of images on a page and persist it? Here&#8217;s my solution using Grails, Prototype, and Script. &hellip;">
+  <meta name="description" content="If you&#8217;ve ever worked with the brilliant Recaptcha service, you&#8217;ll know that their REST API requires an HTTP POST rather than a GET. As I &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,6 +77,68 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/04/25/groovy-post-to-a-url/">Groovy: Post to a URL</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-04-25T23:09:11-05:00" pubdate data-updated="true">Apr 25<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>If you&#8217;ve ever worked with the brilliant <a href="http://recaptcha.net/">Recaptcha</a> service, you&#8217;ll know that their REST API requires an HTTP POST rather than a GET. As I had only used GET requests thus far, I googled around and found a pretty easy solution:</p>
+
+<pre><code>private def evaluateCaptcha(def remoteIp, def challenge, def response) {
+    def config = recaptchaService.getRecaptchaConfig()
+
+    def urlString = "http://api-verify.recaptcha.net/verify"
+    def queryString = "privatekey=${config.recaptcha.privateKey}&amp;remoteip=${remoteIp}&amp;challenge=${challenge}&amp;response=${URLEncoder.encode(response)}"
+
+    def url = new URL(urlString)
+    def connection = url.openConnection()
+    connection.setRequestMethod("POST")
+    connection.doOutput = true
+
+    def writer = new OutputStreamWriter(connection.outputStream)
+    writer.write(queryString)
+    writer.flush()
+    writer.close()
+    connection.connect()
+
+    def recaptchaResponse = connection.content.text
+    log.debug(recaptchaResponse)
+
+    recaptchaResponse.startsWith("true")
+}
+</code></pre>
+
+<p>I have to credit <a href="http://www.fiascode.com/programming/putting-google-finance-to-rest-with-groovy/">Justin Spradlin</a> for the code that ultimately got me here. Consider this a +1.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -750,77 +812,6 @@ class TextileCodec {
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2009/03/15/the-manifesto-for-software-craftsmanship/">The Manifesto for Software Craftsmanship</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-03-15T22:45:00-05:00" pubdate data-updated="true">Mar 15<span>th</span>, 2009</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><a href="http://5386.openphoto.net"><img src="http://openphoto.net/cgi-bin/image?image_id=5386" alt="" /></a>So as I&#8217;m sitting here thumbing through my <a href="http://www.infoq.com">InfoQ</a> feed on <a href="http://www.google.com/reader">Google Reader</a>, I come across the following posting: <a href="http://www.infoq.com/news/2009/03/software_craftsmanship">Software Craftsmanship Manifesto: A Call to Arms</a>. It seems that a group of &#8220;programming patriots&#8221; has struck again (see the <a href="http://agilemanifesto.org">Manifesto for Agile Software Development</a> - circa 2001), complete with a &#8220;founding document&#8221; look and feel. Clicking through <a href="http://manifesto.softwarecraftsmanship.org/">the source link</a>, one finds the following:</p>
-
-<blockquote><p>As aspiring Software Craftsmen we are raising the bar of professional software development by practicing it and helping others learn the craft. Through this work we have come to value:</p>
-
-<ul>
-<li><p>Not only working software, but also well-crafted software</p></li>
-<li><p>Not only responding to change, but also steadily adding value</p></li>
-<li><p>Not only individuals and interactions, but also a community of professionals</p></li>
-<li><p>Not only customer collaboration,but also productive partnerships</p></li>
-</ul>
-
-
-<p>That is, in pursuit of the items on the left we have found the items on the right to be indispensable.</p></blockquote>
-
-<p>© 2009, the undersigned. this statement may be freely copied in any form, but only in its entirety through this notice.</p>
-
-<p>You can&#8217;t even imagine my excitement in reading this. This statement of values is something that I have been trying to get across without having the needed words for quite some time.</p>
-
-<p>The motivation, says the InfoQ article, is right on target:</p>
-
-<blockquote><p>The members of the manifesto group answered two key questions: “How will it help solve the problems of crap code?” and “What will motivate &#8220;The developer just churning out code&#8221; to become a craftsman?” - the distinction is between the developer who is just getting it done vs the one getting it done right.</p></blockquote>
-
-<p>I have felt for a long time that the elements of craftsmanship are something sorely missing from our field. We, as programmers, are often so consumed with getting the job done that we do often neglect getting it done right. In our haste to move on to the next exciting project and/or technology, we neglect the tenets of simple design, test-driven development, merciless refactoring, clean code, etc. We&#8217;re often quite satisfied with the &#8220;hacky solution here&#8221; and the &#8220;quick and dirty solution there.&#8221;</p>
-
-<p>Quite frankly, I&#8217;ve had enough of that. I&#8217;m not satisfied when the contractor building my house cuts corners. I&#8217;m quite irritable when my mechanic does a less than thorough job with my car. Why should I expect my clients to settle for software built like that?</p>
-
-<p>So, to make this a practical rant, I thought I&#8217;d share a couple of the things that we&#8217;re doing in our team to move us in the right direction:</p>
-
-<ol>
-<li><p>First of all, we started a weekly &#8220;brown bag lunch/workshop,&#8221; inspired by Andy Hunt and Venkat Subramaniam&#8217;s discussion in <a href="http://pragprog.com/titles/pad/practices-of-an-agile-developer">Practices of an Agile Developer</a>.</p></li>
-<li><p>Second, we selected books to read as a team that will point us in the right direction. Our first two titles were <a href="http://pragprog.com/titles/tpp/the-pragmatic-programmer">The Pragmatic Programmer: From Journeyman to Master</a> (see, there&#8217;s craftsmanship right away!) and <a href="http://www.pearsonhighered.com/educator/academic/product/1,3110,0132350882,00.html">Clean Code: A Handbook of Agile Software Craftsmanship</a> (sense a pattern yet?).</p></li>
-<li><p>Third, we make a point of our weekly discussions to look at ways we can integrate the principles and practices that we&#8217;re learning into our daily work. An example: We&#8217;re working to integrate peer code review into our development process. The principles, patterns, and practices that we&#8217;re picking up from Clean Code will be informing us as we review code and look for possible improvements.</p></li>
-</ol>
-
-
-<p>So, with that said, tonight I became a signatory of the manifesto. <a href="http://manifesto.softwarecraftsmanship.org/sign/new">Why don&#8217;t you join me and fight the fight against crappy code!</a></p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/7/">&larr; Older</a>
@@ -846,6 +837,10 @@ class TextileCodec {
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2014/07/08/learning-to-go-part-i-interfaces/">Learning to Go, Part I: Interfaces</a>
+      </li>
+    
+      <li class="post">
         <a href="/2014/07/02/wip-microservices-reading-list/">WIP Microservices Reading List</a>
       </li>
     
@@ -859,10 +854,6 @@ class TextileCodec {
     
       <li class="post">
         <a href="/2013/07/10/blue-green-deployments-on-cloudfoundry/">Blue-Green Deployments on Cloud Foundry</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2013/05/29/clojure-on-cloud-foundry/">Clojure on Cloud Foundry</a>
       </li>
     
   </ul>

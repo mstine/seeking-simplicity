@@ -9,7 +9,7 @@
   <meta name="author" content="Matt Stine">
 
   
-  <meta name="description" content="I&#8217;ve started curating a Microservices Reading List. It&#8217;s still work in progress, but there&#8217;s some good stuff there. Watch for more &hellip;">
+  <meta name="description" content="This article was originally published in the April 2014 issue of NFJS the Magazine. This article begins an introductory series on the Go programming &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,6 +77,714 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2014/07/08/learning-to-go-part-i-interfaces/">Learning to Go, Part I: Interfaces</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-07-08T09:00:00-05:00" pubdate data-updated="true">Jul 8<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class="quoteblock abstract">
+<blockquote>
+<div class="paragraph">
+<p><em>This article was originally published in the <a href="https://nofluffjuststuff.com/home/magazine_subscribe?id=52">April 2014 issue</a> of NFJS the Magazine.</em></p>
+</div>
+<div class="paragraph">
+<p>This article begins an introductory series on the <a href="http://golang.org">Go programming language</a>.
+Go is a language optimized for large-scale software engineering and is rapidly becoming the language of choice for building cloud services.
+It does this in a very interesting way, optimizing for simplicity rather than complexity and taking a &#8220;less is exponentially more&#8221; approach.</p>
+</div>
+<div class="paragraph">
+<p>Three ways in which this really stands out are:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>A pragmatic approach to component design (through implicitly satisfied interfaces)</p>
+</li>
+<li>
+<p>The need to forget much of what you&#8217;ve learned about object-oriented programming (and to prefer composition over inheritance)</p>
+</li>
+<li>
+<p>A concurrency model that mere mortals can use to great effect (via goroutines and channels)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Overall, it&#8217;s a language with the productivity of a dynamically-typed, interpreted language with the safety and efficiency found in a statically-typed, compiled language.</p>
+</div>
+<div class="paragraph">
+<p>This series will focus on learning Go from the perspective of Java developers.
+We&#8217;ll begin with design ideas informed by Go&#8217;s primary method of abstraction: interfaces.</p>
+</div>
+</blockquote>
+</div>
+<div class="sect1">
+<h2 id="what-if-i-told-you-classes-were-unnecessary">What If I Told You Classes Were Unnecessary?</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Object-oriented programming (OO) has dominated large-scale software engineering for quite some time now.
+While OO finds its roots in simulation programming, it moved into and began to dominate the mainstream of business programming with the advent of languages like C++ and Java.
+When we design programs in an OO language, we usually begin with an object model, defining a taxonomy of objects representing all of the entities, or nouns, in our business domain.
+Languages like C++ and Java support this via the <em>class</em> construct, with a class defining a <em>template</em> for creating a particular type of <em>object</em>.
+Classes normally can be extended, creating <em>subclasses</em>.
+This allows us to define a hierarchy of types that inherit characteristics and behavior from one another.</p>
+</div>
+<div class="paragraph">
+<p>But what if I told you that classes were unnecessary? This may seem like heresy, but we already know it.
+JavaScript has the feel of an OO language, but it does not have classes at all.
+In fact, it utilizes what&#8217;s called <em>prototype-based programming</em> <a href="#PBP">[PBP]</a>.
+With prototype-based programming, we achieve reuse by cloning existing objects that serve as <em>prototypes</em>.</p>
+</div>
+<div class="paragraph">
+<p>Those of us that have surfed the wave of <em>functional programming</em> have discovered that it&#8217;s indeed possible to structure large programs around a very basic set of types (sets, lists, maps, etc.), along with a large collection of behaviors, or <em>functions</em>, that can operate on those types.
+In these languages, we don&#8217;t really see anything resembling an object!</p>
+</div>
+<div class="paragraph">
+<p>The Go programming language is somewhat unique in that it offers many OO-like constructs, but does not offer either classes or prototypes. But it is also not correct to refer to it as a functional language <em>per se</em>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="favoring-composition-over-inheritance">Favoring Composition Over Inheritance</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>While the Java programming language has always included a type system featuring inheritance, it has long been considered best practice to favor composition over inheritance.
+When Joshua Bloch, now Chief Java Architect at Google and then Distinguished Engineer at Sun Microsystems, wrote his seminal work <em>Effective Java</em> <a href="#EJ">[EJ]</a>, he included as Item #16: &#8220;Favor composition over inheritance.&#8221;</p>
+</div>
+<div class="paragraph">
+<p>When we use inheritance, we must be careful to implement subclasses such that they are in an <em>is-a</em> relationship with their parents.
+In other words, any context that expects an instance of the parent type should also work well with an instance of the subtype.
+We call this <em>substitutabilty</em>, which is expressed well by the Liskov Substitution Principle <a href="#LSP">[LSP]</a>.
+When we don&#8217;t follow this principle, we usually end up creating a lot of code that uses type checking to implement special behaviors.
+In doing so, we create fragile systems that don&#8217;t abide by the Open-Closed Principle <a href="#OCP">[OCP]</a>.</p>
+</div>
+<div class="paragraph">
+<p>When we instead utilize composition, we build classes that are in a <em>has-a</em> relationship with their components.
+If we&#8217;d like to encapsulate the relationship between a class and its components, we can apply <em>delegation</em>, forwarding method calls to the underlying component.
+This makes it appear as if our object <em>is-a</em> instance of another type in terms of behavior, without the problems associated with inheritance-based reuse.</p>
+</div>
+<div class="paragraph">
+<p>The Go programming language also emphasizes composition over inheritance, in that it does not even provide inheritance as a language construct! Instead, it provides the ability to use composition at the type and behavior level.
+Let&#8217;s see how.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="structs-ftw">Structs FTW!</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In Go we can define composite data types using <em class="term">structs</em>.
+You may be familiar with structs if you&#8217;ve spent any time programming in C.
+Structs are simply a sequence of fields, each of which has a name and a type.
+If you take a look at <a href="#pstruct">A <code>Point</code> struct</a>, you&#8217;ll see that we&#8217;ve defined a struct representing a point in Cartesian space.</p>
+</div>
+<div id="pstruct" class="listingblock">
+<div class="title">A <code>Point</code> struct</div>
+<div class="content">
+<pre class="CodeRay"><code class="go language-go"><span style="color:#080;font-weight:bold">type</span> Point <span style="color:#080;font-weight:bold">struct</span> {
+        X, Y <span style="color:#0a8;font-weight:bold">float64</span>
+}
+</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>New Go types are defined using the <code>type</code> keyword.
+We give our type the name <code>Point</code>.
+It&#8217;s important to note that we&#8217;ve used uppercase here.
+Visibility in Go is determined by the case of an identifier.
+All code in Go is defined within a package.
+If you&#8217;d like your types and functions to be visible beyond the confines of your package, you need to <em>export</em> them by starting them with an uppercase letter.
+If you use a lowercase letter or underscore (<code>_</code>), they will be <em>unexported</em>, roughly equivalent to the Java concept of <code>private</code>.</p>
+</div>
+<div class="paragraph">
+<p>You&#8217;ll quickly notice that we&#8217;ve defined two fields in our struct, <code>X</code> and <code>Y</code>, both of which take on the type <code>float64</code>, representing a 64-bit floating-point number.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+Unlike Java, Go places the type declarations <em>after</em> the field names (the same applies when declaring function arguments) - you&#8217;ll get used to this eventually!
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The keen observer will also note the case of the field names.
+Just as case matters when dealing with type visibility beyond package boundaries, case also matters when dealing with field visibility beyond struct boundaries.
+Because both <code>X</code> and <code>Y</code> are uppercase, they are exported from the struct.
+Had they been <code>x</code> and <code>y</code>, they would be unexported, and therefore only visible within the struct.
+To find out how we&#8217;ll deal with that, hold on until the next section!</p>
+</div>
+<div class="paragraph">
+<p>So how do we create one of our <code>Point</code>s? We have a couple of options. First, we can utilize the <code>new</code> function:</p>
+</div>
+<div id="pnew" class="listingblock">
+<div class="content">
+<pre class="CodeRay"><code class="go language-go">        p := *<span style="color:#369;font-weight:bold">new</span>(point.Point)
+        p.X = <span style="color:#00D">1</span>
+        p.Y = <span style="color:#00D">2</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>We prefixed our call to <code>new</code> with an asterisk (<code>*</code>) in order to dereference the pointer returned by <code>new</code>.
+Yes, that&#8217;s right, Go has pointers.
+With that said, there&#8217;s no pointer arithmetic, so they&#8217;re not quite as scary as what we find in languages like C and C++.
+They almost represent a happy medium between C and Java.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+You also don&#8217;t have to worry about freeing memory! Go is a garbage collected language.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Built-in types in Go start <em>zeroed</em>, rather than <code>nil</code>.
+In the case of <code>float64</code>, they take on the value <code>0</code>.
+It&#8217;s good practice for our types to start zeroed as well, and we get that for free here.
+Our newly initialized <code>Point</code> represents the Cartesian coordinate <em>(0,0)</em>. The next two statements move our <code>Point</code> to <em>(1,2)</em>.</p>
+</div>
+<div class="paragraph">
+<p>We can eliminate the two step process by utilizing a composite literal:</p>
+</div>
+<div id="pliteral" class="listingblock">
+<div class="content">
+<pre class="CodeRay"><code class="go language-go">        p = point.Point{X: <span style="color:#00D">1</span>, Y: <span style="color:#00D">2</span>}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>A composite literal creates a new instance each time it is evaluated, and initializes each field with the given value.
+In addition, this particular <code>Point</code> starts out dereferenced.
+If we actually want a pointer to it, we need to prefix the literal with an ampersand (<code>&amp;</code>).</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+It is generally considered idiomatic Go to prefer the composite literal style to using <code>new</code>.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Enough about structs, on to methods!</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="methods">Methods</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Go methods are just functions that happen to have a <em>receiver</em> argument.
+You can find one in <a href="#trans">Method for translating <code>Point</code>s</a>.</p>
+</div>
+<div id="trans" class="listingblock">
+<div class="title">Method for translating <code>Point</code>s</div>
+<div class="content">
+<pre class="CodeRay"><code class="go language-go"><span style="color:#080;font-weight:bold">func</span> (p Point) Translate(xDist <span style="color:#0a8;font-weight:bold">float64</span>, yDist <span style="color:#0a8;font-weight:bold">float64</span>) Point {
+        <span style="color:#080;font-weight:bold">return</span> Point{p.X + xDist, p.Y + yDist}
+}
+</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>Translate</code> method takes two distances along the <em>x</em> and <em>y</em>-axes, and <em>translates</em> a point from its current position to a new position by returning a new <code>Point</code> literal that combines the current <em>x</em> and <em>y</em> coordinates with those distances.
+We call <code>Translate</code> in <a href="#trans-in">Calling <code>Translate</code></a>, and the output is found in <a href="#trans-out">Output of calling <code>Translate</code></a>.</p>
+</div>
+<div id="trans-in" class="listingblock">
+<div class="title">Calling <code>Translate</code></div>
+<div class="content">
+<pre class="CodeRay"><code class="go language-go">        q := p.Translate(<span style="color:#00D">5</span>, <span style="color:#00D">5</span>)
+        fmt.Printf(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">Translated %v to %v</span><span style="color:#b0b">\n</span><span style="color:#710">&quot;</span></span>, p, q)</code></pre>
+</div>
+</div>
+<div id="trans-out" class="listingblock">
+<div class="title">Output of calling <code>Translate</code></div>
+<div class="content">
+<pre class="CodeRay"><code class="console language-console">$ go run point.go
+Translated {1 2} to {6 7}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Because we&#8217;re not operating on a pointer to a <code>Point</code>, there&#8217;s no way for us to affect the existing instance.
+If we couple this with unexported fields, we&#8217;d have completely controlled access to a <code>Point</code> instance&#8217;s fields.</p>
+</div>
+<div class="paragraph">
+<p>If we want to mutate a <code>Point</code>, we need our method to use a pointer as the receiver argument rather than a value.
+We do this in <a href="#pointer">Method for translating a <code>Point</code> via a pointer</a>.</p>
+</div>
+<div id="pointer" class="listingblock">
+<div class="title">Method for translating a <code>Point</code> via a pointer</div>
+<div class="content">
+<pre class="CodeRay"><code class="go language-go"><span style="color:#080;font-weight:bold">func</span> (p *Point) TranslatePointer(xDist <span style="color:#0a8;font-weight:bold">float64</span>, yDist <span style="color:#0a8;font-weight:bold">float64</span>) {
+        p.X = p.X + xDist
+        p.Y = p.Y + yDist
+}
+</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>As you can see, rather than creating a new <code>Point</code> and returning it, this method returns no value and directly mutates the <code>Point</code> referred to by the pointer passed in as a receiver.
+Notice that Go conveniently dereferences the pointer automatically when using the dot (<code>.</code>) operator to access fields. We call this method on a pointer to a <code>Point</code> in <a href="#transp-in">Calling <code>TranslatePointer</code></a> (with output in <a href="#transp-out">Output of calling <code>TranslatePointer</code></a>), again using an ampersand (<code>&amp;</code>) to tell Go we&#8217;d like a pointer to a <code>Point</code>, not a <code>Point</code> value.</p>
+</div>
+<div id="transp-in" class="listingblock">
+<div class="title">Calling <code>TranslatePointer</code></div>
+<div class="content">
+<pre class="CodeRay"><code class="go language-go">        qP := &amp;point.Point{X: <span style="color:#00D">1</span>, Y: <span style="color:#00D">2</span>}
+        qP.TranslatePointer(<span style="color:#00D">5</span>, <span style="color:#00D">5</span>)
+        fmt.Printf(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">Translated using pointer to %v</span><span style="color:#b0b">\n</span><span style="color:#710">&quot;</span></span>, qP)</code></pre>
+</div>
+</div>
+<div id="transp-out" class="listingblock">
+<div class="title">Output of calling <code>TranslatePointer</code></div>
+<div class="content">
+<pre class="CodeRay"><code class="console language-console">$ go run point.go
+Translated using pointer to &amp;{6 7}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now that we have the capability to create types with associated methods, let&#8217;s look at how we can compose new composite types from existing ones.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="type-composition-with-structs">Type composition with structs</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Let&#8217;s imagine that we&#8217;d like to extend the concept of <code>Point</code> and add the notion of color.
+If we were working in Java, we might do the following:</p>
+</div>
+<div id="pcolor" class="listingblock">
+<div class="content">
+<pre class="CodeRay"><code class="java language-java"><span style="color:#088;font-weight:bold">public</span> <span style="color:#339;font-weight:bold">class</span> <span style="color:#B06;font-weight:bold">ColorPoint</span> <span style="color:#088;font-weight:bold">extends</span> <span style="color:#0a8;font-weight:bold">Point</span> {
+  <span style="color:#088;font-weight:bold">private</span> <span style="color:#0a8;font-weight:bold">Color</span> color;
+
+  <span style="color:#777">// rest omitted...</span>
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Since Go doesn&#8217;t have the concept of classes or inheritance, we need to work with structs to accomplish our goal.
+We can compose a type called <code>ColorPoint</code> by <em>embedding</em> the <code>Point</code> type and then adding the additional field representing color (<a href="#pembed">Embedding <code>Point</code> into <code>ColorPoint</code></a>).</p>
+</div>
+<div id="pembed" class="listingblock">
+<div class="title">Embedding <code>Point</code> into <code>ColorPoint</code></div>
+<div class="content">
+<pre class="CodeRay"><code class="go language-go"><span style="color:#080;font-weight:bold">const</span> (
+        BLUE  = <span style="color:#069">iota</span>
+        RED   = <span style="color:#069">iota</span>
+        GREEN = <span style="color:#069">iota</span>
+)
+
+<span style="color:#080;font-weight:bold">type</span> ColorPoint <span style="color:#080;font-weight:bold">struct</span> {
+        Point Point
+        Color <span style="color:#0a8;font-weight:bold">int</span>
+}
+</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>First note the use of the <code>const</code> keyword.
+We&#8217;re defining a set of integer constants to represent our colors.
+This is the closest approximation that Go has to an enumerated type (such as Java&#8217;s <code>enum</code>) and is usually more that sufficient.
+The predeclared identifier <code>iota</code> represents successive untyped integer constants.
+It is reset to <code>0</code> whenever <code>const</code> appears again in the source.
+This has the effect in our code of setting <code>BLUE</code> to <code>0</code>, <code>RED</code> to <code>1</code>, and <code>GREEN</code> to <code>2</code>.</p>
+</div>
+<div class="paragraph">
+<p>Next we define our <code>ColorPoint</code> type as a <code>struct</code>.
+We embed <code>Point</code> as an exported field also called <code>Point</code>, and we define an additional exported field called <code>Color</code> that is typed as an <code>int</code>.
+Now, in <a href="#color-in">Creating and printing a <code>ColorPoint</code></a>, we&#8217;ll create an instance of <code>ColorPoint</code>, and then we&#8217;ll print out both the previously defined <code>Point</code> instance as well as the <code>ColorPoint</code> instance (results in <a href="#color-out">Output of creating and printing a <code>ColorPoint</code></a>).</p>
+</div>
+<div id="color-in" class="listingblock">
+<div class="title">Creating and printing a <code>ColorPoint</code></div>
+<div class="content">
+<pre class="CodeRay"><code class="go language-go">        r := point.ColorPoint{Point: point.Point{X: <span style="color:#00D">1</span>, Y: <span style="color:#00D">4</span>}, Color: point.BLUE}
+
+        fmt.Printf(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">Point: %v</span><span style="color:#b0b">\n</span><span style="color:#710">&quot;</span></span>, p)
+        fmt.Printf(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">Color Point: %v</span><span style="color:#b0b">\n</span><span style="color:#710">&quot;</span></span>, r)</code></pre>
+</div>
+</div>
+<div id="color-out" class="listingblock">
+<div class="title">Output of creating and printing a <code>ColorPoint</code></div>
+<div class="content">
+<pre class="CodeRay"><code class="console language-console">$ go run point.go
+Point: {1 2}
+Color Point: {{1 4} 0}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>We&#8217;ve now successfully created a composite type, but we&#8217;re missing something. Let&#8217;s press on.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="houston-we-have-a-problem">Houston, we have a problem&#8230;</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Here&#8217;s a summary of our problem:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>We have <code>Point</code>s.</p>
+</li>
+<li>
+<p>We have <code>ColorPoint</code>s.</p>
+</li>
+<li>
+<p><code>ColorPoint</code>s are like <code>Point</code>s, but they are definitely not <code>Point</code>s since Go does not have inheritance.</p>
+</li>
+<li>
+<p>That said, we&#8217;d like to be able to write methods that can interoperate between them. What do we do?</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>As an example, since both <code>Point</code> and <code>ColorPoint</code> have <em>x</em> and <em>y</em> coordinates, it might be interesting if we could compute the Euclidean distance <a href="#EUC">[EUC]</a> between them.
+As a reminder, the formula can be found in <a href="#e-formula">Euclidean distance formula</a>.</p>
+</div>
+<div id="e-formula" class="imageblock">
+<div class="content">
+<img src="/images/distance_formula.png" alt="distance formula">
+</div>
+<div class="title">Figure 1. Euclidean distance formula</div>
+</div>
+<div class="paragraph">
+<p>As expressed here, you can think of <em>p<sub>1</sub></em> and <em>q<sub>1</sub></em> as the <em>x</em> coordinates for the two points, and <em>p<sub>2</sub></em> and <em>q<sub>2</sub></em> as the <em>y</em> coordinates for the two points.
+So how do we implement a method that will allow us to compute this formula in such a way that will work with <code>Point</code>s, <code>ColorPoint</code>s, or both?</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="go-interfaces">Go Interfaces</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Fortunately Go contributes a very powerful version of <em>interfaces</em> to the abstraction conversation.
+Go interfaces describe groups of behaviors in the form of method signatures that implementors of the interface must implement.
+So far this doesn&#8217;t sound unlike Java interfaces. Let&#8217;s take a look at two Go interfaces in <a href="#interfaces"><code>Positioner</code> and <code>Distancer</code> interfaces</a>.</p>
+</div>
+<div id="interfaces" class="listingblock">
+<div class="title"><code>Positioner</code> and <code>Distancer</code> interfaces</div>
+<div class="content">
+<pre class="CodeRay"><code class="go language-go"><span style="color:#080;font-weight:bold">type</span> Positioner <span style="color:#080;font-weight:bold">interface</span> {
+        Coordinates() Point
+}
+
+<span style="color:#080;font-weight:bold">type</span> Distancer <span style="color:#080;font-weight:bold">interface</span> {
+        DistanceTo(p Positioner) <span style="color:#0a8;font-weight:bold">float64</span>
+}
+</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Notice that <code>interface</code>s are themselves types. This is important, because it allows us to define function and method signatures that accept interfaces as arguments. <code>Positioner</code>&#8217;s <code>Coordinates()</code> method should provide us the position of any implementor in terms of a <code>Point</code>. <code>Distancer</code>&#8217;s <code>DistanceTo()</code> method will calculate the distance between any implementor and a <code>Positioner</code>.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+It is idiomatic in Go for interface names to be suffixed with &#8220;-er.&#8221;
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>However, unlike Java interfaces, where we might write:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay"><code class="java language-java"><span style="color:#088;font-weight:bold">public</span> <span style="color:#339;font-weight:bold">class</span> <span style="color:#B06;font-weight:bold">Point</span> <span style="color:#088;font-weight:bold">implements</span> Positioner, Distancer {
+  <span style="color:#777">// implementation omitted...</span>
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Go does not have an <code>implements</code> keyword.
+In fact, if you think about the way we&#8217;ve defined structs and methods so far, the only place in which we indicated any attachment between a struct and a method is in the method signature itself, in the form of the receiver parameter.
+So how does this work in Go?</p>
+</div>
+<div class="paragraph">
+<p>Let&#8217;s talk about how interfaces are <em>satsified</em>.</p>
+</div>
+<div class="paragraph">
+<p>In languages like Java, an interfaces is satisfied <em>explicitly</em>.
+Classes are tagged with <code>implements Interface</code>.
+The compiler then looks up that interface and identifies all of the method signatures defined by it.
+It then examines the class to ensure that all of those method signatures have a concrete implementation in either the class itself or one of its parents.</p>
+</div>
+<div class="paragraph">
+<p>In Go, interfaces are satisfied <em>implicitly</em>.
+We do not tag structs in any way.
+For a type to implement an interface, it simply needs to implement all of the method signatures defined by that interface.
+When we use a type in the context of an interface (e.g. we pass a type into a function that expects an interface as one of its arguments), the compiler will check to see if that type satisfies the interface.</p>
+</div>
+<div class="paragraph">
+<p>Let&#8217;s see how this falls out in practice.</p>
+</div>
+<div class="paragraph">
+<p>First, let&#8217;s define a function that can calculate the distance between two <code>Positioner</code>s (<a href="#distance-between">Calculates the distance between two <code>Positioner</code>s</a>).</p>
+</div>
+<div id="distance-between" class="listingblock">
+<div class="title">Calculates the distance between two <code>Positioner</code>s</div>
+<div class="content">
+<pre class="CodeRay"><code class="go language-go"><span style="color:#080;font-weight:bold">func</span> distanceBetween(a Positioner, b Positioner) <span style="color:#0a8;font-weight:bold">float64</span> {
+        p := a.Coordinates()
+        q := b.Coordinates()
+        sqOfXDist := math.Pow(p.X-q.X, <span style="color:#00D">2</span>)
+        sqOfYDist := math.Pow(p.Y-q.Y, <span style="color:#00D">2</span>)
+        <span style="color:#080;font-weight:bold">return</span> math.Sqrt(sqOfXDist + sqOfYDist)
+}
+</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Next, in <a href="#point-satisfies-int"><code>Point</code> satisfies <code>Positioner</code> and <code>Distancer</code></a>, we satisfy both interfaces for <code>Point</code>.</p>
+</div>
+<div id="point-satisfies-int" class="listingblock">
+<div class="title"><code>Point</code> satisfies <code>Positioner</code> and <code>Distancer</code></div>
+<div class="content">
+<pre class="CodeRay"><code class="go language-go"><span style="color:#080;font-weight:bold">func</span> (p Point) Coordinates() Point {
+        <span style="color:#080;font-weight:bold">return</span> p
+}
+
+<span style="color:#080;font-weight:bold">func</span> (p Point) DistanceTo(pos Positioner) <span style="color:#0a8;font-weight:bold">float64</span> {
+        <span style="color:#080;font-weight:bold">return</span> distanceBetween(p, pos)
+}
+</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In <a href="#cp-satisfies-int"><code>ColorPoint</code> satisfies <code>Positioner</code> and <code>Distancer</code></a>, we satisfy both interfaces for <code>ColorPoint</code>.</p>
+</div>
+<div id="cp-satisfies-int" class="listingblock">
+<div class="title"><code>ColorPoint</code> satisfies <code>Positioner</code> and <code>Distancer</code></div>
+<div class="content">
+<pre class="CodeRay"><code class="go language-go"><span style="color:#080;font-weight:bold">func</span> (cp ColorPoint) Coordinates() Point {
+        <span style="color:#080;font-weight:bold">return</span> cp.Point
+}
+
+<span style="color:#080;font-weight:bold">func</span> (cp ColorPoint) DistanceTo(pos Positioner) <span style="color:#0a8;font-weight:bold">float64</span> {
+        <span style="color:#080;font-weight:bold">return</span> distanceBetween(cp, pos)
+}
+</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This all results in our ability to interchange <code>Point</code>s and <code>ColorPoint</code>s in calls to <code>DistanceTo()</code> (<a href="#calculating-distance-in">Calculating the distance between <code>Point</code> and <code>ColorPoint</code></a>). The output of these calls is found in <a href="#calculating-distance-out">Output of calculating the distance between <code>Point</code> and <code>ColorPoint</code></a>.</p>
+</div>
+<div id="calculating-distance-in" class="listingblock">
+<div class="title">Calculating the distance between <code>Point</code> and <code>ColorPoint</code></div>
+<div class="content">
+<pre class="CodeRay"><code class="go language-go">        fmt.Printf(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">Dist b/w p and q = %v</span><span style="color:#b0b">\n</span><span style="color:#710">&quot;</span></span>, p.DistanceTo(r))
+        fmt.Printf(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">Dist b/w q and p = %v</span><span style="color:#b0b">\n</span><span style="color:#710">&quot;</span></span>, r.DistanceTo(p))</code></pre>
+</div>
+</div>
+<div id="calculating-distance-out" class="listingblock">
+<div class="title">Output of calculating the distance between <code>Point</code> and <code>ColorPoint</code></div>
+<div class="content">
+<pre class="CodeRay"><code class="console language-console">$ go run point.go
+Dist b/w p and q = 2
+Dist b/w q and p = 2</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>At first glance this may not seem so impressive, nor may it seem to be that great of an advantage over what&#8217;s available to us in Java.
+The power, however, is hiding just under the surface.
+When we think about implementing an interface in Java, we usually are thinking in terms of taxonomy.
+Classes extend other classes, and as we&#8217;ve previously stated, that means that a child class ought to be substitutable for its parent <a href="#LSP">[LSP]</a>.
+When we implement an interface in Java, we are also usually thinking that the class <em>is a</em> version of that interface.
+We might have expressed our Cartesian coordinate taxonomy in Java as:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay"><code class="java language-java"><span style="color:#088;font-weight:bold">public</span> <span style="color:#339;font-weight:bold">interface</span> <span style="color:#B06;font-weight:bold">Coordinate</span> {
+  <span style="color:#339;font-weight:bold">double</span> distanceTo(Coordinate c);
+}
+
+<span style="color:#088;font-weight:bold">public</span> <span style="color:#339;font-weight:bold">class</span> <span style="color:#B06;font-weight:bold">Point</span> <span style="color:#088;font-weight:bold">implements</span> Coordinate {
+  <span style="color:#777">// implementation omitted</span>
+}
+
+<span style="color:#088;font-weight:bold">public</span> <span style="color:#339;font-weight:bold">class</span> <span style="color:#B06;font-weight:bold">ColorPoint</span> <span style="color:#088;font-weight:bold">extends</span> <span style="color:#0a8;font-weight:bold">Point</span> <span style="color:#088;font-weight:bold">implements</span> Coordinate {
+  <span style="color:#777">// implementation omitted</span>
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>When we do this, we soon hear ourselves talking about <code>Coordinate</code>s as things, not as groups of behaviors.
+Let&#8217;s contrast this with Go&#8217;s implicit satisfaction by adding an additional example.
+Perhaps our program&#8217;s purpose is to keep track of animals in a wildlife preserve.
+It&#8217;s quite natural that we&#8217;d have an <code>Animal</code> type, and that type would have some way of keeping track of the animal&#8217;s current location (<a href="#animal-struct"><code>Animal</code> struct</a>).</p>
+</div>
+<div id="animal-struct" class="listingblock">
+<div class="title"><code>Animal</code> struct</div>
+<div class="content">
+<pre class="CodeRay"><code class="go language-go"><span style="color:#080;font-weight:bold">type</span> Animal <span style="color:#080;font-weight:bold">struct</span> {
+        Name <span style="color:#0a8;font-weight:bold">string</span>
+        X, Y <span style="color:#0a8;font-weight:bold">float64</span>
+}
+</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In order to perform our desired distance calculations, we need <code>Animal</code> to satisfy our two interfaces (<a href="#animal-dp"><code>Animal</code> satisfies <code>Positioner</code> and <code>Distancer</code></a>).</p>
+</div>
+<div id="animal-dp" class="listingblock">
+<div class="title"><code>Animal</code> satisfies <code>Positioner</code> and <code>Distancer</code></div>
+<div class="content">
+<pre class="CodeRay"><code class="go language-go"><span style="color:#080;font-weight:bold">func</span> (a Animal) Coordinates() point.Point {
+        <span style="color:#080;font-weight:bold">return</span> point.Point{X: a.X, Y: a.Y}
+}
+
+<span style="color:#080;font-weight:bold">func</span> (a Animal) DistanceTo(pos point.Positioner) <span style="color:#0a8;font-weight:bold">float64</span> {
+        thing := pos.Coordinates()
+        sqOfXDist := math.Pow(a.X-thing.X, <span style="color:#00D">2</span>)
+        sqOfYDist := math.Pow(a.Y-thing.Y, <span style="color:#00D">2</span>)
+        <span style="color:#080;font-weight:bold">return</span> math.Sqrt(sqOfXDist + sqOfYDist)
+}
+</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+Because <code>distanceBetween()</code> was not exported from the <code>point</code> package, we cannot use it in the <code>animal</code> package. Sometimes you&#8217;ll run into this situation in Go, which prefers &#8220;dependency hygiene&#8221; over reuse.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>And now, we can perform our desired calculations (<a href="#animal-in">Mixing <code>Animal</code>s and <code>Point</code>s using interfaces</a>).
+We now know the distance between our penguin and our original point <code>p</code>, and we also know that given the proximity of the seal (<a href="#animal-out">Output of mixing <code>Animal</code>s and <code>Point</code>s using interfaces</a>), our penguin needs to start running!</p>
+</div>
+<div id="animal-in" class="listingblock">
+<div class="title">Mixing <code>Animal</code>s and <code>Point</code>s using interfaces</div>
+<div class="content">
+<pre class="CodeRay"><code class="go language-go">        penguin := animal.Animal{Name: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">penguin</span><span style="color:#710">&quot;</span></span>, X: <span style="color:#00D">1</span>, Y: <span style="color:#00D">1</span>}
+        seal := animal.Animal{Name: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">seal</span><span style="color:#710">&quot;</span></span>, X: <span style="color:#00D">1</span>, Y: <span style="color:#00D">4</span>}
+
+        fmt.Printf(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">Dist b/w penguin and seal = %v</span><span style="color:#b0b">\n</span><span style="color:#710">&quot;</span></span>, penguin.DistanceTo(seal))
+        fmt.Printf(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">Dist b/w penguin and point = %v</span><span style="color:#b0b">\n</span><span style="color:#710">&quot;</span></span>, penguin.DistanceTo(p))</code></pre>
+</div>
+</div>
+<div id="animal-out" class="listingblock">
+<div class="title">Output of mixing <code>Animal</code>s and <code>Point</code>s using interfaces</div>
+<div class="content">
+<pre class="CodeRay"><code class="console language-console">$ go run point.go
+Dist b/w penguin and seal = 3
+Dist b/w penguin and point = 1</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now for the test.
+Is it proper to think of an <code>Animal</code> as being a <code>Distancer</code> or <code>Positioner</code> in terms of taxonomy?
+Not really.
+In fact, that seems like a coupling of concerns.
+And if we were implementing this program in Java, a naive translation would probably cause us to do the following:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay"><code class="java language-java"><span style="color:#088;font-weight:bold">public</span> <span style="color:#339;font-weight:bold">class</span> <span style="color:#B06;font-weight:bold">Animal</span> <span style="color:#088;font-weight:bold">implements</span> Positioner, Distancer</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>So to summarize, Go interfaces allow us to use arbitrary types in contexts expecting a particular interface type, as long as the type in question implements all of the methods defined by that interface.
+Since interfaces are satisfied implicitly, we&#8217;re no longer pressured toward treating interfaces as part of a type taxonomy.
+Instead, we&#8217;re able to focus on them as groups of related behaviors.</p>
+</div>
+<div class="paragraph">
+<p>This may seem like a concept popularized by dynamic languages called &#8220;duck typing&#8221; <a href="#DT">[DT]</a>.
+In most cases, you call a method <em>blindly</em>, and allow the runtime dispatch system to determine if the object can <em>respond to</em> that method.
+While this is a similar concept, it is not a very good description of how Go works.
+Go actually employs &#8220;structural typing&#8221; <a href="#ST">[ST]</a>, which uses the compiler to determine interface satisfaction in a type safe manner.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="conclusion">Conclusion</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>I hope you&#8217;ve enjoyed this brief introduction to the Go programming language, as well as one of its most powerful features: interfaces.
+With interfaces we&#8217;re able to take a more pragmatic approach to component design, as we&#8217;re not forced to think in terms of taxonomies and deep type hierarchies.
+In the next installment we&#8217;ll explore Go&#8217;s approach to concurrency.
+Until next time my fellow gophers!</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="references">References</h2>
+<div class="sectionbody">
+<div class="ulist bibliography">
+<ul class="bibliography">
+<li>
+<p><a id="EJ"></a>[EJ] Bloch, Joshua. <em>Effective Java: Programming Language Guide</em>. Addison-Wesley, 2001.</p>
+</li>
+<li>
+<p><a id="EUC"></a>[EUC] Euclidean distance, Wikipedia. <a href="http://en.wikipedia.org/wiki/Euclidean_distance">http://en.wikipedia.org/wiki/Euclidean_distance</a>.</p>
+</li>
+<li>
+<p><a id="DT"></a>[DT] Duck typing, Wikipedia. <a href="http://en.wikipedia.org/wiki/Duck_typing">http://en.wikipedia.org/wiki/Duck_typing</a></p>
+</li>
+<li>
+<p><a id="LSP"></a>[LSP] Liskov substitution principle, Wikipedia. <a href="http://en.wikipedia.org/wiki/Liskov_substitution_principle">http://en.wikipedia.org/wiki/Liskov_substitution_principle</a></p>
+</li>
+<li>
+<p><a id="PBP"></a>[PBP] Prototype-based programing, Wikipedia. <a href="http://en.wikipedia.org/wiki/Prototype-based_programming">http://en.wikipedia.org/wiki/Prototype-based_programming</a></p>
+</li>
+<li>
+<p><a id="ST"></a>[ST] Structural type system, Wikipedia. <a href="http://en.wikipedia.org/wiki/Structural_type_system">http://en.wikipedia.org/wiki/Structural_type_system</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div></div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1586,100 +2294,6 @@ Please sound off in the blogosphere, the Twitterverse, or wherever suits your fa
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2011/01/02/2010-in-review-the-automated-analysis/">2010 in Review: The Automated Analysis&#8230;</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-01-02T20:28:25-06:00" pubdate data-updated="true">Jan 2<span>nd</span>, 2011</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>The stats helper monkeys at WordPress.com mulled over how this blog did in 2010, and here&#8217;s a high level summary of its overall blog health:</p>
-
-<p><img src="http://s0.wp.com/i/annual-recap/meter-healthy3.gif" alt="Healthy blog!" /></p>
-
-<p>The <em>Blog-Health-o-Meter™</em> reads Fresher than ever.</p>
-
-<h2>Crunchy numbers</h2>
-
-<pre><code>            ![Featured image](http://s0.wp.com/i/annual-recap/abstract-stats-1.png)
-</code></pre>
-
-<p><em>A helper monkey made this abstract painting, inspired by your stats.</em></p>
-
-<p>A Boeing 747-400 passenger jet can hold 416 passengers.  This blog was viewed about <strong>6,600</strong> times in 2010.  That&#8217;s about 16 full 747s.</p>
-
-<p>In 2010, there were <strong>15</strong> new posts, growing the total archive of this blog to 115 posts. There were <strong>24</strong> pictures uploaded, taking up a total of 979kb. That&#8217;s about 2 pictures per month.</p>
-
-<p>The busiest day of the year was June 4th with <strong>139</strong> views. The most popular post that day was <a href="http://mattstine.com/2010/06/03/dont-build-software-thats-too-smart/">Don&#8217;t build software that&#8217;s TOO smart!</a>.</p>
-
-<h2>Where did they come from?</h2>
-
-<p>The top referring sites in 2010 were <strong>agile.dzone.com</strong>, <strong>java.dzone.com</strong>, <strong>twitter.com</strong>, <strong>Google Reader</strong>, and <strong>javablogs.com</strong>.</p>
-
-<p>Some visitors came searching, mostly for <strong>matt stine</strong>, <strong>groovy http post</strong>, <strong>groovy post</strong>, <strong>groovy url post</strong>, and <strong>groovy url encode</strong>.</p>
-
-<h2>Attractions in 2010</h2>
-
-<p>These are the posts and pages that got the most views in 2010.</p>
-
-<p>1</p>
-
-<pre><code>                [Don't build software that's TOO smart!](http://mattstine.com/2010/06/03/dont-build-software-thats-too-smart/) June 2010  
-</code></pre>
-
-<p>1 comment</p>
-
-<p>2</p>
-
-<pre><code>                [Groovy: Post to a URL](http://mattstine.com/2009/04/25/groovy-post-to-a-url/) April 2009  
-</code></pre>
-
-<p>4 comments</p>
-
-<p>3</p>
-
-<pre><code>                [Resume](http://mattstine.com/resume/) March 2009                                           
-</code></pre>
-
-<p>4</p>
-
-<pre><code>                [Deploying Grails with Groovy](http://mattstine.com/2009/03/29/deploying-grails-with-groovy/) March 2009                                            
-</code></pre>
-
-<p>5</p>
-
-<pre><code>                [LOTY Time Again: Scala or Clojure?!?!](http://mattstine.com/2009/04/02/loty-time-again-scala-or-clojure/) April 2009  
-</code></pre>
-
-<p>17 comments</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -1703,6 +2317,10 @@ Please sound off in the blogosphere, the Twitterverse, or wherever suits your fa
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2014/07/08/learning-to-go-part-i-interfaces/">Learning to Go, Part I: Interfaces</a>
+      </li>
+    
+      <li class="post">
         <a href="/2014/07/02/wip-microservices-reading-list/">WIP Microservices Reading List</a>
       </li>
     
@@ -1716,10 +2334,6 @@ Please sound off in the blogosphere, the Twitterverse, or wherever suits your fa
     
       <li class="post">
         <a href="/2013/07/10/blue-green-deployments-on-cloudfoundry/">Blue-Green Deployments on Cloud Foundry</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2013/05/29/clojure-on-cloud-foundry/">Clojure on Cloud Foundry</a>
       </li>
     
   </ul>

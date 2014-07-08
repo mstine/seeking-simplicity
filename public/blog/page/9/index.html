@@ -9,7 +9,7 @@
   <meta name="author" content="Matt Stine">
 
   
-  <meta name="description" content="Greetings from The Spring Experience 2007 in Hollywood, FL. So far this has been a great conference - I&#8217;m currently waiting for my third &hellip;">
+  <meta name="description" content="This was my very first session of the conference. I&#8217;ve really been looking forward to it. I became pretty excited about object-oriented &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,6 +77,63 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2007/12/13/improving-application-design-with-a-rich-domain-model-chris-richardson/">Improving Application Design With a Rich Domain Model: Chris Richardson</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2007-12-13T17:32:00-06:00" pubdate data-updated="true">Dec 13<span>th</span>, 2007</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>This was my very first session of the conference. I&#8217;ve really been looking forward to it. I became pretty excited about object-oriented programming when I first really learned it in my computer simulation course at Ole Miss. In that course we built discrete event simulation programs using collaborating Java threads. Each thread implemented an object from the domain model representing a particular simulation problem. Once I got into the &#8220;working world,&#8221; I found that the architecture described by Rod Johnson as the &#8220;J2EE stove pipe&#8221; had made my OO skills essentially unusable in the projects on which I was required to work on a day-to-day basis. My recent experiences developing in a more POJO-based style, particularly with JPA/Hibernate, have allowed me to get closer to my preferred OO-style, but the business logic still lived in the service-tier. My domain model was still essentially &#8220;anemic&#8221; to borrow from Martin Fowler.</p>
+
+<p>When I read the description for this session I was elated! Finally I could see that someone was building real enterprise applications using object-oriented techniques! I&#8217;ve never quite been able to articulate what I felt was wrong with the way we&#8217;re building applications in my group. I was fortunate enough to have breakfast with Chris Richardson prior to the session, and he said that addressing my inability to articulate those problems was one of the goals of his talk. Awesome! On to the session&#8230;</p>
+
+<p>Chris began with a tour through his object-based programming experience, beginning in LISP, followed by C++ and then Java. Around 1999 he got into EJB programming, and described his experience as &#8220;Applications were still built from objects, but those objects were very different&#8230;&#8221; Basically the EJB paradigm caused us to abandon object-oriented programming in favor of procedural programming. Why? Well, for all of the pros surrounding EJB, it made writing object-oriented code difficult, and in some cases, impossible. The EJB/procedural style works very well for simple business logic, but it doesn&#8217;t scale well as business logic becomes more complex. The result is a few monolithic transactional classes containing hundreds to thousands of lines of code embedded in very long methods. Hence, the legacy of EJB (and I quote):</p>
+
+<ul>
+<li><p>Java is an object-oriented language, AND&#8230;</p></li>
+<li><p>Object-oriented design is a better way to tackle complexity, YET&#8230;</p></li>
+<li><p>Many complex enterprise Java applications are written in a procedural style</p></li>
+</ul>
+
+
+<p>Chris then moved on to discuss the rich domain model pattern, which is really nothing new at all. It&#8217;s just good OO design. Most of your classes (or entities) correspond to real world concepts, and the business logic is spread amongst them. Classes are true objects: they contain state and behavior. The goal is to push as much business logic as possible down into the domain objects, which is exactly where it belongs. What do you get? Better maintainability, better testability, better reusability, and a better shared understanding of your domain. Not only that, but your code is quantifiably simpler! Who doesn&#8217;t want that? The main drawback to this is that you have to have good OO design skills to make it happen - which is exactly what the EJB programming model has made scarce.</p>
+
+<p>Chris followed this up by discussing the building blocks of domain models, concepts he derived from Eric Evans&#8217; book Domain Driven Design. In a nutshell, they are Entities, Value Objects, Aggregates, Services, Factories, and Repositories - the reader can get the book to find out what these are. Interesting notes for me include the fact that Repositories are nearly equivalent to DAO&#8217;s, especially the way I typically implement them. The concept of a Service is far different from what I&#8217;m used to. I &#8220;grew up&#8221; writing services according to the EJB Session Bean/Facade model, where essentially all of your business logic resides in service methods. Chris defined a service as a class implementing only logic that cannot be put in a single entity. They are actually quite thin!</p>
+
+<p>Next came the discussion of frameworks and their role. In short, frameworks act as an enabler to rich domain models when used properly. Your domain model should be implemented purely as Plain Old Java Objects (POJO&#8217;s) in that they don&#8217;t implement any infrastructure interfaces or call infrastructure API&#8217;s. The jury is still out on annotations - Chris argues that they still violate the POJO concept, I&#8217;m not so sure. You then wire your model together using dependency injection, handle crosscutting concerns (transaction management, security, logging, etc.) with Aspect-Oriented Programming (AOP), and use object/relational mapping (ORM) for persistence. What you often run into as obstacles are that many of these frameworks, particularly web and ORM frameworks, force you to introduce &#8220;smells&#8221; into your code for the framework to use them. Examples include requirements for public default constructors and JavaBean-style setters.</p>
+
+<p>Chris closed with an awesome discussion of common code smells and the refactorings used to eliminate them. I was most interested in Feature Envy, which is where you have methods that are far too interested in data belonging to other classes. This is very common in session facades, and the healing factor is to push that logic down into the appropriate domain classes. Another interesting smell was Primitive Obsession, where code uses built-in types (such as String and Integer) instead of application classes to represent state. The refactoring in this case is to introduce Value Objects, which are immutable, validated objects representing domain concepts (e.g. a shipping address).</p>
+
+<p>Chris closed with the charge to begin refactoring our procedural designs into a rich domain model on MONDAY! Oh, how I can&#8217;t wait to begin. Good job Chris!</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -521,44 +578,6 @@ reaching my personal goal:</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2007/07/06/graeme-rochers-blog-5-more-misconceptions-about-grails/">Graeme Rocher&#8217;s Blog: 5 More Misconceptions About Grails</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2007-07-06T09:28:00-05:00" pubdate data-updated="true">Jul 6<span>th</span>, 2007</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Graeme Rocher, founder of the Grails project, answers five more misconceptions about Groovy/Grails vs. Ruby/Rails. I&#8217;ve grown to be quite fond of both of these languages/frameworks; however, given the amount of investment I&#8217;ve placed into learning and applying Spring and Hibernate to the applications I&#8217;ve developed over the past two years, I have to say that Grails just makes sense for me as the next step toward becoming more &#8220;dynamic&#8221; in my approach to development projects.</p>
-
-<p><a href="http://graemerocher.blogspot.com/2007/07/5-more-misconceptions-about-grails.html">Graeme Rocher&#8217;s Blog: 5 More Misconceptions About Grails</a></p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/10/">&larr; Older</a>
@@ -584,6 +603,10 @@ reaching my personal goal:</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2014/07/08/learning-to-go-part-i-interfaces/">Learning to Go, Part I: Interfaces</a>
+      </li>
+    
+      <li class="post">
         <a href="/2014/07/02/wip-microservices-reading-list/">WIP Microservices Reading List</a>
       </li>
     
@@ -597,10 +620,6 @@ reaching my personal goal:</p>
     
       <li class="post">
         <a href="/2013/07/10/blue-green-deployments-on-cloudfoundry/">Blue-Green Deployments on Cloud Foundry</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2013/05/29/clojure-on-cloud-foundry/">Clojure on Cloud Foundry</a>
       </li>
     
   </ul>

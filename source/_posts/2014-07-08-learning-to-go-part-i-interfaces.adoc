@@ -1,0 +1,451 @@
+---
+layout: post
+title: "Learning to Go, Part I: Interfaces"
+date: 2014-07-08 09:00
+comments: true
+categories:
+- golang
+---
+
+[abstract]
+--
+_This article was originally published in the https://nofluffjuststuff.com/home/magazine_subscribe?id=52[April 2014 issue] of NFJS the Magazine._
+
+This article begins an introductory series on the http://golang.org[Go programming language].
+Go is a language optimized for large-scale software engineering and is rapidly becoming the language of choice for building cloud services.
+It does this in a very interesting way, optimizing for simplicity rather than complexity and taking a ``less is exponentially more'' approach.
+
+Three ways in which this really stands out are:
+
+* A pragmatic approach to component design (through implicitly satisfied interfaces)
+* The need to forget much of what you've learned about object-oriented programming (and to prefer composition over inheritance)
+* A concurrency model that mere mortals can use to great effect (via goroutines and channels)
+
+Overall, it's a language with the productivity of a dynamically-typed, interpreted language with the safety and efficiency found in a statically-typed, compiled language.
+
+This series will focus on learning Go from the perspective of Java developers.
+We'll begin with design ideas informed by Go's primary method of abstraction: interfaces.
+--
+
+== What If I Told You Classes Were Unnecessary?
+
+Object-oriented programming (OO) has dominated large-scale software engineering for quite some time now.
+While OO finds its roots in simulation programming, it moved into and began to dominate the mainstream of business programming with the advent of languages like pass:[C++] and Java.
+When we design programs in an OO language, we usually begin with an object model, defining a taxonomy of objects representing all of the entities, or nouns, in our business domain.
+Languages like pass:[C++] and Java support this via the _class_ construct, with a class defining a _template_ for creating a particular type of _object_.
+Classes normally can be extended, creating _subclasses_.
+This allows us to define a hierarchy of types that inherit characteristics and behavior from one another.
+
+But what if I told you that classes were unnecessary? This may seem like heresy, but we already know it.
+JavaScript has the feel of an OO language, but it does not have classes at all.
+In fact, it utilizes what's called _prototype-based programming_ <<PBP>>.
+With prototype-based programming, we achieve reuse by cloning existing objects that serve as _prototypes_.
+
+Those of us that have surfed the wave of _functional programming_ have discovered that it's indeed possible to structure large programs around a very basic set of types (sets, lists, maps, etc.), along with a large collection of behaviors, or _functions_, that can operate on those types.
+In these languages, we don't really see anything resembling an object!
+
+The Go programming language is somewhat unique in that it offers many OO-like constructs, but does not offer either classes or prototypes. But it is also not correct to refer to it as a functional language _per se_.
+
+== Favoring Composition Over Inheritance
+
+While the Java programming language has always included a type system featuring inheritance, it has long been considered best practice to favor composition over inheritance.
+When Joshua Bloch, now Chief Java Architect at Google and then Distinguished Engineer at Sun Microsystems, wrote his seminal work _Effective Java_ <<EJ>>, he included as Item #16: ``Favor composition over inheritance.''
+
+When we use inheritance, we must be careful to implement subclasses such that they are in an _is-a_ relationship with their parents.
+In other words, any context that expects an instance of the parent type should also work well with an instance of the subtype.
+We call this _substitutabilty_, which is expressed well by the Liskov Substitution Principle <<LSP>>.
+When we don't follow this principle, we usually end up creating a lot of code that uses type checking to implement special behaviors.
+In doing so, we create fragile systems that don't abide by the Open-Closed Principle <<OCP>>.
+
+When we instead utilize composition, we build classes that are in a _has-a_ relationship with their components.
+If we'd like to encapsulate the relationship between a class and its components, we can apply _delegation_, forwarding method calls to the underlying component.
+This makes it appear as if our object _is-a_ instance of another type in terms of behavior, without the problems associated with inheritance-based reuse.
+
+The Go programming language also emphasizes composition over inheritance, in that it does not even provide inheritance as a language construct! Instead, it provides the ability to use composition at the type and behavior level.
+Let's see how.
+
+== Structs FTW!
+
+In Go we can define composite data types using [.term]_structs_.
+You may be familiar with structs if you've spent any time programming in C.
+Structs are simply a sequence of fields, each of which has a name and a type.
+If you take a look at <<pstruct>>, you'll see that we've defined a struct representing a point in Cartesian space.
+
+.A +Point+ struct
+[[pstruct]]
+[source,go]
+----
+include::code/src/point/point.go[tag=PointStruct]
+----
+
+New Go types are defined using the +type+ keyword.
+We give our type the name +Point+.
+It's important to note that we've used uppercase here.
+Visibility in Go is determined by the case of an identifier.
+All code in Go is defined within a package.
+If you'd like your types and functions to be visible beyond the confines of your package, you need to _export_ them by starting them with an uppercase letter.
+If you use a lowercase letter or underscore (`_`), they will be _unexported_, roughly equivalent to the Java concept of +private+.
+
+You'll quickly notice that we've defined two fields in our struct, +X+ and +Y+, both of which take on the type +float64+, representing a 64-bit floating-point number.
+
+NOTE: Unlike Java, Go places the type declarations _after_ the field names (the same applies when declaring function arguments) - you'll get used to this eventually!
+
+The keen observer will also note the case of the field names.
+Just as case matters when dealing with type visibility beyond package boundaries, case also matters when dealing with field visibility beyond struct boundaries.
+Because both +X+ and +Y+ are uppercase, they are exported from the struct.
+Had they been +x+ and +y+, they would be unexported, and therefore only visible within the struct.
+To find out how we'll deal with that, hold on until the next section!
+
+So how do we create one of our ++Point++s? We have a couple of options. First, we can utilize the +new+ function:
+
+[[pnew]]
+[source,go]
+----
+include::code/src/point.go[tag=NewPoint]
+----
+
+We prefixed our call to +new+ with an asterisk (`*`) in order to dereference the pointer returned by +new+.
+Yes, that's right, Go has pointers.
+With that said, there's no pointer arithmetic, so they're not quite as scary as what we find in languages like C and pass:[C++].
+They almost represent a happy medium between C and Java.
+
+NOTE: You also don't have to worry about freeing memory! Go is a garbage collected language.
+
+Built-in types in Go start _zeroed_, rather than +nil+.
+In the case of +float64+, they take on the value +0+.
+It's good practice for our types to start zeroed as well, and we get that for free here.
+Our newly initialized +Point+ represents the Cartesian coordinate _(0,0)_. The next two statements move our +Point+ to _(1,2)_.
+
+We can eliminate the two step process by utilizing a composite literal:
+
+[[pliteral]]
+[source,go]
+----
+include::code/src/point.go[tag=PointLiteral]
+----
+
+A composite literal creates a new instance each time it is evaluated, and initializes each field with the given value.
+In addition, this particular +Point+ starts out dereferenced.
+If we actually want a pointer to it, we need to prefix the literal with an ampersand (`&`).
+
+NOTE: It is generally considered idiomatic Go to prefer the composite literal style to using +new+.
+
+Enough about structs, on to methods!
+
+== Methods
+
+Go methods are just functions that happen to have a _receiver_ argument.
+You can find one in <<trans>>.
+
+.Method for translating ++Point++s
+[[trans]]
+[source,go]
+----
+include::code/src/point/point.go[tag=Translate]
+----
+
+The +Translate+ method takes two distances along the _x_ and _y_-axes, and _translates_ a point from its current position to a new position by returning a new +Point+ literal that combines the current _x_ and _y_ coordinates with those distances.
+We call +Translate+ in <<trans-in>>, and the output is found in <<trans-out>>.
+
+.Calling +Translate+
+[[trans-in]]
+[source,go]
+----
+include::code/src/point.go[tag=TranslatingPoints]
+----
+
+.Output of calling +Translate+
+[[trans-out]]
+[source,console]
+----
+include::code/src/output.txt[tag=RunTranslatingPoints]
+----
+
+Because we're not operating on a pointer to a +Point+, there's no way for us to affect the existing instance.
+If we couple this with unexported fields, we'd have completely controlled access to a +Point+ instance's fields.
+
+If we want to mutate a +Point+, we need our method to use a pointer as the receiver argument rather than a value.
+We do this in <<pointer>>.
+
+.Method for translating a +Point+ via a pointer
+[[pointer]]
+[source,go]
+----
+include::code/src/point/point.go[tag=TranslatePointer]
+----
+
+As you can see, rather than creating a new +Point+ and returning it, this method returns no value and directly mutates the +Point+ referred to by the pointer passed in as a receiver.
+Notice that Go conveniently dereferences the pointer automatically when using the dot (`.`) operator to access fields. We call this method on a pointer to a +Point+ in <<transp-in>> (with output in <<transp-out>>), again using an ampersand (`&`) to tell Go we'd like a pointer to a +Point+, not a +Point+ value.
+
+.Calling +TranslatePointer+
+[[transp-in]]
+[source,go]
+----
+include::code/src/point.go[tag=TranslatingPointers]
+----
+
+.Output of calling +TranslatePointer+
+[[transp-out]]
+[source,console]
+----
+include::code/src/output.txt[tag=RunTranslatingPointers]
+----
+
+Now that we have the capability to create types with associated methods, let's look at how we can compose new composite types from existing ones.
+
+== Type composition with structs
+
+Let's imagine that we'd like to extend the concept of +Point+ and add the notion of color.
+If we were working in Java, we might do the following:
+
+[[pcolor]]
+[source,java]
+----
+public class ColorPoint extends Point {
+  private Color color;
+
+  // rest omitted...
+}
+----
+
+Since Go doesn't have the concept of classes or inheritance, we need to work with structs to accomplish our goal.
+We can compose a type called +ColorPoint+ by _embedding_ the +Point+ type and then adding the additional field representing color (<<pembed>>).
+
+.Embedding +Point+ into +ColorPoint+
+[[pembed]]
+[source,go]
+----
+include::code/src/point/point.go[tag=ColorPoint]
+----
+
+First note the use of the +const+ keyword.
+We're defining a set of integer constants to represent our colors.
+This is the closest approximation that Go has to an enumerated type (such as Java's +enum+) and is usually more that sufficient.
+The predeclared identifier +iota+ represents successive untyped integer constants.
+It is reset to +0+ whenever +const+ appears again in the source.
+This has the effect in our code of setting +BLUE+ to +0+, +RED+ to +1+, and +GREEN+ to +2+.
+
+Next we define our +ColorPoint+ type as a +struct+.
+We embed +Point+ as an exported field also called +Point+, and we define an additional exported field called +Color+ that is typed as an +int+.
+Now, in <<color-in>>, we'll create an instance of +ColorPoint+, and then we'll print out both the previously defined +Point+ instance as well as the +ColorPoint+ instance (results in <<color-out>>).
+
+.Creating and printing a +ColorPoint+
+[[color-in]]
+[source,go]
+----
+include::code/src/point.go[tag=PrintingPointAndColorPoint]
+----
+
+.Output of creating and printing a +ColorPoint+
+[[color-out]]
+[source,console]
+----
+include::code/src/output.txt[tag=RunPrintingPointAndColorPoint]
+----
+
+We've now successfully created a composite type, but we're missing something. Let's press on.
+
+== Houston, we have a problem...
+
+Here's a summary of our problem:
+
+* We have ++Point++s.
+* We have ++ColorPoint++s.
+* ++ColorPoint++s are like ++Point++s, but they are definitely not ++Point++s since Go does not have inheritance.
+* That said, we'd like to be able to write methods that can interoperate between them. What do we do?
+
+As an example, since both +Point+ and +ColorPoint+ have _x_ and _y_ coordinates, it might be interesting if we could compute the Euclidean distance <<EUC>> between them.
+As a reminder, the formula can be found in <<e-formula>>.
+
+.Euclidean distance formula
+[[e-formula]]
+image::/images/distance_formula.png[]
+
+As expressed here, you can think of _p~1~_ and _q~1~_ as the _x_ coordinates for the two points, and _p~2~_ and _q~2~_ as the _y_ coordinates for the two points.
+So how do we implement a method that will allow us to compute this formula in such a way that will work with ++Point++s, ++ColorPoint++s, or both?
+
+== Go Interfaces
+
+Fortunately Go contributes a very powerful version of _interfaces_ to the abstraction conversation.
+Go interfaces describe groups of behaviors in the form of method signatures that implementors of the interface must implement.
+So far this doesn't sound unlike Java interfaces. Let's take a look at two Go interfaces in <<interfaces>>.
+
+.+Positioner+ and +Distancer+ interfaces
+[[interfaces]]
+[source,go]
+----
+include::code/src/point/point.go[tag=Interfaces]
+----
+
+Notice that ++interface++s are themselves types. This is important, because it allows us to define function and method signatures that accept interfaces as arguments. +Positioner+'s +Coordinates()+ method should provide us the position of any implementor in terms of a +Point+. +Distancer+'s +DistanceTo()+ method will calculate the distance between any implementor and a +Positioner+.
+
+NOTE: It is idiomatic in Go for interface names to be suffixed with ``-er.''
+
+However, unlike Java interfaces, where we might write:
+
+[source,java]
+----
+public class Point implements Positioner, Distancer {
+  // implementation omitted...
+}
+----
+
+Go does not have an +implements+ keyword.
+In fact, if you think about the way we've defined structs and methods so far, the only place in which we indicated any attachment between a struct and a method is in the method signature itself, in the form of the receiver parameter.
+So how does this work in Go?
+
+Let's talk about how interfaces are _satsified_.
+
+In languages like Java, an interfaces is satisfied _explicitly_.
+Classes are tagged with +implements Interface+.
+The compiler then looks up that interface and identifies all of the method signatures defined by it.
+It then examines the class to ensure that all of those method signatures have a concrete implementation in either the class itself or one of its parents.
+
+In Go, interfaces are satisfied _implicitly_.
+We do not tag structs in any way.
+For a type to implement an interface, it simply needs to implement all of the method signatures defined by that interface.
+When we use a type in the context of an interface (e.g. we pass a type into a function that expects an interface as one of its arguments), the compiler will check to see if that type satisfies the interface.
+
+Let's see how this falls out in practice.
+
+First, let's define a function that can calculate the distance between two ++Positioner++s (<<distance-between>>).
+
+.Calculates the distance between two ++Positioner++s
+[[distance-between]]
+[source,go]
+----
+include::code/src/point/point.go[tag=distanceBetween]
+----
+
+Next, in <<point-satisfies-int>>, we satisfy both interfaces for +Point+.
+
+.+Point+ satisfies +Positioner+ and +Distancer+
+[[point-satisfies-int]]
+[source,go]
+----
+include::code/src/point/point.go[tag=PointSatisfiesInt]
+----
+
+In <<cp-satisfies-int>>, we satisfy both interfaces for +ColorPoint+.
+
+.+ColorPoint+ satisfies +Positioner+ and +Distancer+
+[[cp-satisfies-int]]
+[source,go]
+----
+include::code/src/point/point.go[tag=ColorPointSatisfiesInt]
+----
+
+This all results in our ability to interchange ++Point++s and ++ColorPoint++s in calls to +DistanceTo()+ (<<calculating-distance-in>>). The output of these calls is found in <<calculating-distance-out>>.
+
+.Calculating the distance between +Point+ and +ColorPoint+
+[[calculating-distance-in]]
+[source,go]
+----
+include::code/src/point.go[tag=CalculatingDistance]
+----
+
+.Output of calculating the distance between +Point+ and +ColorPoint+
+[[calculating-distance-out]]
+[source,console]
+----
+include::code/src/output.txt[tag=RunCalculatingDistance]
+----
+
+At first glance this may not seem so impressive, nor may it seem to be that great of an advantage over what's available to us in Java.
+The power, however, is hiding just under the surface.
+When we think about implementing an interface in Java, we usually are thinking in terms of taxonomy.
+Classes extend other classes, and as we've previously stated, that means that a child class ought to be substitutable for its parent <<LSP>>.
+When we implement an interface in Java, we are also usually thinking that the class _is a_ version of that interface.
+We might have expressed our Cartesian coordinate taxonomy in Java as:
+
+[source,java]
+----
+public interface Coordinate {
+  double distanceTo(Coordinate c);
+}
+
+public class Point implements Coordinate {
+  // implementation omitted
+}
+
+public class ColorPoint extends Point implements Coordinate {
+  // implementation omitted
+}
+----
+
+When we do this, we soon hear ourselves talking about ++Coordinate++s as things, not as groups of behaviors.
+Let's contrast this with Go's implicit satisfaction by adding an additional example.
+Perhaps our program's purpose is to keep track of animals in a wildlife preserve.
+It's quite natural that we'd have an +Animal+ type, and that type would have some way of keeping track of the animal's current location (<<animal-struct>>).
+
+.+Animal+ struct
+[[animal-struct]]
+[source,go]
+----
+include::code/src/animal/animal.go[tag=Animal]
+----
+
+In order to perform our desired distance calculations, we need +Animal+ to satisfy our two interfaces (<<animal-dp>>).
+
+.+Animal+ satisfies +Positioner+ and +Distancer+
+[[animal-dp]]
+[source,go]
+----
+include::code/src/animal/animal.go[tag=AnimalSatisfiesDP]
+----
+
+NOTE: Because +distanceBetween()+ was not exported from the +point+ package, we cannot use it in the +animal+ package. Sometimes you'll run into this situation in Go, which prefers ``dependency hygiene'' over reuse.
+
+And now, we can perform our desired calculations (<<animal-in>>).
+We now know the distance between our penguin and our original point +p+, and we also know that given the proximity of the seal (<<animal-out>>), our penguin needs to start running!
+
+.Mixing ++Animal++s and ++Point++s using interfaces
+[[animal-in]]
+[source,go]
+----
+include::code/src/point.go[tag=CalculatingDistanceWithAnimals]
+----
+
+.Output of mixing ++Animal++s and ++Point++s using interfaces
+[[animal-out]]
+[source,console]
+----
+include::code/src/output.txt[tag=RunCalculatingDistanceWithAnimals]
+----
+
+Now for the test.
+Is it proper to think of an +Animal+ as being a +Distancer+ or +Positioner+ in terms of taxonomy?
+Not really.
+In fact, that seems like a coupling of concerns.
+And if we were implementing this program in Java, a naive translation would probably cause us to do the following:
+
+[source,java]
+----
+public class Animal implements Positioner, Distancer
+----
+
+So to summarize, Go interfaces allow us to use arbitrary types in contexts expecting a particular interface type, as long as the type in question implements all of the methods defined by that interface.
+Since interfaces are satisfied implicitly, we're no longer pressured toward treating interfaces as part of a type taxonomy.
+Instead, we're able to focus on them as groups of related behaviors.
+
+This may seem like a concept popularized by dynamic languages called ``duck typing'' <<DT>>.
+In most cases, you call a method _blindly_, and allow the runtime dispatch system to determine if the object can _respond to_ that method.
+While this is a similar concept, it is not a very good description of how Go works.
+Go actually employs ``structural typing'' <<ST>>, which uses the compiler to determine interface satisfaction in a type safe manner.
+
+== Conclusion
+
+I hope you've enjoyed this brief introduction to the Go programming language, as well as one of its most powerful features: interfaces.
+With interfaces we're able to take a more pragmatic approach to component design, as we're not forced to think in terms of taxonomies and deep type hierarchies.
+In the next installment we'll explore Go's approach to concurrency.
+Until next time my fellow gophers!
+
+== References
+
+[bibliography]
+- [[[EJ]]] Bloch, Joshua. _Effective Java: Programming Language Guide_. Addison-Wesley, 2001.
+- [[[EUC]]] Euclidean distance, Wikipedia. http://en.wikipedia.org/wiki/Euclidean_distance.
+- [[[DT]]] Duck typing, Wikipedia. http://en.wikipedia.org/wiki/Duck_typing
+- [[[LSP]]] Liskov substitution principle, Wikipedia. http://en.wikipedia.org/wiki/Liskov_substitution_principle
+- [[[PBP]]] Prototype-based programing, Wikipedia. http://en.wikipedia.org/wiki/Prototype-based_programming
+- [[[ST]]] Structural type system, Wikipedia. http://en.wikipedia.org/wiki/Structural_type_system

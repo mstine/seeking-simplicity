@@ -36,3 +36,60 @@
 * dt.hdlist1 {
   font-weight:bold;
 }
+
+.admonitionblock td.content,
+.exampleblock,
+.imageblock,
+.listingblock,
+.literalblock,
+.mathblock,
+.openblock,
+.paragraph,
+.quoteblock,
+.sidebarblock,
+.tableblock,
+.verseblock,
+.videoblock,
+.dlist,
+.olist,
+.ulist,
+.qlist,
+.hdlist {
+  & > .title {
+    text-align: left;
+    font-weight: bold;
+  }
+}
+
+.admonitionblock {
+  margin-bottom: 15px;
+}
+
+.admonitionblock > table {
+  border: 0;
+  background: none;
+  width: 100%;
+  td.icon {
+    text-align: center;
+    width: 80px;
+    img {
+      max-width: none;
+    }
+    .title {
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+  }
+
+  td.content {
+    padding-left: 18px;
+    padding-right: 20px;
+    border-left: 1px solid #ddd;
+    color: #666;
+
+    //& > .paragraph:last-child > p {
+    & > :last-child > :last-child {
+      margin-bottom: 0;
+    }
+  }
+}
