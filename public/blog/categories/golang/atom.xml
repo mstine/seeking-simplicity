@@ -4,7 +4,7 @@
   <title><![CDATA[Category: golang | Seeking Simplicity]]></title>
   <link href="http://mattstine.com/blog/categories/golang/atom.xml" rel="self"/>
   <link href="http://mattstine.com/"/>
-  <updated>2014-07-08T09:25:08-05:00</updated>
+  <updated>2014-07-09T09:08:57-05:00</updated>
   <id>http://mattstine.com/</id>
   <author>
     <name><![CDATA[Matt Stine]]></name>
@@ -104,11 +104,14 @@ If you use a lowercase letter or underscore (<code>_</code>), they will be <em>u
 
 <p>NOTE: Unlike Java, Go places the type declarations <em>after</em> the field names (the same applies when declaring function arguments) - you'll get used to this eventually!</p>
 
-<p>The keen observer will also note the case of the field names.
+<p>++++
+<del>The keen observer will also note the case of the field names.
 Just as case matters when dealing with type visibility beyond package boundaries, case also matters when dealing with field visibility beyond struct boundaries.
-Because both +X+ and +Y+ are uppercase, they are exported from the struct.
-Had they been +x+ and +y+, they would be unexported, and therefore only visible within the struct.
-To find out how we'll deal with that, hold on until the next section!</p>
+Because both <code>X</code> and <code>Y</code> are uppercase, they are exported from the struct.
+Had they been <code>x</code> and <code>y</code>, they would be unexported, and therefore only visible within the struct.
+To find out how we'll deal with that, hold on until the next section!</del>
+++++
+<em><em>Update (2014-07-09):</em></em> <em>My understanding of this point http://www.reddit.com/r/golang/comments/2a5aui/learning_to_go_part_i_interfaces/cis9bm8[was corrected] on Reddit. Case only affects visibility with respect to packages, so +x+ and +y+ would also be accessible to any code within the package enclosing the struct. See http://play.golang.org/p/ySlG9K5yfN[this example].</em></p>
 
 <p>So how do we create one of our ++Point++s? We have a couple of options. First, we can utilize the +new+ function:</p>
 

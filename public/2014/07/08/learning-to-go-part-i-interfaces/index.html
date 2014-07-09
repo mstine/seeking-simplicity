@@ -231,12 +231,13 @@ Unlike Java, Go places the type declarations <em>after</em> the field names (the
 </tr>
 </table>
 </div>
-<div class="paragraph">
-<p>The keen observer will also note the case of the field names.
+<del>The keen observer will also note the case of the field names.
 Just as case matters when dealing with type visibility beyond package boundaries, case also matters when dealing with field visibility beyond struct boundaries.
 Because both <code>X</code> and <code>Y</code> are uppercase, they are exported from the struct.
 Had they been <code>x</code> and <code>y</code>, they would be unexported, and therefore only visible within the struct.
-To find out how we&#8217;ll deal with that, hold on until the next section!</p>
+To find out how we'll deal with that, hold on until the next section!</del>
+<div class="paragraph">
+<p><strong><em>Update (2014-07-09):</em></strong> <em>My understanding of this point <a href="http://www.reddit.com/r/golang/comments/2a5aui/learning_to_go_part_i_interfaces/cis9bm8">was corrected</a> on Reddit. Case only affects visibility with respect to packages, so <code>x</code> and <code>y</code> would also be accessible to any code within the package enclosing the struct. See <a href="http://play.golang.org/p/ySlG9K5yfN">this example</a>.</em></p>
 </div>
 <div class="paragraph">
 <p>So how do we create one of our <code>Point</code>s? We have a couple of options. First, we can utilize the <code>new</code> function:</p>

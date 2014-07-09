@@ -90,11 +90,14 @@ You'll quickly notice that we've defined two fields in our struct, +X+ and +Y+, 
 
 NOTE: Unlike Java, Go places the type declarations _after_ the field names (the same applies when declaring function arguments) - you'll get used to this eventually!
 
-The keen observer will also note the case of the field names.
+++++
+<del>The keen observer will also note the case of the field names.
 Just as case matters when dealing with type visibility beyond package boundaries, case also matters when dealing with field visibility beyond struct boundaries.
-Because both +X+ and +Y+ are uppercase, they are exported from the struct.
-Had they been +x+ and +y+, they would be unexported, and therefore only visible within the struct.
-To find out how we'll deal with that, hold on until the next section!
+Because both <code>X</code> and <code>Y</code> are uppercase, they are exported from the struct.
+Had they been <code>x</code> and <code>y</code>, they would be unexported, and therefore only visible within the struct.
+To find out how we'll deal with that, hold on until the next section!</del>
+++++
+*_Update (2014-07-09):_* _My understanding of this point http://www.reddit.com/r/golang/comments/2a5aui/learning_to_go_part_i_interfaces/cis9bm8[was corrected] on Reddit. Case only affects visibility with respect to packages, so +x+ and +y+ would also be accessible to any code within the package enclosing the struct. See http://play.golang.org/p/ySlG9K5yfN[this example]._
 
 So how do we create one of our ++Point++s? We have a couple of options. First, we can utilize the +new+ function:
 
